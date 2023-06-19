@@ -38,6 +38,7 @@ public class NeuralNetwork {
         return cost;
     }
 
+    // a Cost function
     double Cost(DataPoint[] data){
         double totalCost = 0;
 
