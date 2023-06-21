@@ -8,6 +8,10 @@ public class Activations {
     static double Sigmoid(double weightedInput) {
         return 1 / (1 + EXP(-weightedInput));
     }
+    static double SigmoidDerivative(double weightedInput){
+        double activation = Sigmoid(weightedInput);
+        return activation * (1 - activation);
+    }
 
     static double HyperbolicTangent(double weightedInput) {
         double e2w = EXP(2 * weightedInput);
