@@ -1,5 +1,7 @@
 package JanNN;
 
+import java.util.Arrays;
+
 public class NeuralNetwork {
     Layer[] layers;
     double learnRate;
@@ -11,6 +13,8 @@ public NeuralNetwork(double learnRate, int... layerSizes){
         layers[i] = new Layer(layerSizes[i], layerSizes[i+1]);
     }
     this.learnRate = learnRate;
+
+    System.out.println(Arrays.deepToString(layers[0].weights));
 }
 
 // Training
