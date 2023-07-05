@@ -22,10 +22,8 @@ public class Layer {
             for(int nodeIn = 0; nodeIn < numInputNodes; nodeIn++){
                 weightedInput += inputs[nodeIn] * weights[nodeIn][nodeOut];
             }
-            weightedInputs[nodeOut] = weightedInput;
+            weightedInputs[nodeOut] = Activations.Sigmoid(weightedInput);
         }
-
-
         return weightedInputs;
     } 
 }
