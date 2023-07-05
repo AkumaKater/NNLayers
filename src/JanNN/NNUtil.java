@@ -19,4 +19,12 @@ public class NNUtil {
 
         return array;
     }
+
+    public static double[] ArraySubtraction(double[] arr1, double[] arr2){
+        double[] result = new double[arr1.length];
+        for (int i = 0; i < arr1.length; i++) {
+            result[i] = arr1[i] - arr2[i];
+        }
+        return result;
+    }
 }
