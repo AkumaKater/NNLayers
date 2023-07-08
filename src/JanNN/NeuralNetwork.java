@@ -16,6 +16,7 @@ public NeuralNetwork(double learnRate, int... layerSizes){
 // Training
 public void learn(double[] inputs, double[] targets){
     double[] errors = NNUtil.ArraySubtraction(targets, Querry(inputs));
+    
 }
 
 // Abfragen

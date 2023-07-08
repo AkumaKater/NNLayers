@@ -27,4 +27,20 @@ public class NNUtil {
         }
         return result;
     }
+
+    public static double[] KreuzProdukt(double[][] Matrix, double[] inputs){
+        int numOutputNodes = Matrix.length;
+        int numInputNodes = Matrix[0].length;
+        double[] weightedInputs = new double[numOutputNodes];
+        for(int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++){
+            double weightedInput = 0;
+            for(int nodeIn = 0; nodeIn < numInputNodes; nodeIn++){
+                System.out.println(""+inputs[nodeIn] +"  "+Matrix[nodeIn][nodeOut]);
+                weightedInput += inputs[nodeIn] * Matrix[nodeIn][nodeOut];
+            }
+            //weightedInputs[nodeOut] = Activations.Sigmoid(weightedInput);
+            weightedInputs[nodeOut] = weightedInput;
+        }
+        return weightedInputs;
+    }
 }
