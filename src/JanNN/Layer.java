@@ -26,9 +26,9 @@ public class Layer {
     public void UpdateWeights(double learnRate, double[] errors){
         for(int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++){
             for(int nodeIn = 0; nodeIn < numInputNodes; nodeIn++){
-                weights[nodeIn][nodeOut] += errors[nodeOut] * ;
+                //weights[nodeIn][nodeOut] += errors[nodeOut] * ;
             }
 
         } 
     }
-}
+}             

@@ -15,7 +15,10 @@ public NeuralNetwork(double learnRate, int... layerSizes){
 
 // Training
 public void learn(double[] inputs, double[] targets){
-    double[] errors = NNUtil.ArraySubtraction(targets, Querry(inputs));
+    //double[] errors = NNUtil.ArraySubtraction(targets, Querry(inputs));
+    for(int i = 0; i < layers.length; i++){
+        System.out.println("Die Reihen sind "+layers[i].weights.length+"und die Spalten sind "+layers[i].weights[0].length);;
+    }
     
 }
 
