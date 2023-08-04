@@ -111,4 +111,19 @@ public class NNUtil {
         }
         return result;
     }
+
+    public static void printHighestLabel(double[] numbers){
+        int maxNumberIndex = 0;
+
+        // Schleife durch das Array laufen und die größte Zahl finden
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > numbers[maxNumberIndex]) {
+                maxNumberIndex = i;
+            }
+        }
+        double[] result = new double[2];
+        result[0] = (double)maxNumberIndex;
+        result[1] = numbers[maxNumberIndex];
+        System.out.println("Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: " + result[1]+ " Es sich um eine " +result[0] + " handelt.");
+    }
 }

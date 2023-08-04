@@ -31,7 +31,6 @@ public class Layer {
 
     public void UpdateWeights(double learnRate, double[] errors, double[] previousWeightedOutputs){
         double[] partialDerivative = NNUtil.VektorMultiplikation(errors, NNUtil.VektorMultiplikation(weightedOutputs, NNUtil.WertMinusVektor(1.0, weightedOutputs)));
-        System.out.println("Hier EIne Grenze\n"+Arrays.toString(partialDerivative));
         NNUtil.UpdateWeights(weights, learnRate, partialDerivative, previousWeightedOutputs);
     }
 }             
