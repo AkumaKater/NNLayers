@@ -13,22 +13,26 @@ public NeuralNetwork(double learnRate, int... layerSizes){
     this.learnRate = learnRate;
 }
 
+//Training
+public void learnD(double[] inputs, double[] targets){
+
+}
 // Training
 public void learn(double[] inputs, double[] targets){
     //Hier werden die Errors berechnet, und gespeichert
     double[][] errors = new double[layers.length][];
     errors[errors.length-1] = NNUtil.ArraySubtraction(targets, Querry(inputs));
     for(int i = layers.length-2; i >= 0; i--){
-        errors[i] = NNUtil.MatrixToVektor(NNUtil.DotProdukt(layers[i+1].weights, errors[i+1]));
+        errors[i] = layers[i+1].weights.DotVektorTranspose(errors[i+1]);
     }
 
     //Hier müssen jetzt alle PreviousOutputs gespeichert werden
     double[][] PreviousOutputs = new double[layers.length][];
     PreviousOutputs[0] = inputs;
     for(int i = 1; i < layers.length; i++){
-        PreviousOutputs[i] = layers[i-1].CalculateOutputs(PreviousOutputs[i-1]);
+        PreviousOutputs[i] = layers[i-1].weightedOutputs;
     }
-
+ 
     //double[] errors = NNUtil.ArraySubtraction(targets, Querry(inputs));
     for(int i = layers.length-1; i >= 0; i--){
         // über alle Layer iterieren und die weightedOutputs und previousweightedOutputs übergeben

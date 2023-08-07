@@ -1,5 +1,6 @@
 package JanNN;
 
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -48,7 +49,7 @@ public class NNUtil {
     }
 
     public static double[][] DotProdukt(double[][] Matrix1, double[][] Matrix2){
-        if(Matrix1[0].length!=Matrix2.length){System.out.println("Missmacht in Matrix Dimensions to DotProdukt."+ "\nFehler " + Matrix1.length+"X"+Matrix1[0].length +" "+ Matrix2.length+"X"+Matrix2[0].length);};
+        if(Matrix1[0].length!=Matrix2.length){throw new DotProduktException("Missmacht in Matrix Dimensions to DotProdukt."+ "\nFehler " + Matrix1.length+"X"+Matrix1[0].length +" "+ Matrix2.length+"X"+Matrix2[0].length);}
         int Zeilen = Matrix1.length;
         int Spalten = Matrix2[0].length;
         int SZ = Matrix2.length;
@@ -87,12 +88,12 @@ public class NNUtil {
         return result;
     }
 
-    public static void UpdateWeights(double[][] Weights, double Learnrate, double[] Vektor1, double[] Vektor2){
-        int fromNodes = Weights.length;
-        int toNodes = Weights[0].length;
-        for(int toNode = 0; toNode < toNodes; toNode++){
-            for(int fromNode = 0; fromNode < fromNodes; fromNode++){
-                Weights[fromNode][toNode] += Learnrate * Vektor1[toNode] * Vektor2[fromNode];
+    public static void UpdateWeights(Matrix Weights, double Learnrate, Vektor partialDerivative, Vektor previousWeightedOutputs){
+        int toNodes = Weights.length;
+        int fromNodes = Weights.width;
+        for(int fromNode = 0; fromNode < fromNodes; fromNode++){
+            for(int toNode = 0; toNode < toNodes; toNode++){
+                Weights.setValue(toNode, fromNode, (Learnrate * partialDerivative[toNode] * previousWeightedOutputs[fromNode]));
             }
         }
     }
@@ -112,6 +113,18 @@ public class NNUtil {
         return result;
     }
 
+    public static int getHighestIndex(double[] numbers){
+        int maxNumberIndex = 0;
+
+        // Schleife durch das Array laufen und die größte Zahl finden
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] > numbers[maxNumberIndex]) {
+                maxNumberIndex = i;
+            }
+        }
+        return maxNumberIndex;
+    }
+
     public static void printHighestLabel(double[] numbers){
         int maxNumberIndex = 0;
 
@@ -124,6 +137,33 @@ public class NNUtil {
         double[] result = new double[2];
         result[0] = (double)maxNumberIndex;
         result[1] = numbers[maxNumberIndex];
-        System.out.println("Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: " + result[1]+ " Es sich um eine " +result[0] + " handelt.");
+        System.out.println("Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: " + result[1]+ " Es sich um eine " +maxNumberIndex + " handelt.");
+    }
+
+    public static void ArrayToString(double[] arr){
+        ArrayToString(arr, true);
+    }
+
+    public static void ArrayToString(double[] arr, boolean formatter){
+        System.out.print("[");
+        DecimalFormat df = new DecimalFormat("0.0000");
+        for(int i=0; i<arr.length-1;i++){
+            if(formatter)
+            System.out.print(df.format(arr[i]));
+            else
+            System.out.print(arr[i]);
+            System.out.print(", ");
+        }
+        if (formatter) {
+            System.out.print(df.format(arr[arr.length-1]));
+        }else{System.out.print(arr[arr.length-1]);}
+        System.out.print(df.format(arr[arr.length-1]));
+        System.out.println("]");
+    }
+}
+
+class DotProduktException extends RuntimeException {
+    public DotProduktException(String message) {
+        super(message);
     }
 }
