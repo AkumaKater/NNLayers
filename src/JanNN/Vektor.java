@@ -9,6 +9,11 @@ public class Vektor {
         this.length = Vektor.length;
     }
 
+    public Vektor(int length){
+        this.Vektor = new double[length];
+        this.length = length;
+    }
+
     public Vektor X(Vektor Vektor){
         if(Vektor.length!=length){throw new VektorException("Vektoren Passen nicht zusammen!");}
         double[] result = new double[length];
@@ -28,6 +33,9 @@ public class Vektor {
 
     public double getValue(int x){
         return Vektor[x];
+    }
+    public void setValue(int x, double value){
+        Vektor[x] = value;
     }
 
     public Matrix OneByOneToMatrix(Vektor vektor){

@@ -25,7 +25,12 @@ public class Matrix {
         return new Matrix(NNUtil.DotProdukt(this.matrix, vektor));
     }
 
+    public Matrix Dot(Vektor vektor) {
+        return new Matrix(NNUtil.DotProdukt(this.matrix, vektor.Vektor));
+    }
+
     public double[] DotVektor(double[] vektor) {
+        if(width != vektor.length)throw new MatrixException("DotVektor unpassende Dimensionen: "+width+" / "+vektor.length);
         return NNUtil.MatrixToVektor(new Matrix(NNUtil.DotProdukt(this.matrix, vektor)).matrix);
     }
 
@@ -92,6 +97,10 @@ public class Matrix {
         return resultMatrix;
     }
 
+    public Matrix T(){
+        return new Matrix(Transpose());
+    }
+
     public Matrix MalWert(double wert){
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
@@ -102,10 +111,30 @@ public class Matrix {
     }
 
     public void PlusMatrix(Matrix matrix){
+        if(this.length != matrix.length || this.width != matrix.width) throw new MatrixException(this.length +"X"+ width + " / " + matrix.length +"X"+ matrix.width);
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
                 this.matrix[i][j] += matrix.getValue(i, j);
             }
         }
+    }
+
+    public void MinusMatrix(Matrix matrix){
+        MinusMatrix(matrix, 1.0);
+    }
+
+    public void MinusMatrix(Matrix matrix, double learnrate){
+        if(this.length != matrix.length || this.width != matrix.width) throw new MatrixException(this.length +"X"+ width + " / " + matrix.length +"X"+ matrix.width);
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                this.matrix[i][j] -= matrix.getValue(i, j)*learnrate;
+            }
+        }
+    }
+}
+
+class MatrixException extends RuntimeException {
+    public MatrixException(String message) {
+        super(message);
     }
 }

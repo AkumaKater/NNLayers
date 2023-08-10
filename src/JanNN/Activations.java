@@ -6,11 +6,11 @@ public class Activations {
     }
 
     static double Sigmoid(double weightedInput) {
-        return 1 / (1 + EXP(-weightedInput));
+        return 1.0 / (1 + Math.exp(-weightedInput));
     }
     static double SigmoidDerivative(double weightedInput){
         double activation = Sigmoid(weightedInput);
-        return activation * (1 - activation);
+        return activation * (1.0 - activation);
     }
 
     static double HyperbolicTangent(double weightedInput) {
