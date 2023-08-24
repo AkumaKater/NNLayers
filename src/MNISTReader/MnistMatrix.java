@@ -57,4 +57,28 @@ public class MnistMatrix {
         return targets;
     }
 
+    public boolean equalsData(MnistMatrix other) {
+        if (other == null) {
+            return false;
+        }
+
+        if (this == other) {
+            return true;
+        }
+
+        if (this.nRows != other.nRows || this.nCols != other.nCols) {
+            return false;
+        }
+
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nCols; j++) {
+                if (this.data[i][j] != other.data[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
 }

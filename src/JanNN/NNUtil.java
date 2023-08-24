@@ -4,6 +4,8 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Random;
 
+import MNISTReader.MnistMatrix;
+
 public class NNUtil {
     
     public static double[][] generateRandomWeights(int rows, int columns) {
@@ -159,6 +161,23 @@ public class NNUtil {
         }else{System.out.print(arr[arr.length-1]);}
         System.out.print(df.format(arr[arr.length-1]));
         System.out.println("]");
+    }
+
+    public static String getAcuracy(NeuralNetwork nn, MnistMatrix[] mnistMatrix){
+        int iterations = mnistMatrix.length;
+        NNLog.getLogger().sideLog(""+iterations);
+        int correct = 0;
+        double acuracy = 0.0;
+        for (int i = 0; i < iterations; i++) {
+            int Hindex = NNUtil.getHighestIndex(nn.Querry(mnistMatrix[i].getInputs()));
+            int label = mnistMatrix[i].getLabel();
+            if (Hindex == label) {
+                correct++;
+            }
+        }
+        acuracy = (double) correct / (double) iterations * 100;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(acuracy)+"%";
     }
 }
 

@@ -112,4 +112,12 @@ public class NeuralNetwork {
             layer.ApplyGradient(learnrate);
         }
     }
+
+    public String toString(){
+        String result ="";
+        for(int i = 0; i <layers.length-1; i++){
+            result += " ("+layers[i].numOutputNodes+") ";
+        }
+        return result;
+    }
 }
