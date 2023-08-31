@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "ddc69ecf0da6d6bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "23e9fb7f6f56560b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "70e621a9f8881cb1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1d4bf6c7d7f24f8c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Performance Notes with Bias.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e84e0af973d17b26",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/SideNote.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "91692046197f7e8b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Inhalt.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6b79a8088f75270d",
+    "type": "split",
+    "children": [
+      {
+        "id": "0da43505aa545131",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19c3c14ba73094a5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "edeac19b1cb912a8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "953d51514441ed1d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "62735ff7b5eacde0",
+    "type": "split",
+    "children": [
+      {
+        "id": "54014135925f9f34",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "653600ba84460224",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f812169e41caaf30",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b7a2ff374e62acb2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "edb49d9d7cccfd79",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "19c3c14ba73094a5",
+  "lastOpenFiles": [
+    "Projektarbeit/Inhalt.md",
+    "Projektarbeit/Performance Notes.md",
+    "Projektarbeit/SideNote.md",
+    "Projektarbeit/Performance Notes with Bias.md",
+    "Projektarbeit/Kontakt.md",
+    "Notizen/Movies.md",
+    "Notizen/ToDo.md",
+    "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
+    "Projektarbeit/Einleitung/Überblick über die Struktur der Arbeit.md",
+    "Projektarbeit/Einleitung/Hintergrund und Motivation des Themas.md",
+    "script.js",
+    "Notizen",
+    "Projektarbeit/Einleitung",
+    "Projektarbeit"
+  ]
+}

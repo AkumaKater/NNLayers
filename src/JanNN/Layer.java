@@ -5,6 +5,7 @@ public class Layer {
     int numInputNodes, numOutputNodes;
     Matrix weights;
     Matrix costGradientW;
+    Vektor costGradientB;
 
     Vektor inputs;
     Vektor biases;
@@ -14,11 +15,12 @@ public class Layer {
     public Layer(int numInputNodes, int numOutputNodes) {
         this.numInputNodes = numInputNodes;
         this.numOutputNodes = numOutputNodes;
-        this.weights = new Matrix(numOutputNodes, numInputNodes);
+        this.weights = new Matrix(numOutputNodes, numInputNodes, true);
         this.costGradientW = new Matrix(numInputNodes, numOutputNodes);
+        this.costGradientB = new Vektor(numOutputNodes);
         this.inputs = new Vektor(numOutputNodes);
         activations = new double[numOutputNodes];
-        this.biases = new Vektor(numOutputNodes);
+        this.biases = new Vektor(numOutputNodes, true);
     }
 
     // ToDo: Überprüfen
@@ -90,23 +92,26 @@ public class Layer {
                 // Evaluate the partial derivative: cost/weight of current connection 
                 double derivativeCostWrtWeight = previouseActivations.getValue(nodeIn) * nodeValues[nodeOut];
                 // The costGradientW array stores these partial derivatives for each weight.
-                // Note: the derivative is being added to the array here because ultimately we
-                // want // to calculate the average gradient across all the data in the training batch 
-                double costderiv = costGradientW.getValue(nodeIn, nodeOut) + derivativeCostWrtWeight;
-                costGradientW.setValue(nodeIn, nodeOut, costderiv);
+                // Note: the derivative is being added to the array here because ultimately we want 
+                // to calculate the average gradient across all the data in the training batch 
+                double costderivW = costGradientW.getValue(nodeIn, nodeOut) + derivativeCostWrtWeight;
+                costGradientW.setValue(nodeIn, nodeOut, costderivW);
             }
-            // Evaluate the partial derivative: cost/bias of the current node double
-            //derivativeCostWrtBias = 1 nodeValues [nodeOut];
-            //costGradientW[nodeOut] += derivativeCostWrtBias;
+            // Evaluate the partial derivative: cost/bias of the current node 
+            double derivativeCostWrtBias = 1 * nodeValues [nodeOut];
+            double costderivB = derivativeCostWrtBias + costGradientB.getValue(nodeOut);
+            costGradientB.setValue(nodeOut, costderivB);
 
         }
     }
 
     public void ClearGradient() {
         this.costGradientW = new Matrix(numInputNodes, numOutputNodes);
+        this.costGradientB = new Vektor(numOutputNodes);
     }
 
     public void ApplyGradient(double learnrate) {
         weights.MinusMatrix(costGradientW.T(), learnrate);
+        biases.MinusVektor(costGradientB, learnrate);
     }
 }
