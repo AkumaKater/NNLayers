@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Kontakt.md",
+                "file": "Projektarbeit/Inhalt.md",
                 "mode": "source",
                 "source": false
               }
@@ -121,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Kontakt.md",
+                "file": "Projektarbeit/Inhalt.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Kontakt.md",
+                "file": "Projektarbeit/Inhalt.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Kontakt.md"
+                "file": "Projektarbeit/Inhalt.md"
               }
             }
           }
@@ -182,13 +182,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "19c3c14ba73094a5",
+  "active": "70e621a9f8881cb1",
   "lastOpenFiles": [
+    "Projektarbeit/Kontakt.md",
     "Projektarbeit/Inhalt.md",
     "Projektarbeit/Performance Notes.md",
     "Projektarbeit/SideNote.md",
     "Projektarbeit/Performance Notes with Bias.md",
-    "Projektarbeit/Kontakt.md",
     "Notizen/Movies.md",
     "Notizen/ToDo.md",
     "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",

@@ -48,15 +48,7 @@
     -   Abbildungen und Diagramme
     -   Weitere ergänzende Informationen
 
-``` SQL
-Select *
-FROM Tabelle
-Where
-```
+## Inhalt
 
-``` Java
-public static void PascalIstDumm(){
-
-}
-```
-
+1. Einleitung
+	- 
