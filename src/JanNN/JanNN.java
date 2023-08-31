@@ -69,6 +69,7 @@ public class JanNN {
             MNISTPrinter.printMnistMatrix(mnistMatrix[i]);
         }
 
+        log.whatever();
         log.add(NNUtil.getAcuracy(nn, mnistMatrix));
         log.flush();
 

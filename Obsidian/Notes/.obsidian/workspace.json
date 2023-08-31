@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Inhalt.md",
-                "mode": "source",
+                "file": "Projektarbeit/Performance Notes with Bias3.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -121,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Inhalt.md",
+                "file": "Projektarbeit/Performance Notes with Bias3.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Inhalt.md",
+                "file": "Projektarbeit/Performance Notes with Bias3.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Inhalt.md"
+                "file": "Projektarbeit/Performance Notes with Bias3.md"
               }
             }
           }
@@ -184,8 +184,11 @@
   },
   "active": "70e621a9f8881cb1",
   "lastOpenFiles": [
-    "Projektarbeit/Kontakt.md",
     "Projektarbeit/Inhalt.md",
+    "Projektarbeit/Performance Notes with Bias3.md",
+    "ProjektarbeitPerformance Notes with Bias2.md",
+    "ProjektarbeitSideNote.md",
+    "Projektarbeit/Kontakt.md",
     "Projektarbeit/Performance Notes.md",
     "Projektarbeit/SideNote.md",
     "Projektarbeit/Performance Notes with Bias.md",
