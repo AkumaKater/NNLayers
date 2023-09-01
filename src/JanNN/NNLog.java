@@ -9,19 +9,10 @@ public class NNLog {
 
     static NNLog logger;
     String message = "|";
-    String filePath = "../NNLayers/Obsidian/Notes/Projektarbeit/";
+    String filePath = "Obsidian/Notes/Projektarbeit/";//../NNLayers/Obsidian/Notes/Projektarbeit/
     File file = new File(filePath + "Performance Notes with Bias3.md");
     File sideFile = new File(filePath + "SideNote.md");
     File NetworkPath;
-
-
-    public void whatever(){
-        System.out.println("herereerrre");
-        System.out.println(file.getAbsolutePath());//.toString());
-        System.out.println("herereerrre");
-        System.out.println("herereerrre");
-           
-    }
 
     public static NNLog getLogger() {
         if (logger == null) {
@@ -32,7 +23,7 @@ public class NNLog {
 
     public void log(String message) {
         try {
-            FileWriter writer = new FileWriter(file.getAbsolutePath(), true); // Öffne im Append-Modus
+            FileWriter writer = new FileWriter(file, true); // Öffne im Append-Modus
             writer.write("\n" + message);
             writer.close();
         } catch (IOException e) {
@@ -60,7 +51,7 @@ public class NNLog {
 
     public void sideLog(String message) {
         try {
-            FileWriter writer = new FileWriter(sideFile.getAbsolutePath(), true); // Öffne im Append-Modus
+            FileWriter writer = new FileWriter(sideFile, true); // Öffne im Append-Modus
             writer.write("\n" + message);
             writer.close();
         } catch (IOException e) {

@@ -14,7 +14,7 @@ public class JanNN {
 
         String path = "/home/kater/Projekte/testlayer/NNLayers/src/JanNN/NetworksPersitance/NetwerkMitBiases.json";
 
-        int splitIndex = 60000; // 60.000
+        int splitIndex = 60; // 60.000
         int TrainingCycles = 1;
         double learnRate = 0.25;
         int BatchSize = 50;
@@ -69,7 +69,6 @@ public class JanNN {
             MNISTPrinter.printMnistMatrix(mnistMatrix[i]);
         }
 
-        log.whatever();
         log.add(NNUtil.getAcuracy(nn, mnistMatrix));
         log.flush();
 
