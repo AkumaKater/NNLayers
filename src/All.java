@@ -15,7 +15,7 @@ public class All {
 
         System.out.println((int) (random.nextDouble() * bound) + 1);
 
-        Sherlock();
+        Math();
     }
 
     /**
@@ -99,6 +99,22 @@ public class All {
                     + String.format("%02d", resultSeconds);
         }
         return resultTime;
+    }
+
+    public static void Math() {
+        String file = "/home/kater/Projekte/testlayer/NNLayers/src/Text.txt";
+        double base = 0.0;
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(file));
+            for (String line : lines) {
+                if (!line.isEmpty())
+                base += Double.parseDouble(line);
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("Zusammen:  " + base);
     }
 
 }

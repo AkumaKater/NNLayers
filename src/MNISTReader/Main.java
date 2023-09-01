@@ -20,6 +20,6 @@ public class Main {
     }
 
     private static void printMnistMatrix(final MnistMatrix matrix) {
-        MNISTPrinter.printMnistMatrix(matrix);
+        System.out.println(MNISTPrinter.printMnistMatrix(matrix));
     }
 }

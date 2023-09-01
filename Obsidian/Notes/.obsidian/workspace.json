@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias3.md",
+                "file": "Projektarbeit/Visualization 2.md",
                 "mode": "preview",
                 "source": false
               }
@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias.md",
-                "mode": "preview",
+                "file": "Projektarbeit/Performance Notes with Bias3.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -121,7 +121,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias3.md",
+                "file": "Projektarbeit/Visualization 2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +138,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias3.md",
+                "file": "Projektarbeit/Visualization 2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias3.md"
+                "file": "Projektarbeit/Visualization 2.md"
               }
             }
           }
@@ -184,14 +184,16 @@
   },
   "active": "70e621a9f8881cb1",
   "lastOpenFiles": [
-    "Projektarbeit/Inhalt.md",
+    "Projektarbeit/Visualization 1.md",
+    "Projektarbeit/Visualization 2.md",
     "Projektarbeit/Performance Notes with Bias3.md",
+    "Projektarbeit/Performance Notes with Bias.md",
+    "Projektarbeit/Inhalt.md",
     "ProjektarbeitPerformance Notes with Bias2.md",
     "ProjektarbeitSideNote.md",
     "Projektarbeit/Kontakt.md",
     "Projektarbeit/Performance Notes.md",
     "Projektarbeit/SideNote.md",
-    "Projektarbeit/Performance Notes with Bias.md",
     "Notizen/Movies.md",
     "Notizen/ToDo.md",
     "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
