@@ -35,7 +35,7 @@ public class Layer {
 
     //calculate the output of the layer
     public double[] CalculateOutputs(double[] inputs){
-        double[] activations = new double[numNodesOut];
+        double[] weightedInput = new double[numNodesOut];
 
         for(int nodeOut = 0; nodeOut < numNodesOut; nodeOut++){
             double weightedInput = biases[nodeOut];

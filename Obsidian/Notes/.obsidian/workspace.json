@@ -8,25 +8,13 @@
         "type": "tabs",
         "children": [
           {
-            "id": "70e621a9f8881cb1",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projektarbeit/Visualization 2.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
             "id": "1d4bf6c7d7f24f8c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Performance Notes with Bias3.md",
-                "mode": "source",
+                "file": "Projektarbeit/Visualization.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -55,7 +43,8 @@
               }
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -121,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Visualization 2.md",
+                "file": "Projektarbeit/Inhalt.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -138,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Visualization 2.md",
+                "file": "Projektarbeit/Inhalt.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -161,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Visualization 2.md"
+                "file": "Projektarbeit/Inhalt.md"
               }
             }
           }
@@ -182,23 +171,27 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "70e621a9f8881cb1",
+  "active": "91692046197f7e8b",
   "lastOpenFiles": [
-    "Projektarbeit/Visualization 1.md",
-    "Projektarbeit/Visualization 2.md",
-    "Projektarbeit/Performance Notes with Bias3.md",
-    "Projektarbeit/Performance Notes with Bias.md",
+    "Projektarbeit/Performance_Notes.md",
     "Projektarbeit/Inhalt.md",
-    "ProjektarbeitPerformance Notes with Bias2.md",
-    "ProjektarbeitSideNote.md",
+    "Performance_Notes.md",
+    "Performance.md",
     "Projektarbeit/Kontakt.md",
-    "Projektarbeit/Performance Notes.md",
-    "Projektarbeit/SideNote.md",
-    "Notizen/Movies.md",
-    "Notizen/ToDo.md",
     "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
     "Projektarbeit/Einleitung/Überblick über die Struktur der Arbeit.md",
     "Projektarbeit/Einleitung/Hintergrund und Motivation des Themas.md",
+    "Notizen/ToDo.md",
+    "Notizen/Movies.md",
+    "Projektarbeit/Visualization.md",
+    "Projektarbeit/Visualization 2.md",
+    "Projektarbeit/Visualization 1.md",
+    "Projektarbeit/Performance Notes with Bias3.md",
+    "Projektarbeit/Performance Notes with Bias.md",
+    "ProjektarbeitPerformance Notes with Bias2.md",
+    "ProjektarbeitSideNote.md",
+    "Projektarbeit/Performance Notes.md",
+    "Projektarbeit/SideNote.md",
     "script.js",
     "Notizen",
     "Projektarbeit/Einleitung",

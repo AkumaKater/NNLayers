@@ -1,7 +1,6 @@
 package JanNN;
 
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.Random;
 
 import MNISTReader.MnistMatrix;
@@ -115,8 +114,8 @@ public class NNUtil {
         int fromNodes = Weights.width;
         for (int fromNode = 0; fromNode < fromNodes; fromNode++) {
             for (int toNode = 0; toNode < toNodes; toNode++) {
-                Weights.setValue(toNode, fromNode,
-                        (Learnrate * partialDerivative[toNode] * previousWeightedOutputs[fromNode]));
+                //Weights.setValue(toNode, fromNode,
+                        //(Learnrate * partialDerivative[toNode] * previousWeightedOutputs[fromNode]));
             }
         }
     }

@@ -10,9 +10,9 @@ public class JanNN {
     public static void main(String[] args) throws Exception {
         NNLog log = NNLog.getLogger();
 
-        String path = "/home/kater/Projekte/testlayer/NNLayers/src/JanNN/NetworksPersitance/NetwerkMitBiases.json";
+        String path = "/src/JanNN/NetworksPersitance/NetwerkMitBiases.json";
 
-        int splitIndex = 60; // 60.000
+        int splitIndex = 300; // 60.000
         int TrainingCycles = 1000;
         double learnRate = 0.25;
         int BatchSize = 50;

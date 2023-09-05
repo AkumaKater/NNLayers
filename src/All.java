@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,7 +32,6 @@ public class All {
                 base += line + "\n";
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -102,8 +102,12 @@ public class All {
     }
 
     public static void Math() {
-        String file = "/home/kater/Projekte/testlayer/NNLayers/src/Text.txt";
+        String file = "src/Text.txt";//src\Text.txt
         double base = 0.0;
+        File fileD = new File(file);
+        System.out.println(fileD.getAbsolutePath());
+        
+
         try {
             List<String> lines = Files.readAllLines(Paths.get(file));
             for (String line : lines) {
@@ -111,7 +115,6 @@ public class All {
                 base += Double.parseDouble(line);
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         System.out.println("Zusammen:  " + base);
