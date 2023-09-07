@@ -1,7 +1,5 @@
 package JanNN;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -49,40 +47,6 @@ public class NeuralNetwork {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    // Training
-    public void learnD(double[] inputs, double[] targets) {
-
-    }
-
-    // Training
-    public void learndeprecated(DataPoint dataPoint) {
-        double[] inputs = dataPoint.getInputs();
-        double[] targets = dataPoint.getExpectedOutput();
-
-        // Hier werden die Errors berechnet, und gespeichert
-        double[][] errors = new double[layers.length][];
-        errors[errors.length - 1] = NNUtil.ArraySubtraction(targets, Querry(inputs));
-        for (int i = layers.length - 2; i >= 0; i--) {
-            errors[i] = layers[i + 1].weights.DotVektorTranspose(errors[i + 1]);
-        }
-
-        // Hier müssen jetzt alle PreviousOutputs gespeichert werden
-        double[][] PreviousOutputs = new double[layers.length][];
-        PreviousOutputs[0] = inputs;
-        for (int i = 1; i < layers.length; i++) {
-            PreviousOutputs[i] = layers[i - 1].activations;
-        }
-
-        // double[] errors = NNUtil.ArraySubtraction(targets, Querry(inputs));
-        for (int i = layers.length - 1; i >= 0; i--) {
-            // über alle Layer iterieren und die weightedOutputs und previousweightedOutputs
-            // übergeben
-            // vermutlich mit dem letzten Layer anfangen
-            layers[i].UpdateWeights(learnRate, errors[i], PreviousOutputs[i]);
-        }
-
     }
 
     // Training

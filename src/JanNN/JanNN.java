@@ -8,12 +8,13 @@ import MNISTReader.MnistMatrix;
 public class JanNN {
 
     public static void main(String[] args) throws Exception {
-        NNLog log = NNLog.getLogger();
+        NNLog log = NNLog.getLogger("Performance Notes Gemischt.md");
 
-        String path = "/src/JanNN/NetworksPersitance/NetwerkMitBiases.json";
+        String path = "src/JanNN/NetworksPersitance/NetwerkMit50Epochen.json";
+        String FileNameVisualization = "Visualization.md";
 
-        int splitIndex = 300; // 60.000
-        int TrainingCycles = 1000;
+        int splitIndex = 600; // 60.000
+        int TrainingCycles = 1;
         double learnRate = 0.25;
         int BatchSize = 50;
         NeuralNetwork nn = new NeuralNetwork(learnRate, 784, 300, 100, 10);
@@ -52,7 +53,6 @@ public class JanNN {
         log.add(NNUtil.getAcuracy(nn, TrainingData));
         log.add(NNUtil.getAcuracy(nn, TestData));
 
-        String FileNameVisualization = "Visualization.md";
         log.WipeFile(FileNameVisualization);
         log.log(FileNameVisualization, "| HLayersSizes |DataSize| Epochen | BatchSize | Learnrate | ACtrainingD | ACtestD |\n|----------|----------|----------|----------|----------|----------|----------|\n"+log.messageToString(), false);
         log.log(FileNameVisualization, "# Trainigs Daten\n", false);

@@ -8,31 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "1d4bf6c7d7f24f8c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projektarbeit/Visualization.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e84e0af973d17b26",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projektarbeit/SideNote.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "91692046197f7e8b",
+            "id": "ed5fcfd368ea445e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -42,9 +18,57 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "bd2856e700a4e173",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN Ausgaben/Visualization.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e1969c1f1e96d3c9",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d8a2614c42576033",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Gehirn lol???.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "040e29795b1e13f8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Motivation.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -94,7 +118,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 259.5
   },
   "right": {
     "id": "62735ff7b5eacde0",
@@ -110,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Inhalt.md",
+                "file": "NN Ausgaben/Visualization.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Inhalt.md",
+                "file": "NN Ausgaben/Visualization.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Inhalt.md"
+                "file": "NN Ausgaben/Visualization.md"
               }
             }
           }
@@ -171,27 +195,38 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "91692046197f7e8b",
+  "active": "bd2856e700a4e173",
   "lastOpenFiles": [
-    "Projektarbeit/Performance_Notes.md",
+    "NN Ausgaben/Performance Notes Gemischt.md",
+    "NN Ausgaben/Visualization.md",
+    "NN Ausgaben/Performance Notes.md",
+    "NN Ausgaben/Performance Notes with Bias.md",
+    "NN Ausgaben/Performance Notes with merh Epochen.md",
+    "Projektarbeit/Texte/Grundlagen.md",
     "Projektarbeit/Inhalt.md",
-    "Performance_Notes.md",
-    "Performance.md",
+    "NN Ausgaben/Visualization 500 Epochen.md",
+    "Grundlagen/Abgrenzung/ welche Art von Netzwerk werde ich hier bauen.md",
+    "Grundlagen/Abgrenzung",
+    "Grundlagen",
+    "Grundlagen/Wofür wird ein Netzwerk verwende?.md",
+    "Projektarbeit/Texte/Motivation.md",
     "Projektarbeit/Kontakt.md",
-    "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
-    "Projektarbeit/Einleitung/Überblick über die Struktur der Arbeit.md",
-    "Projektarbeit/Einleitung/Hintergrund und Motivation des Themas.md",
-    "Notizen/ToDo.md",
-    "Notizen/Movies.md",
-    "Projektarbeit/Visualization.md",
-    "Projektarbeit/Visualization 2.md",
-    "Projektarbeit/Visualization 1.md",
-    "Projektarbeit/Performance Notes with Bias3.md",
-    "Projektarbeit/Performance Notes with Bias.md",
-    "ProjektarbeitPerformance Notes with Bias2.md",
-    "ProjektarbeitSideNote.md",
-    "Projektarbeit/Performance Notes.md",
+    "Projektarbeit/Texte/Gehirn lol???.md",
+    "NN Ausgaben/Visualization with Batchsize 1.md",
+    "NN Ausgaben/Visualization Bat1 Epo30.md",
+    "NN Ausgaben/Performance Notes with Bias3.md",
+    "NN Ausgaben/Visualization Bat50 Epo30.md",
+    "NN Ausgaben/Visualization Overfitting.md",
+    "NN Ausgaben/Visualization 1.md",
+    "NN Ausgaben/SideNote.md",
+    "Projektarbeit/Visualization with Batchsize 1.md",
     "Projektarbeit/SideNote.md",
+    "Projektarbeit/Performance Notes with Bias.md",
+    "Projektarbeit/Performance Notes.md",
+    "Projektarbeit/Performance Notes with Bias3.md",
+    "NN Ausgaben",
+    "Projektarbeit/Visualization.md",
+    "Projektarbeit/Texte",
     "script.js",
     "Notizen",
     "Projektarbeit/Einleitung",

@@ -12,15 +12,27 @@ public class NNLog {
 
     static NNLog logger;
     String message = "|";
-    String filePath = "Obsidian/Notes/Projektarbeit/";// ../NNLayers/Obsidian/Notes/Projektarbeit/
-    File file = new File(filePath + "Performance Notes with Bias3.md");
+    String filePath = "Obsidian/Notes/NN Ausgaben/";
+    String fileName;
+    File file;
     File sideFile = new File(filePath + "SideNote.md");
     File NetworkPath;
     boolean append = true;
 
-    public static NNLog getLogger() {
+    public NNLog(){}
+
+    public NNLog(String fileName){
+        this.fileName = fileName;
+        file = new File(filePath + fileName);
+    }
+
+    public static NNLog getLogger(){
+        return getLogger("Obsidian/Notes/Projektarbeit/");
+    }
+
+    public static NNLog getLogger(String fileName) {
         if (logger == null) {
-            logger = new NNLog();
+            logger = new NNLog(fileName);
         }
         return logger;
     }
