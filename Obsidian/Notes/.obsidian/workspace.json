@@ -25,18 +25,6 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NN Ausgaben/Visualization.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "e1969c1f1e96d3c9",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
                 "file": "Projektarbeit/Kontakt.md",
                 "mode": "source",
                 "source": false
@@ -134,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "NN Ausgaben/Visualization.md",
+                "file": "Projektarbeit/Kontakt.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -151,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "NN Ausgaben/Visualization.md",
+                "file": "Projektarbeit/Kontakt.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -174,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "NN Ausgaben/Visualization.md"
+                "file": "Projektarbeit/Kontakt.md"
               }
             }
           }
@@ -197,20 +185,22 @@
   },
   "active": "bd2856e700a4e173",
   "lastOpenFiles": [
-    "NN Ausgaben/Performance Notes Gemischt.md",
+    "Projektarbeit/Texte/Grundlagen.md",
+    "Pasted image 20230908173244.png",
+    "Pasted image 20230908173215.png",
+    "Projektarbeit/Inhalt.md",
     "NN Ausgaben/Visualization.md",
+    "Projektarbeit/Kontakt.md",
+    "NN Ausgaben/Performance Notes Gemischt.md",
     "NN Ausgaben/Performance Notes.md",
     "NN Ausgaben/Performance Notes with Bias.md",
     "NN Ausgaben/Performance Notes with merh Epochen.md",
-    "Projektarbeit/Texte/Grundlagen.md",
-    "Projektarbeit/Inhalt.md",
     "NN Ausgaben/Visualization 500 Epochen.md",
     "Grundlagen/Abgrenzung/ welche Art von Netzwerk werde ich hier bauen.md",
     "Grundlagen/Abgrenzung",
     "Grundlagen",
     "Grundlagen/Wofür wird ein Netzwerk verwende?.md",
     "Projektarbeit/Texte/Motivation.md",
-    "Projektarbeit/Kontakt.md",
     "Projektarbeit/Texte/Gehirn lol???.md",
     "NN Ausgaben/Visualization with Batchsize 1.md",
     "NN Ausgaben/Visualization Bat1 Epo30.md",
@@ -225,7 +215,6 @@
     "Projektarbeit/Performance Notes.md",
     "Projektarbeit/Performance Notes with Bias3.md",
     "NN Ausgaben",
-    "Projektarbeit/Visualization.md",
     "Projektarbeit/Texte",
     "script.js",
     "Notizen",

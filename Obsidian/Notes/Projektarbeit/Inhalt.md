@@ -7,8 +7,8 @@
 2. [[Grundlagen]]
 	1. [[Grundlagen#Wofür wird ein Netzwerk verwende?|Wofür wird ein Netzwerk verwende?]]
 	2. [[Grundlagen#Abgrenzung/ welche Art von Netzwerk werde ich hier bauen|Abgrenzung/ welche Art von Netzwerk werde ich hier bauen]]
-	3. Grundlegender AUfbau eines Netztes (Initialisieren/Querry/learn)
-	4. Der MNIST Datensatz
+	3. [[Grundlagen#Grundlegender Aufbau eines Netztes (Initialisieren/Querry/learn)]]
+	4. [[Grundlagen#Der MNIST Datensatz|Der MNIST Datensatz]]
 3. Mathematische Grundlagen
 	1. Grundlage für die Querry (input x weight + bias -> Activation FUnktion)
 	2. Activation funktions

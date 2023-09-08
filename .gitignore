@@ -1,0 +1,5 @@
+# Ignoriere den bin-Ordner
+bin/
+
+# Ignoriere alle Dateien mit der Erweiterung .class
+*.class
