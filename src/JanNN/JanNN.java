@@ -13,7 +13,7 @@ public class JanNN {
         String path = "src/JanNN/NetworksPersitance/NetwerkMit50Epochen.json";
         String FileNameVisualization = "Visualization.md";
 
-        int splitIndex = 600; // 60.000
+        int splitIndex = 60000; // 60.000
         int TrainingCycles = 1;
         double learnRate = 0.25;
         int BatchSize = 50;
