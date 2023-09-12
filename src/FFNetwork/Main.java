@@ -9,10 +9,10 @@ public class Main {
         System.out.println(Arrays.deepToString(Matrix));
 
 
-        Activation activation = new ReLU();
+        Activation activation = Activation.geActivation();
         System.out.println("Baby"+activation.ActivationFunction(3));
 
-        NeuralNetwork nn = new NeuralNetwork(2.5, 10, 20, 5);
-        nn.Querry(NNMath.RandomDoubleArray(10));
+        NeuralNetwork nn = new NeuralNetwork(2.5, 780, 300, 100, 10);
+        System.out.println(Arrays.toString(nn.Querry(NNMath.RandomDoubleArray(780))));
     }
 }

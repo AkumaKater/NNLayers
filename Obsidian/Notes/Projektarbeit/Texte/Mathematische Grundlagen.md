@@ -116,10 +116,29 @@ ReLu wird auch häufiger verwendet.
 Anmerkung des Autors der Arbeit: Ich habe nach einer Möglichkeit gesucht, die recht aufwendige Sigmoid Funktion etwas kosten effizienter ausrechnen zu lassen. Dabei habe ich einen Hinweis gefunden. Die Sigmoid Funktion kann im vorhinein in Hundert Schritten in eine Look Up Tabelle eingetragen werden, so dass sie nicht mehr jedes mal ausgerechnet werden muss. Dabei habe ich festgestellt, dass das Netzwerk kaum an Geschwindigkeit gewinnt, allerdings 2 bis 4% an Genauigkeit gewinnt. Mir ist nicht vollends klar, woher diese Verbesserung kommt, allerdings sind mir derartige Beobachtungen schon häufiger untergekommen. Meist scheint es daran zu liegen, dass es dem Netzwerk schwerer fällt, sich in einem Lokalen Minimum fest zufahren. Dies ist an dieser Stelle allerdings reine Spekulation.
 
 ### Code
-Den Code für die Aktivierungsfunktion. Um Die Funktionen später leichter austauschen zu können, Implementieren wir hier die Abstrakte Klasse "Activation", und implementieren dann die Unterklassen Sigmoid und ReLU.
+Den Code für die Aktivierungsfunktion. Um Die Funktionen später leichter austauschen zu können, Implementieren wir hier die Abstrakte Klasse "Activation", und implementieren dann die Unterklassen Sigmoid und ReLu. Eine Statische Methode "getActivation" ermöglicht es, aus jedem Kontext heraus auf die richtige Activation Function zuzugreifen. Mit der setter Methode kann man eine andere Activation Klasse auswählen.
 ```java
 public abstract class Activation {
     public abstract double ActivationFunction(double weightedInput);
+
+	static Activation activation = new Sigmoid();
+
+    public static Activation geActivation(){
+        return activation;
+    }
+    public static void setActivation(String Activation){
+        switch (Activation) {
+            case "Sigmoid":
+                activation = new Sigmoid();
+                break;
+            case "ReLu":
+                activation = new ReLu();
+                break;
+            default:
+                activation = new Sigmoid();
+                break;
+        }
+    }
 }
 
 class Sigmoid extends Activation{
@@ -128,7 +147,7 @@ class Sigmoid extends Activation{
     }
 }
 
-class ReLU extends Activation{
+class ReLu extends Activation{
     public double ActivationFunction(double weightedInput) {
         return Math.max(0, weightedInput);
     }
@@ -156,24 +175,20 @@ public class Layer {
 
 Wenn wir nun die "CalculateOutputs" Methode aufrufen, dann muss das folgendermaßen ablaufen:
 Zuerst werden die Inputs gespeichert.
-Für jeden Wert der Outputs, die wir hier activations nennen, müssen wir zuerst die Summe aller gewichteten Inputs ausrechnen. Das bedeutet, dass eine Schleife nötig ist, die über alle Felder der "weightedInputs" läuft, und dabei die "weights" berücksichtigt.
+Für jeden Wert der Outputs, die wir hier "activations" nennen, müssen wir zuerst die Summe aller gewichteten Inputs ausrechnen. Das bedeutet, dass eine Schleife nötig ist, die über alle Felder der "weightedInputs" läuft, und dabei die "weights" berücksichtigt. während die Schleife läuft, können direkt die "weightedInputs" abgespeichert werden und direkt danach können die "activations" ebenfalls ausgerechnet und gespeichert werden. Zum Schluss werden die "activations" zurückgegeben.
 ## Code
 ```java
-public double[] CalculateOutputs(double[] inputs) {
-        this.inputs = new Vektor(inputs);
-        for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
-            double weightedInput = biases.getValue(nodeOut);
-            for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
-                weightedInput += inputs[nodeIn] * weights.getValue(nodeOut, nodeIn);
+    public double[] CalculateOutputs(double[] inputs) {
+        this.inputs = inputs;
+        Activation activ = Activation.geActivation();
+        for(int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++){
+            double weightedInput = 0;
+            for(int nodeIn = 0; nodeIn<numInputNodes; nodeIn++){
+                weightedInput += inputs[nodeIn] * weights[nodeOut][nodeIn];
             }
-            this.weightedInputs.setValue(nodeOut, weightedInput);
+            weightedInputs[nodeOut] = weightedInput;
+            activations[nodeOut] = activ.ActivationFunction(weightedInput);
         }
-
-        // Apply activation function
-        for (int i = 0; i < activations.length; i++) {
-            activations[i] = Activations.Sigmoid(this.weightedInputs.getValue(i));
-        }
-
         return activations;
     }
 ```

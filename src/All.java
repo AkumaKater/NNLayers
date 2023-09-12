@@ -15,10 +15,10 @@ public class All {
         int bound = 60;
         //System.out.println((int) (random.nextDouble() * bound) + 1);
 
-        double WrtCntGestern = 682;
-        double WrtCntHeute = 1835-WrtCntGestern;
-        double Datum = 12;
-        double[] WrtCntArray = {682, 620};
+        double WrtCntGestern = 1927;
+        double WrtCntHeute = 1927-WrtCntGestern;
+        double Datum = 13;
+        double[] WrtCntArray = {1927, 620};
         double WrtCnt = 0;
         for(Double d : WrtCntArray){WrtCnt+=d;}
         double Seiten = WrtCnt / 250;

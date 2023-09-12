@@ -33,7 +33,7 @@ public class Layer {
         }
     }
 
-    //calculate the output of the layer
+    /*calculate the output of the layer
     public double[] CalculateOutputs(double[] inputs){
         double[] weightedInput = new double[numNodesOut];
 
@@ -45,7 +45,7 @@ public class Layer {
             activations[nodeOut] = ActivationFunction(weightedInput);
         }
         return activations;
-    }
+    }*/
 
     double ActivationFunction(double weightedInput) {
         return Activations.Sigmoid(weightedInput);

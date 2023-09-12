@@ -92,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -158,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "file": "Projektarbeit/Kontakt.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -175,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "file": "Projektarbeit/Kontakt.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -198,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md"
+                "file": "Projektarbeit/Kontakt.md"
               }
             }
           }
@@ -219,8 +219,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "01e0604a523b1f48",
+  "active": "ebf1cc94ba432a3d",
   "lastOpenFiles": [
+    "Projektarbeit/Texte/Mathematische Grundlagen.md",
     "Pasted image 20230912200758.png",
     "Pasted image 20230912195705.png",
     "Pasted image 20230912194736.png",
@@ -228,7 +229,6 @@
     "Pasted image 20230912192401.png",
     "Projektarbeit/Texte/Einleitung.md",
     "2023-09-12.md",
-    "Projektarbeit/Texte/Mathematische Grundlagen.md",
     "Pasted image 20230912184748.png",
     "Projektarbeit/Kontakt.md",
     "NN Ausgaben/Performance Notes Without Biases.md",

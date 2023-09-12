@@ -13,6 +13,8 @@ Gibt es irgendwelche Regeln wegen der projektarbeit? Muss man die Anmelden oder 
 
 Quellen verweise
 
+Texte aus projektarbeit in Bachelorarbeit recyclen
+
 
 ## ToDO
 20:00 lesen
