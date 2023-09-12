@@ -9,4 +9,11 @@ ISBN 978-3-89722-021-8
 
 Ich möchte wissen, ob mein Ansatz, diese Projektarbeit zu strukturieren, den Wissenschafftlichen Standards entspricht, den man an so eine Arbeit setzten kann?
 
-Wie darf ich den Bin Ordner verstehen? Ist es notwendig diesen Jedes mal zu Komitten und zu Pushen?
+Gibt es irgendwelche Regeln wegen der projektarbeit? Muss man die Anmelden oder so?
+
+Quellen verweise
+
+
+## ToDO
+20:00 lesen
+21:00 Schreiben

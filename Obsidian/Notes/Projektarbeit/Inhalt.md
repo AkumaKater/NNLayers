@@ -1,15 +1,17 @@
 
 ## Inhalt
 
-1. Einleitung
+1. [[Einleitung|Einleitung]]
+	1. Generelle Information zur Inspiration für neuronale netze
+	2. 
 	- [[Motivation]]
 	- [[Gehirn lol???  ]]  
-2. [[Grundlagen]]
+3. [[Grundlagen]]
 	1. [[Grundlagen#Wofür wird ein Netzwerk verwende?|Wofür wird ein Netzwerk verwende?]]
-	2. [[Grundlagen#Abgrenzung/ welche Art von Netzwerk werde ich hier bauen|Abgrenzung/ welche Art von Netzwerk werde ich hier bauen]]
+	2. [[Grundlagen#Abgrenzung/ welche Art von Netzwerk wird hier gebaut?|Abgrenzung/ welche Art von Netzwerk werde ich hier bauen]]
 	3. [[Grundlagen#Grundlegender Aufbau eines Netztes (Initialisieren/Querry/learn)]]
 	4. [[Grundlagen#Der MNIST Datensatz|Der MNIST Datensatz]]
-3. Mathematische Grundlagen
+4. [[Mathematische Grundlagen]]
 	1. Grundlage für die Querry (input x weight + bias -> Activation FUnktion)
 	2. Activation funktions
 	3. Grundlagen für Backpropagation
@@ -18,7 +20,7 @@
 		3. Ableitung für eine schicht
 		4. ableitung für 2 schichten
 		5. ableitung generalisieren
-4. Netzwerk Coden
+5. Netzwerk Coden
 	1. Initialisiereng
 	2. Querry
 	3. Backpropagation
@@ -30,7 +32,7 @@
 	4. Visualisierung
 		1. Anzeige von Bildern
 		2. Erstellen von Tabellen um Netzwerke vergkeichen zu können
-5. Netzwerk Testen
+6. Netzwerk Testen
 	1. Verschiedene Konfigurationen Testen
 		1. Test für eine schicht
 		2. Test für 2 Schichten
@@ -42,13 +44,13 @@
 	4. Potentiell noch andere Activation FUnktions ausprobieren
 	5. Potentiell noch Momentum einprogrammieren
 	6. Potentiell noch regularisierungsverfahren unetrsuchen/einfügen
-6. Fazit..?
+7. Fazit..?
 	1. Disskusion über mögliche Schritte, um das Netzwerk noch besser zu Trainieren
 	2. EInführen von Noise in den Trainigsdatensatz
 	3. Test auf einem anderen Datensatz/ Modebilder/ Doodles
 	4. Ausblick auf verbesserungen eines Netzwerkes (Konvolutional/Language Model)
-7. Literaturverzeichniss
-8. Anhang
+8. Literaturverzeichniss
+9. Anhang
 	1. [[Projektarbeit/Performance Notes|Performance Notes]]
 	2. [[Visualization]]
 

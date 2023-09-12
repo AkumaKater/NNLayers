@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "ed5fcfd368ea445e",
+            "id": "127658804135046c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -20,7 +20,67 @@
             }
           },
           {
-            "id": "bd2856e700a4e173",
+            "id": "89cd88be4f132a1c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Grundlagen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "50bc0646ce4ae31c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Einleitung.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "01e0604a523b1f48",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a5fca7320f6891ac",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN Ausgaben/Visualization.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "556f7686d76a6995",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Bilder.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ebf1cc94ba432a3d",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -30,33 +90,9 @@
                 "source": false
               }
             }
-          },
-          {
-            "id": "d8a2614c42576033",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projektarbeit/Texte/Gehirn lol???.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "040e29795b1e13f8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Projektarbeit/Texte/Motivation.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -106,7 +142,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 259.5
+    "width": 325.5
   },
   "right": {
     "id": "62735ff7b5eacde0",
@@ -122,7 +158,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Kontakt.md",
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +175,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Kontakt.md",
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +198,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Kontakt.md"
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md"
               }
             }
           }
@@ -183,37 +219,46 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bd2856e700a4e173",
+  "active": "01e0604a523b1f48",
   "lastOpenFiles": [
+    "Pasted image 20230912200758.png",
+    "Pasted image 20230912195705.png",
+    "Pasted image 20230912194736.png",
+    "Pasted image 20230912194450.png",
+    "Pasted image 20230912192401.png",
+    "Projektarbeit/Texte/Einleitung.md",
+    "2023-09-12.md",
+    "Projektarbeit/Texte/Mathematische Grundlagen.md",
+    "Pasted image 20230912184748.png",
+    "Projektarbeit/Kontakt.md",
+    "NN Ausgaben/Performance Notes Without Biases.md",
+    "NN Ausgaben/Visualization.md",
+    "Quelle.md",
+    "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
+    "Projektarbeit/Einleitung/Hintergrund und Motivation des Themas.md",
+    "Pasted image 20230912175903.png",
+    "NN Ausgaben/Performance Notes with Bias.md",
+    "NN Ausgaben/Performance Notes Random Biases false.md",
+    "NN Ausgaben/Performance Notes Random false.md",
+    "NN Ausgaben/Performance Notes with merh Epochen.md",
+    "Projektarbeit/Texte/Bilder.md",
+    "Pasted image 20230912141637.png",
+    "NN Ausgaben/Performance Notes Gemischt.md",
+    "Projektarbeit/Inhalt.md",
+    "NN Ausgaben/Visualizationnn.md",
     "Projektarbeit/Texte/Grundlagen.md",
     "Pasted image 20230908173244.png",
     "Pasted image 20230908173215.png",
-    "Projektarbeit/Inhalt.md",
-    "NN Ausgaben/Visualization.md",
-    "Projektarbeit/Kontakt.md",
-    "NN Ausgaben/Performance Notes Gemischt.md",
-    "NN Ausgaben/Performance Notes.md",
-    "NN Ausgaben/Performance Notes with Bias.md",
-    "NN Ausgaben/Performance Notes with merh Epochen.md",
+    "NN Ausgaben/Visualization 700 Epochen.md",
+    "Hamachi.md",
     "NN Ausgaben/Visualization 500 Epochen.md",
-    "Grundlagen/Abgrenzung/ welche Art von Netzwerk werde ich hier bauen.md",
+    "NN Ausgaben/Visualization LookupTabelSigmoid.md",
+    "Texte",
+    "Texte.md",
+    "NN Ausgaben/Visualization ReLu.md",
+    "NN Ausgaben/Performance Notes.md",
     "Grundlagen/Abgrenzung",
     "Grundlagen",
-    "Grundlagen/Wofür wird ein Netzwerk verwende?.md",
-    "Projektarbeit/Texte/Motivation.md",
-    "Projektarbeit/Texte/Gehirn lol???.md",
-    "NN Ausgaben/Visualization with Batchsize 1.md",
-    "NN Ausgaben/Visualization Bat1 Epo30.md",
-    "NN Ausgaben/Performance Notes with Bias3.md",
-    "NN Ausgaben/Visualization Bat50 Epo30.md",
-    "NN Ausgaben/Visualization Overfitting.md",
-    "NN Ausgaben/Visualization 1.md",
-    "NN Ausgaben/SideNote.md",
-    "Projektarbeit/Visualization with Batchsize 1.md",
-    "Projektarbeit/SideNote.md",
-    "Projektarbeit/Performance Notes with Bias.md",
-    "Projektarbeit/Performance Notes.md",
-    "Projektarbeit/Performance Notes with Bias3.md",
     "NN Ausgaben",
     "Projektarbeit/Texte",
     "script.js",

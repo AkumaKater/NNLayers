@@ -1,3 +1,4 @@
+Für die bachelorarbeit. Also
 ## Wofür wird ein Netzwerk verwende?
 
 Neuronale netzwerke werden vor allem für Klassifikationsverfahren verwendet. In der Praxis gibt es viele Anwendungsbereiche, in denen es Vorteilhaft ist, Große Mengen von Daten automatisch zu Klassifizieren. Einige Beispiele wären zB die Bild und schriffterkennung, die man dabei verwendet, Kennschilder von Autos Maschinel auszulesen. Solche Technologien werden immer häufiger auf parkplätzen und Autobahnen eingesetzt. Aber auch fast Jedes handy kann mittlerweile schrifft erkennen, die mit der Kammera aufgenommen wird. Auch in der Medizin, beim Auswerten von Röntgenbildern, in der Biologie, zum erkennen von Pflanzen auf Fotos und noch vielem mehr werden Neuronale Netzwerke eingesetzt.
@@ -7,7 +8,7 @@ Netzwerke werden bei Problemen eingesetzt, die Kompliziert genug sind, dass die 
 Generell wird ein Datensatz mit Labeln versehen, und dieser wird dazu verwendet, das Netzwerk zu Trainieren. Die Daten werden von Menschen mit Labeln versehen. 
 
 
-## Abgrenzung/ welche Art von Netzwerk werde ich hier bauen
+## Abgrenzung/ welche Art von Netzwerk wird hier gebaut?
 In dieser Arbeit soll ein Grundlegendes und einfaches neuronales Netzwerk Programmiert, erklärt und getestet werden. Die Einfachste Form eines solchen Netzwerkes ist ein Feed Forward Netzwerk.
 Die Ansprüche an dieses Netzwerk sind die Folgenden:
 - Variable Anzahl an Layern
@@ -33,11 +34,12 @@ Der Learn (ToDo)
 
 ## Der MNIST Datensatz
 Der Datensatz, mit dem dieses Netzwerk getestet werden soll, ist der MNIST Datensatz. Es handelt sich dabei um eine Teilmenge aus den NIST Datensätzen. Dieser ist frei herunterzuladen, und wird häufig dazu genutzt, Netzwerke zu trainieren.
-Der Datensatz besteht aus 70.000 Bilder, von denen 60.000 zum trainieren verwendet werden. Die Bilder enthalten jeweils eine Handschriftlich gezeichnete Zahl zwischen 0 un 9. 
+Der Datensatz besteht aus 70.000 Bilder, von denen 60.000 zum trainieren verwendet werden. Die Bilder enthalten jeweils eine Handschriftlich gezeichnete Zahl zwischen 0 un 9, bei einer Bild Größe von 28 X 28 Pixeln. 
 
 ![[Pasted image 20230908173244.png]]
 (Quelle: https://www.kaggle.com/datasets/hojjatk/mnist-dataset)
 
 Um den Datensatz einzulesen, wird in diesem Projekt der mnist-data-reader von Author
 Türkdoğan Taşdelen von seinem Github Repository "https://github.com/turkdogan/mnist-data-reader" verwendet. Darin sind zwei Klassen wichtig:
-Der MnistDataReader liest die Dateien ein. Die Bilder und die Label sind getrennt gespeichert, und müssen für das Netzwerk 
+Der MnistDataReader liest die Dateien ein. Die Bilder und die Label sind getrennt gespeichert, und müssen für das Netzwerk zusammen gebracht werden. Daraus werden Objekte der zweiten Klasse erstellt, MnistMatrix. Diese Jedes Objekt der Klasse MnistMatrix enthält ein 2 Dimensionales Array, welches die Helligkeit eines Jeden Pixels des Bildes enthält, ein Wert zwischen 0 und 255. Außerdem kennt das Objekt das Label des Bildes.
+Auf diese Weise kann der Datensatz eingelesen und Nutzbar gemacht werden.

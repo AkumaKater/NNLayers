@@ -1,14 +1,17 @@
 package JanNN;
+
 public class Activations {
-    
+
     static double StepActivation(double weightedInput) {
         return (weightedInput > 0) ? 1 : 0;
     }
 
     static double Sigmoid(double weightedInput) {
-        return 1.0 / (1 + Math.exp(-weightedInput));
+        //return 1.0 / (1 + Math.exp(-weightedInput));
+        return SigmoidLookupTable.lookupSigmoid(weightedInput);
     }
-    static double SigmoidDerivative(double weightedInput){
+
+    static double SigmoidDerivative(double weightedInput) {
         double activation = Sigmoid(weightedInput);
         return activation * (1.0 - activation);
     }
@@ -26,7 +29,15 @@ public class Activations {
         return Math.max(0, weightedInput);
     }
 
-    static double EXP(double expo){
+    static double ReLUDerivative(double weightedInput) {
+        if (weightedInput <= 0)
+            return 0.0;
+        else
+            return 1.0;
+
+    }
+
+    static double EXP(double expo) {
         return Math.exp(expo);
     }
 

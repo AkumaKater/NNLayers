@@ -1,6 +1,7 @@
 package JanNN;
 
 import java.text.DecimalFormat;
+import java.util.LinkedList;
 import java.util.Random;
 
 import MNISTReader.MnistMatrix;
@@ -234,6 +235,25 @@ public class NNUtil {
             int label = mnistMatrix[i].getLabel();
             if (Hindex == label) {
                 correct++;
+            }
+        }
+        acuracy = (double) correct / (double) iterations * 100;
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(acuracy) + "%";
+    }
+
+    public static String getAcuracy(NeuralNetwork nn, MnistMatrix[] mnistMatrix, LinkedList<Integer> wrongList) {
+        int iterations = mnistMatrix.length;
+        int correct = 0;
+        double acuracy = 0.0;
+        for (int i = 0; i < iterations; i++) {
+            double[] querry = nn.Querry(mnistMatrix[i].getInputs());
+            int Hindex = NNUtil.getHighestIndex(querry);
+            int label = mnistMatrix[i].getLabel();
+            if (Hindex == label) {
+                correct++;
+            }else{
+                wrongList.add(i);
             }
         }
         acuracy = (double) correct / (double) iterations * 100;

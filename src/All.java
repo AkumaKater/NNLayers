@@ -13,10 +13,39 @@ public class All {
     public static void main(String[] args) {
         Random random = new Random();
         int bound = 60;
+        //System.out.println((int) (random.nextDouble() * bound) + 1);
 
-        System.out.println((int) (random.nextDouble() * bound) + 1);
+        double WrtCntGestern = 682;
+        double WrtCntHeute = 1835-WrtCntGestern;
+        double Datum = 12;
+        double[] WrtCntArray = {682, 620};
+        double WrtCnt = 0;
+        for(Double d : WrtCntArray){WrtCnt+=d;}
+        double Seiten = WrtCnt / 250;
+        double SeitenMitHeute = Seiten + WrtCntHeute/250;
+        double WrtProTag = roundToDecimalPlaces(Mathe(Datum, Seiten), 2);
+        double WrtProTagRounded = roundToDecimalPlaces(WrtProTag*250.0, 1);
 
-        Math();
+
+        System.out.println("Worte Pro tag zu schreiben: " +WrtProTagRounded);
+        System.out.println("So viel hast du heute geschrieben: "+WrtCntHeute);
+        System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*250)*100, 1) +"%");
+        System.out.println("So viele Worte fehlen dir heute noch: "+ (WrtProTagRounded-WrtCntHeute));
+        System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt+WrtCntHeute)/(50*250))*100, 1)+"%");
+        System.out.println("Du hast So viele Seiten geschafft: " +roundToDecimalPlaces(SeitenMitHeute,1)+"/"+50);
+    }
+
+    public static double roundToDecimalPlaces(double value, int decimalPlaces) {
+        double multiplier = Math.pow(10, decimalPlaces);
+        return Math.round(value * multiplier) / multiplier;
+    }
+
+    public static double math2(double WorteBisher, Double Datum){
+        return (50*250-WorteBisher)-(21-Datum)*3.5*250;
+    }
+
+    public static double Mathe(double Tag, double Seiten){
+        return (50.0 - Seiten) / (21.0 - Tag);
     }
 
     /**
