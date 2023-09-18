@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import MNISTReader.MnistMatrix;
+
 public class NeuralNetwork {
     Layer[] layers;
     double learnRate;
@@ -50,12 +52,12 @@ public class NeuralNetwork {
     }
 
     // Training
-    public void learn(DataPoint[] data, double learnrate) {
-        for (DataPoint dataPoint : data) {
+    public void learn(MnistMatrix[] data) {
+        for (MnistMatrix dataPoint : data) {
             UpdateAllGradients(dataPoint);
         }
 
-        ApplyAllGradients(learnrate / data.length);
+        ApplyAllGradients(this.learnRate / data.length);
 
         ClearAllGradients();
     }
@@ -68,32 +70,31 @@ public class NeuralNetwork {
         return inputs;
     }
 
-    double Cost(DataPoint dataPoint) {
-        double[] ExpectedOutput = dataPoint.getExpectedOutput();
-        double[] errors = new double[ExpectedOutput.length];
-        errors = NNUtil.ArraySubtraction(ExpectedOutput, Querry(dataPoint.getInputs()));
+    double Cost(MnistMatrix dataPoint) {
+        double[] QuerryOutputs = Querry(dataPoint.getInputs());
+        double[] Targets = dataPoint.getTargets();
         double cost = 0;
-        for (double e : errors) {
-            cost += e * e;
+        for(int i=0; i<Targets.length; i++) {
+            cost = Targets[i]-QuerryOutputs[i];
         }
         return cost;
     }
 
-    double Cost(DataPoint[] data) {
+    double Cost(MnistMatrix[] data) {
         double totalCost = 0;
 
-        for (DataPoint dataPoint : data) {
+        for (MnistMatrix dataPoint : data) {
             totalCost += Cost(dataPoint);
         }
 
         return totalCost / data.length;
     }
 
-    void UpdateAllGradients(DataPoint dataPoint) {
+    void UpdateAllGradients(MnistMatrix dataPoint) {
         Querry(dataPoint.getInputs());
 
         Layer outputLayer = layers[layers.length - 1];
-        double[] nodeValues = outputLayer.CalculateOutputLayerNodeValues(dataPoint.expectedOutput);
+        double[] nodeValues = outputLayer.CalculateOutputLayerNodeValues(dataPoint.getTargets());
         outputLayer.UpdateGradients(nodeValues);
 
         for (int index = layers.length - 2; index >= 0; index--) {

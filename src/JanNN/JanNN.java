@@ -4,48 +4,40 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import MNISTReader.MnistBuffer;
 import MNISTReader.MnistMatrix;
 
 public class JanNN {
 
     public static void main(String[] args) throws Exception {
-        NNLog log = NNLog.getLogger("Performance Notes Without Biases.md");
+        NNLog log = NNLog.getLogger("Performance Notes Gemischt.md");
 
         String path = "src/JanNN/NetworksPersitance/NetwerkMit!!!Epochen.json";
         String FileNameVisualization = "Visualization.md";
 
-        int splitIndex = 6000; // 60.000
-        int TrainingCycles = 1;
+        int splitIndex = 60000; // 60.000
+        int TrainingCycles = 5;
         double learnRate = 0.25;
         int BatchSize = 50;
         NeuralNetwork nn = new NeuralNetwork(learnRate, 784, 300, 100, 10);
         
-        //nn = new NeuralNetwork(learnRate, path);
-
-        DataLoader dataLoader = new DataLoader(splitIndex);
-
-        MnistMatrix[] TrainingData = dataLoader.getTrainingsData();
-        MnistMatrix[] TestData = dataLoader.getTestData();
-
         DecimalFormat df = new DecimalFormat("0.00");
 
-        DataPoint[] Batch = new DataPoint[BatchSize];
-        int index = 0;
-        int mnistIndex = TrainingData.length - 1;
-        for (int j = 0; j < (TrainingCycles * TrainingData.length); j++) {
-            Batch[index] = new DataPoint(TrainingData[mnistIndex].getInputs(), TrainingData[mnistIndex].getTargets());
-            index++;
-            mnistIndex--;
-            if (mnistIndex < 0) {
-                mnistIndex = TrainingData.length - 1;
-            }
-            if (index == BatchSize) {
-                nn.learn(Batch, learnRate);
-                index = 0;
-            }
+        //nn = new NeuralNetwork(learnRate, path);
+
+        MnistBuffer mBuffer = new MnistBuffer();
+        mBuffer.loadMNIST();
+        mBuffer.splitData(splitIndex);
+        for(int i=0; i<(splitIndex*TrainingCycles/BatchSize); i++){
+            MnistMatrix[] MnistMatrix = mBuffer.getBatch(BatchSize);
+            nn.learn(MnistMatrix);
             System.out.print('\r');
-            System.out.print(df.format(((double) j / (double) (TrainingCycles * TrainingData.length)) * 100) + "%");
+            System.out.print(df.format((double) i / (splitIndex*TrainingCycles/BatchSize-1) * 100) + "%");
         }
+        int rest = splitIndex*TrainingCycles%BatchSize;
+        if(rest != 0){nn.learn(mBuffer.getBatch(rest));
+        System.out.print('\r');
+        System.out.print("100.00%   "+rest);}
 
         //nn = new NeuralNetwork(learnRate, path);
 
@@ -53,16 +45,16 @@ public class JanNN {
 
         System.out.println();
         log.add(nn.toString());
-        log.add(TrainingData.length);
+        log.add(mBuffer.getTrainingsDataLength());
         log.add(TrainingCycles);
         log.add(BatchSize);
         log.add(learnRate);
-        log.add(NNUtil.getAcuracy(nn, TrainingData));
-        log.add(NNUtil.getAcuracy(nn, TestData, wrongList));
+        log.add(NNUtil.getAcuracy(nn, mBuffer.getTrainingsData()));
+        log.add(NNUtil.getAcuracy(nn, mBuffer.getTestData(), wrongList));
 
         MnistMatrix[] wrongMatrixs = new MnistMatrix[wrongList.size()];
         for(Integer i  =0; i<wrongList.size();i++){
-            wrongMatrixs[i] = TestData[wrongList.get(i)];
+            wrongMatrixs[i] = mBuffer.getTestData()[wrongList.get(i)];
         }
 
         
@@ -73,9 +65,9 @@ public class JanNN {
                         + log.messageToString(),
                 false);
         log.log(FileNameVisualization, "# Trainings Daten\n", false);
-        log.printDataPoints(Arrays.copyOfRange(TrainingData, 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Trainings Data werden ausgegeben
+        log.printDataPoints(Arrays.copyOfRange(mBuffer.getTrainingsData(), 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Trainings Data werden ausgegeben
         log.log(FileNameVisualization, "# Test Daten\n", false);
-        log.printDataPoints(Arrays.copyOfRange(TestData, 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
+        log.printDataPoints(Arrays.copyOfRange(mBuffer.getTestData(), 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
         log.log(FileNameVisualization, "# Wrong Examples\n", false);
         log.printDataPoints(Arrays.copyOfRange(wrongMatrixs, 1, 20), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
 

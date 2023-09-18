@@ -93,7 +93,7 @@ Der erste Knoten wird *a*<sub>0</sub> genannt, und entspricht schlichtweg dem In
 
 ### Aktivierungsfunktion
 Die am Häufigsten genutze Aktivierungsfunktion ist die Sigmoid Funktion. Diese sieht so aus:
-***σ(x) = 1 / (1 + e^(-x))***
+![[Pasted image 20230918125041.png]]
 ![[Pasted image 20230912192401.png]]
 Jeder Wert, der hier hinein läuft, wird auf einen Wert zwischen 0 und 1 verkleinert. 
 Um ein Starkes Signal an die Nächsten Schicht zu senden, muss die Summer aller eingegangenen und danach gewichteten Signale Groß genug sein, um nach der Sigmoid Funktion noch näher an der 1 zu sein als an der 0. 
@@ -194,9 +194,133 @@ Für jeden Wert der Outputs, die wir hier "activations" nennen, müssen wir zuer
 ```
 
 # Learn
+Nun kommen wir endlich zum Herzstück des Netzwerkes. Das Netzwerk braucht Daten, um um zu lernen. Rückschlüsse zu ziehen und korrekte Vorhersagen zu treffen. Nur wenn es die Trainingsdaten gut verstanden hat kann das Netzwerk die Testdaten richtig Klassifizieren. Aber noch kann das Netzwerk, das hier programmiert wird, nicht lernen.
+## Cost Function
+Wir fangen hier einmal ganz am Ende an. Bisher kann das Netzwerk eine Ausgabe machen, indem wir ein Bild in die Querry geben. Dafür erhalten wir ein Array an Zahlen zurück. Diese Zahlen ergeben aber noch überhaupt keinen Sinn. Da die Gewichte Zufällig belegt wurden, sind auch die Ergebnisse, die das Netzwerk hervorbringt, rein Zufällig. 
+Wie kann das Netzwerk sich dann jetzt verbessern? Bei einem sehr kleinen Netzwerk mit 1 bis 3 Knoten könnte man die Gewichte manuell anpassen. Das wäre aber nur für Probleme möglich, die eben so klein und unbedeutend sind, dass es sich die Mühe eines neuronalen Netzwerkes nicht loht. Bei Größeren Komplexen Problemen möchten wir diesen Prozess so weit es geht Automatisieren.
+Intuitiv ist leicht zu verstehen, dass es nötig ist, den eignen Fehler zu kennen, bevor man ihn verbessern kann. Das gilt auch für das Netzwerk. Wir müssen zunächst ausrechnen, wie falsch das Netzwerk war. Dazu nehmen wir jedes Ergebnis aus dem Output Array der Querry, ziehen sie von den erwarteten Werten ab, und summieren alle Werte zusammen. Im folgenden werden die erwarteten Werte "Targets" genannt, also die Ziel-Werte. Um diese zu erhalten, brauchen wir eigentlich nur ein Array, welches genau so groß ist, wie das Output Array, und in diesem Array setzten wir alle Werte auf 0, außer das Feld mit dem Index, welches dem Label des Bildes entspricht. Dieses Feld setzten wir auf 1. Hier ein ausschnitt aus der Klasse MnistMatrix, aus dem Paket MNISTReader, um die Targets zu berechnen.
 
-## Grundgedanke
+```Java
+public double[] getTargets(){
+    double[] targets = new double[10];
+    targets[label] = 1.0;
+    return targets;
+}
+    ```
 
-## Mathematik
+Danach werden die Targets dazu verwendet, um den Fehler des Netzes, oder auch die Kosten des Netzes zu berechnen. 
+- Die Outputs werden von den Targets abgezogen
+- Alle Ergebnisse dieser Rechnung werden aufaddiert
+- Das Ergebnis wird zurück gegeben, und entspricht den Kosten des Netzes
+
+```Java
+double Cost(MnistMatrix dataPoint) {
+        double[] QuerryOutputs = Querry(dataPoint.getInputs());
+        double[] Targets = dataPoint.getTargets();
+        double cost = 0;
+        for(int i=0; i<Targets.length; i++) {
+            cost = Targets[i]-QuerryOutputs[i];
+        }
+        return cost;
+    }
+```
+
+## Was bringt uns die Cost Funktion?
+Wie geht es jetzt weiter? In Unserem Code wird die Cost Funktion von hier an nicht mehr aufgerufen. Aber Sie ist dennoch wichtig: denn Das Ziel unseres Netzwerkes muss es sein, diese Cost Funktion zu minimieren. 
+
+Wenn wir den Graphen einer Cost Function plotten und die Gewichtungen Gewichte als unabhängige Variable "w" festlegen, um den Verlauf der Funktion "f(w) zu visualisieren, könnte dies beispielsweise folgendermaßen aussehen, gesetzt den Fall, dass wir nur eine einzelne Gewichtung betrachten:
+![[Pasted image 20230914193809.png]]
+[Quelle](https://www.youtube.com/watch?v=hfMk-kjRv4c)
+
+Für dieses einfache Netzwerk wäre es nun das beste, wenn wir das "w" so wählen, dass ein Globales Minimum erreicht wird. 
+## Warum lässt sich das nicht Analytisch berechnen?
+man könnte annehmen, dass die Besten Ergebnisse damit erzielt werden könnten, indem man die Tiefpunkte mit der 3. Ableitung errechnet, aber das ist leider nicht so einfach.
+Die vielen Dimensionen, und die Hoche Komplexität erlauben das nicht so einfach. Um ein Beispiel zu nennen, der Graph der Cost Funktion ist bei jedem Bild, dass wir in das Netz Fütter ein wenig anders. Daher ist es Sinnvoller sich Schrittweise eine allgemeinen Lösung zu nähern. Dieses Verfahren heißt Gradient Descent. 
+
+## Gradient Descent
+Man kann sich das Gradient Descent Verfahren ein wenig so vorstellen wie eine Kugel, die man einen Hügel herabrollen lässt. Entsprechend der Neigung unter ihr, rollt sie auf dem direktesten Weg in das nächste Tal. 
+![[Pasted image 20230915145401.png]]
+[Quelle](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.2pKHEzMrh3NbrTHsToGwzwHaEA%26pid%3DApi&f=1&ipt=0143a98e2b0b1bd0d6b6adb608301673298c518b31f1b0fe9e95d4b52b86e8cc&ipo=images)
+
+Hierbei sollte das größte Problem des Verfahrens auch schon klar werden: Das nächste Tal ist nicht unbedingt das Tiefste.
+![[Pasted image 20230915223421.png]]
+[Quelle](https://www.phamduytung.com/blog/2018-11-01-overview-of-gradient-descent-optimization-algorithm/)
+
+Wir initialisieren die Gewichte, also die variable zufällig. So gesehen ist der Startpunkt der imaginären Kugel damit am Anfang eines jeden Netzwerkes zufällig. Es kommt vor, dass sich die Kugel in der Nähe des Globalen Tiefpunktes befindet, es kommt aber oft genug vor, dass sie sich in einem Lokalen Minimum festsetzt. 
+Das Größte Problem ist allerdings, ein Phänomen, welches Overshooting oder Überkorrektur genannt wird. Diese Überkorrektur entsteht, wenn die Korrektur zu Groß war, und über den Tiefpunkt hinaus geschossen wird.
+![[Pasted image 20230915222826.png]]
+[Quelle](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmatlabhelper.com%2Fwp-content%2Fuploads%2F2021%2F06%2FOvershooting-in-gradient-descent.jpg&f=1&nofb=1&ipt=21de0bd972bbc02b6d5213be0ce982643c92092381025c518ba20b15f3105910&ipo=images)
+
+## LearnRate
+[3]Um dem Problem mit dem Overshooting zu beheben, bedient man sich der sogenannten LearnRate. Dabei handelt es sich einfach um einen Faktor, mit welchem die Änderungsrate Multipliziert wird. Der Sinn dahinter ist es, die Schritt Größe anzupassen, das heißt wie Stark die Gewichte in eine Richtung angepasst werden. Wenn die Rate zu Groß ist, dann haben wir das Overshooting, bei dem sich das Netzwerk immer wieder über den Tiefpunkt hinausschießt. Wenn die rate zu niedrig ist kann es sein, dass das Netzwerk einfach zu langsam lernt. Es muss also eine Goldene Mitte gefunden werden. Normalerweise benutz man in einem Feed Forward Netzwerk eine Feste Konstante, die meist bei 0,2 oder 0,3 liegt. Im Späteren Verlauf dieser Arbeit werden dazu Tests durchgeführt, um eine Optimale LearnRate zu finden.
+![[Pasted image 20230917181526.png]]
+[Quelle](https://medium.com/diogo-menezes-borges/what-is-gradient-descent-235a6c8d26b0)
+
+[1]Der Ansatz einer Learnrate wurde auch schon von Widrow und Hoff vorgeschlagen, ihr Ansatz galt den 2 Schichtigen Feed Forward Netzwerken. Die LernRate (λ) wird zunächst recht hoch angesetzt, im Bereich von 1 ≤ λ ≤ 10. Dadurch soll das Netzwerk in groben Schritten der Konvergenz näherkommen. Anschließend wird die LernRate schrittweise verringert, bis sie im Bereich von 0.01 ≤ λ ≤ 0.1 liegt. Dies ermöglicht eine genauere Annäherung an das Minimum.
+
+## Kettenregel
+Die Folgenden Kapitel zu den Ableitung, die für die Backpropagation (siehe spätere Kapitel) notwendig sind, sind Größtenteils unter zuhilfenahme von T. Rashids Buch "Neuronale Netze selbst programmieren"[2] und aus dem Video von Sebastian Lague namens "How to Create a Neural Network (and Train it to Identify Doodles)"[3] entstanden. 
+Bisher haben wurde die Cost Funktion und die LearnRate behandelt. Die Cost Funltion sagt uns, wie falsch das Netzwerk liegt, und die LearnRate reguliert die Schritt Größe, die beidem Gradient Descent Verfahren in Richtung der Fehler Minima angepasst werden. Allerdings Fehlt uns noch das Wissen um die Richtung. 
+Am leichtesten lässt sich dies in einer Zweidimensionalen Darstellung der Cost Funktion erklären.
+![[Pasted image 20230917195146.png]]
+[Quelle](https://vzahorui.net/optimization/gradient-descent/)
+
+Auf der *Y* Achse ist der Fehler eingetragen, die *X* Achse Repräsentiert unsere Gewichte. Wenn das Gewicht bei 8 liegt, und der Fehler des Netzwerks damit vom Punkt *A* beschrieben wird. Das nächste Minimum liegt bei 6. Daher muss das Gewicht in dieser Richtung verschoben werden, also kleiner werden. 
+Mathematisch kann das durch die Steigung im Punkt *A* beschrieben werden. 
+
+Als ersten Ansatz (Sowohl mathematisch, als auch im Code) könnte man zwei Punkte nehmen, die sehr nah beieinander liegen, und damit die Steigung ausrechnen. Diese 2 Punkte sind zum einen das Aktuelle Gewicht, und zum anderen ein Punkt, der minimal von dem Aktuellen Gewicht abweicht, also leicht verschoben wird.
+Diese kleine Änderung nennen wir Delta *w* (_Δw_) für weight, also das Gewicht das angepasst wird, wobei Delta eine sehr kleine Änderung an *w* repräsentiert.
+Um die Steigung zu berechnen würde man also die Änderung des Errors _Δe_, welche durch die Änderung an dem Gewicht _Δw_ entsteht, durch eben dieses _Δw_  geteilt. 
+![[Pasted image 20230918174436.png]]
+Mithilfe dieser Formel könnte man die Steigung berechnen. Je nachdem, ob diese Steigung dann Positiv oder Negativ ist, lässt sich herleiten, in welcher Richtung der nächste Tiefpunkt liegt. Damit könnte bereits eine Learn Funktion erstellt werden, jedoch gibt es hier zwei Probleme.
+Zum einen ist das Ergebnis bei dieser Herangehensweise bestenfalls eine Annäherung, und zweitens ist es recht aufwändig, so zu verfahren. Da für jede Anpassung an den Gewichten zwei Punkte berechnet werden müssen, muss die Querry also zwei mal angestoßen werden. besser wäre es, die Querry jedes mal nur einmal zu verwenden, dadurch würden wir die Arbeit, die verrichtet werden muss bereits an dieser Stelle halbieren. Und das ist auch möglich, indem wir Ableitungen bilden.
+
+## Ableitung der Cost Funktion
+Was genau ist eine Ableitung? Im Prinzip wird dabei der Gedanke verfolgt, was passiert, wenn die kleine Abweichung _Δw_ sich an 0 annähert. Natürlich kann _Δw_ auf den ersten blick nicht 0 sein, weil wir ansonsten durch 0 teilen würden. 
+Aber verfolgen wir diesen Gedanken doch einmal an einem Beispiel:
+Sei f(x) unsere Funktion:
+
+![[Pasted image 20230919000705.png]]
+
+Wir nennen die kleine Verschiebung von *x* jetzt *h*.
+Dann gilt zumindest schon einmal:
+![[Pasted image 20230919001324.png]]
+Und gekürzt:
+![[Pasted image 20230919001411.png]]
+
+Dann wäre die Änderungsrate also:
+
+![[Pasted image 20230919003718.png]]
+
+![[Pasted image 20230919001751.png]]
+
+Wenn wir uns dann die Mühe machen, f(x) einzusetzen, ergibt sich daraus:
+
+![[Pasted image 20230919003350.png]]
+
+Dann fangen wir einmal an zu kürzen:
+![[Pasted image 20230919003026.png]]
+![[Pasted image 20230919003135.png]]
+
+![[Pasted image 20230919003214.png]]
+
+![[Pasted image 20230919003238.png]]
+
+Und jetzt zum Interessanten Teil. Da wir *h* nicht gleich 0 setzten können, können wir allerdings *h* gegen 0 laufen lassen, dann verwenden wir die Leibniz Notation. Das bedeutet, das wir anstatt  _Δw_ und  _Δh_ wobei _Δ_ eine sehr kleine Vergrößerung darstellt, jetzt _dw_ und _dh_ verwenden, wobei d für eine unendlich kleine Vergrößerung steht, eine sogenannte Infinitesimalzahl.
+Das sieht dann ungefähr so aus:
+
+![[LimH.png]]
+
+![[Pasted image 20230919010023.png]]
+
+
+## Crap den ich Später vielleicht verwenden kann
+![[Pasted image 20230917181649.png]]
+[Quelle](https://intlyouthscientists.org/2018/09/03/gradient-descent-a-simple-yet-effective-approach-to-artificial-intelligence/)
+
+Die *Y* Koordinate gibt den Fehler des Netztes im Bezug auf zwei gewichte an. Die *Z* und *X* Achsen Repräsentieren die Gewichte. Diese Darstellung ist also ein verschwindend kleines Netzwerk, allerdings wird klar, dass eine Anpassung auf die *Z* und *X* Achse notwendig ist, um näher an ein Minimum zu gelangen.  
+
 
 ## Code
+
+

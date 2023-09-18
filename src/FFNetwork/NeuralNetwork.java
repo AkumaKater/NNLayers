@@ -1,5 +1,7 @@
 package FFNetwork;
 
+import MNISTReader.MnistMatrix;
+
 public class NeuralNetwork {
     Layer[] layers;
     double learnRate;
@@ -19,5 +21,16 @@ public class NeuralNetwork {
             inputs = layer.CalculateOutputs(inputs);
         }
         return inputs;
+    }
+
+    //Den Fehler berechnen mit der Cost Funktion
+    double Cost(MnistMatrix dataPoint) {
+        double[] QuerryOutputs = Querry(dataPoint.getInputs());
+        double[] Targets = dataPoint.getTargets();
+        double cost = 0;
+        for(int i=0; i<Targets.length; i++) {
+            cost = Targets[i]-QuerryOutputs[i];
+        }
+        return cost;
     }
 }

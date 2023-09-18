@@ -7,14 +7,7 @@ Burkhard Lenze
 Logos Verlag Berlin 2009, 3-te Auflage
 ISBN 978-3-89722-021-8
 
-Ich möchte wissen, ob mein Ansatz, diese Projektarbeit zu strukturieren, den Wissenschafftlichen Standards entspricht, den man an so eine Arbeit setzten kann?
-
-Gibt es irgendwelche Regeln wegen der projektarbeit? Muss man die Anmelden oder so?
-
-Quellen verweise
-
-Texte aus projektarbeit in Bachelorarbeit recyclen
-
+Donnerstag 10:00
 
 ## ToDO
 20:00 lesen

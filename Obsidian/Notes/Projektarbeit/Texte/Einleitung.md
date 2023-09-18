@@ -1,3 +1,8 @@
+## Stichpunkte für den Aufbau
+- Zielsetzung
+- Motivation
+- Abgrenzung
+
 ## **Wofür wird ein Netzwerk verwende?**
 
 Neuronale netzwerke werden vor allem für Klassifikationsverfahren verwendet. In der Praxis gibt es viele Anwendungsbereiche, in denen es Vorteilhaft ist, Große Mengen von Daten automatisch zu Klassifizieren. Einige Beispiele wären zB die Bild und schriffterkennung, die man dabei verwendet, Kennschilder von Autos Maschinel auszulesen. Solche Technologien werden immer häufiger auf parkplätzen und Autobahnen eingesetzt. Aber auch fast Jedes handy kann mittlerweile schrifft erkennen, die mit der Kammera aufgenommen wird. Auch in der Medizin, beim Auswerten von Röntgenbildern, in der Biologie, zum erkennen von Pflanzen auf Fotos und noch vielem mehr werden Neuronale Netzwerke eingesetzt.  

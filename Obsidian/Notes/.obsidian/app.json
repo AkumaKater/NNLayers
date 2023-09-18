@@ -1,6 +1,7 @@
 {
   "rightToLeft": false,
   "pdfExportSettings": {
+    "includeName": true,
     "pageSize": "Letter",
     "landscape": false,
     "margin": "0",

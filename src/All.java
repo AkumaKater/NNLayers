@@ -12,26 +12,31 @@ public class All {
 
     public static void main(String[] args) {
         Random random = new Random();
-        int bound = 60;
-        //System.out.println((int) (random.nextDouble() * bound) + 1);
+        int WrtProSeite = 3613/18;
 
-        double WrtCntGestern = 1927;
-        double WrtCntHeute = 1927-WrtCntGestern;
-        double Datum = 13;
-        double[] WrtCntArray = {1927, 620};
+        String filePath = "Obsidian/Notes/Projektarbeit/Texte/Mathematische Grundlagen.md";
+        double AktWrtCntMathematischeGrundlagen = WordCounter.countWords(filePath)-59;
+        filePath = "Obsidian/Notes/Projektarbeit/Texte/Einleitung.md";
+        double AktWrtCntEinleitung = WordCounter.countWords(filePath)-12;
+
+        double WrtCntGestern = AktWrtCntEinleitung + 2856 +274;
+        double WrtCntHeute = AktWrtCntMathematischeGrundlagen-WrtCntGestern + AktWrtCntEinleitung;
+        double Datum = 18;
+        double[] WrtCntArray = {WrtCntGestern+WrtCntHeute, AktWrtCntEinleitung};
         double WrtCnt = 0;
         for(Double d : WrtCntArray){WrtCnt+=d;}
-        double Seiten = WrtCnt / 250;
-        double SeitenMitHeute = Seiten + WrtCntHeute/250;
+        double Seiten = WrtCnt / WrtProSeite;
+        double SeitenMitHeute = Seiten + WrtCntHeute/WrtProSeite;
         double WrtProTag = roundToDecimalPlaces(Mathe(Datum, Seiten), 2);
-        double WrtProTagRounded = roundToDecimalPlaces(WrtProTag*250.0, 1);
+        double WrtProTagRounded = roundToDecimalPlaces(WrtProTag*WrtProSeite, 1);
 
 
+        System.out.println("Worte Pro Seite: "+WrtProSeite+"\nWorte Insgesammt übrig: "+(int)(WrtProSeite*50-WrtCnt)+" / "+WrtProSeite*50);
         System.out.println("Worte Pro tag zu schreiben: " +WrtProTagRounded);
         System.out.println("So viel hast du heute geschrieben: "+WrtCntHeute);
-        System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*250)*100, 1) +"%");
+        System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*WrtProSeite)*100, 1) +"%");
         System.out.println("So viele Worte fehlen dir heute noch: "+ (WrtProTagRounded-WrtCntHeute));
-        System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt+WrtCntHeute)/(50*250))*100, 1)+"%");
+        System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt+WrtCntHeute)/(50*WrtProSeite))*100, 1)+"%");
         System.out.println("Du hast So viele Seiten geschafft: " +roundToDecimalPlaces(SeitenMitHeute,1)+"/"+50);
     }
 
@@ -40,12 +45,12 @@ public class All {
         return Math.round(value * multiplier) / multiplier;
     }
 
-    public static double math2(double WorteBisher, Double Datum){
-        return (50*250-WorteBisher)-(21-Datum)*3.5*250;
+    public static double math2(double WorteBisher, Double Datum, double WrtProSeite){
+        return (50*WrtProSeite-WorteBisher)-(22-Datum)*3.5*WrtProSeite;
     }
 
     public static double Mathe(double Tag, double Seiten){
-        return (50.0 - Seiten) / (21.0 - Tag);
+        return (50.0 - Seiten) / (22.0 - Tag);
     }
 
     /**
@@ -156,3 +161,10 @@ class SchonVorhndenException extends RuntimeException {
         super(message);
     }
 }
+
+/*
+(5|20)(7|50)
+(2|30) 
+
+
+ */
