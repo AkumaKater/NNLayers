@@ -4,6 +4,8 @@ public class Layer {
 
     int numInputNodes, numOutputNodes;
     double[][] weights;
+    //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
+    double[] CostSteigungW;
 
     double[] inputs;
     double[] weightedInputs;
@@ -33,16 +35,16 @@ public class Layer {
         return activations;
     }
 
-    private double NodeCostDerivative(double activation, double expectedOutput) {
+    private double CostAbleitung(double activation, double expectedOutput) {
         return 2 * (activation - expectedOutput);
     }
 
     public double[] CalculateOutputLayerNodeValues(double[] expectedOutputs) {
         double[] nodeValues = new double[expectedOutputs.length];
         for (int i = 0; i < nodeValues.length; i++) {
-            double costDerivative = NodeCostDerivative(activations[i], expectedOutputs[i]);
-            double activationDerivative = Activation.geActivation().ActivationDerivative(weightedInputs[i]);
-            nodeValues[i] = activationDerivative * costDerivative;
+            double costDerivative = CostAbleitung(activations[i], expectedOutputs[i]);
+            double activationAbleitung = Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+            nodeValues[i] = activationAbleitung * costDerivative;
         }
         return nodeValues;
     }

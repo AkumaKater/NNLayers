@@ -410,7 +410,7 @@ also wäre demnach die Ableitung der Cost Funktion:
 Diese Formel kann man in der Layer Klasse umsetzten:
 
 ```Java
-private double NodeCostDerivative(double activation, double expectedOutput) {
+private double CostAbleitung(double activation, double expectedOutput) {
     return 2*(activation - expectedOutput);
 }
 ```
@@ -418,7 +418,7 @@ private double NodeCostDerivative(double activation, double expectedOutput) {
 Jetzt wollen wir uns die Ableitung der Sigmoid Funktion ansehen, also das Ergebnis von
 ![[Pasted image 20230921002631.png]]
 die Ableitung so zu bilden, wie wir es zuvor gemacht haben, ist recht aufwendig, daher können wir uns einfach auf das Ergebnis anderer Mathematiker verlassen.
-Die Sigmoid Funktion:
+Die Sigmoid Funktion`[2-S.84, 4]`:
 ![[Pasted image 20230918125041.png]]
 Und ihre Ableitung:
 ![[Pasted image 20230921001429.png]]
@@ -432,7 +432,7 @@ class Sigmoid extends Activation{
         return 1.0 / (1 + Math.exp(-weightedInput));
     }
     //Die Ableitung der Sigmoid Funktion
-    public double ActivationDerivative(double weightedInput) {
+    public double ActivationAbleitung(double weightedInput) {
         double activation = ActivationFunction(weightedInput);
         return activation * (1.0 - activation);
     }
@@ -441,6 +441,36 @@ class Sigmoid extends Activation{
 
 Die Sigmoid Funktion und ihre Ableitung benötigen die Gewichteten Inputs als Eingabe Parameter. Diese werden wären der Querry berechnet und werden zwischengespeichert. In der Methode CalculateOutputs in der Layer Klasse werden die Inputs zuerst mit den Gewichten Multipliziert, das Ergebnis wird zwischengespeichert, und anschließend wird die Schwellwert Funktion verwendet. 
 
+Der letzte Term ist die der Input im Bezug zu den Gewichten.
+Dabei gilt 
+
+![[Pasted image 20230921230613.png]]
+
+Also wird die Ableitung demnach so gebildet:
+
+![[Pasted image 20230921230922.png]]
+
+![[Pasted image 20230921231146.png]]
+
+![[Pasted image 20230921231221.png]]
+
+![[Pasted image 20230921231251.png]]
+
+Der Limes ist hier nicht einmal mehr nötig. Um es einmal in Worte zu fassen, bedeutet diese Ableitung einfach nur, dass die Änderungsrate im Bezug auf w<sub>2</sub> vollständig von den Inputs ![[Pasted image 20230921231554.png]] abhängig ist. Also wenn ![[Pasted image 20230921231606.png]] = 0 ist, dann haben die Gewichte auch keinen Einfluss mehr. Wenn ![[Pasted image 20230921231638.png]] = 1 ist, dann ist der einfluss von den Gewichten genau so groß, wie die Gewichte selbst sind. Wenn ![[Pasted image 20230921231721.png]] = 2 ist, dann haben die Gewichte einen Doppelten Einfluss und so weiter. 
+
+Wir suchen nach dieser Ableitung:
+
+![[Pasted image 20230920235100.png]]
+
+und haben jetzt alle Terme zusammen, die darin vorkommen. Der erste Term war 
+![[Pasted image 20230921004959.png]]
+Welchen wir in der Methode CostAbleitung festgehalten haben.
+Der Zweite Term war
+![[Pasted image 20230921001429.png]]
+Diesen haben wir in der Sigmoid Activation Klasse bereits in der activationAbleitung Methode festgehalten.
+Der Dritte Term war
+![[Pasted image 20230921231251.png]]
+wobei ![[Pasted image 20230921231638.png]] den unbearbeiteten Inputs dieser Schicht entspricht, und in der Querry bereits aufgefangen wurden und im 2D Array "Inputs" abgespeichert wurden.
 
 
 

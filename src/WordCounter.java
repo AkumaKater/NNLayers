@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -71,36 +70,5 @@ public class WordCounter {
         }catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static double readLastNumberFromYesterday(String fileName) {
-        double lastNumber = -1;
-        String lastLine = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date yesterday = new Date(System.currentTimeMillis() - 24 * 60 * 60 * 1000); // Berechne das Datum von gestern
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(" - ");
-                if (parts.length == 2) {
-                    String dateString = parts[0].trim();
-                    try {
-                        Date lineDate = dateFormat.parse(dateString);
-                        if (lineDate.before(yesterday)) {
-                            lastNumber = Double.parseDouble(parts[1].trim());
-                            break; // Stoppe die Suche nach dem ersten passenden Eintrag
-                        }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return lastNumber;
     }
 }
