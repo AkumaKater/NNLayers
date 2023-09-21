@@ -1,60 +1,112 @@
-# Learn
-Nun kommen wir endlich zum Herzstück des Netzwerkes. Das Netzwerk braucht Daten, um um zu lernen. Rückschlüsse zu ziehen und korrekte Vorhersagen zu treffen. Nur wenn es die Trainingsdaten gut verstanden hat kann das Netzwerk die Testdaten richtig Klassifizieren. Aber noch kann das Netzwerk, das hier programmiert wird, nicht lernen.
-## Cost Function
-Wir fangen hier einmal ganz am Ende an. Bisher kann das Netzwerk eine Ausgabe machen, indem wir ein Bild in die Querry geben. Dafür erhalten wir ein Array an Zahlen zurück. Diese Zahlen ergeben aber noch überhaupt keinen Sinn. Da die Gewichte Zufällig belegt wurden, sind auch die Ergebnisse, die das Netzwerk hervorbringt, rein Zufällig. 
-Wie kann das Netzwerk sich dann jetzt verbessern? Bei einem sehr kleinen Netzwerk mit 1 bis 3 Knoten könnte man die Gewichte manuell anpassen. Das wäre aber nur für Probleme möglich, die eben so klein und unbedeutend sind, dass es sich die Mühe eines neuronalen Netzwerkes nicht loht. Bei Größeren Komplexen Problemen möchten wir diesen Prozess so weit es geht Automatisieren.
-Intuitiv ist leicht zu verstehen, dass es nötig ist, den eignen Fehler zu kennen, bevor man ihn verbessern kann. Das gilt auch für das Netzwerk. Wir müssen zunächst ausrechnen, wie falsch das Netzwerk war. Dazu nehmen wir jedes Ergebnis aus dem Output Array der Querry, ziehen sie von den erwarteten Werten ab, und summieren alle Werte zusammen. Im folgenden werden die erwarteten Werte "Targets" genannt, also die Ziel-Werte. Um diese zu erhalten, brauchen wir eigentlich nur ein Array, welches genau so groß ist, wie das Output Array, und in diesem Array setzten wir alle Werte auf 0, außer das Feld mit dem Index, welches dem Label des Bildes entspricht. Dieses Feld setzten wir auf 1. Hier ein ausschnitt aus der Klasse MnistMatrix, aus dem Paket MNISTReader, um die Targets zu berechnen.
+## Kettenregel für 2 Schichten
+Nun versuchen wir die Ableitung an dem Netzwerk. Zur Erinnerung, so sah unser kleines hypothetisches Netzwerk aus:
+
+![[Pasted image 20230912184748.png]]
+
+wir wollen uns erstmal nur auf den letzten Knoten mit seinem Input konzentrieren. Die frage ist, **wie verändert sich der Fehler des Netzwerks, wenn ich** **w<sub>2</sub>** **anpasse?**
+Wir fangen am besten damit an, jede unabhängige Rechnung aufzuschreiben:
+die erste Rechnung, in der w<sub>2</sub> vorkommt, ist die Multiplikation mit den Outputs aus der versteckten Schicht.
+![[Pasted image 20230920001258.png]]
+Diese wird an die Schwellwert Funktion *A* gegeben:
+![[Pasted image 20230920001519.png]]
+und danach wird das Ergebnis an die Cost Funktion gegeben:
+![[Pasted image 20230920001633.png]]
+
+Es ist ersichtlich, dass w<sub>2</sub> nicht direkt in der Cost Funktion vorkommt. Wie also ist es möglich, die Ableitung der Cost Funktion im Bezug auf die Gewichte zu bilden?
+![[Pasted image 20230920001956.png]]
+
+Hier kommt die Kettenregel ins Spiel. Es ist möglich, die Abhängigkeiten der Reihe nach aufzuschreiben, und miteinander zu Multiplizieren. 
+Wir fangen mit Z<sub>2</sub> im Bezug auf w<sub>2</sub> an, multiplizieren dies mit a<sub>2</sub> im Bezug auf Z<sub>2</sub> und schließlich Multiplizieren wir c im Bezug auf a<sub>2</sub>.
+
+![[Pasted image 20230920235108.png]]
+
+Das dies durchaus möglich ist kann man daran erkenne, dass wenn man die einzelnen Komponenten der Brüche wegkürzt, tatsächlich 
+![[Pasted image 20230920001956.png]]  
+übrig bleibt.
+Nun können wir die Einzelnen Komponenten unabhängig voneinander Ableiten, das heißt dass wir im Code eine Große Flexibilität erhalten haben.
+
+## Kettenregel für 3 Schichten
+Nun sehen wir uns mal an, was passiert, wenn man eine Schicht hinzufügt. Wie man die Ableitung bildet, um die Änderungsrate im Bezug auf w<sub>2</sub> zu berechnen haben wir im Letzten Kapitel gesehen. Wie würden wir also eine Ableitung bilden, welche uns die Änderungsrate im Bezug auf w<sub>1</sub> berechnet?
+Wir suchen:
+
+![[Pasted image 20230920181830.png]]
+
+Dazu müssen wir zuerst alle Rechnungen im Gesamten Netzwerk angeben.
+
+![[Pasted image 20230912184748.png]]
+
+Wir Stellen die Einzelnen Rechnungen auf:
+![[Pasted image 20230920180830.png]]   Input in das Netz mit dem zugeteilten Gewicht multipliziert
+![[Pasted image 20230920180912.png]]  Schwellwert Funktion (Sigmoid)
+![[Pasted image 20230920001258.png]]   Output der versteckten Schicht mit dem zugeteilten Gewicht  multipliziert
+![[Pasted image 20230920001519.png]]   Letzte Schwellwert Funktion (Sigmoid)
+![[Pasted image 20230920001633.png]]   Cost Funktion
+
+Und nun zum Grundgedanken der Kettenregel zurück. Das Ziel ist es, die Änderungsrate der Cost Funktion (hier c) im Bezug auf Änderungen an den Gewichten der ersten versteckten Schicht zu ermitteln. Das heißt wie hängt *dc* von *dw* ab?
+
+![[Pasted image 20230920181830.png]]
+
+c ist abhängig von a<sub>2</sub>, welches wiederum abhängig ist von Z<sub>2</sub>, dieses von a<sub>2</sub>, dieses ist abhängig von a, dieses wieder von w<sub>1</sub>, also dem Ende unsere Untersuchung.
+
+![[Pasted image 20230920212443.png]]
+
+Es ist an dieser Stelle anzumerken, dass im Vergleich zur Cost in Abhängigkeit von w<sub>2</sub>, die Abhängigkeit von Z<sub>2</sub> nicht mehr w<sub>2</sub> ist, sondern a<sub>2</sub>. Das liegt daran, dass wir uns bereits um w<sub>2</sub> in der vorherigen Ableitung gekümmert haben.
+Hier wird ersichtlich, dass sich durch das hinzunehmen einer weiteren Schicht 2 Terme zu der Ableitung hinzugefügt wurden. das sind die Terme ![[Pasted image 20230920213957.png]] in Abhängigkeit zu ![[Pasted image 20230920214053.png]], als auch ![[Pasted image 20230920214208.png]] in Abhängigkeit von ![[Pasted image 20230920214238.png]]. 
+Und genau so wird das für jede weitere Schicht sein, denn Jede Schicht verarbeitet zwei Rechnungen, und zwar das Anwenden der Gewichte, und die Schwellwert Funktion.
+
+## Backpropagation
+Kommen wir nun zum Abschluss der Learn Methode. Alle bisherigen Erkenntnisse Gipfeln im Backpropagation Algorithmus. Wie der Name vermuten lässt, handelt es sich um einen Algorithmus, der unser Netzwerk zurückverfolgt, das heißt er fängt hinten an, und Arbeitet sich nach vorne vor. 
+Wie wir im letzten Kapitel gesehen haben, ist die Ableitung der letzten Schicht im Bezug zu den letzten Gewichten im Netz die kleinste Formel. 
+
+![[Pasted image 20230920235100.png]]
+
+![[Pasted image 20230920212443.png]]
+
+Die ersten beiden Terme sind zudem gleich, und der letzte Term ist ebenfalls nahezu gleich. Lediglich die zwei Terme dazwischen werden mit jeder Schicht hinzugefügt. Wir werden also versuchen einen Algorithmus zu schreiben, welcher zunächst einmal nur die ersten beiden Terme für die Output Schicht errechnet, diese dann zurückgibt, sodass sie an die vorherige Schicht gegeben werden können. Danach muss das Ergebnis, welches wir von hier an NodeValues nennen, mit dem letzten Term verrechnet werden. Auch der letzte Term muss von jeder Schicht mit den jeweils eigenen Werten gerechnet werden, daher ist das auch der letzte Schritt. 
+
+Als erstes betrachten wir die Ableitung der Cost Funktion:
+![[Pasted image 20230921000346.png]]
+So ungefähr verlief die Rechnung:
+Cost(Targets, Outputs) = (Targets - Outputs)² 
+
+Es gibt eine verallgemeinerte Formel, mit der man recht schnell Simple Ableitungen bilden kann:
+
+![[Pasted image 20230921004843.png]]
+
+also wäre demnach die Ableitung der Cost Funktion:
+
+![[Pasted image 20230921004959.png]]
+
+Diese Formel kann man in der Layer Klasse umsetzten:
 
 ```Java
-public double[] getTargets(){
-    double[] targets = new double[10];
-    targets[label] = 1.0;
-    return targets;
+private double NodeCostDerivative(double activation, double expectedOutput) {
+    return 2*(activation - expectedOutput);
 }
 ```
 
-Danach werden die Targets dazu verwendet, um den Fehler des Netzes, oder auch die Kosten des Netzes zu berechnen. 
-- Die Outputs werden von den Targets abgezogen
-- Alle Ergebnisse dieser Rechnung werden aufaddiert
-- Das Ergebnis wird zurück gegeben, und entspricht den Kosten des Netzes
+Jetzt wollen wir uns die Ableitung der Sigmoid Funktion ansehen, also das Ergebnis von
+![[Pasted image 20230921002631.png]]
+die Ableitung so zu bilden, wie wir es zuvor gemacht haben, ist recht aufwendig, daher können wir uns einfach auf das Ergebnis anderer Mathematiker verlassen.
+Die Sigmoid Funktion:
+![[Pasted image 20230918125041.png]]
+Und ihre Ableitung:
+![[Pasted image 20230921001429.png]]
+
+Daraus lässt sich eine Einfach Methode bauen, die wir dann aufrufen können. Wir fügen die Methode ActivationDerivative(double weightedInput) in unserer Sigmoid Klasse hinzu.
 
 ```Java
-double Cost(MnistMatrix dataPoint) {
-        double[] QuerryOutputs = Querry(dataPoint.getInputs());
-        double[] Targets = dataPoint.getTargets();
-        double cost = 0;
-        for(int i=0; i<Targets.length; i++) {
-            cost = Targets[i]-QuerryOutputs[i];
-        }
-        return cost;
+class Sigmoid extends Activation{
+    //Die Sigmoid Funktion
+    public double ActivationFunction(double weightedInput) {
+        return 1.0 / (1 + Math.exp(-weightedInput));
     }
+    //Die Ableitung der Sigmoid Funktion
+    public double ActivationDerivative(double weightedInput) {
+        double activation = ActivationFunction(weightedInput);
+        return activation * (1.0 - activation);
+    }
+}
 ```
 
-## Was bringt uns die Cost Funktion?
-Wie geht es jetzt weiter? In Unserem Code wird die Cost Funktion von hier an nicht mehr aufgerufen. Aber Sie ist dennoch wichtig: denn Das Ziel unseres Netzwerkes muss es sein, diese Cost Funktion zu minimieren. 
-
-Wenn wir den Graphen einer Cost Function plotten und die Gewichtungen Gewichte als unabhängige Variable "w" festlegen, um den Verlauf der Funktion "f(w) zu visualisieren, könnte dies beispielsweise folgendermaßen aussehen, gesetzt den Fall, dass wir nur eine einzelne Gewichtung betrachten:
-![[Pasted image 20230914193809.png]]
-[Quelle](https://www.youtube.com/watch?v=hfMk-kjRv4c)
-
-Für dieses einfache Netzwerk wäre es nun das beste, wenn wir das "w" so wählen, dass ein Globales Minimum erreicht wird. 
-## Warum lässt sich das nicht Analytisch berechnen?
-man könnte annehmen, dass die Besten Ergebnisse damit erzielt werden könnten, indem man die Tiefpunkte mit der 3. Ableitung errechnet, aber das ist leider nicht so einfach.
-Die vielen Dimensionen, und die Hoche Komplexität erlauben das nicht so einfach. Um ein Beispiel zu nennen, der Graph der Cost Funktion ist bei jedem Bild, dass wir in das Netz Fütter ein wenig anders. Daher ist es Sinnvoller sich Schrittweise eine allgemeinen Lösung zu nähern. Dieses Verfahren heißt Gradient Descent. 
-
-## Gradient Descent
-Man kann sich das Gradient Descent Verfahren ein wenig so vorstellen wie eine Kugel, die man einen Hügel herabrollen lässt. Entsprechend der Neigung unter ihr, rollt sie auf dem direktesten Weg in das nächste Tal. 
-![[Pasted image 20230915145401.png]]
-[Quelle](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.2pKHEzMrh3NbrTHsToGwzwHaEA%26pid%3DApi&f=1&ipt=0143a98e2b0b1bd0d6b6adb608301673298c518b31f1b0fe9e95d4b52b86e8cc&ipo=images)
-
-Hierbei sollte das größte Problem des Verfahrens auch schon klar werden: Das nächste Tal ist nicht unbedingt das Tiefste.
-![[Pasted image 20230915223421.png]]
-[Quelle](https://www.phamduytung.com/blog/2018-11-01-overview-of-gradient-descent-optimization-algorithm/)
-
-Wir initialisieren die Gewichte, also die variable zufällig. So gesehen ist der Startpunkt der imaginären Kugel damit am Anfang eines jeden Netzwerkes zufällig. Es kommt vor, dass sich die Kugel in der Nähe des Globalen Tiefpunktes befindet, es kommt aber oft genug vor, dass sie sich in einem Lokalen Minimum festsetzt. 
-Das Größte Problem ist allerdings, ein Phänomen, welches Overshooting oder Überkorrektur genannt wird. Diese Überkorrektur entsteht, wenn die Korrektur zu Groß war, und über den Tiefpunkt hinaus geschossen wird.
-![[Pasted image 20230915222826.png]]
-[Quelle](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmatlabhelper.com%2Fwp-content%2Fuploads%2F2021%2F06%2FOvershooting-in-gradient-descent.jpg&f=1&nofb=1&ipt=21de0bd972bbc02b6d5213be0ce982643c92092381025c518ba20b15f3105910&ipo=images)
-
-## LearnRate
-Um dem Problem mit dem Overshooting zu beheben, bedient man sich der sogenannten LearnRate. Dabei handelt es sich einfach um einen Faktor, mit welchem die Änderungsrate Multipliziert wird. Normalerweise benutz man in einem Feed Forward Netzwerk eine Feste Konstante dazu, die meist bei 0,2 oder 0,3 liegt. [1]
+Die Sigmoid Funktion und ihre Ableitung benötigen die Gewichteten Inputs als Eingabe Parameter. Diese werden wären der Querry berechnet und werden zwischengespeichert. In der Methode CalculateOutputs in der Layer Klasse werden die Inputs zuerst mit den Gewichten Multipliziert, das Ergebnis wird zwischengespeichert, und anschließend wird die Schwellwert Funktion verwendet. 

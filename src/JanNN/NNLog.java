@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import MNISTReader.MNISTPrinter;
 import MNISTReader.MnistMatrix;
@@ -146,6 +147,12 @@ public class NNLog {
         setAppend(true);
     }
 
+    public void WipeHTMLFile(String fileName){
+        setAppend(false);
+        log(fileName, header(), false);
+        setAppend(true);
+    }
+
     public void printDataPoints(MnistMatrix[] PrintData, String fileName, NeuralNetwork nn) {
         for (MnistMatrix matrix : PrintData) {
             int Label = matrix.getLabel();
@@ -166,6 +173,103 @@ public class NNLog {
             log(fileName, MNISTPrinter.printMnistMatrix(matrix), true);
             log(fileName,"```\n\n",false);
         }
+    }
+
+    public void printHTML(MnistMatrix[] PrintData, String fileName, NeuralNetwork nn) {
+        for (MnistMatrix matrix : PrintData) {
+            int Label = matrix.getLabel();
+            double[] querry = nn.Querry(matrix.getInputs());
+            int correctPrediction = NNUtil.CorrectLabel(querry, Label);
+
+            if(correctPrediction == Label){
+                log(fileName, "<H2 style=\"color:green;\">Prediction "+correctPrediction+"</H2>"+"\n", false);
+            }else{
+                log(fileName, "<H2 style=\"color:red;\">Prediction "+correctPrediction+"</H2>"+"\n", false);
+            }
+
+            log(fileName, tableHTML(), false);
+            log(fileName, ArrayToStringHTML(querry, true)+"\n", true);
+            log(fileName, NNUtil.HighestLabelToString(querry), true);
+            log(fileName,"\n",false);
+            log(fileName, MNISTPrinter.printMnistHTML(matrix), true);
+            log(fileName,"\n\n",false);
+        }
+    }
+
+    private String tableHTML(){
+        return "<table>\n" + //
+                "\t\t\t\t<tr>\n" + //
+                "\t\t\t\t\t<td>0</td>\n" + //
+                "\t\t\t\t\t<td>1</td>\n" + //
+                "\t\t\t\t\t<td>2</td>\n" + //
+                "\t\t\t\t\t<td>3</td>\n" + //
+                "\t\t\t\t\t<td>4</td>\n" + //
+                "\t\t\t\t\t<td>5</td>\n" + //
+                "\t\t\t\t\t<td>6</td>\n" + //
+                "\t\t\t\t\t<td>7</td>\n" + //
+                "\t\t\t\t\t<td>8</td>\n" + //
+                "\t\t\t\t\t<td>9</td>\n" + //
+                "\t\t\t\t</tr>";
+    }
+
+    private String header(){
+        return "<head>\n" + //
+                "\t<title>Visualization</title>\n" + //
+                "\t<meta charset=\"UTF-8\">\n" + //
+                "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" + //
+                "\t<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n" + //
+                "\t<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Lato\">\n" + //
+                "\t<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n" + //
+                "\t<style>\n" + //
+                "\t\tbody {\n" + //
+                "\t\t\tfont-family: \"Lato\", sans-serif;\n" + //
+                "\t\t\tcolor: #85b1b0;\n" + //
+                "\t\t\tbackground-color: #231a10;\n" + //
+                "\t\t}\n" + //
+                "\n" + //
+                "\t\ttable,\n" + //
+                "\t\ttr,\n" + //
+                "\t\ttd {\n" + //
+                "\t\t\tborder: 1px solid;\n" + //
+                "\t\t\tborder-collapse: collapse;\n" + //
+                "\t\t\tmargin: 5px;\n" + //
+                "\t\t\tpadding: 5px;\n" + //
+                "\t\t}\n" + //
+                "\n" + //
+                "\t\t.Kasten {\n" + //
+                "\t\t\tborder: 1px solid;\n" + //
+                "\t\t\tmargin: 5px;\n" + //
+                "\t\t\tpadding: 5px;\n" + //
+                "\t\t\tdisplay: inline-block;\n" + //
+                "\n" + //
+                "\t\t}\n" + //
+                "\n" + //
+                "\t\ttd {\n" + //
+                "\t\t\ttext-align: center;\n" + //
+                "\t\t}\nh1 {\n" + //
+                "\t\t\tcolor: #e5395a;\n" + //
+                "\t\t}" + //
+                "\t</style>\n" + //
+                "</head>";
+    }
+
+    public static String ArrayToStringHTML(double[] arr, boolean formatter) {
+        String result = "<tr>\n" + "<td>";
+        DecimalFormat df = new DecimalFormat("0.0");
+        for (int i = 0; i < arr.length - 1; i++) {
+            if (formatter)
+                result += (df.format(arr[i]*100))+"%";
+            else
+                System.out.print(arr[i]);
+            result += ("</td><td>");
+        }
+        if (formatter) {
+            result += (df.format(arr[arr.length - 1]*100))+"%";
+        } else {
+            result += (arr[arr.length - 1]);
+        }
+        result += ("</td></tr></table>");
+        return result;
     }
 
 }

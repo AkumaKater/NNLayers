@@ -3,7 +3,6 @@
 ## Grundgedanke
 Bei der Initialisierung des Netzwerkes soll eine Instanz der Klasse NeuralNetwork erstellt werden. Wichtig ist hierbei, dass das Netzwerk über alle Variablen verfügt, die hierbei wichtig sind, und dass es im Konstruktor möglich ist, wichtige Eigenschaften so dynamisch anzulegen, wie es nur geht. Für den Learn Algorithmus ist später eine LearnRate wichtig, das wird später im Backpropagation Algorithmus wichtig. Abgesehen davon, muss es möglich sein, die Menge der versteckten Schichten, sowie die Menge der Nodes auf diesen festzulegen. für eine leichtere Lesbarkeit, und leichtere Skalierung des Netzwerks, ist es Vorteilhaft, die Schichten, oder auch Layer, in einer eigenen Klasse festzulegen.
 
-  
 
 Diese Layer müssen also auch vorbereitet werden. Wie bereits erwähnt, ist jede Schicht durch Kanten mit der nächsten Schicht verbunden.  Von jedem Knoten aus dem Input Layer gehen Kanten an jeweils jeden Knoten der ersten versteckten Schicht. Und genau so ist es zwischen der Versteckten Schicht zu jeder nachfolgenden versteckten Schicht, bis hin zum Output Layer. Jede diese Kanten ist gewichtet, und diese gewichte müssen in jedem Layer gespeichert werden. Das Input Layer ist mehr Symbolisch dargestellt, da es sich bei den Knoten dieser Schicht nur um die Inputs handelt, mit denen das Netzwerk gefüttert werden soll. Bezogen auf den MNIST Datensatz, bedeutet das, dass jeder Pixel eines Bildes ein Knoten der Input Layer ist. Daraus ergibt sich bei 28 X 28 Pixeln eine Input Schicht von 784 Knoten. Diese unterliegen natürlich noch keine Activation Function/Schwellwertfunktion, und werden daher direkt in die erste versteckte Schicht geleitet. Die Implementation dieser Schichten kann von hier an generalisiert werden.
 
@@ -198,7 +197,7 @@ Nun kommen wir endlich zum Herzstück des Netzwerkes. Das Netzwerk braucht Daten
 ## Cost Function
 Wir fangen hier einmal ganz am Ende an. Bisher kann das Netzwerk eine Ausgabe machen, indem wir ein Bild in die Querry geben. Dafür erhalten wir ein Array an Zahlen zurück. Diese Zahlen ergeben aber noch überhaupt keinen Sinn. Da die Gewichte Zufällig belegt wurden, sind auch die Ergebnisse, die das Netzwerk hervorbringt, rein Zufällig. 
 Wie kann das Netzwerk sich dann jetzt verbessern? Bei einem sehr kleinen Netzwerk mit 1 bis 3 Knoten könnte man die Gewichte manuell anpassen. Das wäre aber nur für Probleme möglich, die eben so klein und unbedeutend sind, dass es sich die Mühe eines neuronalen Netzwerkes nicht loht. Bei Größeren Komplexen Problemen möchten wir diesen Prozess so weit es geht Automatisieren.
-Intuitiv ist leicht zu verstehen, dass es nötig ist, den eignen Fehler zu kennen, bevor man ihn verbessern kann. Das gilt auch für das Netzwerk. Wir müssen zunächst ausrechnen, wie falsch das Netzwerk war. Dazu nehmen wir jedes Ergebnis aus dem Output Array der Querry, ziehen sie von den erwarteten Werten ab, und summieren alle Werte zusammen. Im folgenden werden die erwarteten Werte "Targets" genannt, also die Ziel-Werte. Um diese zu erhalten, brauchen wir eigentlich nur ein Array, welches genau so groß ist, wie das Output Array, und in diesem Array setzten wir alle Werte auf 0, außer das Feld mit dem Index, welches dem Label des Bildes entspricht. Dieses Feld setzten wir auf 1. Hier ein ausschnitt aus der Klasse MnistMatrix, aus dem Paket MNISTReader, um die Targets zu berechnen.
+Intuitiv ist leicht zu verstehen, dass es nötig ist, den eignen Fehler zu kennen, bevor man ihn verbessern kann. Das gilt auch für das Netzwerk. Wir müssen zunächst ausrechnen, wie falsch das Netzwerk war. Dazu nehmen wir jedes Ergebnis aus dem Output Array der Querry, ziehen sie von den erwarteten Werten ab, und summieren alle Werte zusammen. Damit sich die Fehler nicht gegenseitig aufheben, müssen sie alle Positiv sein. Ein einfacher Weg dies umzusetzen, ist es, jeden Fehler zum Quadrat zu nehmen. Dadurch werden die Fehler außerdem betont, was hilfreich sein kann. Im folgenden werden die erwarteten Werte "Targets" genannt, also die Ziel-Werte. Um diese zu erhalten, brauchen wir eigentlich nur ein Array, welches genau so groß ist, wie das Output Array, und in diesem Array setzten wir alle Werte auf 0, außer das Feld mit dem Index, welches dem Label des Bildes entspricht. Dieses Feld setzten wir auf 1. Hier ein ausschnitt aus der Klasse MnistMatrix, aus dem Paket MNISTReader, um die Targets zu berechnen.
 
 ```Java
 public double[] getTargets(){
@@ -210,19 +209,22 @@ public double[] getTargets(){
 
 Danach werden die Targets dazu verwendet, um den Fehler des Netzes, oder auch die Kosten des Netzes zu berechnen. 
 - Die Outputs werden von den Targets abgezogen
+- Die Fehler werden Quadriert
 - Alle Ergebnisse dieser Rechnung werden aufaddiert
 - Das Ergebnis wird zurück gegeben, und entspricht den Kosten des Netzes
 
 ```Java
+//Den Fehler berechnen mit der Cost Funktion
 double Cost(MnistMatrix dataPoint) {
-        double[] QuerryOutputs = Querry(dataPoint.getInputs());
-        double[] Targets = dataPoint.getTargets();
-        double cost = 0;
-        for(int i=0; i<Targets.length; i++) {
-            cost = Targets[i]-QuerryOutputs[i];
-        }
-        return cost;
+    double[] QuerryOutputs = Querry(dataPoint.getInputs());
+    double[] Targets = dataPoint.getTargets();
+    double cost = 0;
+    for(int i=0; i<Targets.length; i++) {
+        double error = Targets[i]-QuerryOutputs[i];
+        cost += error*error;
     }
+    return cost;
+}
 ```
 
 ## Was bringt uns die Cost Funktion?
@@ -258,7 +260,7 @@ Das Größte Problem ist allerdings, ein Phänomen, welches Overshooting oder Ü
 
 [1]Der Ansatz einer Learnrate wurde auch schon von Widrow und Hoff vorgeschlagen, ihr Ansatz galt den 2 Schichtigen Feed Forward Netzwerken. Die LernRate (λ) wird zunächst recht hoch angesetzt, im Bereich von 1 ≤ λ ≤ 10. Dadurch soll das Netzwerk in groben Schritten der Konvergenz näherkommen. Anschließend wird die LernRate schrittweise verringert, bis sie im Bereich von 0.01 ≤ λ ≤ 0.1 liegt. Dies ermöglicht eine genauere Annäherung an das Minimum.
 
-## Kettenregel
+# Kettenregel
 Die Folgenden Kapitel zu den Ableitung, die für die Backpropagation (siehe spätere Kapitel) notwendig sind, sind Größtenteils unter zuhilfenahme von T. Rashids Buch "Neuronale Netze selbst programmieren"[2] und aus dem Video von Sebastian Lague namens "How to Create a Neural Network (and Train it to Identify Doodles)"[3] entstanden. 
 Bisher haben wurde die Cost Funktion und die LearnRate behandelt. Die Cost Funltion sagt uns, wie falsch das Netzwerk liegt, und die LearnRate reguliert die Schritt Größe, die beidem Gradient Descent Verfahren in Richtung der Fehler Minima angepasst werden. Allerdings Fehlt uns noch das Wissen um die Richtung. 
 Am leichtesten lässt sich dies in einer Zweidimensionalen Darstellung der Cost Funktion erklären.
@@ -270,50 +272,195 @@ Mathematisch kann das durch die Steigung im Punkt *A* beschrieben werden.
 
 Als ersten Ansatz (Sowohl mathematisch, als auch im Code) könnte man zwei Punkte nehmen, die sehr nah beieinander liegen, und damit die Steigung ausrechnen. Diese 2 Punkte sind zum einen das Aktuelle Gewicht, und zum anderen ein Punkt, der minimal von dem Aktuellen Gewicht abweicht, also leicht verschoben wird.
 Diese kleine Änderung nennen wir Delta *w* (_Δw_) für weight, also das Gewicht das angepasst wird, wobei Delta eine sehr kleine Änderung an *w* repräsentiert.
-Um die Steigung zu berechnen würde man also die Änderung des Errors _Δe_, welche durch die Änderung an dem Gewicht _Δw_ entsteht, durch eben dieses _Δw_  geteilt. 
+Um die Steigung zu berechnen würde man also die Änderung des Errors _Δe_, welche durch die Änderung an dem Gewicht _Δw_ entsteht, durch eben dieses _Δw_  teilen. 
+
 ![[Pasted image 20230918174436.png]]
-Mithilfe dieser Formel könnte man die Steigung berechnen. Je nachdem, ob diese Steigung dann Positiv oder Negativ ist, lässt sich herleiten, in welcher Richtung der nächste Tiefpunkt liegt. Damit könnte bereits eine Learn Funktion erstellt werden, jedoch gibt es hier zwei Probleme.
+
+Mithilfe dieser Formel könnte man die Steigung annähernd berechnen. Je nachdem, ob diese Steigung dann Positiv oder Negativ ist, lässt sich herleiten, in welcher Richtung der nächste Tiefpunkt liegt. Damit könnte bereits eine Learn Funktion erstellt werden, jedoch gibt es hier zwei Probleme.
 Zum einen ist das Ergebnis bei dieser Herangehensweise bestenfalls eine Annäherung, und zweitens ist es recht aufwändig, so zu verfahren. Da für jede Anpassung an den Gewichten zwei Punkte berechnet werden müssen, muss die Querry also zwei mal angestoßen werden. besser wäre es, die Querry jedes mal nur einmal zu verwenden, dadurch würden wir die Arbeit, die verrichtet werden muss bereits an dieser Stelle halbieren. Und das ist auch möglich, indem wir Ableitungen bilden.
 
-## Ableitung der Cost Funktion
-Was genau ist eine Ableitung? Im Prinzip wird dabei der Gedanke verfolgt, was passiert, wenn die kleine Abweichung _Δw_ sich an 0 annähert. Natürlich kann _Δw_ auf den ersten blick nicht 0 sein, weil wir ansonsten durch 0 teilen würden. 
+## Ableitung einer Beispiel Cost Funktion
+Was genau ist eine Ableitung? Im Prinzip wird dabei der Gedanke verfolgt, was passiert, wenn die kleine Abweichung _Δw_ sich an 0 annähert. Natürlich kann _Δw_ auf den ersten Blick nicht 0 sein, weil wir ansonsten durch 0 teilen würden. 
 Aber verfolgen wir diesen Gedanken doch einmal an einem Beispiel:
-Sei f(x) unsere Funktion:
+Sei *f(w)* unsere Funktion:
 
-![[Pasted image 20230919000705.png]]
+![[Pasted image 20230919135144.png]]
 
-Wir nennen die kleine Verschiebung von *x* jetzt *h*.
+Wir nennen die kleine Verschiebung von *w* jetzt *h*.
 Dann gilt zumindest schon einmal:
-![[Pasted image 20230919001324.png]]
+
+![[Pasted image 20230919135305.png]]
+
 Und gekürzt:
-![[Pasted image 20230919001411.png]]
+
+![[Pasted image 20230919135421.png]]
 
 Dann wäre die Änderungsrate also:
 
-![[Pasted image 20230919003718.png]]
+![[Pasted image 20230919143429.png]]
 
-![[Pasted image 20230919001751.png]]
+![[Pasted image 20230919143648.png]]
 
-Wenn wir uns dann die Mühe machen, f(x) einzusetzen, ergibt sich daraus:
+Wenn wir uns dann die Mühe machen, *f(w)* auszuschreiben, ergibt sich daraus:
 
-![[Pasted image 20230919003350.png]]
+![[Pasted image 20230919143845.png]]
 
-Dann fangen wir einmal an zu kürzen:
-![[Pasted image 20230919003026.png]]
-![[Pasted image 20230919003135.png]]
+Dann fangen wir an klammern auszurechnen:
 
-![[Pasted image 20230919003214.png]]
+![[Pasted image 20230919144010.png]]
 
-![[Pasted image 20230919003238.png]]
+![[Pasted image 20230919144043.png]]
 
-Und jetzt zum Interessanten Teil. Da wir *h* nicht gleich 0 setzten können, können wir allerdings *h* gegen 0 laufen lassen, dann verwenden wir die Leibniz Notation. Das bedeutet, das wir anstatt  _Δw_ und  _Δh_ wobei _Δ_ eine sehr kleine Vergrößerung darstellt, jetzt _dw_ und _dh_ verwenden, wobei d für eine unendlich kleine Vergrößerung steht, eine sogenannte Infinitesimalzahl.
+![[Pasted image 20230919144125.png]]
+
+*h* kürzen:
+
+![[Pasted image 20230919144334.png]]
+
+![[Pasted image 20230919144355.png]]
+
+Und jetzt zum Interessanten Teil. Da wir *h* nicht gleich 0 setzten können, können wir allerdings *h* gegen 0 laufen lassen, dann verwenden wir die Leibniz Notation. Das bedeutet, das wir anstatt  _Δw_ und  _Δe_ wobei _Δ_ eine sehr kleine Vergrößerung darstellt, jetzt _dw_ und _de_ verwenden, wobei d für eine unendlich kleine Vergrößerung steht, eine sogenannte Infinitesimalzahl.
 Das sieht dann ungefähr so aus:
 
-![[LimH.png]]
+![[KorrektH.png]]
 
-![[Pasted image 20230919010023.png]]
+![[Pasted image 20230920104745.png]]
+
+Diese Formel nennt man eine Ableitung, und sie gibt die Steigung des Ursprünglichen Graphen in jedem gegebenen Punkt im Bezug auf *w* an. Mit anderen Worten, Wenn unsere Fehlerfunktion wie in diesem Beispiel *f(w)* ist, dann beschreibt *2w* in jedem gegebenen Punkt den man für *w* einsetzt die Steigung, und somit auch die Richtung, in welcher ein Tiefpunkt zu finden ist. Genau wie bei dem Beispiel mit der Kugel, würde die Kugel die Steigung herab rollen.
+
+## Kettenregel für 2 Schichten
+Nun versuchen wir die Ableitung an dem Netzwerk. Zur Erinnerung, so sah unser kleines hypothetisches Netzwerk aus:
+
+![[Pasted image 20230912184748.png]]
+
+wir wollen uns erstmal nur auf den letzten Knoten mit seinem Input konzentrieren. Die frage ist, **wie verändert sich der Fehler des Netzwerks, wenn ich** **w<sub>2</sub>** **anpasse?**
+Wir fangen am besten damit an, jede unabhängige Rechnung aufzuschreiben:
+die erste Rechnung, in der w<sub>2</sub> vorkommt, ist die Multiplikation mit den Outputs aus der versteckten Schicht.
+![[Pasted image 20230920001258.png]]
+Diese wird an die Schwellwert Funktion *A* gegeben:
+![[Pasted image 20230920001519.png]]
+und danach wird das Ergebnis an die Cost Funktion gegeben:
+![[Pasted image 20230920001633.png]]
+
+Es ist ersichtlich, dass w<sub>2</sub> nicht direkt in der Cost Funktion vorkommt. Wie also ist es möglich, die Ableitung der Cost Funktion im Bezug auf die Gewichte zu bilden?
+![[Pasted image 20230920001956.png]]
+
+Hier kommt die Kettenregel ins Spiel. Es ist möglich, die Abhängigkeiten der Reihe nach aufzuschreiben, und miteinander zu Multiplizieren. 
+Wir fangen mit Z<sub>2</sub> im Bezug auf w<sub>2</sub> an, multiplizieren dies mit a<sub>2</sub> im Bezug auf Z<sub>2</sub> und schließlich Multiplizieren wir c im Bezug auf a<sub>2</sub>.
+
+![[Pasted image 20230920235108.png]]
+
+Das dies durchaus möglich ist kann man daran erkenne, dass wenn man die einzelnen Komponenten der Brüche wegkürzt, tatsächlich 
+![[Pasted image 20230920001956.png]]  
+übrig bleibt.
+Nun können wir die Einzelnen Komponenten unabhängig voneinander Ableiten, das heißt dass wir im Code eine Große Flexibilität erhalten haben.
+
+## Kettenregel für 3 Schichten
+Nun sehen wir uns mal an, was passiert, wenn man eine Schicht hinzufügt. Wie man die Ableitung bildet, um die Änderungsrate im Bezug auf w<sub>2</sub> zu berechnen haben wir im Letzten Kapitel gesehen. Wie würden wir also eine Ableitung bilden, welche uns die Änderungsrate im Bezug auf w<sub>1</sub> berechnet?
+Wir suchen:
+
+![[Pasted image 20230920181830.png]]
+
+Dazu müssen wir zuerst alle Rechnungen im Gesamten Netzwerk angeben.
+
+![[Pasted image 20230912184748.png]]
+
+Wir Stellen die Einzelnen Rechnungen auf:
+![[Pasted image 20230920180830.png]]   Input in das Netz mit dem zugeteilten Gewicht multipliziert
+![[Pasted image 20230920180912.png]]  Schwellwert Funktion (Sigmoid)
+![[Pasted image 20230920001258.png]]   Output der versteckten Schicht mit dem zugeteilten Gewicht  multipliziert
+![[Pasted image 20230920001519.png]]   Letzte Schwellwert Funktion (Sigmoid)
+![[Pasted image 20230920001633.png]]   Cost Funktion
+
+Und nun zum Grundgedanken der Kettenregel zurück. Das Ziel ist es, die Änderungsrate der Cost Funktion (hier c) im Bezug auf Änderungen an den Gewichten der ersten versteckten Schicht zu ermitteln. Das heißt wie hängt *dc* von *dw* ab?
+
+![[Pasted image 20230920181830.png]]
+
+c ist abhängig von a<sub>2</sub>, welches wiederum abhängig ist von Z<sub>2</sub>, dieses von a<sub>2</sub>, dieses ist abhängig von a, dieses wieder von w<sub>1</sub>, also dem Ende unsere Untersuchung.
+
+![[Pasted image 20230920212443.png]]
+
+Es ist an dieser Stelle anzumerken, dass im Vergleich zur Cost in Abhängigkeit von w<sub>2</sub>, die Abhängigkeit von Z<sub>2</sub> nicht mehr w<sub>2</sub> ist, sondern a<sub>2</sub>. Das liegt daran, dass wir uns bereits um w<sub>2</sub> in der vorherigen Ableitung gekümmert haben.
+Hier wird ersichtlich, dass sich durch das hinzunehmen einer weiteren Schicht 2 Terme zu der Ableitung hinzugefügt wurden. das sind die Terme ![[Pasted image 20230920213957.png]] in Abhängigkeit zu ![[Pasted image 20230920214053.png]], als auch ![[Pasted image 20230920214208.png]] in Abhängigkeit von ![[Pasted image 20230920214238.png]]. 
+Und genau so wird das für jede weitere Schicht sein, denn Jede Schicht verarbeitet zwei Rechnungen, und zwar das Anwenden der Gewichte, und die Schwellwert Funktion.
+
+## Backpropagation
+Kommen wir nun zum Abschluss der Learn Methode. Alle bisherigen Erkenntnisse Gipfeln im Backpropagation Algorithmus. Wie der Name vermuten lässt, handelt es sich um einen Algorithmus, der unser Netzwerk zurückverfolgt, das heißt er fängt hinten an, und Arbeitet sich nach vorne vor. 
+Wie wir im letzten Kapitel gesehen haben, ist die Ableitung der letzten Schicht im Bezug zu den letzten Gewichten im Netz die kleinste Formel. 
+
+![[Pasted image 20230920235100.png]]
+
+![[Pasted image 20230920212443.png]]
+
+Die ersten beiden Terme sind zudem gleich, und der letzte Term ist ebenfalls nahezu gleich. Lediglich die zwei Terme dazwischen werden mit jeder Schicht hinzugefügt. Wir werden also versuchen einen Algorithmus zu schreiben, welcher zunächst einmal nur die ersten beiden Terme für die Output Schicht errechnet, diese dann zurückgibt, sodass sie an die vorherige Schicht gegeben werden können. Danach muss das Ergebnis, welches wir von hier an NodeValues nennen, mit dem letzten Term verrechnet werden. Auch der letzte Term muss von jeder Schicht mit den jeweils eigenen Werten gerechnet werden, daher ist das auch der letzte Schritt. 
+
+Als erstes betrachten wir die Ableitung der Cost Funktion:
+![[Pasted image 20230921000346.png]]
+So ungefähr verlief die Rechnung:
+Cost(Targets, Outputs) = (Targets - Outputs)² 
+
+Es gibt eine verallgemeinerte Formel, mit der man recht schnell Simple Ableitungen bilden kann:
+
+![[Pasted image 20230921004843.png]]
+
+also wäre demnach die Ableitung der Cost Funktion:
+
+![[Pasted image 20230921004959.png]]
+
+Diese Formel kann man in der Layer Klasse umsetzten:
+
+```Java
+private double NodeCostDerivative(double activation, double expectedOutput) {
+    return 2*(activation - expectedOutput);
+}
+```
+
+Jetzt wollen wir uns die Ableitung der Sigmoid Funktion ansehen, also das Ergebnis von
+![[Pasted image 20230921002631.png]]
+die Ableitung so zu bilden, wie wir es zuvor gemacht haben, ist recht aufwendig, daher können wir uns einfach auf das Ergebnis anderer Mathematiker verlassen.
+Die Sigmoid Funktion:
+![[Pasted image 20230918125041.png]]
+Und ihre Ableitung:
+![[Pasted image 20230921001429.png]]
+
+Daraus lässt sich eine Einfach Methode bauen, die wir dann aufrufen können. Wir fügen die Methode ActivationDerivative(double weightedInput) in unserer Sigmoid Klasse hinzu.
+
+```Java
+class Sigmoid extends Activation{
+    //Die Sigmoid Funktion
+    public double ActivationFunction(double weightedInput) {
+        return 1.0 / (1 + Math.exp(-weightedInput));
+    }
+    //Die Ableitung der Sigmoid Funktion
+    public double ActivationDerivative(double weightedInput) {
+        double activation = ActivationFunction(weightedInput);
+        return activation * (1.0 - activation);
+    }
+}
+```
+
+Die Sigmoid Funktion und ihre Ableitung benötigen die Gewichteten Inputs als Eingabe Parameter. Diese werden wären der Querry berechnet und werden zwischengespeichert. In der Methode CalculateOutputs in der Layer Klasse werden die Inputs zuerst mit den Gewichten Multipliziert, das Ergebnis wird zwischengespeichert, und anschließend wird die Schwellwert Funktion verwendet. 
 
 
+
+
+## ToDo
+- [ ] Backpropagation Code
+	- [x] lässt sich in schleifen aufarbeiten
+	- [x] eine funktion multipliziert Term 1 mit den anderen, die hier angestoßen werden.
+	- [x] Zuerst wird Outputlayer angestoßen, dann rückwärtslaufend  Hidden layer
+	- [ ] Diesr Ansatz, von vorne nach Hinten zu laufen nennt man Backpropagation
+	- [ ] NodeCostDerivative
+	- [ ] CalculateOutputLayerNodeValues
+- [ ] Und daraus dann Code machen und präsentieren.
+
+## Weitere ToDos
+- [ ] die Cost Funktion muss überarbeitet werden. Das Quadrieren des Fehlers ist notwendig
+	- [ ] Jeder Fehler der verrechnet wird, muss Positiv sein. Nur die Differenz zählt
+- [ ] Lenze Email schreiben
+- [ ] Prüfungssystem Anmelden
+- [ ] Blocksatz
+- [ ] Donnerstag 10 Uhr
 ## Crap den ich Später vielleicht verwenden kann
 ![[Pasted image 20230917181649.png]]
 [Quelle](https://intlyouthscientists.org/2018/09/03/gradient-descent-a-simple-yet-effective-approach-to-artificial-intelligence/)
@@ -322,5 +469,4 @@ Die *Y* Koordinate gibt den Fehler des Netztes im Bezug auf zwei gewichte an. Di
 
 
 ## Code
-
 

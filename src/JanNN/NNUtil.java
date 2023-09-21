@@ -226,6 +226,8 @@ public class NNUtil {
         return result;
     }
 
+    
+
     public static String getAcuracy(NeuralNetwork nn, MnistMatrix[] mnistMatrix) {
         int iterations = mnistMatrix.length;
         int correct = 0;

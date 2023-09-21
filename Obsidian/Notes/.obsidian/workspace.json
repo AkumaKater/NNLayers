@@ -56,12 +56,24 @@
             }
           },
           {
-            "id": "556f7686d76a6995",
+            "id": "4d57fda7cf1dad5d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "NN Ausgaben/Visualization.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2a32cbf581140430",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Abschnitt.md",
                 "mode": "source",
                 "source": false
               }
@@ -142,7 +154,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 325.5
+    "width": 325.5,
+    "collapsed": true
   },
   "right": {
     "id": "62735ff7b5eacde0",
@@ -231,24 +244,26 @@
   },
   "active": "18da01f847aeaa87",
   "lastOpenFiles": [
-    "Pasted image 20230919010023.png",
-    "LimH.png",
-    "Projektarbeit/Texte/Mathematische Grundlagen.md",
-    "Pasted image 20230919004653.png",
-    "Pasted image 20230919003718.png",
-    "Pasted image 20230919003350.png",
-    "Pasted image 20230919003238.png",
-    "Pasted image 20230919003214.png",
-    "Pasted image 20230919003135.png",
-    "Pasted image 20230919003026.png",
-    "Pasted image 20230919001751.png",
-    "Pasted image 20230919001704.png",
-    "Projektarbeit/Kontakt.md",
-    "Projektarbeit/Texte/Quellen.md",
-    "NN Ausgaben/Visualization.md",
-    "Projektarbeit/Texte/Einleitung.md",
-    "Projektarbeit/Texte/Bilder.md",
     "Projektarbeit/Texte/Abschnitt.md",
+    "NN Ausgaben/Visualization.md",
+    "NN Ausgaben/EIn Html.md",
+    "Projektarbeit/Texte/Mathematische Grundlagen.md",
+    "Projektarbeit/Kontakt.md",
+    "Pasted image 20230921004959.png",
+    "Pasted image 20230921004843.png",
+    "Pasted image 20230921002631.png",
+    "Pasted image 20230921001429.png",
+    "Pasted image 20230921000346.png",
+    "Pasted image 20230920235108.png",
+    "Pasted image 20230920235100.png",
+    "Pasted image 20230920214238.png",
+    "Pasted image 20230920214208.png",
+    "Pasted image 20230920214053.png",
+    "Projektarbeit/Texte/Einleitung.md",
+    "NN Ausgaben/Visualization verkürzte Fehler Ableitung.md",
+    "NN Ausgaben/Visualization.html",
+    "Projektarbeit/Texte/Quellen.md",
+    "Projektarbeit/Texte/Bilder.md",
     "Projektarbeit/Texte/Bachelorarbeit.md",
     "NN Ausgaben/Performance Notes Gemischt.md",
     "2023-09-12.md",
@@ -265,8 +280,6 @@
     "Projektarbeit/Texte/Grundlagen.md",
     "NN Ausgaben/Visualization 700 Epochen.md",
     "Hamachi.md",
-    "NN Ausgaben/Visualization 500 Epochen.md",
-    "NN Ausgaben/Visualization LookupTabelSigmoid.md",
     "Texte",
     "Grundlagen/Abgrenzung",
     "Grundlagen",

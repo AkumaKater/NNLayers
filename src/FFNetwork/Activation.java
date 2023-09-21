@@ -25,9 +25,11 @@ public abstract class Activation {
 }
 
 class Sigmoid extends Activation{
+    //Die Sigmoid Funktion
     public double ActivationFunction(double weightedInput) {
         return 1.0 / (1 + Math.exp(-weightedInput));
     }
+    //Die Ableitung der Sigmoid Funktion
     public double ActivationDerivative(double weightedInput) {
         double activation = ActivationFunction(weightedInput);
         return activation * (1.0 - activation);

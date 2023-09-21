@@ -71,6 +71,21 @@ public class JanNN {
         log.log(FileNameVisualization, "# Wrong Examples\n", false);
         log.printDataPoints(Arrays.copyOfRange(wrongMatrixs, 1, 20), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
 
+        FileNameVisualization = "Visualization.html";
+        log.WipeHTMLFile(FileNameVisualization);
+
+        log.log(FileNameVisualization,
+                "| HLayersSizes |DataSize| Epochen | BatchSize | Learnrate | ACtrainingD | ACtestD |\n|----------|----------|----------|----------|----------|----------|----------|\n"
+                        + log.messageToString(),
+                false);
+        log.log(FileNameVisualization, "<H1>Visualisierung der Netzwerk Ergebnisse</H>\n", false);
+        log.log(FileNameVisualization, "<H2>Trainings Daten</H2>\n", false);
+        log.printHTML(Arrays.copyOfRange(mBuffer.getTrainingsData(), 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Trainings Data werden ausgegeben
+        log.log(FileNameVisualization, "<H2>Test Daten</H2>\n", false);
+        log.printHTML(Arrays.copyOfRange(mBuffer.getTestData(), 1, 10), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
+        log.log(FileNameVisualization, "<H2>Wrong Examples</H2>\n", false);
+        log.printHTML(Arrays.copyOfRange(wrongMatrixs, 1, 20), FileNameVisualization, nn); // 5 Bilder aus den Test Data werden ausgegeben
+
         log.flush();
 
         // System.out.println(NNUtil.getAcuracy(nn, TrainingData));

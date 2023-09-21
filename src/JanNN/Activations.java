@@ -6,12 +6,12 @@ public class Activations {
         return (weightedInput > 0) ? 1 : 0;
     }
 
-    static double Sigmoid(double weightedInput) {
+    static public double Sigmoid(double weightedInput) {
         //return 1.0 / (1 + Math.exp(-weightedInput));
         return SigmoidLookupTable.lookupSigmoid(weightedInput);
     }
 
-    static double SigmoidDerivative(double weightedInput) {
+    static public double SigmoidDerivative(double weightedInput) {
         double activation = Sigmoid(weightedInput);
         return activation * (1.0 - activation);
     }

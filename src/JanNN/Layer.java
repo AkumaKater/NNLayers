@@ -67,16 +67,17 @@ public class Layer {
     public void UpdateGradients(double[] nodeValues) {
         for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
             for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
-                // Evaluate the partial derivative: cost/weight of current connection 
+                // Evaluate the partial derivative: cost/weight of current connection
                 double derivativeCostWrtWeight = inputs.getValue(nodeIn) * nodeValues[nodeOut];
                 // The costGradientW array stores these partial derivatives for each weight.
-                // Note: the derivative is being added to the array here because ultimately we want 
-                // to calculate the average gradient across all the data in the training batch 
+                // Note: the derivative is being added to the array here because ultimately we
+                // want
+                // to calculate the average gradient across all the data in the training batch
                 double costderivW = costGradientW.getValue(nodeIn, nodeOut) + derivativeCostWrtWeight;
                 costGradientW.setValue(nodeIn, nodeOut, costderivW);
             }
-            // Evaluate the partial derivative: cost/bias of the current node 
-            double derivativeCostWrtBias = 1 * nodeValues [nodeOut];
+            // Evaluate the partial derivative: cost/bias of the current node
+            double derivativeCostWrtBias = 1 * nodeValues[nodeOut];
             double costderivB = derivativeCostWrtBias + costGradientB.getValue(nodeOut);
             costGradientB.setValue(nodeOut, costderivB);
 

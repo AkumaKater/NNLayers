@@ -9,6 +9,10 @@ ISBN 978-3-89722-021-8
 
 Donnerstag 10:00
 
+# Fragen
+- [ ] Wünschen sie sich eine besondere Formatierung oder passt es so, wie ich es Ihnen bisher geschickt habe
+- [ ] 
+
 ## ToDO
 20:00 lesen
 21:00 Schreiben

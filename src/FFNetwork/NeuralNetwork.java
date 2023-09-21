@@ -29,7 +29,8 @@ public class NeuralNetwork {
         double[] Targets = dataPoint.getTargets();
         double cost = 0;
         for(int i=0; i<Targets.length; i++) {
-            cost = Targets[i]-QuerryOutputs[i];
+            double error = Targets[i]-QuerryOutputs[i];
+            cost += error*error;
         }
         return cost;
     }
