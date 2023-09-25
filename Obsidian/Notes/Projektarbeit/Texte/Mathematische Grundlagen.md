@@ -466,10 +466,14 @@ und haben jetzt alle Terme zusammen, die darin vorkommen. Der erste Term war
 ![[Pasted image 20230921004959.png]]
 Welchen wir in der Methode CostAbleitung festgehalten haben.
 Der Zweite Term war
+
 ![[Pasted image 20230921001429.png]]
+
 Diesen haben wir in der Sigmoid Activation Klasse bereits in der activationAbleitung Methode festgehalten.
 Der Dritte Term war
+
 ![[Pasted image 20230921231251.png]]
+
 wobei ![[Pasted image 20230921231638.png]] den unbearbeiteten Inputs dieser Schicht entspricht, und in der Querry bereits aufgefangen wurden und im 2D Array "Inputs" abgespeichert wurden.
 
 
