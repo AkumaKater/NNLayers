@@ -22,10 +22,10 @@ public class All {
 
 
         System.out.println("Worte Pro Seite: "+WrtProSeite+"\nWorte Insgesammt übrig: "+(int)(WrtProSeite*50-WrtCnt)+" / "+WrtProSeite*50);
-        System.out.println("Worte Pro tag zu schreiben: " +WrtProTagRounded);
+        //System.out.println("Worte Pro tag zu schreiben: " +WrtProTagRounded);
         System.out.println("So viel hast du heute geschrieben: "+WrtCntHeute);
-        System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*WrtProSeite)*100, 1) +"%");
-        System.out.println("So viele Worte fehlen dir heute noch: "+ (WrtProTagRounded-WrtCntHeute));
+        //System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*WrtProSeite)*100, 1) +"%");
+        //System.out.println("So viele Worte fehlen dir heute noch: "+ (WrtProTagRounded-WrtCntHeute));
         System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt+WrtCntHeute)/(50*WrtProSeite))*100, 1)+"%");
         System.out.println("Du hast So viele Seiten geschafft: " +roundToDecimalPlaces(SeitenMitHeute,1)+"/"+50);
     }
@@ -60,7 +60,6 @@ class SchonVorhndenException extends RuntimeException {
 \frac{ dc }{ da_{ 2 } }*
 \frac{ da_{ 2 } }{ dZ_{ 2 } }*
 \frac{ dZ_{ 2 } }{ dw_{ 2 } }
-
 
 
 

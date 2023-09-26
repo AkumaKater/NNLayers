@@ -23,15 +23,36 @@ public class NeuralNetwork {
         return inputs;
     }
 
-    //Den Fehler berechnen mit der Cost Funktion
+    // Den Fehler berechnen mit der Cost Funktion
     double Cost(MnistMatrix dataPoint) {
         double[] QuerryOutputs = Querry(dataPoint.getInputs());
         double[] Targets = dataPoint.getTargets();
         double cost = 0;
-        for(int i=0; i<Targets.length; i++) {
-            double error = Targets[i]-QuerryOutputs[i];
-            cost += error*error;
+        for (int i = 0; i < Targets.length; i++) {
+            double error = Targets[i] - QuerryOutputs[i];
+            cost += error * error;
         }
         return cost;
     }
+
+    // Training
+    public void learn(MnistMatrix data) {
+        UpdateAllGradients(data);
+        ApplyAllGradients(this.learnRate);
+        ClearAllGradients();
+    }
+
+    void UpdateAllGradients(MnistMatrix dataPoint) {
+        Querry(dataPoint.getInputs());
+        Layer outputLayer = layers[layers.length - 1];
+        double[] nodeValues = outputLayer.CalculateOutputLayerNodeValues(dataPoint.getTargets());
+        outputLayer.UpdateGradients(nodeValues);
+        for (int index = layers.length - 2; index >= 0; index--) {
+            Layer hiddenLayer = layers[index];
+            nodeValues = hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1],
+                    nodeValues);
+            hiddenLayer.UpdateGradients(nodeValues);
+        }
+    }
+
 }
