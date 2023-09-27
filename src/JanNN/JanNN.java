@@ -16,7 +16,7 @@ public class JanNN {
         String FileNameVisualization = "Visualization.md";
 
         int splitIndex = 60000; // 60.000
-        int TrainingCycles = 5;
+        int TrainingCycles = 1;
         double learnRate = 0.25;
         int BatchSize = 50;
         NeuralNetwork nn = new NeuralNetwork(learnRate, 784, 300, 100, 10);

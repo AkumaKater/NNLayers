@@ -1,5 +1,7 @@
 package JanNN;
 
+import FFNetwork.Activation;
+
 public class Layer {
 
     int numInputNodes, numOutputNodes;
@@ -56,6 +58,18 @@ public class Layer {
     }
 
     public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
+        double[] newNodeValues = new double[numOutputNodes];
+        Activation ac = Activation.geActivation();
+        for(int i=0; i < numOutputNodes; i++){
+            for(int j=0; j < nodeValues.length; j++){
+                newNodeValues[i] += nodeValues[j]*oldLayer.weights.getValue(j, i);
+            } 
+            newNodeValues[i] *= ac.ActivationAbleitung(weightedInputs.getValue(i));
+        }
+        return newNodeValues;
+    }
+
+    public double[] CalculateHiddenLayerNodeValues2(Layer oldLayer, double[] nodeValues) {
         double[] newNodeValues = oldLayer.weights.T().DotVektor(nodeValues);
 
         for (int i = 0; i < weightedInputs.length; i++) {
@@ -89,8 +103,22 @@ public class Layer {
         this.costGradientB = new Vektor(numOutputNodes);
     }
 
-    public void ApplyGradient(double learnrate) {
+    public void ApplyGradient2(double learnrate) {
         weights.MinusMatrix(costGradientW.T(), learnrate);
         biases.MinusVektor(costGradientB, learnrate);
+    }
+
+        public void ApplyGradient(double learnrate) {
+            for(int i=0; i<numOutputNodes;i++){
+                for(int j=0; j<numInputNodes;j++){
+                    double e = weights.getValue(i, j) - costGradientW.getValue(j, i)*learnrate;
+                    weights.setValue(i, j, e);
+                }
+                double e = biases.getValue(i) - costGradientB.getValue(i)*learnrate;
+                biases.setValue(i, e);
+            }
+
+        //weights.MinusMatrix(costGradientW.T(), learnrate);
+        //biases.MinusVektor(costGradientB, learnrate);
     }
 }

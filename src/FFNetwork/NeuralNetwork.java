@@ -49,10 +49,20 @@ public class NeuralNetwork {
         outputLayer.UpdateGradients(nodeValues);
         for (int index = layers.length - 2; index >= 0; index--) {
             Layer hiddenLayer = layers[index];
-            nodeValues = hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1],
-                    nodeValues);
+            nodeValues = hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1], nodeValues);
             hiddenLayer.UpdateGradients(nodeValues);
         }
     }
 
+    private void ApplyAllGradients(double learnrate) {
+        for (Layer layer : layers) {
+            layer.ApplyGradient(learnrate);
+        }
+    }
+
+    private void ClearAllGradients() {
+        for (Layer layer : layers) {
+            layer.ClearGradient();
+        }
+    }
 }

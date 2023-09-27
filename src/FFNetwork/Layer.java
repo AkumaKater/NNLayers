@@ -4,7 +4,7 @@ public class Layer {
 
     int numInputNodes, numOutputNodes;
     double[][] weights;
-    //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
+    // --> Steigung der Cost Funktion im Bezug auf das Gewicht W
     double[][] CostSteigungW;
 
     double[] inputs;
@@ -19,6 +19,7 @@ public class Layer {
         inputs = new double[numInputNodes];
         weightedInputs = new double[numOutputNodes];
         activations = new double[numOutputNodes];
+        CostSteigungW = new double[numInputNodes][numOutputNodes];
     }
 
     public double[] CalculateOutputs(double[] inputs) {
@@ -51,14 +52,12 @@ public class Layer {
 
     public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
         double[] newNodeValues = new double[numOutputNodes];
-        for(int i=0; i < numOutputNodes; i++){
-            for(int j=0; j < nodeValues.length; j++){
-                newNodeValues[i] += nodeValues[j]*oldLayer.weights[i][j];
-            } 
-        }
-
-        for (int i = 0; i < weightedInputs.length; i++) {
-            newNodeValues[i] *= Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+        Activation ac = Activation.geActivation();
+        for (int i = 0; i < numOutputNodes; i++) {
+            for (int j = 0; j < nodeValues.length; j++) {
+                newNodeValues[i] += nodeValues[j] * oldLayer.weights[j][i];
+            }
+            newNodeValues[i] *= ac.ActivationAbleitung(weightedInputs[i]);
         }
         return newNodeValues;
     }
@@ -70,5 +69,17 @@ public class Layer {
                 CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
             }
         }
+    }
+
+    public void ApplyGradient(double learnrate) {
+        for (int i = 0; i < numOutputNodes; i++) {
+            for (int j = 0; j < numInputNodes; j++) {
+                weights[i][j] -= CostSteigungW[j][i] * learnrate;
+            }
+        }
+    }
+
+    public void ClearGradient() {
+        this.CostSteigungW = new double[numInputNodes][numOutputNodes];
     }
 }
