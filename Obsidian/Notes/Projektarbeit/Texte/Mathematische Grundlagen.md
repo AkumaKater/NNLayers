@@ -478,6 +478,23 @@ wobei ![[Pasted image 20230921231638.png]] den unbearbeiteten Inputs dieser Schi
 
 
 ## Learn Algorithmus
+
+Wir fangen nun mit der Learn Methode an.
+ ```java 
+// Training
+public void learn(MnistMatrix data) {
+	UpdateAllGradients(data);
+	ApplyAllGradients(this.learnRate);
+	ClearAllGradients();
+}
+```
+
+UpdateAllGradients() wird die Methode sein, in der die Rechnungen aus dem letzten Kapital angewandt werden. Der Name kommt daher, dass die Ergebnisse der Rechnungen nicht sofort mit den Gewichten verrechnet werden, sondern zunächst als Steigung (Gradient) gespeichert wird. Dies liegt daran, dass später noch die Batches hinzukommen. Dabei handelt es sich um ein Konzept, bei dem der Durchschnitt mehrerer Berechnungen  als Änderung an den Gewichten verwendet wird. Für den Moment und zu Demonstrationszwecken gehen wir noch nicht im Code darauf ein. Es werden die Grundvoraussetzungen dennoch bereits jetzt geschaffen, um uns später Arbeit zu ersparen.
+
+ApplyAllGradients() wird dazu verwendet, um die Gradients mit den Gewichten zu verrechnen. 
+ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Nächsten Rechnungen vorgenommen werden können.
+
+### UpdateAllGradients
 Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
 
 ![[Pasted image 20230921231251.png]]
@@ -486,6 +503,7 @@ Mit anderen Worten, die NodeValues werden mit den unveränderten Inputs in die O
 
 Wie werden dann alle Gewichte einer jeden versteckten Schicht berechnet? 
 Wie oben bereits beschrieben, werden für jede versteckte Schicht zwei Rechnungen zwischengeschoben, das sind jeweils die Ableitung für die Gewichtung in Bezug zu den Activations, sowie die Activations im Bezug zu den Gewichteten Inputs der vorherigen Schicht. Da die ersten Beiden Terme sich von der ersten Berechnung nicht unterscheiden, werden sie am besten wiederverwendet. Das heißt, sie sind ja bereits als NodeValues, also dem Ergebniss der CalculateOutputLayerNodeValues() Methode gespeichert. Daher übergeben wir die NodeValues der Methode CalculateOutputLayerNodeValues(), und übergeben sie der Methode CalculateHiddenLayerNodeValues(). Genau wie zuvor lassen wir uns die Ergebnisse als NodeValues übergeben, und speichern sie zwischen. Und genau wie zuvor, müssen sie noch mit der Ableitung der Gewichteten Inputs verrechnet werden, das heißt mit den ungewichteten Inputs der vorherigen Schicht.
+Dieser Schritt mit den CalculateHiddenLayerNodeValues() lässt sich in einer Schleife leicht auf alle Schichten Anwenden.
 
 Im Code sieht das dann so aus:
 ```java
@@ -505,59 +523,83 @@ void UpdateAllGradients(MnistMatrix dataPoint) {
     }
 }
     ```
+Und so sieht also der Backpropagation Algorithmus aus. Man fängt bei der letzten Schicht, der Output Schicht an, und passt die Gewichte an. Dann geht es weiter zur vorletzten Schicht und so weiter, bis zur Input Schicht. Die Gewichte werden sozusagen von Hinten nach vorne angepasst.
+Kommen wir nu zur Implementierung der CalculateOutputLayerNodeValues() und CalculateHiddenLayerNodeValues() Methoden.
 
-## Code für Learn
-
-Wir fangen nun mit der Learn Methode an.
- ```java 
-// Training
-public void learn(MnistMatrix data) {
-	UpdateAllGradients(data);
-	ApplyAllGradients(this.learnRate);
-	ClearAllGradients();
+### CalculateOutputLayerNodeValues
+Sowohl die CalculateOutputLayerNodeValues() Methode, als auch die CalculateHiddenLayerNodeValues() Methode werden in der Layer Klasse implementiert.
+Die ersten NodeValues, die für die Output Schicht berechnet werden, entsprechen der Multiplikation aus der Ableitung der Cost Funktion und der Ableitung der Schwellwert Funktion der Output Schicht.
+Die NodeValues werden danach zurückgegeben.
+```java
+public double[] CalculateOutputLayerNodeValues(double[] expectedOutputs) {
+    double[] nodeValues = new double[expectedOutputs.length];
+    for (int i = 0; i < nodeValues.length; i++) {
+        double costDerivative = CostAbleitung(activations[i], expectedOutputs[i]);
+        double activationAbleitung = 
+	 Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+        nodeValues[i] = activationAbleitung * costDerivative;
+    }
+    return nodeValues;
 }
 ```
+In der Aufrufenden Methode, UpdateAllGradients(), werden die NodeValues zwischengespeichert, und danach direkt an die Methode UpdateGradients() der Output Schicht weitergegeben. Dort werden sie mit den Ungewichteten Inputs verrechnet, wodurch die erste Matrix entsteht, welche die Änderungen an den Gewichten enthält, die noch nicht mit den Gewichten verrechnet wurden.
 
-UpdateAllGradients() wird die Methode sein, in der die Rechnungen aus dem letzten Kapital angewandt werden. Der Name kommt daher, dass die Ergebnisse der Rechnungen nicht sofort mit den Gewichten verrechnet werden, sondern zunächst als Steigung (Gradient) gespeichert wird. Dies liegt daran, dass später noch die Batches hinzukommen. Dabei handelt es sich um ein Konzept, bei dem der Durchschnitt mehrerer Berechnungen  als Änderung an den Gewichten verwendet wird. Für den Moment und zu Demonstrationszwecken gehen wir nicht im Code darauf ein. Es werden die Grundvoraussetzungen dennoch bereits jetzt geschaffen, um uns später Arbeit zu ersparen.
-
-ApplyAllGradients() wird dazu verwendet, um die Gradients mit den Gewichten zu verrechnen. 
-ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Nächsten Rechnungen vorgenommen werden können.
-
-### UpdateAllGradients
-
-```Java
-void UpdateAllGradients(MnistMatrix dataPoint) {
-    Querry(dataPoint.getInputs());
-    Layer outputLayer = layers[layers.length - 1];
-    double[] nodeValues = 
-	    outputLayer.CalculateOutputLayerNodeValues(dataPoint.getTargets());
-    outputLayer.UpdateGradients(nodeValues);
-    for (int index = layers.length - 2; index >= 0; index--) {
-        Layer hiddenLayer = layers[index];
-        nodeValues = hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1], 
-	        nodeValues);
-        hiddenLayer.UpdateGradients(nodeValues);
+```java
+public void UpdateGradients(double[] nodeValues) {
+    for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+        for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];                CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+        }
     }
 }
 ```
+Das Array CostSteigungW muss außerdem ebenfalls in der Klasse Layer festgehalten werden. Hier werden die Anpassungen, die wir mithilfe der Kettenregel ausrechnen abgespeichert, bevor sie mit den Gewichten verrechnet werden.
 
-Das erste das passieren muss, wenn die Gradients berechnet werden sollen, ist die Querry aufzurufen. Wir haben die Vorarbeit bereits geleistet. In der Querry werden die Zwischenergebnisse gespeichert, die notwendig sind, um später die Gradients zu berechnen.
-Danach müssen, um das Netzwerk Flexibel zu halten, 
+```java
+public class Layer {
+
+    int numInputNodes, numOutputNodes;
+    double[][] weights;
+    //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
+    double[][] CostSteigungW;
+
+    double[] inputs;
+    double[] weightedInputs;
+    double[] activations;
+```
+### CalculateHiddenLayerNodeValues
+Nun sehen wir uns an, wie die Anpassungen an den Gewichten in den Versteckten Schichten berechnet werden.
+
+```java
+public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
+    double[] newNodeValues = new double[numOutputNodes];
+    for(int i=0; i < numOutputNodes; i++){
+        for(int j=0; j < nodeValues.length; j++){
+            newNodeValues[i] += nodeValues[j]*oldLayer.weights[i][j];
+        } 
+    }
+    for (int i = 0; i < weightedInputs.length; i++) {
+        newNodeValues[i] *= Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+    }
+    return newNodeValues;
+}
+```
+
 ## ToDo
 - [ ] Backpropagation Code
 	- [x] lässt sich in schleifen aufarbeiten
 	- [x] eine funktion multipliziert Term 1 mit den anderen, die hier angestoßen werden.
 	- [x] Zuerst wird Outputlayer angestoßen, dann rückwärtslaufend  Hidden layer
-	- [ ] Diesr Ansatz, von vorne nach Hinten zu laufen nennt man Backpropagation
-	- [ ] NodeCostDerivative
+	- [x] Diesr Ansatz, von vorne nach Hinten zu laufen nennt man Backpropagation
+	- [x] NodeCostDerivative
 	- [ ] CalculateOutputLayerNodeValues
 - [ ] Und daraus dann Code machen und präsentieren.
 
 ## Weitere ToDos
-- [ ] die Cost Funktion muss überarbeitet werden. Das Quadrieren des Fehlers ist notwendig
-	- [ ] Jeder Fehler der verrechnet wird, muss Positiv sein. Nur die Differenz zählt
-- [ ] Lenze Email schreiben
-- [ ] Prüfungssystem Anmelden
+- [x] die Cost Funktion muss überarbeitet werden. Das Quadrieren des Fehlers ist notwendig
+	- [x] Jeder Fehler der verrechnet wird, muss Positiv sein. Nur die Differenz zählt
+- [x] Lenze Email schreiben
+- [x] Prüfungssystem Anmelden
 - [ ] Blocksatz
 - [ ] Donnerstag 10 Uhr
 ## Crap den ich Später vielleicht verwenden kann

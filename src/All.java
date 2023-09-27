@@ -11,21 +11,15 @@ public class All {
 
         double WrtCntGestern = AktWrtCntEinleitung + 2856 +274+478+328+1014;
         double WrtCntHeute = AktWrtCntMathematischeGrundlagen-WrtCntGestern + AktWrtCntEinleitung;
-        double Datum = 21;
         double[] WrtCntArray = {WrtCntGestern+WrtCntHeute, AktWrtCntEinleitung};
         double WrtCnt = 0;
         for(Double d : WrtCntArray){WrtCnt+=d;}
         double Seiten = WrtCnt / WrtProSeite;
         double SeitenMitHeute = Seiten + WrtCntHeute/WrtProSeite;
-        double WrtProTag = roundToDecimalPlaces(Mathe(Datum, Seiten), 2);
-        double WrtProTagRounded = roundToDecimalPlaces(WrtProTag*WrtProSeite, 1);
-
+        
 
         System.out.println("Worte Pro Seite: "+WrtProSeite+"\nWorte Insgesammt übrig: "+(int)(WrtProSeite*50-WrtCnt)+" / "+WrtProSeite*50);
-        //System.out.println("Worte Pro tag zu schreiben: " +WrtProTagRounded);
         System.out.println("So viel hast du heute geschrieben: "+WrtCntHeute);
-        //System.out.println("So viel Prozent hast du schon: "+ roundToDecimalPlaces(WrtCntHeute/(WrtProTag*WrtProSeite)*100, 1) +"%");
-        //System.out.println("So viele Worte fehlen dir heute noch: "+ (WrtProTagRounded-WrtCntHeute));
         System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt+WrtCntHeute)/(50*WrtProSeite))*100, 1)+"%");
         System.out.println("Du hast So viele Seiten geschafft: " +roundToDecimalPlaces(SeitenMitHeute,1)+"/"+50);
     }

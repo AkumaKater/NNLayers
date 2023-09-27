@@ -5,7 +5,7 @@ public class Layer {
     int numInputNodes, numOutputNodes;
     double[][] weights;
     //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
-    double[] CostSteigungW;
+    double[][] CostSteigungW;
 
     double[] inputs;
     double[] weightedInputs;
@@ -47,5 +47,28 @@ public class Layer {
             nodeValues[i] = activationAbleitung * costDerivative;
         }
         return nodeValues;
+    }
+
+    public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
+        double[] newNodeValues = new double[numOutputNodes];
+        for(int i=0; i < numOutputNodes; i++){
+            for(int j=0; j < nodeValues.length; j++){
+                newNodeValues[i] += nodeValues[j]*oldLayer.weights[i][j];
+            } 
+        }
+
+        for (int i = 0; i < weightedInputs.length; i++) {
+            newNodeValues[i] *= Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+        }
+        return newNodeValues;
+    }
+
+    public void UpdateGradients(double[] nodeValues) {
+        for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+            for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+                double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
+                CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+            }
+        }
     }
 }
