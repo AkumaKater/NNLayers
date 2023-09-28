@@ -646,7 +646,8 @@ public void ClearGradient() {
 
 
 ## ToDo
-- [ ] ClearAllGradients
+- [ ] 
+- [x] ClearAllGradients
 - [x] Backpropagation Code
 	- [x] lässt sich in schleifen aufarbeiten
 	- [x] eine funktion multipliziert Term 1 mit den anderen, die hier angestoßen werden.

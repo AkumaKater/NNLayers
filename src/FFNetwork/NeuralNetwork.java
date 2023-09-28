@@ -7,7 +7,7 @@ public class NeuralNetwork {
     double learnRate;
 
     // Initialisierung
-    public NeuralNetwork(double learnRate, int... layerSizes) {
+    public NeuralNetwork(double learnRate, int[] layerSizes) {
         layers = new Layer[layerSizes.length - 1];
         for (int i = 0; i < layers.length; i++) {
             layers[i] = new Layer(layerSizes[i], layerSizes[i + 1]);

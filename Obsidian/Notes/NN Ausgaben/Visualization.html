@@ -37,13 +37,44 @@ h1 {
 			color: #e5395a;
 		}	</style>
 </head>
-| HLayersSizes |DataSize| Epochen | BatchSize | Learnrate | ACtrainingD | ACtestD |
-|----------|----------|----------|----------|----------|----------|----------|
-| (300)  (100) |60000|1|1|0.05|60,99%|61,84%|
-<H1>Visualisierung der Netzwerk Ergebnisse</H>
+<head>
+	<title>Visualization</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body {
+			font-family: "Lato", sans-serif;
+			color: #85b1b0;
+			background-color: #231a10;
+		}
 
-<H2>Trainings Daten</H2>
+		table,
+		tr,
+		td {
+			border: 1px solid;
+			border-collapse: collapse;
+			margin: 5px;
+			padding: 5px;
+		}
 
+		.Kasten {
+			border: 1px solid;
+			margin: 5px;
+			padding: 5px;
+			display: inline-block;
+
+		}
+
+		td {
+			text-align: center;
+		}
+h1 {
+			color: #e5395a;
+		}	</style>
+</head><h1>Visualisierung der Netzwerk Ergebnisse</h1><table><tr><td>HLayersSizes</td><td>DataSize</td><td>Epochen</td><td>BatchSize</td><td>Learnrate</td><td>ACtrainingD</td><td>ACtestD</td></tr><tr><td>[780, 300, 100, 10]</td><td>60000</td><td>5</td><td>1</td><td>0.25</td><td>51,23%</td><td>49,93%</td></tr></table><h2>Trainings Daten</h2>
 <H2 style="color:green;">Prediction 0</H2>
 
 <table>
@@ -60,9 +91,9 @@ h1 {
 					<td>9</td>
 				</tr>
 <tr>
-<td>55,8%</td><td>0,2%</td><td>4,1%</td><td>5,8%</td><td>0,2%</td><td>5,4%</td><td>0,6%</td><td>3,3%</td><td>1,2%</td><td>1,1%</td></tr></table>
+<td>57,3%</td><td>4,3%</td><td>3,3%</td><td>10,5%</td><td>7,5%</td><td>11,7%</td><td>3,0%</td><td>3,1%</td><td>1,4%</td><td>3,9%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,8% Es sich um eine 0 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 57,3% Es sich um eine 0 handelt.
 
 
 <div>
@@ -116,9 +147,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,8% Es sich um eine 0 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>0,2%</td><td>0,4%</td><td>3,4%</td><td>89,1%</td><td>1,9%</td><td>1,7%</td><td>6,1%</td><td>2,2%</td><td>53,6%</td></tr></table>
+<td>11,7%</td><td>0,6%</td><td>16,4%</td><td>2,4%</td><td>58,2%</td><td>13,9%</td><td>7,5%</td><td>1,5%</td><td>14,0%</td><td>0,8%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 89,1% Es sich um eine 4 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 58,2% Es sich um eine 4 handelt.
 
 
 <div>
@@ -172,9 +203,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 89,1% Es sich um eine 4 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>99,6%</td><td>1,5%</td><td>2,4%</td><td>0,2%</td><td>0,2%</td><td>0,2%</td><td>0,2%</td><td>7,9%</td><td>0,2%</td></tr></table>
+<td>0,7%</td><td>32,6%</td><td>18,1%</td><td>4,4%</td><td>15,6%</td><td>8,2%</td><td>4,6%</td><td>5,7%</td><td>1,5%</td><td>7,4%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,6% Es sich um eine 1 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 32,6% Es sich um eine 1 handelt.
 
 
 <div>
@@ -228,9 +259,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,6% Es sich um eine 1 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>1,2%</td><td>1,4%</td><td>2,5%</td><td>3,6%</td><td>8,5%</td><td>1,1%</td><td>10,1%</td><td>35,3%</td><td>39,5%</td></tr></table>
+<td>2,9%</td><td>1,8%</td><td>2,2%</td><td>11,6%</td><td>10,3%</td><td>3,7%</td><td>6,3%</td><td>12,9%</td><td>3,3%</td><td>13,8%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 39,5% Es sich um eine 9 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 13,8% Es sich um eine 9 handelt.
 
 
 <div>
@@ -268,7 +299,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 39,5% Es sich um eine 9 
 
 
 
-<H2 style="color:red;">Prediction 8</H2>
+<H2 style="color:red;">Prediction 7</H2>
 
 <table>
 				<tr>
@@ -284,9 +315,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 39,5% Es sich um eine 9 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,4%</td><td>1,0%</td><td>5,8%</td><td>11,6%</td><td>0,4%</td><td>8,7%</td><td>1,8%</td><td>7,6%</td><td>31,2%</td><td>15,9%</td></tr></table>
+<td>29,1%</td><td>0,2%</td><td>23,5%</td><td>16,3%</td><td>5,4%</td><td>3,1%</td><td>7,6%</td><td>34,2%</td><td>1,2%</td><td>6,4%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 31,2% Es sich um eine 8 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 34,2% Es sich um eine 7 handelt.
 
 
 <div>
@@ -340,9 +371,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 31,2% Es sich um eine 8 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>99,5%</td><td>0,4%</td><td>21,7%</td><td>0,2%</td><td>1,2%</td><td>0,4%</td><td>0,3%</td><td>2,8%</td><td>0,4%</td></tr></table>
+<td>2,4%</td><td>58,9%</td><td>2,3%</td><td>4,4%</td><td>10,1%</td><td>1,4%</td><td>6,0%</td><td>17,7%</td><td>1,0%</td><td>2,7%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,5% Es sich um eine 1 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 58,9% Es sich um eine 1 handelt.
 
 
 <div>
@@ -396,9 +427,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,5% Es sich um eine 1 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>3,1%</td><td>0,4%</td><td>44,8%</td><td>0,6%</td><td>18,0%</td><td>8,5%</td><td>0,2%</td><td>19,5%</td><td>9,3%</td></tr></table>
+<td>6,9%</td><td>0,6%</td><td>7,7%</td><td>24,6%</td><td>5,3%</td><td>1,9%</td><td>13,3%</td><td>16,3%</td><td>1,7%</td><td>14,0%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 44,8% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,6% Es sich um eine 3 handelt.
 
 
 <div>
@@ -452,9 +483,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 44,8% Es sich um eine 3 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>99,5%</td><td>0,2%</td><td>11,4%</td><td>0,2%</td><td>3,4%</td><td>0,4%</td><td>1,8%</td><td>2,0%</td><td>2,2%</td></tr></table>
+<td>1,0%</td><td>79,2%</td><td>3,3%</td><td>18,5%</td><td>6,5%</td><td>1,2%</td><td>8,4%</td><td>31,5%</td><td>3,0%</td><td>8,3%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,5% Es sich um eine 1 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 79,2% Es sich um eine 1 handelt.
 
 
 <div>
@@ -492,7 +523,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,5% Es sich um eine 1 
 
 
 
-<H2 style="color:red;">Prediction 6</H2>
+<H2 style="color:green;">Prediction 4</H2>
 
 <table>
 				<tr>
@@ -508,9 +539,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,5% Es sich um eine 1 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>1,1%</td><td>0,3%</td><td>1,4%</td><td>7,6%</td><td>4,4%</td><td>24,1%</td><td>2,6%</td><td>8,8%</td><td>21,0%</td></tr></table>
+<td>4,4%</td><td>0,7%</td><td>4,2%</td><td>3,3%</td><td>31,1%</td><td>1,4%</td><td>29,1%</td><td>3,6%</td><td>7,5%</td><td>4,2%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,1% Es sich um eine 6 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 31,1% Es sich um eine 4 handelt.
 
 
 <div>
@@ -550,7 +581,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,1% Es sich um eine 6 
 
 <H2>Test Daten</H2>
 
-<H2 style="color:red;">Prediction 3</H2>
+<H2 style="color:green;">Prediction 0</H2>
 
 <table>
 				<tr>
@@ -566,121 +597,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,1% Es sich um eine 6 
 					<td>9</td>
 				</tr>
 <tr>
-<td>7,1%</td><td>0,9%</td><td>26,1%</td><td>74,6%</td><td>0,2%</td><td>10,5%</td><td>6,5%</td><td>0,2%</td><td>3,2%</td><td>0,2%</td></tr></table>
+<td>50,4%</td><td>0,5%</td><td>13,6%</td><td>12,6%</td><td>11,5%</td><td>7,7%</td><td>10,5%</td><td>13,8%</td><td>1,6%</td><td>6,1%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 74,6% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 2 
-                                                        
-                                                        
-                                                        
-                    ^^""==@@@@;;~~                      
-                  ==@@@@@@@@@@@@##..                    
-                ==@@@@@@##;;==@@@@""                    
-              ::@@@@++,,      ++@@;;                    
-              __@@++..      ""@@@@;;                    
-                ,,..        ++@@@@;;                    
-                          ^^@@@@++                      
-                        __@@@@%%;;                      
-                        ""@@@@;;                        
-                      ==@@@@--                          
-                    ..%%@@%%,,                          
-                    ++@@@@;;                            
-                  __@@@@**                              
-                ..++@@@@;;                              
-                ""@@@@==                                
-                @@@@@@..                                
-                @@@@@@,,........      ....,,;;;;;;;;    
-                @@@@@@@@@@@@@@@@==;;==@@@@@@@@@@@@@@""  
-                ==@@@@@@@@@@@@@@@@@@@@@@@@@@@@==^^^^::  
-                  ^^""""""==@@@@@@--"""",,              
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:green;">Prediction 1</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>99,8%</td><td>0,2%</td><td>4,0%</td><td>0,2%</td><td>0,5%</td><td>0,2%</td><td>0,7%</td><td>5,2%</td><td>0,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,8% Es sich um eine 1 handelt.
-
-
-<div>
-<pre class="Kasten">label: 1 
-                                                        
-                                                        
-                                                        
-                                                        
-                                ,,@@^^                  
-                                __@@__                  
-                                ""@@                    
-                              ,,@@;;                    
-                              __@@;;                    
-                              ++##                      
-                            ,,@@##                      
-                            ~~@@**                      
-                            ;;@@__                      
-                          ::%%++                        
-                          ""@@--                        
-                          ==@@__                        
-                        ..%%##                          
-                        ^^@@--                          
-                        --@@;;                          
-                        %%@@;;                          
-                      ;;@@@@;;                          
-                      ;;@@++                            
-                      ##@@""                            
-                      ++==                              
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>15,0%</td><td>0,2%</td><td>9,1%</td><td>17,4%</td><td>0,2%</td><td>13,0%</td><td>1,8%</td><td>5,9%</td><td>1,6%</td><td>3,5%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 17,4% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 50,4% Es sich um eine 0 handelt.
 
 
 <div>
@@ -689,700 +608,26 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 17,4% Es sich um eine 3 
                                                         
                                                         
                                                         
-                          ;;@@++,,                      
-                        ,,@@@@@@^^                      
-                      ..++@@@@@@^^                      
-                    ^^**@@@@@@@@==^^;;                  
-                    @@@@@@@@@@@@@@@@##::                
-                  **@@@@@@@@@@%%##@@@@@@                
-                ;;##@@@@@@@@;;__;;""@@@@~~              
-              ,,%%@@@@@@##;;      ,,%%@@@@^^            
-              ,,@@@@@@**..          ^^@@@@@@,,          
-              ,,@@@@++..            ,,++@@@@,,          
-              ,,@@@@                ,,++@@@@--          
-              ;;@@@@                ^^@@@@@@,,          
-              ##@@@@            ..;;%%@@@@%%..          
-              ##@@@@            ;;@@@@@@##;;            
-              ##@@@@          **##@@@@@@==              
-              ##@@@@;;;;%%@@@@@@@@@@@@@@                
-              ^^@@@@@@@@@@@@@@@@@@@@@@;;                
-              ,,%%@@@@@@@@@@@@@@%%**,,                  
-                ;;;;@@@@@@@@@@@@^^                      
-                    ;;==@@==;;;;..                      
                                                         
                                                         
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:green;">Prediction 4</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,2%</td><td>0,6%</td><td>0,2%</td><td>93,1%</td><td>0,9%</td><td>15,3%</td><td>5,6%</td><td>0,4%</td><td>25,7%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 93,1% Es sich um eine 4 handelt.
-
-
-<div>
-<pre class="Kasten">label: 4 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                    ::##              ;;..              
-                    ""%%              ;;==              
-                    **%%              ~~++              
-                  ;;@@""              ^^@@..            
-                ,,%%##                **@@..            
-                ==@@::              ..@@@@..            
-              __@@##                ;;@@**              
-              ==@@^^              ,,%%@@;;              
-              ##@@                ""@@##                
-            ..@@--                ==@@==                
-              ++++..            ..@@@@^^                
-              ==@@++________""--**@@@@^^                
-              ,,==@@@@@@@@@@%%%%@@@@@@                  
-                  ::________    --@@@@                  
-                                ""@@@@,,                
-                                ""@@@@                  
-                                ""@@@@                  
-                                ""@@@@                  
-                                %%%%^^                  
-                                ==;;                    
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:green;">Prediction 1</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>99,8%</td><td>0,2%</td><td>0,3%</td><td>0,2%</td><td>0,2%</td><td>0,2%</td><td>2,5%</td><td>2,8%</td><td>0,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 99,8% Es sich um eine 1 handelt.
-
-
-<div>
-<pre class="Kasten">label: 1 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                __@@^^                  
-                              ..%%@@@@                  
-                              __@@@@--                  
-                              ++@@@@;;                  
-                            ::@@@@@@                    
-                            ""@@@@==                    
-                            ++@@@@::                    
-                          ::@@@@%%                      
-                          ^^@@@@""                      
-                          --@@%%..                      
-                        ::@@@@##                        
-                        __@@@@--                        
-                        --@@%%::                        
-                      ..@@@@++                          
-                      __@@@@""                          
-                      ~~@@%%..                          
-                      ==@@++                            
-                      ##@@++                            
-                      --@@--                            
-                      ..--^^                            
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 9</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,2%</td><td>0,2%</td><td>17,2%</td><td>15,5%</td><td>12,5%</td><td>0,7%</td><td>13,9%</td><td>5,1%</td><td>55,6%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 handelt.
-
-
-<div>
-<pre class="Kasten">label: 4 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                  ..**"",,                  __          
-                ..%%@@==                  ##@@,,        
-              ..**@@;;                  ;;@@~~          
-              ;;@@@@..                ,,@@==            
-            ..--@@~~                ,,%%@@~~            
-            --@@++                  ~~@@--              
-            --@@==                ""%%@@                
-            --@@@@**==;;;;;;;;""++@@@@==                
-            ::%%@@@@@@@@@@@@@@@@@@@@##,,                
-              ..;;;;@@%%;;;;;;,,@@@@--                  
-                              ,,@@++..                  
-                              --@@;;                    
-                            __@@@@::                    
-                            --@@--                      
-                            %%@@::                      
-                          ~~@@%%                        
-                          ++@@--    ..                  
-                          ++@@--~~++--                  
-                          ++@@@@@@--..                  
-                          ;;**""..                      
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,4%</td><td>1,3%</td><td>36,7%</td><td>0,8%</td><td>17,2%</td><td>8,2%</td><td>2,2%</td><td>8,1%</td><td>18,7%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 36,7% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 9 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                        ;;**                            
-                    ~~##@@@@..                          
-                  ..%%@@@@@@==..                        
-                  ;;@@@@@@@@@@%%^^                      
-                ,,@@@@++**@@@@@@%%..                    
-                __@@**    ~~##@@@@++..                  
-                __@@__      **@@@@**                    
-                ==@@--      %%@@@@""                    
-                __@@++,,__==@@%%@@%%,,                  
-                ..%%@@@@@@@@**,,##@@--                  
-                  ;;%%@@@@;;    ""@@##,,                
-                    ;;--;;        ==@@--                
-                                  __@@%%..              
-                                    ==@@""              
-                                    ::@@@@,,            
-                                      ^^@@==            
-                                      ..##@@::          
-                                        ..@@--          
-                                          **@@,,        
-                                            ##__        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:green;">Prediction 5</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>4,4%</td><td>0,2%</td><td>0,4%</td><td>6,3%</td><td>1,1%</td><td>21,3%</td><td>16,6%</td><td>0,9%</td><td>2,6%</td><td>14,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 21,3% Es sich um eine 5 handelt.
-
-
-<div>
-<pre class="Kasten">label: 5 
-                                                        
-                                                        
-                                                        
-                                                        
-                                  ..::::::..""__::      
-                              ;;--##@@@@@@##@@@@@@      
-                        ,,;;@@@@@@@@@@@@@@@@@@@@@@      
-                        ;;@@@@@@@@@@@@@@##========      
-                .."";;  ::%%%%%%=="";;..                
-                ++@@__    ,,  ..                        
-              ==@@""                                    
-            ""@@%%                                      
-          ~~@@##..                                      
-          ;;@@==                                        
-          %%@@@@""::                                    
-          @@@@@@@@@@;;~~""__,,,,__..                    
-          ;;@@@@@@@@@@@@@@@@@@@@@@%%==                  
-            ::####@@@@@@@@@@@@@@@@@@@@""                
-                  ;;;;++@@@@@@@@@@@@@@==                
-                      ^^@@@@--::--@@@@==                
-                      ::@@@@@@**@@@@@@;;                
-                        ==@@@@@@@@@@==                  
-                        ..==%%@@##""                    
-                            ~~;;..                      
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:green;">Prediction 9</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,4%</td><td>0,2%</td><td>0,5%</td><td>7,3%</td><td>4,6%</td><td>13,4%</td><td>14,9%</td><td>5,4%</td><td>35,6%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 35,6% Es sich um eine 9 handelt.
-
-
-<div>
-<pre class="Kasten">label: 9 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                          ,,::;;++++~~,,                
-                      ,,--%%@@@@@@@@@@@@##--            
-                  ::--%%@@@@%%==""@@++@@%%##~~          
-                --%%@@@@**;;      **,,++@@##@@..        
-              ""@@@@%%""          ++,,;;@@@@@@..        
-            ;;@@@@%%::          ,,^^##@@@@@@--          
-            ;;%%@@##^^;;======++@@%%@@@@@@%%,,          
-              ==@@@@@@@@@@@@@@@@@@@@@@@@==..            
-                ..;;**==;;--++@@@@@@@@;;..              
-                            --@@@@@@~~                  
-                          ^^@@@@@@__                    
-                        ~~@@@@@@##                      
-                      ::@@@@@@@@::                      
-                      ""@@@@@@;;                        
-                      @@@@@@--                          
-                    %%@@@@++                            
-                  __@@@@@@;;                            
-                  ++@@@@;;                              
-                  %%@@%%..                              
-                  ^^@@^^                                
-                                                        
-</pre>
-</div>
-
-
-
-<H2>Wrong Examples</H2>
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>15,0%</td><td>0,2%</td><td>9,1%</td><td>17,4%</td><td>0,2%</td><td>13,0%</td><td>1,8%</td><td>5,9%</td><td>1,6%</td><td>3,5%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 17,4% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 0 
-                                                        
-                                                        
-                                                        
-                                                        
-                          ;;@@++,,                      
-                        ,,@@@@@@^^                      
-                      ..++@@@@@@^^                      
-                    ^^**@@@@@@@@==^^;;                  
-                    @@@@@@@@@@@@@@@@##::                
-                  **@@@@@@@@@@%%##@@@@@@                
-                ;;##@@@@@@@@;;__;;""@@@@~~              
-              ,,%%@@@@@@##;;      ,,%%@@@@^^            
-              ,,@@@@@@**..          ^^@@@@@@,,          
-              ,,@@@@++..            ,,++@@@@,,          
-              ,,@@@@                ,,++@@@@--          
-              ;;@@@@                ^^@@@@@@,,          
-              ##@@@@            ..;;%%@@@@%%..          
-              ##@@@@            ;;@@@@@@##;;            
-              ##@@@@          **##@@@@@@==              
-              ##@@@@;;;;%%@@@@@@@@@@@@@@                
-              ^^@@@@@@@@@@@@@@@@@@@@@@;;                
-              ,,%%@@@@@@@@@@@@@@%%**,,                  
-                ;;;;@@@@@@@@@@@@^^                      
-                    ;;==@@==;;;;..                      
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 9</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,2%</td><td>0,2%</td><td>17,2%</td><td>15,5%</td><td>12,5%</td><td>0,7%</td><td>13,9%</td><td>5,1%</td><td>55,6%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 handelt.
-
-
-<div>
-<pre class="Kasten">label: 4 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                  ..**"",,                  __          
-                ..%%@@==                  ##@@,,        
-              ..**@@;;                  ;;@@~~          
-              ;;@@@@..                ,,@@==            
-            ..--@@~~                ,,%%@@~~            
-            --@@++                  ~~@@--              
-            --@@==                ""%%@@                
-            --@@@@**==;;;;;;;;""++@@@@==                
-            ::%%@@@@@@@@@@@@@@@@@@@@##,,                
-              ..;;;;@@%%;;;;;;,,@@@@--                  
-                              ,,@@++..                  
-                              --@@;;                    
-                            __@@@@::                    
-                            --@@--                      
-                            %%@@::                      
-                          ~~@@%%                        
-                          ++@@--    ..                  
-                          ++@@--~~++--                  
-                          ++@@@@@@--..                  
-                          ;;**""..                      
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>0,4%</td><td>1,3%</td><td>36,7%</td><td>0,8%</td><td>17,2%</td><td>8,2%</td><td>2,2%</td><td>8,1%</td><td>18,7%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 36,7% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 9 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                        ;;**                            
-                    ~~##@@@@..                          
-                  ..%%@@@@@@==..                        
-                  ;;@@@@@@@@@@%%^^                      
-                ,,@@@@++**@@@@@@%%..                    
-                __@@**    ~~##@@@@++..                  
-                __@@__      **@@@@**                    
-                ==@@--      %%@@@@""                    
-                __@@++,,__==@@%%@@%%,,                  
-                ..%%@@@@@@@@**,,##@@--                  
-                  ;;%%@@@@;;    ""@@##,,                
-                    ;;--;;        ==@@--                
-                                  __@@%%..              
-                                    ==@@""              
-                                    ::@@@@,,            
-                                      ^^@@==            
-                                      ..##@@::          
-                                        ..@@--          
-                                          **@@,,        
-                                            ##__        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>50,8%</td><td>0,2%</td><td>4,2%</td><td>58,3%</td><td>0,2%</td><td>12,4%</td><td>1,8%</td><td>0,2%</td><td>1,2%</td><td>0,4%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 58,3% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 0 
-                                                        
-                                                        
-                                                        
-                                                        
-                      ;;  ,,^^**^^^^;;                  
-                    ==@@%%@@@@@@@@@@@@%%__              
-                  --@@@@@@##**======@@@@@@::            
-                ,,%%@@%%;;..        ""@@@@==..          
-                ::@@@@^^              ""@@@@;;          
-                ;;@@--                  ##@@--          
-                **@@~~                  ;;@@##          
-              ,,##%%::                  __@@##          
-              ""@@==                    __@@##          
-              ##%%::                    __@@##          
-              ##++                      __@@##          
-              ##++                      __@@##          
-            ~~@@++                      --@@++          
-            ~~@@++                    ::%%@@;;          
-            ~~@@++                  ::--@@**            
-            ;;@@++                  ==@@%%::            
-              ####..          ::--++@@@@;;              
-              ##@@++==========%%@@@@%%--                
-              __++@@@@@@@@@@@@@@@@%%^^                  
-                ..++@@@@@@@@@@--~~                      
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>1,1%</td><td>0,4%</td><td>1,4%</td><td>50,9%</td><td>0,2%</td><td>16,5%</td><td>7,6%</td><td>0,7%</td><td>2,6%</td><td>4,8%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 50,9% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 6 
-                                                        
-                                                        
-                                                        
-                      ++@@==                            
-                    ;;@@@@""                            
-                  ^^@@**::                              
-                  ;;@@^^                                
-                  --@@::                                
-                ..@@++                                  
-                ;;@@++              ::____,,            
-                ##@@~~          --%%@@@@@@%%""          
-                %%%%        ::%%@@@@%%==##@@%%,,        
-              ^^@@;;    ..""@@@@%%""..    ==@@::        
-              --@@^^    ;;@@@@**,,        ;;@@::        
-              **@@^^  ,,%%@@--            ;;++          
-              ++@@^^  ;;@@--              --++          
-              ++@@^^  ==@@**            ..@@==          
-              ++@@^^  ..%%@@""..        ++@@::          
-            ..##@@^^    ..++@@**    __++@@""            
-              **@@==        __,,..--@@@@""              
-              ..++@@++__::::""++@@@@##__                
-                ..##@@@@@@@@@@@@@@--..                  
-                  ..~~;;%%;;;;;;,,                      
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>12,8%</td><td>0,3%</td><td>1,9%</td><td>63,3%</td><td>0,2%</td><td>27,6%</td><td>7,3%</td><td>0,2%</td><td>2,4%</td><td>1,1%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 63,3% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 5 
-                                                        
-                                                        
-                                                        
-                                                        
-                        ::""##@@@@@@++--,,              
-                ~~;;++++@@@@@@@@--;;                    
-                @@@@@@++;;~~__                          
-                ==@@++                                  
-                ..##%%..                                
-                  ""@@::                                
-                  ""@@~~::::::                          
-                ..##@@@@@@@@@@==__                      
-              ..##@@++--~~~~++##@@@@::                  
-              ;;@@==          ..^^**@@##,,              
-                                    ~~++%%::            
-                                      ..##%%__          
-                                        ;;++%%^^        
-                                          ..##@@        
-                                            --@@        
-                                          ,,%%##        
-                ^^~~                    ,,==@@,,        
-              __@@--            ..~~~~**%%##__          
-              __@@@@%%----**==@@@@@@@@##;;..            
-                ;;----%%@@##**--""::::                  
+                          ..~~~~~~~~~~                  
+                      ;;""##@@@@@@@@@@##__              
+                    ::@@@@@@@@@@@@@@@@@@%%~~..          
+                ,,==@@@@@@@@@@@@@@@@@@@@@@@@~~          
+              ,,##@@@@@@@@@@@@@@@@@@@@@@@@@@==          
+              ""@@@@@@@@;;""~~    ;;==@@@@@@@@;;        
+            ++@@@@@@++                --@@@@@@^^        
+          ""@@@@@@++__                __@@@@@@%%        
+        ~~@@@@%%==..                  __@@@@@@@@        
+        ^^@@@@++                    ..**@@@@@@--        
+        ^^@@@@++                    **@@@@@@%%,,        
+        ^^@@@@++              ..;;++@@@@@@@@~~          
+        **@@@@%%^^          ..;;@@@@@@@@@@##            
+        ""@@@@@@@@@@==--@@@@@@@@@@@@@@@@**              
+        ..**@@@@@@@@@@@@@@@@@@@@@@@@@@;;..              
+          ..**@@@@@@@@@@@@@@@@@@##**;;                  
+            ..~~####%%@@####**;;,,                      
+                    ::~~                                
                                                         
                                                         
                                                         
@@ -1408,39 +653,39 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 63,3% Es sich um eine 3 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>0,2%</td><td>0,2%</td><td>0,7%</td><td>75,0%</td><td>4,0%</td><td>3,1%</td><td>21,8%</td><td>1,2%</td><td>60,4%</td></tr></table>
+<td>2,3%</td><td>13,4%</td><td>5,8%</td><td>14,0%</td><td>40,1%</td><td>2,9%</td><td>5,7%</td><td>35,1%</td><td>1,3%</td><td>2,3%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 75,0% Es sich um eine 4 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 40,1% Es sich um eine 4 handelt.
 
 
 <div>
-<pre class="Kasten">label: 9 
+<pre class="Kasten">label: 1 
                                                         
                                                         
                                                         
                                                         
                                                         
+                  ^^@@@@;;                              
+                  ^^@@@@@@##                            
+                  ^^@@@@@@@@^^                          
+                  ^^==""@@@@##..                        
+                  ::  ..++@@@@^^                        
+                        ==@@@@==                        
+                        ""@@@@@@::                      
+                        ..@@@@@@::                      
+                        ..@@@@@@::                      
+                          **@@@@""                      
+                          ;;@@@@++                      
+                          ;;@@@@**                      
+                          ;;@@@@**                      
+                          ::@@@@%%::                    
+                            ==@@@@--                    
+                            ^^@@@@##                    
+                            ^^@@@@==                    
+                            ^^@@@@__                    
+                            ~~@@##..                    
+                              ##^^                      
                                                         
-                      ;;;;%%@@++^^                      
-                  ..++@@@@####%%@@__                    
-                ..++@@##;;    ..++==  __,,              
-                ;;@@%%          ,,..__@@@@              
-              __@@%%              ,,%%@@==              
-              ""@@**                %%@@--              
-              ==@@;;              __@@@@;;              
-              @@@@::              ##@@@@,,              
-              @@@@::            ;;@@@@;;                
-              ##@@^^        ..^^@@@@@@::                
-              ..@@@@**~~;;--##@@%%@@##..                
-                __++@@@@@@##--;;@@@@--                  
-                    ::::::    ,,@@@@;;                  
-                              ;;@@@@..                  
-                              ;;@@@@..                  
-                            ..%%@@**                    
-                            ;;@@@@^^                    
-                            __@@@@                      
-                            ==@@++                      
-                            @@@@;;                      
                                                         
                                                         
 </pre>
@@ -1448,7 +693,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 75,0% Es sich um eine 4 
 
 
 
-<H2 style="color:red;">Prediction 9</H2>
+<H2 style="color:green;">Prediction 1</H2>
 
 <table>
 				<tr>
@@ -1464,261 +709,37 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 75,0% Es sich um eine 4 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>1,1%</td><td>2,1%</td><td>0,9%</td><td>2,2%</td><td>1,0%</td><td>3,9%</td><td>9,1%</td><td>4,3%</td><td>9,3%</td></tr></table>
+<td>4,1%</td><td>24,6%</td><td>4,7%</td><td>23,2%</td><td>3,7%</td><td>0,8%</td><td>9,4%</td><td>11,7%</td><td>6,4%</td><td>4,9%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 9,3% Es sich um eine 9 handelt.
-
-
-<div>
-<pre class="Kasten">label: 6 
-                                                        
-                                                        
-                                                        
-                  ^^@@::                                
-                  %%@@::                                
-                ..@@^^                                  
-                ^^@@__                                  
-                ++@@..                                  
-              ..@@%%                                    
-              ;;@@;;            ::____;;::              
-              ==@@__          ::%%@@@@@@@@::            
-              ==@@__          ==@@@@^^::%%++            
-              ==@@__        ::@@@@__    ==@@            
-              ==@@__        ==@@__      ==@@__          
-              ;;@@^^      ..@@++        ==@@__          
-              ..@@@@      ==@@^^        ++%%            
-                ++@@^^    ==@@__      __@@^^            
-                __@@@@==::@@@@..    __%%%%..            
-                  ^^%%@@@@@@@@____==@@@@::              
-                    ..;;@@@@@@@@@@@@++..                
-                          %%@@@@;;__                    
-                          ;;@@@@====::                  
-                            ;;%%==^^..                  
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>17,4%</td><td>0,2%</td><td>12,1%</td><td>62,9%</td><td>0,2%</td><td>18,7%</td><td>3,0%</td><td>0,3%</td><td>3,1%</td><td>1,7%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 62,9% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,6% Es sich um eine 1 handelt.
 
 
 <div>
-<pre class="Kasten">label: 0 
+<pre class="Kasten">label: 1 
                                                         
                                                         
                                                         
                                                         
-                                                        
-                  ,,@@@@@@@@@@@@--""__                  
-                  ,,@@@@@@@@@@@@@@@@@@^^                
-                    ""%%@@@@@@@@@@@@@@@@..              
-                      ::@@@@==%%@@@@@@@@~~              
-                      ==@@**  ..""@@@@@@##              
-                    ""@@##..      **@@@@@@..            
-                  ,,@@@@""        ;;@@@@@@^^            
-                  ^^@@++..          **@@@@;;            
-                ::##@@;;            __@@@@;;            
-                ;;@@**              __@@@@;;            
-                %%@@~~              __@@@@;;            
-              ..@@@@~~              __@@@@;;            
-              ..@@@@~~              __@@@@^^            
-              ..@@@@""              __@@##..            
-              ..@@@@%%,,            ""@@--              
-              ..@@@@@@%%^^  ;;~~~~++@@##,,              
-                --@@@@@@@@%%@@@@@@@@@@^^                
-                ~~@@@@@@@@@@@@@@@@@@^^                  
-                  ,,@@@@@@@@@@@@@@^^                    
-                  ..::__##--~~                          
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 0</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>75,7%</td><td>0,2%</td><td>23,4%</td><td>0,2%</td><td>0,8%</td><td>0,4%</td><td>62,3%</td><td>0,2%</td><td>0,2%</td><td>0,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 75,7% Es sich um eine 0 handelt.
-
-
-<div>
-<pre class="Kasten">label: 4 
-                                                        
-                                                        
-                                                        
-                                                        
-                    ..                                  
-                    **==__                    ..        
-                    ;;@@^^                    "";;      
-                    ^^@@^^                  ;;@@@@      
-                    ##@@^^                  ""@@++      
-                  ,,%%@@^^                  ++@@__      
-                  ~~@@@@~~                  ++@@..      
-                  ##@@==                  __@@--        
-                --@@@@::                  **@@--        
-              __%%@@##                    ++@@--        
-              ++@@@@::                  ::@@@@::        
-            ,,@@@@==                    ::@@@@,,        
-          ;;++@@##..                    ::@@==          
-          ;;@@@@##;;;;--@@@@@@++@@@@__  ^^@@--          
-          %%@@@@@@@@@@@@@@@@@@######@@++##@@::          
-          ^^@@@@##++****"";;;;....  ;;==@@++            
-            ::::..                    ;;@@;;            
-                                      ..,,              
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 8</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,2%</td><td>8,8%</td><td>8,3%</td><td>2,0%</td><td>0,6%</td><td>2,2%</td><td>1,1%</td><td>19,3%</td><td>41,4%</td><td>10,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 41,4% Es sich um eine 8 handelt.
-
-
-<div>
-<pre class="Kasten">label: 7 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-              %%##__            ::""""%%@@%%,,          
-              ;;%%@@%%%%%%%%%%@@@@@@@@@@@@@@~~          
-                ;;**@@@@@@@@@@@@@@@@@@@@@@@@~~          
-                    ,,,,::~~,,,,,,,,##@@@@++;;          
-                                  ;;@@@@++..            
-                                  ""@@@@++              
-                                ~~@@@@@@==              
-                                @@@@@@""..              
-                              ++@@@@@@::                
-                            ++@@@@@@~~                  
-                          ++@@@@@@--                    
-                      ..""@@@@@@@@~~                    
-                      __@@@@@@@@,,                      
-                    ..++@@@@++^^                        
-                  ..==@@@@@@__                          
-                ..^^@@@@@@;;                            
-                ==@@@@@@%%,,                            
-                ##@@@@@@;;                              
-              __@@@@@@##,,                              
-                ######__                                
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,6%</td><td>4,0%</td><td>10,4%</td><td>94,9%</td><td>0,2%</td><td>3,2%</td><td>2,0%</td><td>0,2%</td><td>1,5%</td><td>0,2%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 94,9% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 2 
-                                                        
-                                                        
-                                                        
-                                                        
-                          ::==@@::                      
-                      ,,**@@@@@@==                      
-                    ;;@@@@%%%%@@**                      
-                ..**@@@@~~..^^@@**                      
-              ..++@@~~..    ^^@@;;                      
-              ,,~~..        ^^@@,,                      
-                            ^^%%                        
-                          ,,##;;                        
-                          ""++..                        
-                        ..%%;;                          
-                        ;;@@;;                          
-                      ..++""                            
-                      --%%,,                ""++::      
-                    __@@""              __##@@;;        
-                    ++%%,,        ..;;%%@@%%;;          
-                  ""@@;;      ::**@@@@++^^              
-                ..%%**  ,,~~**@@%%==~~                  
-                ""@@~~""%%@@@@**::                      
-                ##@@@@@@@@**;;                          
-              ::@@@@**~~;;                              
+                                ;;@@--                  
+                              ,,##@@@@--                
+                              %%@@@@@@##                
+                            ~~@@@@@@@@##                
+                            ==@@@@@@@@##                
+                          ,,++@@@@@@@@""                
+                          ^^@@@@@@@@%%,,                
+                        __@@@@@@@@@@""                  
+                        **@@@@@@@@@@""                  
+                      ^^@@@@@@@@@@%%__                  
+                    ..++@@@@@@@@@@++                    
+                    __@@@@@@@@@@@@..                    
+                    ++@@@@@@@@@@--                      
+                  ..##@@@@@@@@%%__                      
+                  ""@@@@@@@@@@~~                        
+                ;;%%@@@@@@@@^^                          
+                ##@@@@@@@@@@__                          
+                ##@@@@@@@@@@__                          
+                ##@@@@@@@@##::                          
+                ~~@@@@@@""::                            
                                                         
                                                         
                                                         
@@ -1744,65 +765,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 94,9% Es sich um eine 3 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>1,1%</td><td>1,0%</td><td>4,8%</td><td>13,2%</td><td>0,7%</td><td>0,2%</td><td>38,8%</td><td>8,8%</td><td>31,2%</td></tr></table>
+<td>10,9%</td><td>0,8%</td><td>2,1%</td><td>3,9%</td><td>4,8%</td><td>4,9%</td><td>9,1%</td><td>53,7%</td><td>0,3%</td><td>10,5%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 38,8% Es sich um eine 7 handelt.
-
-
-<div>
-<pre class="Kasten">label: 4 
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-                ""@@--            ;;@@==                
-                ""@@--            ^^@@@@::              
-                ##@@~~            ;;@@%%,,              
-                ##@@__          __%%@@##                
-              ::@@@@::          **@@@@++                
-              ::@@@@          ;;@@@@@@^^                
-              ;;@@@@        ""@@@@@@%%..                
-              --@@@@      ~~@@@@@@@@**                  
-              ~~@@@@,,  ..@@@@@@@@@@;;                  
-                --@@==~~@@@@@@@@@@@@;;                  
-                ;;==@@@@@@@@==@@@@++                    
-                    ~~==;;,,^^@@@@;;                    
-                            ++@@@@""                    
-                            ""@@##                      
-                            ==@@++                      
-                            --@@""                      
-                            **@@^^                      
-                            ++@@^^                      
-                            **@@^^                      
-                            ..**^^                      
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 3</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,5%</td><td>1,3%</td><td>0,7%</td><td>71,0%</td><td>0,2%</td><td>42,7%</td><td>7,2%</td><td>0,2%</td><td>17,6%</td><td>4,4%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 71,0% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 53,7% Es sich um eine 7 handelt.
 
 
 <div>
@@ -1812,26 +777,26 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 71,0% Es sich um eine 3 
                                                         
                                                         
                                                         
-                        --**--~~::::::::,,              
-                      ..##@@@@@@@@@@@@@@**__            
-                      ::@@~~  ..~~;;~~~~;;**,,          
-                      ::@@~~              ;;            
-                      ::@@~~                            
-                      ~~@@~~                            
-                      ==@@~~                            
-                      @@@@##++++++__                    
-                    ""@@@@##++++##@@;;                  
-                  ,,@@@@""..    ..@@%%,,                
-                  --@@**          ""@@~~                
-                  ::--..          ::@@~~                
-                  ..              ^^@@~~                
-                __**              **@@~~                
-                ++**            ..@@@@,,                
-              ..##~~          ..++@@""                  
-                ++""        ,,==@@++..                  
-                --##~~..~~--@@@@==..                    
-                ,,%%@@@@@@@@==__                        
-                  ..""**^^::                            
+                                                        
+                                                        
+                                          ..........    
+                    ""******************++@@@@@@@@%%    
+                __--%%@@@@@@@@@@@@@@@@@@@@##++==~~;;    
+              ^^@@@@@@%%@@--,,::"";;,,,,;;..            
+            ;;@@@@;;;;..""~~                            
+            --@@**                                      
+            ++@@;;                                      
+            **@@%%""____                                
+            ::%%@@@@@@@@@@@@@@**;;,,                    
+              ..__;;;;##%%%%@@@@@@%%                    
+                            ..~~**@@__                  
+                                ,,@@^^                  
+                                **@@^^                  
+                ""^^          ::%%@@__                  
+                ::@@%%""~~""++@@@@++                    
+                  ;;@@@@@@@@@@@@""..                    
+                    __**""~~;;                          
+                                                        
                                                         
                                                         
                                                         
@@ -1840,7 +805,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 71,0% Es sich um eine 3 
 
 
 
-<H2 style="color:red;">Prediction 3</H2>
+<H2 style="color:red;">Prediction 7</H2>
 
 <table>
 				<tr>
@@ -1856,37 +821,37 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 71,0% Es sich um eine 3 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>3,1%</td><td>2,3%</td><td>72,2%</td><td>0,2%</td><td>8,9%</td><td>2,4%</td><td>2,2%</td><td>5,8%</td><td>6,9%</td></tr></table>
+<td>26,8%</td><td>0,3%</td><td>12,3%</td><td>17,0%</td><td>6,3%</td><td>1,9%</td><td>6,3%</td><td>37,1%</td><td>2,4%</td><td>9,4%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 72,2% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 37,1% Es sich um eine 7 handelt.
 
 
 <div>
-<pre class="Kasten">label: 1 
+<pre class="Kasten">label: 2 
                                                         
                                                         
                                                         
                                                         
-                    --@@==                              
-                  ..##@@@@;;                            
-                    ++@@@@**                            
-                    ;;@@@@@@__                          
-                    ;;@@@@@@;;                          
-                      **@@@@%%,,                        
-                      ;;@@@@@@##                        
-                        %%@@@@%%                        
-                        ""@@@@@@__                      
-                          **@@@@++..                    
-                          **@@@@@@,,                    
-                          --@@@@@@""                    
-                          __@@@@@@**                    
-                            ##@@@@@@^^                  
-                            ^^@@@@@@**                  
-                            ;;@@@@@@%%,,                
-                              ++@@@@@@;;                
-                              ""@@@@@@++                
-                              ,,@@@@@@^^                
-                                ^^%%@@::                
+                                                        
+                        ,,~~~~~~~~~~~~                  
+                  ::__##%%@@@@@@@@@@@@##;;              
+              ..__%%@@@@@@@@@@@@@@@@@@@@**              
+              __@@@@@@@@@@@@@@@@##%%@@@@@@;;            
+              __@@@@@@@@%%**~~__  ;;@@@@@@%%,,          
+              ,,##@@==""            **@@@@@@;;          
+                                    ==@@@@%%,,          
+                                  ""@@@@@@**            
+                  ::;;;;;;;;;;;;,,==@@@@@@**            
+              __**%%@@@@@@@@@@@@##@@@@@@@@""  ..        
+            --%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@**##;;      
+          ""@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--::      
+          @@@@@@@@%%"";;^^@@@@@@@@@@@@@@@@##^^          
+          @@@@@@@@__;;~~@@@@@@@@@@@@;;;;,,              
+          ""@@@@@@%%%%@@@@@@@@@@++~~                    
+          ..%%@@@@@@@@@@@@@@++--..                      
+            ""@@@@@@@@##--;;                            
+              __~~~~__                                  
+                                                        
                                                         
                                                         
                                                         
@@ -1896,7 +861,7 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 72,2% Es sich um eine 3 
 
 
 
-<H2 style="color:red;">Prediction 9</H2>
+<H2 style="color:red;">Prediction 6</H2>
 
 <table>
 				<tr>
@@ -1912,9 +877,177 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 72,2% Es sich um eine 3 
 					<td>9</td>
 				</tr>
 <tr>
-<td>0,2%</td><td>0,2%</td><td>0,2%</td><td>17,2%</td><td>15,5%</td><td>12,5%</td><td>0,7%</td><td>13,9%</td><td>5,1%</td><td>55,6%</td></tr></table>
+<td>4,6%</td><td>4,7%</td><td>5,6%</td><td>5,2%</td><td>3,0%</td><td>0,9%</td><td>13,6%</td><td>3,7%</td><td>2,3%</td><td>3,0%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 13,6% Es sich um eine 6 handelt.
+
+
+<div>
+<pre class="Kasten">label: 8 
+                                                        
+                                                        
+                                                        
+                                                        
+                          ;;****::                      
+                        ^^@@@@@@%%^^                    
+                      ::@@%%~~__++%%,,                  
+                      ++@@^^    ~~@@==                  
+                    ::@@@@..      ####                  
+                    ::@@--        __##                  
+                    ;;@@;;        ==@@~~                
+                    ##%%        ::@@@@""                
+                    ;;%%        ==@@++                  
+                    ::@@__    ""@@@@,,                  
+                    ^^@@..  ""@@@@~~                    
+                    --%%  __@@@@%%                      
+                    __%%^^@@@@@@@@==                    
+                    ..%%@@@@@@##%%@@--                  
+                    ::@@@@@@;;  __@@%%..                
+                    ::@@@@@@,,  ..@@@@::                
+                    ,,%%@@""    ..@@@@~~                
+                      **@@;;  ::++@@##..                
+                      ;;%%@@%%@@@@@@^^                  
+                        ..--@@%%--""                    
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:green;">Prediction 3</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>24,0%</td><td>1,0%</td><td>16,4%</td><td>41,4%</td><td>10,5%</td><td>3,5%</td><td>19,9%</td><td>7,8%</td><td>4,4%</td><td>3,6%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 41,4% Es sich um eine 3 handelt.
+
+
+<div>
+<pre class="Kasten">label: 3 
+                                                        
+                                                        
+                                                        
+                                                        
+                ::~~""@@@@;;~~^^__                      
+              ::%%@@@@@@@@@@@@@@@@++;;,,                
+              --@@@@@@@@@@@@@@@@@@@@@@==                
+              --@@@@@@@@@@@@@@@@@@@@@@==                
+              ....--========##@@@@@@@@==                
+                          ..--@@@@@@@@==                
+                        ==@@@@@@@@@@@@==                
+                  ..^^%%@@@@@@@@@@@@@@__                
+                  **@@@@@@@@@@@@@@@@@@**,,              
+                  ##@@@@@@@@@@@@@@@@@@@@%%;;            
+                  --@@@@@@%%++@@@@@@@@@@@@^^            
+              ,,""__;;,,,,,,..,,,,==@@@@@@;;            
+              --@@@@;;            ;;@@@@@@@@..          
+              --@@@@;;              @@@@@@@@~~          
+              --@@@@^^          ..==@@@@@@@@            
+              ;;@@@@@@~~......,,==@@@@@@@@--            
+                @@@@@@@@@@@@@@@@@@@@@@@@@@^^            
+                ++@@@@@@@@@@@@@@@@@@@@##;;              
+                ..~~%%@@@@@@@@@@@@@@++::                
+                    ;;~~@@@@@@@@""~~                    
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:green;">Prediction 0</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>66,4%</td><td>2,4%</td><td>5,3%</td><td>3,0%</td><td>27,3%</td><td>26,0%</td><td>5,9%</td><td>0,9%</td><td>3,3%</td><td>2,6%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 66,4% Es sich um eine 0 handelt.
+
+
+<div>
+<pre class="Kasten">label: 0 
+                                                        
+                                                        
+                                                        
+                                                        
+                              @@##__                    
+                          ::++@@@@##++==,,              
+                        ;;**@@%%__,,--@@==              
+                      ..@@@@%%        ^^@@__            
+                      **@@++            ==++..          
+                  ,,++@@%%;;            ::@@;;          
+                  ^^@@@@~~                ==++          
+                ""@@@@##                  ""%%,,        
+                ##@@@@::                  ""@@;;        
+                @@@@##                    ==@@""        
+              --@@@@~~                    ""@@;;        
+            ::%%@@##..                  ..++@@;;        
+            ;;@@@@^^                    ==@@%%,,        
+            ^^@@@@,,                  ::@@@@++          
+            ;;@@%%                __--**@@##,,          
+            ,,%%%%,,            ^^@@@@@@##,,            
+              ;;@@==__    ,,""%%@@@@@@@@;;              
+                ==@@@@==****@@@@@@%%**                  
+                ,,**@@@@@@@@@@@@==::                    
+                    ;;%%;;;;~~..                        
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:green;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>4,6%</td><td>0,5%</td><td>8,0%</td><td>10,0%</td><td>21,6%</td><td>2,6%</td><td>8,8%</td><td>10,8%</td><td>11,5%</td><td>12,2%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 21,6% Es sich um eine 4 handelt.
 
 
 <div>
@@ -1924,27 +1057,27 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 
                                                         
                                                         
                                                         
+                                      ==@@--..          
+                                    ::@@@@@@..          
+                                    ==@@@@==            
+                    ,,;;            @@@@@@;;            
+                    ==@@^^        ::@@@@%%,,            
+                    @@@@@@;;      ==@@@@**              
+                  ^^@@@@##      ^^@@@@@@""              
+              ..##@@@@@@__      %%@@@@@@;;              
+            ::%%@@@@@@++      ==@@@@@@**                
+          ..%%@@@@@@@@##~~::~~@@@@@@@@;;                
+          ,,@@@@@@@@@@@@@@@@@@@@@@@@**                  
+            ""**@@@@@@@@@@@@@@@@@@@@..                  
+                ......;;##@@@@@@@@**                    
+                        --@@@@@@**                      
+                        ##@@@@@@""                      
+                      ""@@@@@@==                        
+                      @@@@@@%%..                        
+                    ~~@@@@%%^^                          
+                    %%@@@@**                            
+                    __@@==::                            
                                                         
-                    ^^""__          ~~==##..            
-                  __@@@@@@        ""@@@@@@,,            
-                ::%%@@@@%%      ,,@@@@@@@@^^            
-                **@@@@@@;;      ,,@@@@@@@@""            
-              ;;%%@@@@@@::      ,,@@@@@@@@,,            
-              **@@@@@@@@..    __++@@@@@@@@,,            
-            ,,@@@@@@@@@@~~__++@@@@@@@@@@**              
-            ;;@@@@@@@@@@@@@@@@@@@@@@@@@@;;              
-            ^^@@@@@@@@@@@@@@@@@@@@@@@@**                
-            ,,@@@@@@@@@@@@@@@@@@@@@@@@==                
-            ,,@@@@;;##@@@@@@@@@@@@@@@@==                
-              ::              **@@@@@@::                
-                              ;;@@@@@@__                
-                              ##@@@@@@==                
-                            ,,@@@@@@@@--                
-                            %%@@@@@@@@::                
-                          ~~@@@@@@@@@@::                
-                          ""@@@@@@@@%%,,                
-                            @@@@@@@@__                  
-                            @@@@--                      
                                                         
                                                         
 </pre>
@@ -1952,7 +1085,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 
 
 
 
-<H2 style="color:red;">Prediction 3</H2>
+<H2>Wrong Examples</H2>
+
+<H2 style="color:red;">Prediction 7</H2>
 
 <table>
 				<tr>
@@ -1968,65 +1103,9 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 55,6% Es sich um eine 9 
 					<td>9</td>
 				</tr>
 <tr>
-<td>1,3%</td><td>0,2%</td><td>2,3%</td><td>25,6%</td><td>0,5%</td><td>11,3%</td><td>12,7%</td><td>1,1%</td><td>2,3%</td><td>7,0%</td></tr></table>
+<td>10,9%</td><td>0,8%</td><td>2,1%</td><td>3,9%</td><td>4,8%</td><td>4,9%</td><td>9,1%</td><td>53,7%</td><td>0,3%</td><td>10,5%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 25,6% Es sich um eine 3 handelt.
-
-
-<div>
-<pre class="Kasten">label: 6 
-                                                        
-                                                        
-                                                        
-                                ,,--@@::                
-                              ..##@@@@::                
-                              ""@@@@--                  
-                            ::@@@@**                    
-                            ""@@++..                    
-                          ~~@@@@..                      
-                          **@@~~                        
-                        __@@**                          
-                      **""##,,                          
-                    ::@@@@__                            
-                    ##@@**        ,,..                  
-                    @@@@__  ..;;##@@##;;                
-                  ;;@@@@::  ""--==@@@@##                
-                  **@@==          ##@@@@__              
-                  **@@~~        ..@@@@##                
-                  ++@@;;        ..@@@@""                
-                  **@@**__      __@@@@::                
-                  ""##@@@@==__--@@@@;;                  
-                    ;;++@@@@@@@@@@##..                  
-                        ::++##**;;..                    
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        
-</pre>
-</div>
-
-
-
-<H2 style="color:red;">Prediction 9</H2>
-
-<table>
-				<tr>
-					<td>0</td>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-					<td>9</td>
-				</tr>
-<tr>
-<td>0,4%</td><td>0,2%</td><td>0,4%</td><td>9,4%</td><td>2,6%</td><td>14,2%</td><td>6,3%</td><td>4,4%</td><td>5,5%</td><td>33,0%</td></tr></table>
-
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 33,0% Es sich um eine 9 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 53,7% Es sich um eine 7 handelt.
 
 
 <div>
@@ -2036,26 +1115,306 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 33,0% Es sich um eine 9 
                                                         
                                                         
                                                         
-                                                __::    
-                                      ;;^^==@@@@++~~    
-                          ::..  ..^^++@@@@%%""^^        
-                      ..**@@%%##%%@@@@--;;..            
-                    ..##@@@@@@@@##~~,,                  
-                  ..++@@@@@@--;;                        
-                  **@@@@++,,                            
-                ::%%@@--                                
-                ##@@--                                  
-              ,,@@@@__,,^^""##==~~..                    
-              ^^@@@@@@@@@@%%##%%@@%%~~                  
-              ++@@@@++;;::..  ,,;;@@%%~~                
-              ..--__              ""@@==                
-                                  ^^@@@@                
-                                ,,++@@==                
-                              ;;%%@@%%,,                
-                          ~~**@@@@%%__                  
-            ......~~^^--##@@@@%%;;..                    
-            @@@@@@@@@@@@@@**~~..                        
-              ::::;;,,..                                
+                                                        
+                                                        
+                                          ..........    
+                    ""******************++@@@@@@@@%%    
+                __--%%@@@@@@@@@@@@@@@@@@@@##++==~~;;    
+              ^^@@@@@@%%@@--,,::"";;,,,,;;..            
+            ;;@@@@;;;;..""~~                            
+            --@@**                                      
+            ++@@;;                                      
+            **@@%%""____                                
+            ::%%@@@@@@@@@@@@@@**;;,,                    
+              ..__;;;;##%%%%@@@@@@%%                    
+                            ..~~**@@__                  
+                                ,,@@^^                  
+                                **@@^^                  
+                ""^^          ::%%@@__                  
+                ::@@%%""~~""++@@@@++                    
+                  ;;@@@@@@@@@@@@""..                    
+                    __**""~~;;                          
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 7</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>26,8%</td><td>0,3%</td><td>12,3%</td><td>17,0%</td><td>6,3%</td><td>1,9%</td><td>6,3%</td><td>37,1%</td><td>2,4%</td><td>9,4%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 37,1% Es sich um eine 7 handelt.
+
+
+<div>
+<pre class="Kasten">label: 2 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                        ,,~~~~~~~~~~~~                  
+                  ::__##%%@@@@@@@@@@@@##;;              
+              ..__%%@@@@@@@@@@@@@@@@@@@@**              
+              __@@@@@@@@@@@@@@@@##%%@@@@@@;;            
+              __@@@@@@@@%%**~~__  ;;@@@@@@%%,,          
+              ,,##@@==""            **@@@@@@;;          
+                                    ==@@@@%%,,          
+                                  ""@@@@@@**            
+                  ::;;;;;;;;;;;;,,==@@@@@@**            
+              __**%%@@@@@@@@@@@@##@@@@@@@@""  ..        
+            --%%@@@@@@@@@@@@@@@@@@@@@@@@@@@@**##;;      
+          ""@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@--::      
+          @@@@@@@@%%"";;^^@@@@@@@@@@@@@@@@##^^          
+          @@@@@@@@__;;~~@@@@@@@@@@@@;;;;,,              
+          ""@@@@@@%%%%@@@@@@@@@@++~~                    
+          ..%%@@@@@@@@@@@@@@++--..                      
+            ""@@@@@@@@##--;;                            
+              __~~~~__                                  
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 6</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>4,6%</td><td>4,7%</td><td>5,6%</td><td>5,2%</td><td>3,0%</td><td>0,9%</td><td>13,6%</td><td>3,7%</td><td>2,3%</td><td>3,0%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 13,6% Es sich um eine 6 handelt.
+
+
+<div>
+<pre class="Kasten">label: 8 
+                                                        
+                                                        
+                                                        
+                                                        
+                          ;;****::                      
+                        ^^@@@@@@%%^^                    
+                      ::@@%%~~__++%%,,                  
+                      ++@@^^    ~~@@==                  
+                    ::@@@@..      ####                  
+                    ::@@--        __##                  
+                    ;;@@;;        ==@@~~                
+                    ##%%        ::@@@@""                
+                    ;;%%        ==@@++                  
+                    ::@@__    ""@@@@,,                  
+                    ^^@@..  ""@@@@~~                    
+                    --%%  __@@@@%%                      
+                    __%%^^@@@@@@@@==                    
+                    ..%%@@@@@@##%%@@--                  
+                    ::@@@@@@;;  __@@%%..                
+                    ::@@@@@@,,  ..@@@@::                
+                    ,,%%@@""    ..@@@@~~                
+                      **@@;;  ::++@@##..                
+                      ;;%%@@%%@@@@@@^^                  
+                        ..--@@%%--""                    
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 8</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>2,6%</td><td>9,2%</td><td>3,4%</td><td>7,5%</td><td>5,5%</td><td>4,1%</td><td>11,8%</td><td>0,9%</td><td>13,0%</td><td>4,2%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 13,0% Es sich um eine 8 handelt.
+
+
+<div>
+<pre class="Kasten">label: 5 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                            ;;====;;    
+                      ,,;;;;,,,,__::;;;;;;%%@@@@@@@@    
+                      ++@@@@@@@@@@@@@@@@@@@@@@@@@@;;    
+                  ^^**@@@@@@@@@@@@@@%%@@++++;;;;,,      
+                ;;@@@@@@@@==""""^^,,..,,                
+                __@@@@@@@@""                            
+                  ,,^^%%@@@@;;                          
+                      ::%%@@##__                        
+                        ==@@@@--                        
+            ;;..        ..@@@@%%                        
+            ##""          ++@@@@~~                      
+            @@;;        ~~@@@@@@~~                      
+            ==@@--~~""++@@@@@@==..                      
+            ""@@@@@@@@@@@@@@~~                          
+              __++@@@@%%;;;;                            
+                  ,,__                                  
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 0</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>22,1%</td><td>1,9%</td><td>5,5%</td><td>4,5%</td><td>4,8%</td><td>5,8%</td><td>6,4%</td><td>9,7%</td><td>3,5%</td><td>2,1%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 22,1% Es sich um eine 0 handelt.
+
+
+<div>
+<pre class="Kasten">label: 6 
+                                                        
+                                                        
+                          ::;;@@@@..                    
+                        ..%%@@@@%%..                    
+                      ::--@@@@@@""                      
+                    ==@@@@@@@@@@__                      
+                  --@@@@@@@@@@~~                        
+                ==@@@@@@@@**__                          
+              ;;@@@@@@@@==                              
+            ::##@@@@@@==..                              
+            ++@@@@@@@@                                  
+          ~~@@@@@@@@""                                  
+          ~~@@@@@@%%,,    ....,,==============,,        
+          ~~@@@@@@##    ^^@@@@@@@@@@@@@@@@@@@@""        
+          ~~@@@@@@@@;;##@@@@@@@@@@@@@@@@@@@@@@##..      
+          ~~@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@~~      
+          ~~@@@@@@@@@@@@@@@@@@@@++;;##@@@@@@@@@@~~      
+            ==@@@@@@@@@@@@@@++~~--##@@@@@@@@@@%%;;      
+            ,,@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@++        
+              ;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@""        
+              ..,,;;++@@@@@@@@@@@@@@@@@@@@##,,          
+                      ~~~~==@@@@@@@@@@**~~,,            
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>4,8%</td><td>3,7%</td><td>3,8%</td><td>11,7%</td><td>18,9%</td><td>1,6%</td><td>3,6%</td><td>13,6%</td><td>4,5%</td><td>4,0%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 18,9% Es sich um eine 4 handelt.
+
+
+<div>
+<pre class="Kasten">label: 3 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+              __%%;;                                    
+              ;;%%@@%%--__..                            
+                ..==%%@@@@%%++__,,                      
+                    ..~~==@@@@@@@@++::                  
+                          ..~~==@@@@**                  
+                            ..__++@@--                  
+                        ,,==%%@@@@++                    
+                    ,,==@@@@++^^,,                      
+                    ++@@==,,                            
+                  ^^@@^^                                
+                  ;;@@##--;;::                          
+                    ^^##@@@@@@##;;..                    
+                      ..,,""==%%@@**                    
+                              ,,**@@                    
+                                ;;@@~~                  
+                                ++@@;;                  
+                              ,,@@@@                    
+                            ,,==@@**                    
+                        ^^""%%@@**..                    
+                        ==@@++;;..                      
                                                         
                                                         
                                                         
@@ -2080,36 +1439,708 @@ Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 33,0% Es sich um eine 9 
 					<td>9</td>
 				</tr>
 <tr>
-<td>3,1%</td><td>0,4%</td><td>0,5%</td><td>17,4%</td><td>0,2%</td><td>8,9%</td><td>1,8%</td><td>1,6%</td><td>1,7%</td><td>5,0%</td></tr></table>
+<td>5,6%</td><td>2,9%</td><td>16,1%</td><td>29,1%</td><td>8,0%</td><td>0,7%</td><td>4,3%</td><td>10,5%</td><td>3,6%</td><td>7,1%</td></tr></table>
 
-Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 17,4% Es sich um eine 3 handelt.
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 29,1% Es sich um eine 3 handelt.
 
 
 <div>
-<pre class="Kasten">label: 6 
+<pre class="Kasten">label: 8 
                                                         
                                                         
                                                         
-                  ..++##                                
-                ..++@@##                                
-              ..++@@@@;;                                
-              ;;@@@@;;                                  
-            ..++@@%%,,                                  
-            ++@@@@;;                                    
-            @@@@@@,,                                    
-            @@@@%%              ,,::::::::::            
-            @@@@%%          ;;==%%@@@@@@@@@@**""..      
-            @@@@%%          ++@@@@++**;;""==@@@@##""    
-            @@@@;;        ;;@@@@==          ^^##@@@@    
-            @@@@++        ==@@@@;;            ^^@@@@    
-            @@@@%%        ==@@@@;;            ^^@@##    
-            @@@@@@,,      ==@@@@--            ^^@@__    
-            ~~@@@@%%__    ..""%%@@**;;        --@@^^    
-              ++@@@@++        ^^%%@@@@__    ,,@@@@__    
-              ..@@@@@@;;,,      ::;;**@@**^^%%@@~~      
-                __++@@@@@@##^^^^^^^^^^==@@@@++..        
-                  __""++@@@@@@@@@@@@@@##""__            
-                        ..""""""""""""..                
+                                                        
+                                                        
+                  ,,""@@@@@@@@@@@@@@**;;                
+                ::++@@@@@@@@@@@@@@@@@@%%~~..            
+                @@@@@@@@@@@@@@@@@@@@@@@@@@""            
+                @@@@@@@@@@@@@@**@@@@@@@@@@@@            
+                ##@@@@@@@@__..  ..,,##@@@@@@            
+                ,,##@@@@@@**~~  ....""@@@@@@            
+                  ;;@@@@@@@@@@""%%@@@@@@@@@@            
+                    ^^++@@@@@@@@@@@@@@@@@@@@            
+                      ^^@@@@@@@@@@@@@@@@##""            
+                        ;;@@@@@@@@@@@@@@;;              
+                        --@@@@@@@@@@@@@@;;              
+                      ;;@@@@@@@@@@@@@@@@;;              
+                    ""@@@@@@@@@@@@@@@@@@;;              
+                  ;;@@@@@@@@@@@@@@@@@@@@;;              
+                ,,##@@@@@@%%__""@@@@@@@@;;              
+                ""@@@@@@@@""..++@@@@@@@@;;              
+                @@@@@@@@@@@@@@@@@@@@@@@@;;              
+                @@@@@@@@@@@@@@@@@@@@++^^                
+                ""@@@@@@@@@@@@@@@@@@^^                  
+                  ""@@@@@@@@@@@@##~~                    
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 7</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>9,6%</td><td>2,4%</td><td>5,2%</td><td>6,4%</td><td>7,9%</td><td>1,7%</td><td>4,2%</td><td>14,5%</td><td>5,7%</td><td>1,1%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 14,5% Es sich um eine 7 handelt.
+
+
+<div>
+<pre class="Kasten">label: 5 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                          ,,,,##@@@@^^                  
+                      ..;;@@@@@@**^^::                  
+                    ;;##@@++__..                        
+                  ::##%%""                              
+                  ##@@""                                
+                ,,%%--                                  
+                ;;@@++..                                
+                ,,%%@@++;;..                            
+                  ^^++@@@@@@**""==^^..                  
+                      __++@@@@@@@@@@%%==,,              
+                            ,,""##==%%@@##              
+                                    ==@@##..            
+                                  ..##@@;;              
+                                  --@@;;                
+                                ,,@@%%__                
+                              ..%%@@^^^^                
+                              __@@++..                  
+                              ++@@;;                    
+                      __^^..**@@""                      
+                      __@@##@@==                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>6,8%</td><td>0,9%</td><td>8,2%</td><td>4,6%</td><td>24,7%</td><td>2,1%</td><td>2,8%</td><td>19,8%</td><td>2,0%</td><td>8,7%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,7% Es sich um eine 4 handelt.
+
+
+<div>
+<pre class="Kasten">label: 9 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                          ^^^^##@@@@@@@@@@^^            
+                    ::==%%@@@@@@@@@@@@@@@@@@""          
+                ..~~%%@@@@@@@@++====##@@@@@@##          
+                __@@@@@@@@--;;..    ""@@@@++::          
+              ::%%@@@@@@__        ..;;@@~~;;            
+              __@@@@@@==        ..++@@@@,,              
+              ##@@@@%%          ~~@@@@@@,,              
+              --@@@@@@^^::^^^^##@@@@@@@@,,              
+              __@@@@@@@@%%@@@@@@@@@@@@@@,,              
+                ==@@@@@@@@@@@@@@@@@@@@##..              
+                  ~~@@++@@@@@@@@@@@@%%""                
+                    __  __;;@@@@@@@@""                  
+                          ==@@@@@@@@::                  
+                        ==@@@@@@@@^^                    
+                      ::@@@@@@@@==                      
+                      ==@@@@@@%%::                      
+                    ""@@@@@@@@~~                        
+                    ==@@@@@@++..                        
+                  ^^@@@@@@**;;                          
+                  ,,@@@@^^                              
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 3</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>4,3%</td><td>1,2%</td><td>5,7%</td><td>30,3%</td><td>4,1%</td><td>0,6%</td><td>2,5%</td><td>9,8%</td><td>1,5%</td><td>3,2%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 30,3% Es sich um eine 3 handelt.
+
+
+<div>
+<pre class="Kasten">label: 8 
+                                                        
+                                                        
+                                                        
+                                                        
+                                  ..**##                
+                        ..~~..    ..==++                
+                  ::""##@@@@@@;;  ..##**                
+                ;;@@@@%%;;;;^^%%""--@@""                
+              ^^@@%%__        ;;%%@@++                  
+              **@@~~          ::@@@@~~                  
+              ::##@@"",,      ^^@@++                    
+                ::++@@@@""::  ##@@,,                    
+                    __++%%@@##@@~~                      
+                        ..##@@@@""                      
+                          ++@@##@@--                    
+                        ~~@@~~  ==@@--                  
+                      ..%%@@,,    ##@@^^                
+                      --@@~~      ,,@@@@                
+                    ..%%++          ""@@,,              
+                    ^^@@::          ;;@@~~              
+                    ^^@@::          __@@==              
+                      ##++__      ,,%%@@__              
+                      ..%%@@@@@@@@@@@@**                
+                        ,,--##@@@@==~~                  
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 6</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>10,6%</td><td>0,3%</td><td>6,7%</td><td>0,8%</td><td>23,6%</td><td>2,1%</td><td>31,3%</td><td>14,5%</td><td>2,9%</td><td>3,2%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 31,3% Es sich um eine 6 handelt.
+
+
+<div>
+<pre class="Kasten">label: 4 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                        ..##@@^^        
+                  ;;%%~~                ;;@@@@^^        
+                ..%%@@@@..              ==@@@@^^        
+                ,,@@@@@@;;            ;;%%@@@@^^        
+                ::@@@@@@@@^^          ^^@@@@@@**        
+              ,,##@@@@@@--          ~~@@@@@@@@^^        
+              **@@@@@@@@..          ~~@@@@@@@@::        
+          ,,--@@@@@@@@++            %%@@@@@@==          
+          ;;@@@@@@@@@@**          ^^@@@@@@##            
+        ++@@@@@@@@@@@@@@##__      %%@@@@@@==            
+        %%@@@@@@@@@@@@@@@@%%**~~::@@@@@@@@~~            
+        **@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@##;;            
+        **@@@@;;^^^^==@@@@@@@@@@@@@@@@@@^^              
+                        ::--@@@@@@@@@@@@""              
+                            ,,++@@@@@@##,,              
+                            ~~@@@@@@##^^                
+                          ::%%@@@@@@^^                  
+                          ;;@@@@@@@@                    
+                          ..++@@%%~~                    
+                            ..^^::                      
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 7</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>5,9%</td><td>5,0%</td><td>13,8%</td><td>12,6%</td><td>1,5%</td><td>0,9%</td><td>4,0%</td><td>18,9%</td><td>9,0%</td><td>9,4%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 18,9% Es sich um eine 7 handelt.
+
+
+<div>
+<pre class="Kasten">label: 5 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                            ::;;##%%    
+                                      ..~~++@@@@--,,    
+                                ..::##@@@@@@**;;        
+                          ..__^^##@@@@++""::            
+                          ==@@@@%%++""                  
+                        ""%%@@^^                        
+                    ..++@@##__                          
+                  ;;##@@**..                            
+                  ~~@@##                                
+                  ~~@@==                                
+                  ~~@@%%..                              
+                    ==@@%%;;                            
+                      ;;@@%%::                          
+                        __@@""                          
+                        ..@@""                          
+                        ==@@__                          
+                      ~~@@==                            
+                    __@@@@;;                            
+                  ::@@@@::                              
+                  ~~%%;;                                
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 0</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>26,2%</td><td>1,3%</td><td>10,4%</td><td>8,1%</td><td>12,6%</td><td>5,9%</td><td>16,2%</td><td>9,0%</td><td>3,6%</td><td>3,9%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 26,2% Es sich um eine 0 handelt.
+
+
+<div>
+<pre class="Kasten">label: 5 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                        ;;^^^^^^  ::^^^^^^^^^^^^^^::    
+                    ;;**@@@@@@@@%%%%@@@@@@@@@@@@@@%%    
+                  ^^@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@==    
+                ;;@@@@@@@@@@@@@@@@@@@@@@%%****~~::      
+                **@@@@@@@@@@@@@@@@%%;;;;::              
+                %%@@@@@@@@@@@@@@;;::                    
+                ++@@@@@@@@@@@@@@~~..                    
+            ;;~~  ""%%@@@@@@@@@@@@--                    
+            **@@--    __;;@@@@@@@@@@--                  
+            @@@@--        __++@@@@@@@@,,                
+            **@@@@^^        ..@@@@@@@@^^                
+            **@@@@^^          ;;@@@@@@++..              
+            ;;@@@@##^^;;::____~~@@@@@@##..              
+            ..@@@@@@@@@@%%@@@@@@@@@@@@==..              
+              ;;%%@@@@@@@@@@@@@@@@@@%%~~                
+                ""@@@@@@@@@@@@@@%%--::                  
+                  ""##########--::                      
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>13,2%</td><td>1,6%</td><td>1,6%</td><td>5,6%</td><td>24,9%</td><td>3,8%</td><td>8,1%</td><td>18,2%</td><td>1,4%</td><td>0,8%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 24,9% Es sich um eine 4 handelt.
+
+
+<div>
+<pre class="Kasten">label: 8 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                        ""@@@@@@@@@@""..                
+                      ==%%##--;;==@@@@++..              
+                    ;;@@@@++^^    ::%%@@^^              
+                ..;;@@@@@@%%@@""    ;;@@==              
+              ..##@@##;;,,..,,..    ^^@@==              
+              ==@@%%..              ##@@~~              
+              ==@@##::            ==@@==                
+              ^^@@@@@@""        ==@@++                  
+                ^^@@@@@@++~~..++@@**::                  
+                  ""++@@@@%%##@@@@::                    
+                      ::++@@@@@@::                      
+                        ++@@@@@@@@;;                    
+                      __@@--,,##@@%%~~                  
+                      %%@@""  ..%%@@##..                
+                    ,,@@++      ~~@@@@**                
+                    __@@__        --@@@@;;              
+                    ""@@__        ~~@@%%,,              
+                    __@@%%~~__""##@@@@##                
+                    ..%%@@@@@@@@@@@@%%;;                
+                      ,,;;@@@@@@--__..                  
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>14,6%</td><td>2,4%</td><td>3,1%</td><td>2,8%</td><td>29,9%</td><td>2,2%</td><td>29,3%</td><td>10,8%</td><td>2,6%</td><td>5,9%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 29,9% Es sich um eine 4 handelt.
+
+
+<div>
+<pre class="Kasten">label: 9 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                              ,,##==                    
+                            ##%%@@%%;;                  
+                          ^^@@@@@@@@--                  
+                      ::%%@@**;;@@@@;;                  
+                    ::%%@@;;  ^^@@**                    
+                    **@@**    ##@@^^                    
+                  ~~@@**..  **@@@@^^                    
+                  **@@^^::++@@@@@@^^                    
+                  @@@@@@@@@@**==@@^^                    
+                  ;;@@@@%%__  **@@^^                    
+                    ::;;      ##@@^^                    
+                              ##@@^^                    
+                              ##@@__                    
+                              ##@@..                    
+                              ##@@..                    
+                              ##++                      
+                              ##**;;;;                  
+                              ##@@@@;;                  
+                              ##@@^^                    
+                              ==**                      
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 3</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>9,4%</td><td>1,7%</td><td>8,8%</td><td>25,3%</td><td>4,2%</td><td>1,5%</td><td>8,3%</td><td>11,6%</td><td>2,4%</td><td>25,0%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 25,3% Es sich um eine 3 handelt.
+
+
+<div>
+<pre class="Kasten">label: 2 
+                                                        
+                                                        
+                                                        
+                                                        
+                          ,,;;==@@@@@@##__              
+                    ::;;==@@@@@@@@@@@@@@;;              
+              ..""++@@@@@@@@@@@@@@@@@@##,,              
+              ""@@@@@@@@@@@@@@@@@@@@%%,,                
+              **@@@@@@%%##==##@@@@@@@@^^                
+              ;;~~++""..      ~~##@@@@##,,              
+                                ..@@@@@@==              
+                                  ++@@@@@@              
+                                  ""@@@@@@              
+                                  ~~@@@@@@              
+                    ::""++++""..  %%@@@@##              
+              ,,^^%%@@@@@@@@@@%%##@@@@@@;;              
+              --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@==        
+            ""@@@@@@@@++~~++%%@@@@@@@@@@@@@@##__        
+            ==@@@@@@==      ==@@@@@@@@##==^^..          
+            ==@@@@%%      ""@@@@@@@@;;..                
+            ==@@@@%%..;;**@@@@@@@@::                    
+            ;;@@@@@@@@@@@@@@@@==::                      
+              ""@@@@@@@@@@@@==                          
+                ""@@@@##;;..                            
+                                                        
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 4</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>13,0%</td><td>6,0%</td><td>5,6%</td><td>2,8%</td><td>15,4%</td><td>5,4%</td><td>3,2%</td><td>10,1%</td><td>1,0%</td><td>2,8%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 15,4% Es sich um eine 4 handelt.
+
+
+<div>
+<pre class="Kasten">label: 8 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                        ;;@@@@@@@@@@--,,                
+                    ::%%@@@@@@@@@@@@@@@@__              
+                  ::==@@@@@@@@@@@@@@@@@@@@;;            
+                  --@@@@@@@@@@++@@@@@@@@@@%%,,          
+                ,,@@@@@@@@""::##@@@@**==@@@@--          
+                ^^@@@@@@==  ^^@@@@@@__  ^^--;;          
+                ^^@@@@@@==..##@@@@%%::                  
+                ..++@@@@%%##@@@@@@~~                    
+                  ;;@@@@@@@@@@@@++                      
+                    ""@@@@@@@@@@++..                    
+                    ::%%@@@@@@@@@@==..                  
+                    ~~@@@@@@@@@@@@@@~~                  
+                  ..**@@@@%%##@@@@@@++                  
+                  ~~@@@@@@--..##@@@@%%__                
+                  ~~@@@@@@,,  ^^@@@@@@##                
+                  ~~@@@@==    ;;@@@@@@##                
+                  ~~@@@@==....;;@@@@@@++                
+                  ~~@@@@@@@@@@@@@@@@%%,,                
+                  ~~@@@@@@@@@@@@@@@@""                  
+                  ::==@@@@@@@@@@##,,                    
+                                                        
+                                                        
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 6</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>20,8%</td><td>7,4%</td><td>2,7%</td><td>1,3%</td><td>14,0%</td><td>5,1%</td><td>21,1%</td><td>6,1%</td><td>4,5%</td><td>5,1%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 21,1% Es sich um eine 6 handelt.
+
+
+<div>
+<pre class="Kasten">label: 9 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                        ..;;--**--::                    
+                      ""%%@@@@@@@@##--                  
+                ;;==@@%%++--  ;;,,--@@~~                
+              ;;++%%""..            ""@@..              
+            ,,%%__,,                  ++....            
+            --**                      ..;;;;            
+            --""                      ~~@@;;            
+            ;;++::                ..==@@##              
+            ;;@@%%~~..      ,,..==%%%%"";;              
+            ..**@@@@@@##@@==@@@@##;;::~~::              
+                ;;++@@@@@@@@@@""      **..              
+                    ;;~~::__        ::%%                
+                                    ""==                
+                                    ""==                
+                                    ""==                
+                                    ""==                
+                                    ""==                
+                                    __~~                
+                                    "";;                
+                                    ____                
+                                                        
+</pre>
+</div>
+
+
+
+<H2 style="color:red;">Prediction 0</H2>
+
+<table>
+				<tr>
+					<td>0</td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+				</tr>
+<tr>
+<td>46,5%</td><td>0,9%</td><td>13,2%</td><td>1,9%</td><td>19,9%</td><td>1,8%</td><td>10,5%</td><td>10,3%</td><td>0,9%</td><td>2,4%</td></tr></table>
+
+Das Netzwerk denkt dass mit der Wahrscheinlichkeit von: 46,5% Es sich um eine 0 handelt.
+
+
+<div>
+<pre class="Kasten">label: 2 
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        
+                    ::;;;;;;;;::..                      
+                  ,,@@##++%%@@@@%%++__                  
+                  __%%    ..,,,,""++@@++::              
+                  ::##..            ::**@@""            
+                                        --@@::          
+                                          ++**          
+          __====@@@@@@@@====__,,        ::%%--          
+        ::@@++%%;;====~~====@@@@++^^  ,,**##..          
+        --%%                ;;;;##@@%%%%@@__            
+        ~~@@..                ::""@@@@@@@@^^            
+          %%==;;;;;;;;;;%%%%%%##;;^^;;__@@@@^^..        
+          ..^^++++##++++;;~~,,          ,,++%%%%        
+                                          ~~@@++        
+                                            ,,..        
+                                                        
+                                                        
                                                         
                                                         
                                                         
