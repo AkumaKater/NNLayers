@@ -43,6 +43,8 @@ public class Main {
         .printMatrix(Arrays.copyOfRange(mBuffer.getTestData(), 1, 20), nn);
 
         html.writeHTML("Visualization.html");
+
+        html = new MNISTHTML().log("PerormanceNotes.html", accTrain, accTest);
         
     }
 

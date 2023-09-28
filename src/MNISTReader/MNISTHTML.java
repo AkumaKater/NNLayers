@@ -9,10 +9,10 @@ import java.util.LinkedList;
 
 import FFNetwork.ConfigLoader;
 import FFNetwork.NeuralNetwork;
-import JanNN.NNUtil;
 
 public class MNISTHTML {
     String html;
+    String log;
     LinkedList<String> endTags = new LinkedList<String>();
 
     public static void main(String[] args) {
@@ -36,6 +36,33 @@ public class MNISTHTML {
                 .tag("a", "href=\"#Test Daten\"")
                 .text("Test Daten")
                 .end();
+
+        return this;
+    }
+
+    public MNISTHTML log(String file, String accTrain, String accTest) {
+        File f = new File(file);
+        if (f.exists() && !f.isDirectory()) {
+            html = "";
+        } else {
+            String[] erg = { "HLayersSizes", "DataSize", "Epochen", "BatchSize", "Learnrate", "ACtrainingD",
+                    "ACtestD" };
+                    tag("table").tr(erg);
+        }
+        ConfigLoader conf = ConfigLoader.getConfig();
+        String[] con = { Arrays.toString(conf.getLayers()), "" + conf.getSplitIndex(),
+                "" + conf.getTrainingCycles(),
+                "" + conf.getBatchSize(), "" + conf.getLearnRate(), accTrain, accTest };
+        tr(con);
+
+        try {
+            FileWriter writer = new FileWriter(file, true);
+            writer.write(getHtml());
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Fehler beim Schreiben in die Datei.");
+        }
 
         return this;
     }
@@ -100,8 +127,8 @@ public class MNISTHTML {
     }
 
     public MNISTHTML h2(String title) {
-        tag("a", "name=\""+title+"\"").end()
-        .tag("h2");
+        tag("a", "name=\"" + title + "\"").end()
+                .tag("h2");
         html += title;
         end();
         return this;
