@@ -114,7 +114,7 @@ public class Layer {
                     double e = weights.getValue(i, j) - costGradientW.getValue(j, i)*learnrate;
                     weights.setValue(i, j, e);
                 }
-                double e = biases.getValue(i) - costGradientB.getValue(i)*learnrate;
+                double e = 0;//biases.getValue(i) - costGradientB.getValue(i)*learnrate;
                 biases.setValue(i, e);
             }
 

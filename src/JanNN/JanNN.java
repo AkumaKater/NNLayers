@@ -18,7 +18,7 @@ public class JanNN {
         int splitIndex = 60000; // 60.000
         int TrainingCycles = 1;
         double learnRate = 0.25;
-        int BatchSize = 50;
+        int BatchSize = 1;
         NeuralNetwork nn = new NeuralNetwork(learnRate, 784, 300, 100, 10);
         
         DecimalFormat df = new DecimalFormat("0.00");
