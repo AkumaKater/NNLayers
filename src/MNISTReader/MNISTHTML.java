@@ -40,8 +40,10 @@ public class MNISTHTML {
         return this;
     }
 
-    public MNISTHTML log(String file, String accTrain, String accTest) {
-        File f = new File(file);
+    public MNISTHTML log(String accTrain, String accTest) {
+        ConfigLoader conf = ConfigLoader.getConfig();
+        File f = new File(conf.getValue("PerformanceNotes"));
+        System.out.println(f.getAbsolutePath());
         if (f.exists() && !f.isDirectory()) {
             html = "";
         } else {
@@ -49,14 +51,13 @@ public class MNISTHTML {
                     "ACtestD" };
                     tag("table").tr(erg);
         }
-        ConfigLoader conf = ConfigLoader.getConfig();
         String[] con = { Arrays.toString(conf.getLayers()), "" + conf.getSplitIndex(),
                 "" + conf.getTrainingCycles(),
                 "" + conf.getBatchSize(), "" + conf.getLearnRate(), accTrain, accTest };
         tr(con);
 
         try {
-            FileWriter writer = new FileWriter(file, true);
+            FileWriter writer = new FileWriter(f, true);
             writer.write(getHtml());
             writer.close();
         } catch (IOException e) {
@@ -151,9 +152,10 @@ public class MNISTHTML {
         return html;
     }
 
-    public void writeHTML(String FileName) {
-        File file = new File(FileName);
+    public void writeHTML() {
+        File file = new File(ConfigLoader.getConfig().getValue("Visualization"));
         try {
+             System.out.println(file.getAbsolutePath());
             FileWriter writer = new FileWriter(file);
             writer.write(getHtml());
             writer.close();

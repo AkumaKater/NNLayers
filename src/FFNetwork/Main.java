@@ -11,7 +11,7 @@ import MNISTReader.MnistMatrix;
 public class Main {
 
     public static void main(String[] args) throws Exception{
-        ConfigLoader config = new ConfigLoader();
+        ConfigLoader config = ConfigLoader.getConfig();
         int splitIndex = config.getSplitIndex(); // 60.000
         int TrainingCycles = config.getTrainingCycles();
         int BatchSize = config.getBatchSize();
@@ -38,13 +38,13 @@ public class Main {
         .h1("Visualisierung der Netzwerk Ergebnisse")
         .setHeader(accTrain, accTest)
         .h2("Trainings Daten")
-        .printMatrix(mBuffer.getBatch(20), nn)
+        .printMatrix(Arrays.copyOfRange(mBuffer.getTrainingsData(), 1, 20), nn)
         .h2("Test Daten")
         .printMatrix(Arrays.copyOfRange(mBuffer.getTestData(), 1, 20), nn);
 
-        html.writeHTML("Visualization.html");
+        html.writeHTML();
 
-        html = new MNISTHTML().log("PerormanceNotes.html", accTrain, accTest);
+        html = new MNISTHTML().log(accTrain, accTest);
         
     }
 

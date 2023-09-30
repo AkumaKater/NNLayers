@@ -1,6 +1,7 @@
-LayerSizesd=780,300,100,10
-LayerSizes=780,10
+LayerSizes=780,100,10
 SplitIndex=60000
 TrainingCycles=1
-LearnRate=0.25
+LearnRate=0.025
 BatchSize=1
+PerformanceNotes=PerormanceNotes(LearnRate025).html
+Visualization=Visualization.html

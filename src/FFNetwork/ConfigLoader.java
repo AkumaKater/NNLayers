@@ -16,6 +16,7 @@ public class ConfigLoader {
     private String[] mapValues;
 
     private static ConfigLoader config;
+    HashMap<String, String[]> map;
 
     public static void main(String[] args) {
        ConfigLoader cl = new ConfigLoader();
@@ -33,7 +34,7 @@ public class ConfigLoader {
     }
 
     public ConfigLoader() {
-        HashMap<String, String[]> map = getPropertys();
+        map = getPropertys();
 
         setSplitIndex(map.get("SplitIndex")[0]);
         setTrainingCycles(map.get("TrainingCycles")[0]);
@@ -106,5 +107,8 @@ public class ConfigLoader {
 
     public String[] getMapValues() {
         return mapValues;
+    }
+    public String getValue(String key){
+        return map.get(key)[0];
     }
 }
