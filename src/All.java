@@ -9,7 +9,7 @@ public class All {
         filePath = "Obsidian/Notes/Projektarbeit/Texte/Einleitung.md";
         double AktWrtCntEinleitung = WordCounter.countWords(filePath)-12;
 
-        double WrtCntGestern = AktWrtCntEinleitung + 2856 +274+478+328+1014+1047.0;
+        double WrtCntGestern = AktWrtCntEinleitung + 2856 +274+478+328+1014+1047.0+1337.0;
         double WrtCntHeute = AktWrtCntMathematischeGrundlagen-WrtCntGestern + AktWrtCntEinleitung;
         double[] WrtCntArray = {AktWrtCntMathematischeGrundlagen, AktWrtCntEinleitung};
         double WrtCnt = 0;

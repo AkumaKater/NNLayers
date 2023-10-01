@@ -1,112 +1,168 @@
-## Kettenregel für 2 Schichten
-Nun versuchen wir die Ableitung an dem Netzwerk. Zur Erinnerung, so sah unser kleines hypothetisches Netzwerk aus:
+## Learn Algorithmus
 
-![[Pasted image 20230912184748.png]]
-
-wir wollen uns erstmal nur auf den letzten Knoten mit seinem Input konzentrieren. Die frage ist, **wie verändert sich der Fehler des Netzwerks, wenn ich** **w<sub>2</sub>** **anpasse?**
-Wir fangen am besten damit an, jede unabhängige Rechnung aufzuschreiben:
-die erste Rechnung, in der w<sub>2</sub> vorkommt, ist die Multiplikation mit den Outputs aus der versteckten Schicht.
-![[Pasted image 20230920001258.png]]
-Diese wird an die Schwellwert Funktion *A* gegeben:
-![[Pasted image 20230920001519.png]]
-und danach wird das Ergebnis an die Cost Funktion gegeben:
-![[Pasted image 20230920001633.png]]
-
-Es ist ersichtlich, dass w<sub>2</sub> nicht direkt in der Cost Funktion vorkommt. Wie also ist es möglich, die Ableitung der Cost Funktion im Bezug auf die Gewichte zu bilden?
-![[Pasted image 20230920001956.png]]
-
-Hier kommt die Kettenregel ins Spiel. Es ist möglich, die Abhängigkeiten der Reihe nach aufzuschreiben, und miteinander zu Multiplizieren. 
-Wir fangen mit Z<sub>2</sub> im Bezug auf w<sub>2</sub> an, multiplizieren dies mit a<sub>2</sub> im Bezug auf Z<sub>2</sub> und schließlich Multiplizieren wir c im Bezug auf a<sub>2</sub>.
-
-![[Pasted image 20230920235108.png]]
-
-Das dies durchaus möglich ist kann man daran erkenne, dass wenn man die einzelnen Komponenten der Brüche wegkürzt, tatsächlich 
-![[Pasted image 20230920001956.png]]  
-übrig bleibt.
-Nun können wir die Einzelnen Komponenten unabhängig voneinander Ableiten, das heißt dass wir im Code eine Große Flexibilität erhalten haben.
-
-## Kettenregel für 3 Schichten
-Nun sehen wir uns mal an, was passiert, wenn man eine Schicht hinzufügt. Wie man die Ableitung bildet, um die Änderungsrate im Bezug auf w<sub>2</sub> zu berechnen haben wir im Letzten Kapitel gesehen. Wie würden wir also eine Ableitung bilden, welche uns die Änderungsrate im Bezug auf w<sub>1</sub> berechnet?
-Wir suchen:
-
-![[Pasted image 20230920181830.png]]
-
-Dazu müssen wir zuerst alle Rechnungen im Gesamten Netzwerk angeben.
-
-![[Pasted image 20230912184748.png]]
-
-Wir Stellen die Einzelnen Rechnungen auf:
-![[Pasted image 20230920180830.png]]   Input in das Netz mit dem zugeteilten Gewicht multipliziert
-![[Pasted image 20230920180912.png]]  Schwellwert Funktion (Sigmoid)
-![[Pasted image 20230920001258.png]]   Output der versteckten Schicht mit dem zugeteilten Gewicht  multipliziert
-![[Pasted image 20230920001519.png]]   Letzte Schwellwert Funktion (Sigmoid)
-![[Pasted image 20230920001633.png]]   Cost Funktion
-
-Und nun zum Grundgedanken der Kettenregel zurück. Das Ziel ist es, die Änderungsrate der Cost Funktion (hier c) im Bezug auf Änderungen an den Gewichten der ersten versteckten Schicht zu ermitteln. Das heißt wie hängt *dc* von *dw* ab?
-
-![[Pasted image 20230920181830.png]]
-
-c ist abhängig von a<sub>2</sub>, welches wiederum abhängig ist von Z<sub>2</sub>, dieses von a<sub>2</sub>, dieses ist abhängig von a, dieses wieder von w<sub>1</sub>, also dem Ende unsere Untersuchung.
-
-![[Pasted image 20230920212443.png]]
-
-Es ist an dieser Stelle anzumerken, dass im Vergleich zur Cost in Abhängigkeit von w<sub>2</sub>, die Abhängigkeit von Z<sub>2</sub> nicht mehr w<sub>2</sub> ist, sondern a<sub>2</sub>. Das liegt daran, dass wir uns bereits um w<sub>2</sub> in der vorherigen Ableitung gekümmert haben.
-Hier wird ersichtlich, dass sich durch das hinzunehmen einer weiteren Schicht 2 Terme zu der Ableitung hinzugefügt wurden. das sind die Terme ![[Pasted image 20230920213957.png]] in Abhängigkeit zu ![[Pasted image 20230920214053.png]], als auch ![[Pasted image 20230920214208.png]] in Abhängigkeit von ![[Pasted image 20230920214238.png]]. 
-Und genau so wird das für jede weitere Schicht sein, denn Jede Schicht verarbeitet zwei Rechnungen, und zwar das Anwenden der Gewichte, und die Schwellwert Funktion.
-
-## Backpropagation
-Kommen wir nun zum Abschluss der Learn Methode. Alle bisherigen Erkenntnisse Gipfeln im Backpropagation Algorithmus. Wie der Name vermuten lässt, handelt es sich um einen Algorithmus, der unser Netzwerk zurückverfolgt, das heißt er fängt hinten an, und Arbeitet sich nach vorne vor. 
-Wie wir im letzten Kapitel gesehen haben, ist die Ableitung der letzten Schicht im Bezug zu den letzten Gewichten im Netz die kleinste Formel. 
-
-![[Pasted image 20230920235100.png]]
-
-![[Pasted image 20230920212443.png]]
-
-Die ersten beiden Terme sind zudem gleich, und der letzte Term ist ebenfalls nahezu gleich. Lediglich die zwei Terme dazwischen werden mit jeder Schicht hinzugefügt. Wir werden also versuchen einen Algorithmus zu schreiben, welcher zunächst einmal nur die ersten beiden Terme für die Output Schicht errechnet, diese dann zurückgibt, sodass sie an die vorherige Schicht gegeben werden können. Danach muss das Ergebnis, welches wir von hier an NodeValues nennen, mit dem letzten Term verrechnet werden. Auch der letzte Term muss von jeder Schicht mit den jeweils eigenen Werten gerechnet werden, daher ist das auch der letzte Schritt. 
-
-Als erstes betrachten wir die Ableitung der Cost Funktion:
-![[Pasted image 20230921000346.png]]
-So ungefähr verlief die Rechnung:
-Cost(Targets, Outputs) = (Targets - Outputs)² 
-
-Es gibt eine verallgemeinerte Formel, mit der man recht schnell Simple Ableitungen bilden kann:
-
-![[Pasted image 20230921004843.png]]
-
-also wäre demnach die Ableitung der Cost Funktion:
-
-![[Pasted image 20230921004959.png]]
-
-Diese Formel kann man in der Layer Klasse umsetzten:
-
-```Java
-private double NodeCostDerivative(double activation, double expectedOutput) {
-    return 2*(activation - expectedOutput);
+Wir fangen nun mit der Learn Methode an.
+ ```java 
+// Training
+public void learn(MnistMatrix data) {
+	UpdateAllGradients(data);
+	ApplyAllGradients(this.learnRate);
+	ClearAllGradients();
 }
 ```
 
-Jetzt wollen wir uns die Ableitung der Sigmoid Funktion ansehen, also das Ergebnis von
-![[Pasted image 20230921002631.png]]
-die Ableitung so zu bilden, wie wir es zuvor gemacht haben, ist recht aufwendig, daher können wir uns einfach auf das Ergebnis anderer Mathematiker verlassen.
-Die Sigmoid Funktion:
-![[Pasted image 20230918125041.png]]
-Und ihre Ableitung:
-![[Pasted image 20230921001429.png]]
+UpdateAllGradients() wird die Methode sein, in der die Rechnungen aus dem letzten Kapital angewandt werden. Der Name kommt daher, dass die Ergebnisse der Rechnungen nicht sofort mit den Gewichten verrechnet werden, sondern zunächst als Steigung (Gradient) gespeichert wird. Dies liegt daran, dass später noch die Batches hinzukommen. Dabei handelt es sich um ein Konzept, bei dem der Durchschnitt mehrerer Berechnungen  als Änderung an den Gewichten verwendet wird. Für den Moment und zu Demonstrationszwecken gehen wir noch nicht im Code darauf ein. Es werden die Grundvoraussetzungen dennoch bereits jetzt geschaffen, um uns später Arbeit zu ersparen.
 
-Daraus lässt sich eine Einfach Methode bauen, die wir dann aufrufen können. Wir fügen die Methode ActivationDerivative(double weightedInput) in unserer Sigmoid Klasse hinzu.
+ApplyAllGradients() wird dazu verwendet, um die Gradients mit den Gewichten zu verrechnen. 
+ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Nächsten Rechnungen vorgenommen werden können.
 
-```Java
-class Sigmoid extends Activation{
-    //Die Sigmoid Funktion
-    public double ActivationFunction(double weightedInput) {
-        return 1.0 / (1 + Math.exp(-weightedInput));
-    }
-    //Die Ableitung der Sigmoid Funktion
-    public double ActivationDerivative(double weightedInput) {
-        double activation = ActivationFunction(weightedInput);
-        return activation * (1.0 - activation);
+### UpdateAllGradients
+
+Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil-Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu Ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
+
+![[Pasted image 20230921231251.png]]
+
+Mit anderen Worten, die NodeValues werden mit den unveränderten Inputs in die Outputschicht multipliziert.
+
+Wie werden dann alle Gewichte einer jeden versteckten Schicht berechnet? 
+Wie oben bereits beschrieben, werden für jede versteckte Schicht zwei Rechnungen zwischengeschoben, das sind jeweils die Ableitung für die Gewichtung in Bezug zu den Activations, sowie die Activations im Bezug zu den Gewichteten Inputs der vorherigen Schicht. Da die ersten Beiden Terme sich von der ersten Berechnung nicht unterscheiden, werden sie am besten wiederverwendet. Das heißt, sie sind ja bereits als NodeValues, also dem Ergebniss der CalculateOutputLayerNodeValues() Methode gespeichert. Daher übergeben wir die NodeValues der Methode CalculateOutputLayerNodeValues(), und übergeben sie der Methode CalculateHiddenLayerNodeValues(). Genau wie zuvor lassen wir uns die Ergebnisse als NodeValues übergeben, und speichern sie zwischen. Und genau wie zuvor, müssen sie noch mit der Ableitung der Gewichteten Inputs verrechnet werden, das heißt mit den ungewichteten Inputs der vorherigen Schicht.
+Dieser Schritt mit den CalculateHiddenLayerNodeValues() lässt sich in einer Schleife leicht auf alle Schichten Anwenden.
+
+Im Code sieht das dann so aus:
+```java
+void UpdateAllGradients(MnistMatrix dataPoint) {
+    Querry(dataPoint.getInputs());
+
+    Layer outputLayer = layers[layers.length - 1];
+    double[] nodeValues = 
+    outputLayer.CalculateOutputLayerNodeValues(dataPoint.getTargets());
+    outputLayer.UpdateGradients(nodeValues);
+
+    for (int index = layers.length - 2; index >= 0; index--) {
+        Layer hiddenLayer = layers[index];
+        nodeValues = 
+	        hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1], nodeValues);
+            hiddenLayer.UpdateGradients(nodeValues);
     }
 }
 ```
 
-Die Sigmoid Funktion und ihre Ableitung benötigen die Gewichteten Inputs als Eingabe Parameter. Diese werden wären der Querry berechnet und werden zwischengespeichert. In der Methode CalculateOutputs in der Layer Klasse werden die Inputs zuerst mit den Gewichten Multipliziert, das Ergebnis wird zwischengespeichert, und anschließend wird die Schwellwert Funktion verwendet. 
+Und so sieht also der Backpropagation Algorithmus aus. Man fängt bei der letzten Schicht, der Output Schicht an, und passt die Gewichte an. Dann geht es weiter zur vorletzten Schicht und so weiter, bis zur Input Schicht. Die Gewichte werden sozusagen von Hinten nach vorne angepasst.
+Kommen wir nu zur Implementierung der CalculateOutputLayerNodeValues() und CalculateHiddenLayerNodeValues() Methoden.
+
+### CalculateOutputLayerNodeValues
+
+Sowohl die CalculateOutputLayerNodeValues() Methode, als auch die CalculateHiddenLayerNodeValues() Methode werden in der Layer Klasse implementiert.
+Die ersten NodeValues, die für die Output Schicht berechnet werden, entsprechen der Multiplikation aus der Ableitung der Cost Funktion und der Ableitung der Schwellwert Funktion der Output Schicht.
+Die NodeValues werden danach zurückgegeben.
+```java
+public double[] CalculateOutputLayerNodeValues(double[] expectedOutputs) {
+    double[] nodeValues = new double[expectedOutputs.length];
+    for (int i = 0; i < nodeValues.length; i++) {
+        double costDerivative = CostAbleitung(activations[i], expectedOutputs[i]);
+        double activationAbleitung = 
+	 Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
+        nodeValues[i] = activationAbleitung * costDerivative;
+    }
+    return nodeValues;
+}
+```
+In der Aufrufenden Methode, UpdateAllGradients(), werden die NodeValues zwischengespeichert, und danach direkt an die Methode UpdateGradients() der Output Schicht weitergegeben. Dort werden sie mit den Ungewichteten Inputs verrechnet, wodurch die erste Matrix entsteht, welche die Änderungen an den Gewichten enthält, die noch nicht mit den Gewichten verrechnet wurden.
+
+```java
+public void UpdateGradients(double[] nodeValues) {
+    for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+        for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];                CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+        }
+    }
+}
+```
+Das Array CostSteigungW muss außerdem ebenfalls in der Klasse Layer festgehalten werden. Hier werden die Anpassungen, die wir mithilfe der Kettenregel ausrechnen abgespeichert, bevor sie mit den Gewichten verrechnet werden.
+
+```java
+public class Layer {
+
+    int numInputNodes, numOutputNodes;
+    double[][] weights;
+    //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
+    double[][] CostSteigungW;
+
+    double[] inputs;
+    double[] weightedInputs;
+    double[] activations;
+```
+### CalculateHiddenLayerNodeValues
+
+Nun sehen wir uns an, wie die Anpassungen an den Gewichten in den Versteckten Schichten berechnet werden.
+```java
+
+public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
+    double[] newNodeValues = new double[numOutputNodes];
+    Activation ac = Activation.geActivation();
+    for(int i=0; i < numOutputNodes; i++){
+        for(int j=0; j < nodeValues.length; j++){
+            newNodeValues[i] += nodeValues[j]*oldLayer.weights[j][i];
+        } 
+        newNodeValues[i] *= ac.ActivationAbleitung(weightedInputs[i]);
+    return newNodeValues;
+}
+```
+Die Gewichte der vorherigen Schicht und die NodeValues, die übergeben wurden werden mithilfe des Punkt Produkt verrechnet. Die Schicht, die zuvor berechnet wurde, muss in den Übergabe Parametern mitgegeben werden, und wird hier OldLayer genannt. Wenn wir gerade die Methode das erste mal aufrufen, dann wurde die Output Schicht bereits von der Methode CalculateOutputLayerNodeValues() berechnet und muss als OldLayer an diese Methode übergeben werden.
+Bei dem Punkt Produkt muss auf die Dimensionen der Gewichts-Matrix geachtet werden. In unserem Netzwerk wurde diese Matrix Transponiert aufgebaut, das heißt dass die Werte Senkrecht mit den Werten der vorherigen NodeValues verrechnet werden müssen.
+
+Auch diese Methode gibt wieder NodeValues zurück, welche in der aufrufenden Methode mit den ungewichteten Inputs dieser Schicht verrechnet werden müssen, und somit die Anpassungen berechnen, die an den Gewichten vorgenommen werden müssen. Falls es weitere versteckte Schichten gibt, werden die NodeValues weitergereicht, womit sich viele aufrufe und Rechnungen sparen lassen.
+
+
+### ApplyAllGradients
+
+In dieser Methode werden alle Anpassungen, die wir zuvor ausgerechnet haben, und die dem 2D Array CostSteigungW gespeichert wurden, mit den Gewichten verrechnet. Im NeuralNetwork Skript wird über alle Schichten iteriert:
+
+```java
+private void ApplyAllGradients(double learnrate) {
+    for (Layer layer : layers) {
+        layer.ApplyGradient(learnrate);
+    }
+}
+```
+
+Und in der Layer Klasse werden sie verrechnet:
+
+```java
+public void ApplyGradient(double learnrate) {
+    for(int i=0; i<numOutputNodes;i++){
+        for(int j=0; j<numInputNodes;j++){
+            weights[i][j] -= CostSteigungW[j][i]*learnrate;
+        }
+    }
+}
+```
+Wichtig zu beachten ist hier, dass die Steigung der Cost Funktion, die wir ausgerechnet haben, also die Anpassung an den Gewichten von den Gewichten *abgezogen* wird. Wenn die Steigung nämlich Positiv ist, dann läge der Tiefpunkt in entgegengesetzter Richtung, wenn sie negativ ist, liegt der Tiefpunkt voraus.
+
+![[Pasted image 20230917195146.png]]
+[Quelle](https://vzahorui.net/optimization/gradient-descent/)
+
+Um es an einem Beispiel zu verdeutlichen, die Steigung in Punkt A ist positiv. Daher müsste man die Steigung von den Gewichten abziehen, um näher an den Tiefpunkt zu gelangen. In Punkt F ist die Steigung negativ, und muss daher ebenfalls abgezogen werden, wodurch das Gewicht vergrößert wird.
+
+### ClearAllGradients
+
+Zum Schluss müssen die Steigungen die wir verrechnet haben wieder auf Null gesetzt werden, nachdem sie verrechnet wurden.
+Wir iterieren über alle Schichten:
+
+```java
+private void ClearAllGradients() {
+    for (Layer layer : layers) {
+        layer.ClearGradient();
+    }
+}
+```
+
+Und initialisieren neue Arrays in den Schichten:
+
+```java
+public void ClearGradient() {
+    this.CostSteigungW = new double[numInputNodes][numOutputNodes];
+}
+```
+
+Das ist der Abschluss. Wir haben nun ein Funktionsfähiges Netzwerk erstellt. Es ist nun möglich, das Netzwerk mit Daten zu füttern, und Ergebnisse zu erwarten. Die Testreihen dazu werden in den Nächsten Kapiteln behandelt.
+

@@ -1,0 +1,281 @@
+{
+  "main": {
+    "id": "ddc69ecf0da6d6bf",
+    "type": "split",
+    "children": [
+      {
+        "id": "23e9fb7f6f56560b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "127658804135046c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Grundlagen.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "89cd88be4f132a1c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "50bc0646ce4ae31c",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Einleitung.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "4d57fda7cf1dad5d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN Ausgaben/Visualization verkürzte Fehler Ableitung.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2a32cbf581140430",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Abschnitt.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "05fd17947ce8dc97",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Texte/Quellen.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "ebf1cc94ba432a3d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projektarbeit/Kontakt.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6b79a8088f75270d",
+    "type": "split",
+    "children": [
+      {
+        "id": "0da43505aa545131",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19c3c14ba73094a5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "edeac19b1cb912a8",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "953d51514441ed1d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 249.5
+  },
+  "right": {
+    "id": "62735ff7b5eacde0",
+    "type": "split",
+    "children": [
+      {
+        "id": "54014135925f9f34",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "653600ba84460224",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "f812169e41caaf30",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b7a2ff374e62acb2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "edb49d9d7cccfd79",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Projektarbeit/Texte/Mathematische Grundlagen.md"
+              }
+            }
+          },
+          {
+            "id": "5e13acf96b684f9b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "89cd88be4f132a1c",
+  "lastOpenFiles": [
+    "Pasted image 20231001134329.png",
+    "Pasted image 20231001133707.png",
+    "Pasted image 20231001133317.png",
+    "Pasted image 20231001133125.png",
+    "Projektarbeit/Texte/Grundlagen.md",
+    "NN Ausgaben/Performance Notes Gemischt.md",
+    "Projektarbeit/Texte/Mathematische Grundlagen.md",
+    "Projektarbeit/Texte/Einleitung.md",
+    "Projektarbeit/Texte/TestReihen und Anpassungen.md",
+    "Projektarbeit/Texte/Abschnitt.md",
+    "NN Ausgaben/Visualization verkürzte Fehler Ableitung.md",
+    "NN Ausgaben/Visualization with Batchsize 1.md",
+    "NN Ausgaben/Visualization.md",
+    "NN Ausgaben/Performance Notes.md",
+    "NN Ausgaben/Visualization 500 Epochen.md",
+    "NN Ausgaben/SideNote.md",
+    "NN Ausgaben/EIn Html.md",
+    "NN Ausgaben/Performance Notes Random Biases false.md",
+    "Projektarbeit/Kontakt.md",
+    "Images/Pasted image 20230921231721.png",
+    "Images/Pasted image 20230921231638.png",
+    "Images/Pasted image 20230921231606.png",
+    "Images/Pasted image 20230921231554.png",
+    "Images/Pasted image 20230921231251.png",
+    "Images/Pasted image 20230921231221.png",
+    "Images/Pasted image 20230921231146.png",
+    "Images",
+    "Projektarbeit/Inhalt.md",
+    "Pascal Hochzeit/Video.md",
+    "Pascal Hochzeit",
+    "Projektarbeit/Texte/Quellen.md",
+    "NN Ausgaben/Visualization.html",
+    "Projektarbeit/Texte/Bilder.md",
+    "Projektarbeit/Texte/Bachelorarbeit.md",
+    "2023-09-12.md",
+    "NN Ausgaben/Performance Notes Without Biases.md",
+    "Quelle.md",
+    "Projektarbeit/Einleitung/Zielsetzung der Projektarbeit.md",
+    "Projektarbeit/Einleitung/Hintergrund und Motivation des Themas.md",
+    "Texte",
+    "Grundlagen/Abgrenzung",
+    "Grundlagen",
+    "NN Ausgaben",
+    "Projektarbeit/Texte",
+    "script.js",
+    "Notizen"
+  ]
+}

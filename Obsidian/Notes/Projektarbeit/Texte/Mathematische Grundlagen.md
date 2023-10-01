@@ -255,6 +255,7 @@ Das Größte Problem ist allerdings, ein Phänomen, welches Overshooting oder Ü
 
 ## LearnRate
 [3]Um dem Problem mit dem Overshooting zu beheben, bedient man sich der sogenannten LearnRate. Dabei handelt es sich einfach um einen Faktor, mit welchem die Änderungsrate Multipliziert wird. Der Sinn dahinter ist es, die Schritt Größe anzupassen, das heißt wie Stark die Gewichte in eine Richtung angepasst werden. Wenn die Rate zu Groß ist, dann haben wir das Overshooting, bei dem sich das Netzwerk immer wieder über den Tiefpunkt hinausschießt. Wenn die rate zu niedrig ist kann es sein, dass das Netzwerk einfach zu langsam lernt. Es muss also eine Goldene Mitte gefunden werden. Normalerweise benutz man in einem Feed Forward Netzwerk eine Feste Konstante, die meist bei 0,2 oder 0,3 liegt. Im Späteren Verlauf dieser Arbeit werden dazu Tests durchgeführt, um eine Optimale LearnRate zu finden.
+
 ![[Pasted image 20230917181526.png]]
 [Quelle](https://medium.com/diogo-menezes-borges/what-is-gradient-descent-235a6c8d26b0)
 
@@ -500,7 +501,7 @@ ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Näch
 
 ### UpdateAllGradients
 
-Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
+Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil-Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu Ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
 
 ![[Pasted image 20230921231251.png]]
 
@@ -527,7 +528,8 @@ void UpdateAllGradients(MnistMatrix dataPoint) {
             hiddenLayer.UpdateGradients(nodeValues);
     }
 }
-    ```
+```
+
 Und so sieht also der Backpropagation Algorithmus aus. Man fängt bei der letzten Schicht, der Output Schicht an, und passt die Gewichte an. Dann geht es weiter zur vorletzten Schicht und so weiter, bis zur Input Schicht. Die Gewichte werden sozusagen von Hinten nach vorne angepasst.
 Kommen wir nu zur Implementierung der CalculateOutputLayerNodeValues() und CalculateHiddenLayerNodeValues() Methoden.
 
@@ -548,6 +550,7 @@ public double[] CalculateOutputLayerNodeValues(double[] expectedOutputs) {
     return nodeValues;
 }
 ```
+
 In der Aufrufenden Methode, UpdateAllGradients(), werden die NodeValues zwischengespeichert, und danach direkt an die Methode UpdateGradients() der Output Schicht weitergegeben. Dort werden sie mit den Ungewichteten Inputs verrechnet, wodurch die erste Matrix entsteht, welche die Änderungen an den Gewichten enthält, die noch nicht mit den Gewichten verrechnet wurden.
 
 ```java
@@ -559,6 +562,7 @@ public void UpdateGradients(double[] nodeValues) {
     }
 }
 ```
+
 Das Array CostSteigungW muss außerdem ebenfalls in der Klasse Layer festgehalten werden. Hier werden die Anpassungen, die wir mithilfe der Kettenregel ausrechnen abgespeichert, bevor sie mit den Gewichten verrechnet werden.
 
 ```java
@@ -576,6 +580,7 @@ public class Layer {
 ### CalculateHiddenLayerNodeValues
 
 Nun sehen wir uns an, wie die Anpassungen an den Gewichten in den Versteckten Schichten berechnet werden.
+
 ```java
 
 public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
@@ -589,11 +594,11 @@ public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValu
     return newNodeValues;
 }
 ```
+
 Die Gewichte der vorherigen Schicht und die NodeValues, die übergeben wurden werden mithilfe des Punkt Produkt verrechnet. Die Schicht, die zuvor berechnet wurde, muss in den Übergabe Parametern mitgegeben werden, und wird hier OldLayer genannt. Wenn wir gerade die Methode das erste mal aufrufen, dann wurde die Output Schicht bereits von der Methode CalculateOutputLayerNodeValues() berechnet und muss als OldLayer an diese Methode übergeben werden.
-Bei dem Punkt Produkt muss auf die Dimensionen der Gewichts Matrix geachtet werden. In unserem Netzwerk wurde diese Matrix Transponiert aufgebaut, das heißt dass die Werte Senkrecht mit den Werten der vorherigen NodeValues verrechnet werden müssen.
+Bei dem Punkt Produkt muss auf die Dimensionen der Gewichts-Matrix geachtet werden. In unserem Netzwerk wurde diese Matrix Transponiert aufgebaut, das heißt dass die Werte Senkrecht mit den Werten der vorherigen NodeValues verrechnet werden müssen.
 
 Auch diese Methode gibt wieder NodeValues zurück, welche in der aufrufenden Methode mit den ungewichteten Inputs dieser Schicht verrechnet werden müssen, und somit die Anpassungen berechnen, die an den Gewichten vorgenommen werden müssen. Falls es weitere versteckte Schichten gibt, werden die NodeValues weitergereicht, womit sich viele aufrufe und Rechnungen sparen lassen.
-
 
 ### ApplyAllGradients
 
@@ -607,7 +612,7 @@ private void ApplyAllGradients(double learnrate) {
 }
 ```
 
-und in der Layer Klasse werden sie verrechnet:
+Und in der Layer Klasse werden sie verrechnet:
 
 ```java
 public void ApplyGradient(double learnrate) {
@@ -618,6 +623,7 @@ public void ApplyGradient(double learnrate) {
     }
 }
 ```
+
 Wichtig zu beachten ist hier, dass die Steigung der Cost Funktion, die wir ausgerechnet haben, also die Anpassung an den Gewichten von den Gewichten *abgezogen* wird. Wenn die Steigung nämlich Positiv ist, dann läge der Tiefpunkt in entgegengesetzter Richtung, wenn sie negativ ist, liegt der Tiefpunkt voraus.
 
 ![[Pasted image 20230917195146.png]]
@@ -627,7 +633,7 @@ Um es an einem Beispiel zu verdeutlichen, die Steigung in Punkt A ist positiv. D
 
 ### ClearAllGradients
 
-Zum Schluss müssen die Steigungen die wir berechnet haben wieder auf null gesetzt werden, nachdem sie verrechnet wurden.
+Zum Schluss müssen die Steigungen die wir verrechnet haben wieder auf Null gesetzt werden, nachdem sie verrechnet wurden.
 Wir iterieren über alle Schichten:
 
 ```java
@@ -637,25 +643,84 @@ private void ClearAllGradients() {
     }
 }
 ```
+
 Und initialisieren neue Arrays in den Schichten:
+
 ```java
 public void ClearGradient() {
     this.CostSteigungW = new double[numInputNodes][numOutputNodes];
 }
 ```
 
+Das ist der Abschluss. Wir haben nun ein Funktionsfähiges Netzwerk erstellt. Es ist nun möglich, das Netzwerk mit Daten zu füttern, und Ergebnisse zu erwarten. Die Testreihen dazu werden in den Nächsten Kapiteln behandelt.
+
+# Tool um das Netzwerk zu überprüfen
+
+Es gibt einige Möglichkeiten, das Netzwerk zu testen, aber Sinnvoll sind ist es in diesem Fall, Einfache Mittel zu verwenden.
+Zunächst muss der Datensatz eingelesen und Nutzbar gemacht werden.
+Um den Datensatz einzulesen, wird in diesem Projekt der mnist-data-reader des Authors Türkdoğan Taşdelen von seinem Github Repository "[https://github.com/turkdogan/mnist-data-reader"](https://github.com/turkdogan/mnist-data-reader%22) verwendet. Darin sind zwei Klassen wichtig:  
+Der MnistDataReader liest die Dateien ein. Die Bilder und die Label sind getrennt gespeichert, und müssen für das Netzwerk zusammen gebracht werden. Daraus werden Objekte der zweiten Klasse erstellt, MnistMatrix. Diese Jedes Objekt der Klasse MnistMatrix enthält ein 2 Dimensionales Array, welches die Helligkeit eines Jeden Pixels des Bildes enthält, ein Wert zwischen 0 und 255. Außerdem kennt das Objekt das Label des Bildes.  
+Auf diese Weise kann der Datensatz eingelesen und Nutzbar gemacht werden.
+Das Projekt wurde für diese Projektarbeit angepasst und erweitert. Hinzugekommen ist eine Klasse MnistBuffer, welche eine bestimmte Menge an Bildern aus dem Datensatz einliest, und dann als Array zurückgibt. Dies ist hilfreich für die Spätere Umsetzung der Batches, welche später behandelt werden.
+Die Klasse MNISTPrinter gibt ein String zurück, welches eine ASCII Darstellung der Bilder ermöglicht. Je nach Helligkeit eines Pixels wird ein größeres oder kleineres Zeichen ausgegeben. Hier ein Beispiel:
+
+![[Pasted image 20231001133125.png]]
+
+Oben Links in der Ecke steht außerdem bereits, welches Lable das Bild trägt. Teilweise sind die Zahlen auch für Menschen schlecht erkennbar, wie zum Beispiel diese 5:
+
+![[Pasted image 20231001133317.png]]
+
+Die Letzte Klasse ist die MNISTHTML Klasse. Diese wird dazu verwendet, um eine Ausgabe im HTML Format auszugeben. Dabei werden mehrere Beispiele aus dem Trainingsdatensatz und aus dem Testdatensatz dargestellt, zusammen mit den Outputs des Netzwerkes.
+Über der 3, die oben als Beispiel gezeigt wurde, wird dies Angezeigt:
+
+![[Pasted image 20231001133707.png]]
+
+Das Netzwerk hat das Bild Korrekt als eine 3 Klassifizier, dies wird Grün dargestellt. Die Wahrscheinlichkeiten für jede mögliche Ausgabe werden in der Tabelle darunter dargestellt. Wir können eine Wahrscheinlichkeit von 5.52% für das Ergebnis "0" erkennen. Die Korrekte Ausgabe "3" wurde mit einer Wahrscheinlichkeit von 89,16% angegeben. Ein sehr gutes Ergebnis. An dieser Stelle soll darauf hingewiesen werden, dass die Prozentzahlen alles möglichen Ausgaben zusammengerechnet nicht 100% ergeben. Die Wahrscheinlichkeiten sind unabhängig voneinander. Sie zeigen lediglich an, wie wahrscheinlich eine Ausgabe ist, oder unwahrscheinlich, sprich, 5,52% Wahrscheinlichkeit das dieses Bild eine 0 darstellt, und eine 94,48% Wahrscheinlichkeit, dass es keine 0 ist.
+So sehen die Ergebnisse für die 5 aus:
+
+![[Pasted image 20231001134329.png]]
+
+Hier wird Sichtbar, wie sich das Netzwerk irren kann. Das Netzwerk gibt eine 44% Wahrscheinlichkeit für die Ergebnisse "4" und "6" an. Die "5", die hier tatsächlich dargestellt wird, erhält nur eine 2,4% Wahrscheinlichkeit. Dieser Fehler ist allerdings leicht zu verzeihen, da auch Menschen häufig eine 6 erkennen. Es ist wichtig zu verstehen, dass bei diesen Datensätzen auch Menschen keine 100% Genauigkeit erreichen würden.
+
+Kommen wir nun zu generelleren Merkmalen des Netzwerkes. Die Betrachtung einzelner Bilder sagt uns noch nicht viel über die gesamte Leistung eines Netzwerkes aus. Das Netzwerk kann Configuriert werden. Einige Merkmale wurden schon genannt, allerdings werden wir uns alle Einstellungen einmal einzeln ansehen. In der Klasse ConfigLoader wird eine Datei "config.json" eingelesen, welche alle Einstellungen für unser Netzwerk enthält.
+
+### LayerSizes
+
+Die Anzahl der Layer und die Anzahl ihrer jeweiligen Nodes müssen als erstes Festgelegt werden. Das ziel ist es, ein Netzwerk zu finden, das Präzise genug ist, um gute Klassifikationen zu errechnen, aber auch nicht zu Groß zu sein, da der Aufwand beim Training des Netzes Exponentiell Steigt. Mit Jede weiteren Schicht kommt eine Gewichts Matrix dazu, und diese sind Quadratisch, und wachsen daher zusammen mit der Anzahl der Knoten in einer Schicht Exponentiell. 
+Die Erste Schicht ist die Input Schicht. Diese sollte nicht frei gewählt werden, sondern anhand des zu lernenden Datensatzes angepasst werden. Jedes Bild im MNIST Datensatz enthält 784 Pixel, das ist also die Größe unserer Input Schicht.
+Auch die Output Schicht sollte nicht frei gewählt werden, sondern der Anzahl der möglichen Label entsprechen. Der MNIST Datensatz hat 10 Zahlen, 0-9, also gibt es 10 mögliche Label, also muss die Output Schicht 10 Knoten enthalten.
+
+### SplitIndex
+
+In unserem Fall werden die Trainings Daten und die Test Daten gemeinsam eingelesen, und mit diesem Index kann festgelegt werden, wie viele Bilder des gesamten Datensatzes als Trainingsdatensatz benutzt werden sollen. Dies ist hilfreich um später die Effekte zu kleiner Datensätze zu demonstrieren, sowie leichter ein Over Fitting entstehen zu lassen. Dazu später mehr.
+
+### TrainingCycles/Epochen
+
+In unserem Netzwerk werden sie TrainingCycles genannt, in der Fachliteratur allerdings meist Epochen. Dabei handelt es sich um die Anzahl an Durchläufen, die das Netzwerk den Trainingsdatensatz lernt. Es kann durchaus nützlich sein, die Daten mehrmals zu durchlaufen, das heißt die Selben Daten wiederholt zu lernen. Dabei muss allerdings ebenfalls aufgepasst werden, da es zu einem Phänomen kommen kann, welches Over Fitting genannt wird. Dabei Handelt es sich um den Umstand, dass ein Ausreichend Großes Netzwerk einen Datensatz auch Auswendig lernen kann, anstatt generelle Rückschlüsse über die Natur der Daten zu ziehen. Dies ist häufig daran sichtbar, dass das Netzwerk eine ungewöhnlich Hohe Genauigkeit auf den Trainingsdaten aufweist, auf den Testdaten allerdings weit zurückfällt. Damit Demonstriert das Netzwerk, dass es die Trainingsdaten auswendig gelernt hat, und die Testdaten nicht viel schlechter versteht. 
+
+### LearnRate
+Die LearnRate sollte mittlerweile bekannt sein. Dabei handelt es sich um eine Zahl, mit der die Anpassungsrate verrechnet wird, um ein Over Shooting zu vermeiden. Wenn das Netzwerk zu Große Schritte in Richtung eines Fehlerminimums geht, kann es dazu kommen, dass es über den Tiefpunkt hinaushüpft, im schlimmsten falle sogar komplett aus dem Tal des Tiefpunkts hinausspringt.
+
+![[Pasted image 20230917181526.png]]
+[Quelle](https://medium.com/diogo-menezes-borges/what-is-gradient-descent-235a6c8d26b0)
+
+
+
+
 
 ## ToDo
+- [ ] Flow chart
+- [ ] Tools zur Überwachung
+- [ ] Ergebnisse der ersten Testreihen
+- [ ] wie funktionmiert es ohne batch sizes
+- [ ] bioses ohne batch sizes >> kaum EInfluss?
+- [ ] Vorteil von Batch sizes
+- [ ] bioses in Verbindung mit Lernzyklen
+- [ ] Testreihe zum austarieren: best of Einstellungen für ein gutes Netzwerk
+- [ ] Fazit
+- [ ] Einleitung
+- [x] Anna lieb haben
 - [ ] 
-- [x] ClearAllGradients
-- [x] Backpropagation Code
-	- [x] lässt sich in schleifen aufarbeiten
-	- [x] eine funktion multipliziert Term 1 mit den anderen, die hier angestoßen werden.
-	- [x] Zuerst wird Outputlayer angestoßen, dann rückwärtslaufend  Hidden layer
-	- [x] Diesr Ansatz, von vorne nach Hinten zu laufen nennt man Backpropagation
-	- [x] NodeCostDerivative
-	- [x] CalculateOutputLayerNodeValues
-- [x] Und daraus dann Code machen und präsentieren.
 
 ## Weitere ToDos
 - [x] die Cost Funktion muss überarbeitet werden. Das Quadrieren des Fehlers ist notwendig
@@ -663,13 +728,4 @@ public void ClearGradient() {
 - [x] Lenze Email schreiben
 - [x] Prüfungssystem Anmelden
 - [ ] Blocksatz
-- [ ] Donnerstag 10 Uhr
-## Crap den ich Später vielleicht verwenden kann
-![[Pasted image 20230917181649.png]]
-[Quelle](https://intlyouthscientists.org/2018/09/03/gradient-descent-a-simple-yet-effective-approach-to-artificial-intelligence/)
-
-Die *Y* Koordinate gibt den Fehler des Netztes im Bezug auf zwei gewichte an. Die *Z* und *X* Achsen Repräsentieren die Gewichte. Diese Darstellung ist also ein verschwindend kleines Netzwerk, allerdings wird klar, dass eine Anpassung auf die *Z* und *X* Achse notwendig ist, um näher an ein Minimum zu gelangen.  
-
-
-## Code
-
+- [x] Donnerstag 10 Uhr
