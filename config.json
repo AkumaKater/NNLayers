@@ -1,7 +1,7 @@
-LayerSizes=784,100,10
+LayerSizes=784,10
 SplitIndex=60000
-TrainingCycles=100
-LearnRate=0.002
+TrainingCycles=1
+LearnRate=0.003
 BatchSize=1
-PerformanceNotes=PerormanceNotes(LearnRateTests).html
-Visualization=Visualization.html
+PerformanceNotes=FFN-Ausgabe/PN(LS300-100EpochenTest).html
+Visualization=FFN-Ausgabe/Visualization.html
