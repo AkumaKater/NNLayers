@@ -292,5 +292,41 @@ public double[] CalculateOutputs(double[] inputs) {
 
 Um die Ergebnisse ein wenig besser Einordnen zu können, betrachten wir einmal, wie ein Nicht funktionierendes Netzwerk aussehen würde. Wir nehmen an, dass das Netzwerk jedes Bild als eine 0 Klassifiziert. Dann wäre das Netzwerk in 10\% der Fällen immer noch richtig. Das heißt wenn es tatsächlich dazu kommt, dass das Ergebnis des Netzwerkes immer 0 ist, dann läge die Genauigkeit bei 10\%, und nicht bei 0\%, wie man fälschlicherweise annehmen könnte. In dem Fall, dass das Netzwerk tatsächlich eine geringere Genauigkeit als ungefähr 10\% erzielt, dann muss davon ausgegangen werden, dass das Netzwerk Gezielt Fehler macht. Unter Umständen Maximiert das Netzwerk den Fehler dann. Dadurch würde auf jeden Fall die Vermutung nahe liegen, dass das Netzwerk bereits Korrekt Klassifizieren kann, allerdings gezielt das Falsche Ergebnis ausgibt. In den meisten Fällen würde ein nicht funktionierendes Netzwerk allerdings rund um die 10\% Genauigkeit erreichen, das heißt zwischen 8\% und 12\%. Wenn das Netzwerk nicht verstanden hat, was es tun soll, und einfach nur wild rät, wird es ebenfalls ungefähr bei 10\% Genauigkeit landen, mit leichten Abweichungen. Wenn wir es also mit einem Netzwerk zu tun haben, das 20\% Genauigkeit erreicht, dann können wir davon ausgehen, dass es bereits ein gewisses Verständnis darüber erlangt hat, wie die Bilder zu klassifizieren sind. 
 
+
+
+\section{Biases}
+\subsection{Erklärung zum Nutzen}
+
+Die Erklärung und die Bilder in diesem Abschnitt basieren auf einem Thread aus stackoverflow[5], sowie eigenen Erfahrungen.
+
+Biases geben uns die Möglichkeit, die Schwellwert Funktion zu verschieben. Kurzgefasst, das Netzwerk wird Felxibler. 
+Um etwas genauer zu werden, sehen wir uns einmal an, wie die Graphen aussehen im Bezug auf die Inputs x, nachdem sie mit den Gewichten w verrechnet werden. Für w nehemn wir als Beispielswerte 0.5, 1, und 3.
+
+![[Pasted image 20231005144238.png]]
+
+Alle Graphen verlaufen durch den 0 Punkt. Dies sorgt allerdings auch dafür, dass das Netzwerk recht unflexibel ist. Nehemn wir an, dass es zwei Klassen gibt, die das Netzwerk unterscheiden können soll, und Klasse 1 befindet sich in x < 1 sowie y < 1, dann wäre es schlicht unmöglich, mit einem dieser Graphen eine einfache Klassifizierung vorzunehmen. Wenn wir allerdings einen Bias c addieren, dann lässt sich so ein Graph entlang der y Achse verschieben.
+
+![[Pasted image 20231005144628.png]]
+
+Mit diesem Graphen wäre unser Beispiel dann gelöst, alle Elemente der Klasse 1 liegen unterhalb des Graphen, während alle Elemente der Klasse 2 größer als 1 in beiden Achsen sind, und damit über dem Graphen liegen.
+Um die Berechnung im Neuron einmal darzustellen, hier eine Graphik:
+
+![[Pasted image 20231005133406.png]]
+
+Nachdem die Gewichte mit den Inputs multipliziert wurden, werden die Biases dazu addiert. Dieser Wert wird dann an die Schwellenfunktion übergeben. Hier ein beispiel mit der Sigmoid Funktion:
+
+![[Pasted image 20231005145933.png]]
+
+Der Bias von 2 und -2 verschiebt die Sigmoid Funktion nach Rechts und nach Links. Dadurch hat das Netzwerk eine Größere Kontrolle darüber, wie Stark ein Input sein muss, um ein Neuron/Knoten zu Aktivieren.
+
+\subsection{Mathematische Umsetzung}
+
+
+
+\cleardoublepage
+% \phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+
 \end{document}
 

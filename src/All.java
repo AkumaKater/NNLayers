@@ -2,21 +2,20 @@
 public class All {
 
     public static void main(String[] args) {
-        int WrtProSeite = 4754/22;
+        double WrtProSeite = 13099/47;
 
-        String filePath = "Obsidian/Notes/Projektarbeit/Texte/Mathematische Grundlagen.md";
-        double AktWrtCntMathematischeGrundlagen = WordCounter.countWords(filePath)-59;
-        filePath = "Obsidian/Notes/Projektarbeit/Texte/Einleitung.md";
-        double AktWrtCntEinleitung = WordCounter.countWords(filePath)-12;
+        String filePath = "Obsidian/Notes/Projektarbeit/Texte/Projektarbeit.md";
+        double AktWrtCntMathematischeGrundlagen = WordCounter.countWords(filePath)+427;
 
-        double WrtCntGestern = AktWrtCntEinleitung + 2856 +274+478+328+1014+1047.0+1337.0+ 193.0;
-        double WrtCntHeute = AktWrtCntMathematischeGrundlagen-WrtCntGestern + AktWrtCntEinleitung;
-        double[] WrtCntArray = {AktWrtCntMathematischeGrundlagen, AktWrtCntEinleitung};
+        double WrtCntGestern = 9941.0;
+        double WrtCntHeute = AktWrtCntMathematischeGrundlagen-WrtCntGestern ;
+        double[] WrtCntArray = {AktWrtCntMathematischeGrundlagen};
         double WrtCnt = 0;
         for(Double d : WrtCntArray){WrtCnt+=d;}
         double Seiten = WrtCnt / WrtProSeite;
         
 
+        System.out.println(AktWrtCntMathematischeGrundlagen);// - 13900 + 1287 );
         System.out.println("Worte Pro Seite: "+WrtProSeite+"\nWorte Insgesammt übrig: "+(int)(WrtProSeite*50-WrtCnt)+" / "+WrtProSeite*50);
         System.out.println("So viel hast du heute geschrieben: "+WrtCntHeute);
         System.out.println("So weit bist du mit der Projektarbeit: "+roundToDecimalPlaces(((WrtCnt)/(50*WrtProSeite))*100, 1)+"%");
@@ -54,8 +53,8 @@ class SchonVorhndenException extends RuntimeException {
 \frac{ da_{ 2 } }{ dZ_{ 2 } }*
 \frac{ dZ_{ 2 } }{ dw_{ 2 } }
 
-
-
+$$\sigma (x)=\frac{1}{(1+e^{-x})}$$
+$$\sigma '(x)=\sigma (x)(1-\sigma(x))$$
 
 
 

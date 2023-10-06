@@ -1,3 +1,35 @@
+## Stichpunkte für den Aufbau
+- Zielsetzung
+- Motivation
+- Abgrenzung
+
+## **Wofür wird ein Netzwerk verwende?**
+
+Neuronale netzwerke werden vor allem für Klassifikationsverfahren verwendet. In der Praxis gibt es viele Anwendungsbereiche, in denen es Vorteilhaft ist, Große Mengen von Daten automatisch zu Klassifizieren. Einige Beispiele wären zB die Bild und schriffterkennung, die man dabei verwendet, Kennschilder von Autos Maschinel auszulesen. Solche Technologien werden immer häufiger auf parkplätzen und Autobahnen eingesetzt. Aber auch fast Jedes handy kann mittlerweile schrifft erkennen, die mit der Kammera aufgenommen wird. Auch in der Medizin, beim Auswerten von Röntgenbildern, in der Biologie, zum erkennen von Pflanzen auf Fotos und noch vielem mehr werden Neuronale Netzwerke eingesetzt.  
+Es gibt kaum einen bereich, in dem sich nicht eine mögliche anwendung für Neuronale Netzwerke finden lässt. Ganz besonders aufwändige Netzwerke werden mittlerweile auch für konstruktive Aufgaben verwendet, wie zB Sprachmodelle wie ChatGPT und Bilder Generierende KIs wie Midjourney.
+
+Netzwerke werden bei Problemen eingesetzt, die Kompliziert genug sind, dass die Lösung nicht manuell (ToDo) programmiert werden kann, es sich allerdings um solche Datenmengen handelt, dass es sich nicht lohnt, Menschen mit dieser Aufgabe zu betrauen.  
+Generell wird ein Datensatz mit Labeln versehen, und dieser wird dazu verwendet, das Netzwerk zu Trainieren. Die Daten werden von Menschen mit Labeln versehen.
+
+## **Abgrenzung/ welche Art von Netzwerk wird hier gebaut?**
+
+In dieser Arbeit soll ein Grundlegendes und einfaches neuronales Netzwerk Programmiert, erklärt und getestet werden. Die Einfachste Form eines solchen Netzwerkes ist ein Feed Forward Netzwerk.  
+Die Ansprüche an dieses Netzwerk sind die Folgenden:
+
+- Variable Anzahl an Layern
+- Variable Anzahl an Nodes
+- Epochen
+- Learnrate
+- Batches
+
+Darüber hinaus wird das Netzwerk Tabelarisch ausgaben über die erziehlte Genauigkeit auf den Trainings und test Datensätzen ausgeben, um anpassungen an den Einstellungen vergleichbar zu machen.  
+Außerdem wird man ein Trainiertes Netzwerk abspeichern können.
+
+Augenmerk dieser Arbeit wird allerdings Hauptsächlich die Grundlagen und Praktische Umsetzung eines Feed Forward Netzwerkes in seiner einfachsten Grundform:
+
+- Initialisierung
+- Abfrage
+
 # Initialisierung
 
 ## Grundgedanke
@@ -97,12 +129,12 @@ Sehen wir uns zunächst ein Einfaches Netzwerk mit einer versteckten Schicht an.
 ![[Pasted image 20230912184748.png]]
 [Quelle](https://www.youtube.com/watch?v=hfMk-kjRv4c)
 
-Der erste Knoten wird *a*<sub>0</sub> genannt, und entspricht schlichtweg dem Input. Dieser wird an die erste Schicht geleitet, an alle darin vorhandenen Knoten. Dort wird es erst gewichtet, das heißt mit dem Gewicht *w*<sub>1</sub> , welches der Kante zugewiesen ist multipliziert. Hier wird es jetzt Spannend. Nachdem alle Inputs in unseren Knoten miteinander verrechnet sind, muss das Ergebnis erst noch durch die Aktivierungsfunktion.
+Der erste Knoten wird $a_0$ genannt, und entspricht schlichtweg dem Input. Dieser wird an die erste Schicht geleitet, an alle darin vorhandenen Knoten. Dort wird es erst gewichtet, das heißt mit dem Gewicht $w_1$ , welches der Kante zugewiesen ist multipliziert. Hier wird es jetzt Spannend. Nachdem alle Inputs in unseren Knoten miteinander verrechnet sind, muss das Ergebnis erst noch durch die Aktivierungsfunktion.
 
 ### Aktivierungsfunktion
 
-Die am Häufigsten genutze Aktivierungsfunktion ist die Sigmoid Funktion. Diese sieht so aus:
-![[Pasted image 20230918125041.png]]
+Die am Häufigsten genutzte Aktivierungsfunktion ist die Sigmoid Funktion. Diese sieht so aus:
+$$\sigma (x)=\frac{1}{(1+e^{-x})}$$
 ![[Pasted image 20230912192401.png]]
 Jeder Wert, der hier hinein läuft, wird auf einen Wert zwischen 0 und 1 verkleinert. 
 Um ein Starkes Signal an die Nächsten Schicht zu senden, muss die Summer aller eingegangenen und danach gewichteten Signale Groß genug sein, um nach der Sigmoid Funktion noch näher an der 1 zu sein als an der 0. 
@@ -114,12 +146,12 @@ Hierbei ist ***f(x) = x***. Die Werte können dabei allerdings zu Groß werden, 
 
 **Die Sprung Funktion**
 ![[Pasted image 20230912195705.png]]
-Diese Funktion gibt bei *{x>=0}* eine 1 aus, bei *{x<0}* immer eine 0.
-Dadurch können allerdings Sprunghafte veränderungen im Netztwerk eintreten, die unvorteilhaft sind.
+Diese Funktion gibt bei $\text{\{x>=0\}}$ eine 1 aus, bei $\text{\{x<0\}}$ immer eine 0.
+Dadurch können allerdings Sprunghafte Veränderungen im Netzwerk eintreten, die unvorteilhaft sind.
 
 **ReLu**
 ![[Pasted image 20230912200758.png]]
-Ähnlich wie **Die Identität**, allerdings verläuft sie bei *{x<0}* bei 0.
+Ähnlich wie **Die Identität**, allerdings verläuft sie bei $\text{\{x<0\}}$ bei 0.
 ReLu wird auch häufiger verwendet.
 
 Anmerkung des Autors der Arbeit: Ich habe nach einer Möglichkeit gesucht, die recht aufwendige Sigmoid Funktion etwas kosten effizienter ausrechnen zu lassen. Dabei habe ich einen Hinweis gefunden. Die Sigmoid Funktion kann im vorhinein in Hundert Schritten in eine Look Up Tabelle eingetragen werden, so dass sie nicht mehr jedes mal ausgerechnet werden muss. Dabei habe ich festgestellt, dass das Netzwerk kaum an Geschwindigkeit gewinnt, allerdings 2 bis 4% an Genauigkeit gewinnt. Mir ist nicht vollends klar, woher diese Verbesserung kommt, allerdings sind mir derartige Beobachtungen schon häufiger untergekommen. Meist scheint es daran zu liegen, dass es dem Netzwerk schwerer fällt, sich in einem Lokalen Minimum fest zufahren. Dies ist an dieser Stelle allerdings reine Spekulation.
@@ -169,7 +201,7 @@ class ReLu extends Activation{
 
 Nach diesem Stück Vorarbeit kommen wir nun zum Abschluss der Querry. Wie genau Setzen wir das alles jetzt zusammen?
 Wie bereits vorbereitet, wird jede Schicht vom NeuralNetwork in der Querry Methode aufgerufen. von jedem Layer wird die Methode "CalculateOutputs(double[] inputs)" aufgerufen, mit den Inputs versorgt, und danach werden die Outputs erwartet, um an die nächste Schicht weitergegeben zu werden.
-Um uns Arbeit zu sparen, greifen wir einmal der Thematik vorraus. Für die Umsetzung des Learn Algorithmus brauchen wir die Inputs, die jede Schicht erhalten hat, die gewichteten Inputs auch und die Outputs, die schon durch die Aktivierungsfunktion gegangen sind. Daher müssen wir jetzt erstmal drei Arrays hinzufügen. Wir nennen sie "inputs", "weightedInputs" und "activations". Für unsere versteckte Schicht entsprechen diese Werte also a<sub>0</sub> für "inputs", und a<sub>1</sub> für die "activations"
+Um uns Arbeit zu sparen, greifen wir einmal der Thematik vorraus. Für die Umsetzung des Learn Algorithmus brauchen wir die Inputs, die jede Schicht erhalten hat, die gewichteten Inputs auch und die Outputs, die schon durch die Aktivierungsfunktion gegangen sind. Daher müssen wir jetzt erstmal drei Arrays hinzufügen. Wir nennen sie "inputs", "weightedInputs" und "activations". Für unsere versteckte Schicht entsprechen diese Werte also $a_0$ für "inputs", und $a_1$ für die "activations"
 
 ```java
 public class Layer {
@@ -293,67 +325,38 @@ Am leichtesten lässt sich dies in einer Zweidimensionalen Darstellung der Cost 
 ![[Pasted image 20230917195146.png]]
 [Quelle](https://vzahorui.net/optimization/gradient-descent/)
 
-Auf der *Y* Achse ist der Fehler eingetragen, die *X* Achse Repräsentiert unsere Gewichte. Wenn das Gewicht bei 8 liegt, und der Fehler des Netzwerks damit vom Punkt *A* beschrieben wird. Das nächste Minimum liegt bei 6. Daher muss das Gewicht in dieser Richtung verschoben werden, also kleiner werden. 
-Mathematisch kann das durch die Steigung im Punkt *A* beschrieben werden. 
+Auf der $Y$ Achse ist der Fehler eingetragen, die $X$ Achse Repräsentiert unsere Gewichte. Wenn das Gewicht bei 8 liegt, und der Fehler des Netzwerks damit vom Punkt $A$ beschrieben wird. Das nächste Minimum liegt bei 6. Daher muss das Gewicht in dieser Richtung verschoben werden, also kleiner werden. 
+Mathematisch kann das durch die Steigung im Punkt $A$ beschrieben werden. 
 
 Als ersten Ansatz (Sowohl mathematisch, als auch im Code) könnte man zwei Punkte nehmen, die sehr nah beieinander liegen, und damit die Steigung ausrechnen. Diese 2 Punkte sind zum einen das Aktuelle Gewicht, und zum anderen ein Punkt, der minimal von dem Aktuellen Gewicht abweicht, also leicht verschoben wird.
-Diese kleine Änderung nennen wir Delta *w* (_Δw_) für weight, also das Gewicht das angepasst wird, wobei Delta eine sehr kleine Änderung an *w* repräsentiert.
-Um die Steigung zu berechnen würde man also die Änderung des Errors _Δe_, welche durch die Änderung an dem Gewicht _Δw_ entsteht, durch eben dieses _Δw_  teilen. 
-
-![[Pasted image 20230918174436.png]]
-
+Diese kleine Änderung nennen wir Delta $w$ ($\Delta w$) für weight, also das Gewicht das angepasst wird, wobei Delta eine sehr kleine Änderung an $w$ repräsentiert.
+Um die Steigung zu berechnen würde man also die Änderung des Errors $\Delta e$, welche durch die Änderung an dem Gewicht $\Delta w$ entsteht, durch eben dieses $\Delta w$ teilen. $$Änderungsrate = \frac{\Delta e}{\Delta w}$$
 Mithilfe dieser Formel könnte man die Steigung annähernd berechnen. Je nachdem, ob diese Steigung dann Positiv oder Negativ ist, lässt sich herleiten, in welcher Richtung der nächste Tiefpunkt liegt. Damit könnte bereits eine Learn Funktion erstellt werden, jedoch gibt es hier zwei Probleme.
 Zum einen ist das Ergebnis bei dieser Herangehensweise bestenfalls eine Annäherung, und zweitens ist es recht aufwändig, so zu verfahren. Da für jede Anpassung an den Gewichten zwei Punkte berechnet werden müssen, muss die Querry also zwei mal angestoßen werden. besser wäre es, die Querry jedes mal nur einmal zu verwenden, dadurch würden wir die Arbeit, die verrichtet werden muss bereits an dieser Stelle halbieren. Und das ist auch möglich, indem wir Ableitungen bilden.
 
 ## Ableitung einer Beispiel Cost Funktion
 
-Was genau ist eine Ableitung? Im Prinzip wird dabei der Gedanke verfolgt, was passiert, wenn die kleine Abweichung _Δw_ sich an 0 annähert. Natürlich kann _Δw_ auf den ersten Blick nicht 0 sein, weil wir ansonsten durch 0 teilen würden. 
+Was genau ist eine Ableitung? Im Prinzip wird dabei der Gedanke verfolgt, was passiert, wenn die kleine Abweichung $\Delta w$sich an 0 annähert. Natürlich kann $\Delta w$auf den ersten Blick nicht 0 sein, weil wir ansonsten durch 0 teilen würden. 
 Aber verfolgen wir diesen Gedanken doch einmal an einem Beispiel:
-Sei *f(w)* unsere Funktion:
-
-![[Pasted image 20230919135144.png]]
-
-Wir nennen die kleine Verschiebung von *w* jetzt *h*.
-Dann gilt zumindest schon einmal:
-
-![[Pasted image 20230919135305.png]]
-
-Und gekürzt:
-
-![[Pasted image 20230919135421.png]]
-
-Dann wäre die Änderungsrate also:
-
-![[Pasted image 20230919143429.png]]
-
-![[Pasted image 20230919143648.png]]
-
-Wenn wir uns dann die Mühe machen, *f(w)* auszuschreiben, ergibt sich daraus:
-
-![[Pasted image 20230919143845.png]]
-
+Sei $f(w)$ unsere Funktion: $$f(w)=w^2+3$$
+Wir nennen die kleine Verschiebung von $w$ jetzt $h$.
+Dann gilt zumindest schon einmal: $$\Delta w=(w+h)-w$$Und gekürzt:$$\Delta w=h$$
+Dann wäre die Änderungsrate also:$$Änderungsrate = \frac{\Delta e}{\Delta w}$$ $$\frac{\Delta e}{\Delta w}=\frac{f(w+h)-f(w)}{h}$$
+Wenn wir uns dann die Mühe machen, $f(w)$ aus zuschreiben, ergibt sich daraus:
+$$\frac{\Delta e}{\Delta w}=\frac{(w+h)^2+3-(w^2+3)}{h}$$
 Dann fangen wir an klammern auszurechnen:
+$$\frac{\Delta e}{\Delta w}=\frac{w^2+w*h+w*h+h^2+3-w^2-3}{h}$$
+$$\frac{\Delta e}{\Delta w}=\frac{w^2+w*h+w*h+h^2-w^2}{h}$$
+$$\frac{\Delta e}{\Delta w}=\frac{w*h+w*h+h^2}{h}$$
+$h$ kürzen:
+$$\frac{\Delta e}{\Delta w}=w+w+h$$
+$$\frac{\Delta e}{\Delta w}=2w+h$$
 
-![[Pasted image 20230919144010.png]]
-
-![[Pasted image 20230919144043.png]]
-
-![[Pasted image 20230919144125.png]]
-
-*h* kürzen:
-
-![[Pasted image 20230919144334.png]]
-
-![[Pasted image 20230919144355.png]]
-
-Und jetzt zum Interessanten Teil. Da wir *h* nicht gleich 0 setzten können, können wir allerdings *h* gegen 0 laufen lassen, dann verwenden wir die Leibniz Notation. Das bedeutet, das wir anstatt  _Δw_ und  _Δe_ wobei _Δ_ eine sehr kleine Vergrößerung darstellt, jetzt _dw_ und _de_ verwenden, wobei d für eine unendlich kleine Vergrößerung steht, eine sogenannte Infinitesimalzahl.
+Und jetzt zum Interessanten Teil. Da wir $h$ nicht gleich 0 setzten können, können wir allerdings $h$ gegen 0 laufen lassen, dann verwenden wir die Leibniz Notation. Das bedeutet, das wir anstatt  $\Delta w$ und  $\Delta e$ wobei $\Delta$ eine sehr kleine Vergrößerung darstellt, jetzt $dw$ und $de$ verwenden, wobei $d$ für eine unendlich kleine Vergrößerung steht, eine sogenannte Infinitesimalzahl.
 Das sieht dann ungefähr so aus:
-
-![[KorrektH.png]]
-
-![[Pasted image 20230920104745.png]]
-
-Diese Formel nennt man eine Ableitung, und sie gibt die Steigung des Ursprünglichen Graphen in jedem gegebenen Punkt im Bezug auf *w* an. Mit anderen Worten, Wenn unsere Fehlerfunktion wie in diesem Beispiel *f(w)* ist, dann beschreibt *2w* in jedem gegebenen Punkt den man für *w* einsetzt die Steigung, und somit auch die Richtung, in welcher ein Tiefpunkt zu finden ist. Genau wie bei dem Beispiel mit der Kugel, würde die Kugel die Steigung herab rollen.
+$$\frac{de}{dw}=\lim_{h\to 0} 2w +h$$
+$$\frac{de}{dw}=2w$$
+Diese Formel nennt man eine Ableitung, und sie gibt die Steigung des Ursprünglichen Graphen in jedem gegebenen Punkt im Bezug auf $w$ an. Mit anderen Worten, Wenn unsere Fehlerfunktion wie in diesem Beispiel $f(w)$ ist, dann beschreibt $2w$ in jedem gegebenen Punkt den man für $w$ einsetzt die Steigung, und somit auch die Richtung, in welcher ein Tiefpunkt zu finden ist. Genau wie bei dem Beispiel mit der Kugel, würde die Kugel die Steigung herab rollen.
 
 ### Kettenregel für 2 Schichten
 
@@ -361,82 +364,83 @@ Nun versuchen wir die Ableitung an dem Netzwerk. Zur Erinnerung, so sah unser kl
 
 ![[Pasted image 20230912184748.png]]
 
-wir wollen uns erstmal nur auf den letzten Knoten mit seinem Input konzentrieren. Die frage ist, **wie verändert sich der Fehler des Netzwerks, wenn ich** **w<sub>2</sub>** **anpasse?**
+wir wollen uns erstmal nur auf den letzten Knoten mit seinem Input konzentrieren. Die frage ist, **wie verändert sich der Fehler des Netzwerks, wenn ich $w_2$ anpasse?**
 Wir fangen am besten damit an, jede unabhängige Rechnung aufzuschreiben:
-die erste Rechnung, in der w<sub>2</sub> vorkommt, ist die Multiplikation mit den Outputs aus der versteckten Schicht.
-![[Pasted image 20230920001258.png]]
-Diese wird an die Schwellwert Funktion *A* gegeben:
-![[Pasted image 20230920001519.png]]
+die erste Rechnung, in der $w_2$ vorkommt, ist die Multiplikation mit den Outputs aus der versteckten Schicht.
+$$Z_2 = a_1*w_2$$
+Diese wird an die Schwellwert Funktion $A$ gegeben:
+$$a_2 = A(Z_2)$$
 und danach wird das Ergebnis an die Cost Funktion gegeben:
-![[Pasted image 20230920001633.png]]
-
-Es ist ersichtlich, dass w<sub>2</sub> nicht direkt in der Cost Funktion vorkommt. Wie also ist es möglich, die Ableitung der Cost Funktion im Bezug auf die Gewichte zu bilden?
-![[Pasted image 20230920001956.png]]
-
+$$c=C(a_2)$$
+Es ist ersichtlich, dass $w_2$ nicht direkt in der Cost Funktion vorkommt. Wie also ist es möglich, die Ableitung der Cost Funktion im Bezug auf die Gewichte zu bilden?
+$$\frac{dc}{dw_2}$$
 Hier kommt die Kettenregel ins Spiel. Es ist möglich, die Abhängigkeiten der Reihe nach aufzuschreiben, und miteinander zu Multiplizieren. 
-Wir fangen mit Z<sub>2</sub> im Bezug auf w<sub>2</sub> an, multiplizieren dies mit a<sub>2</sub> im Bezug auf Z<sub>2</sub> und schließlich Multiplizieren wir c im Bezug auf a<sub>2</sub>.
-
-![[Pasted image 20230920235108.png]]
-
-Das dies durchaus möglich ist kann man daran erkenne, dass wenn man die einzelnen Komponenten der Brüche wegkürzt, tatsächlich 
-![[Pasted image 20230920001956.png]]  
-übrig bleibt.
+Wir fangen mit $Z_2$ im Bezug auf $w_2$ an, multiplizieren dies mit $a_2$ im Bezug auf $Z_2$ und schließlich Multiplizieren wir $c$ im Bezug auf $a_2$.
+$$\frac{ dc }{ dw_{ 2 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ dw_{ 2 } }$$
+Das dies durchaus möglich ist kann man daran erkenne, dass wenn man die einzelnen Komponenten der Brüche wegkürzt, tatsächlich $$\frac{ dc }{ dw_{ 2 } }$$  übrig bleibt.
 Nun können wir die Einzelnen Komponenten unabhängig voneinander Ableiten, das heißt dass wir im Code eine Große Flexibilität erhalten haben.
 
 ### Kettenregel für 3 Schichten
 
-Nun sehen wir uns mal an, was passiert, wenn man eine Schicht hinzufügt. Wie man die Ableitung bildet, um die Änderungsrate im Bezug auf w<sub>2</sub> zu berechnen haben wir im Letzten Kapitel gesehen. Wie würden wir also eine Ableitung bilden, welche uns die Änderungsrate im Bezug auf w<sub>1</sub> berechnet?
-Wir suchen:
-
-![[Pasted image 20230920181830.png]]
-
+Nun sehen wir uns mal an, was passiert, wenn man eine Schicht hinzufügt. Wie man die Ableitung bildet, um die Änderungsrate im Bezug auf $w_2$ zu berechnen haben wir im Letzten Kapitel gesehen. Wie würden wir also eine Ableitung bilden, welche uns die Änderungsrate im Bezug auf $w_1$ berechnet?
+Wir suchen:$$\frac{ dc }{ dw_{ 1 } }$$
 Dazu müssen wir zuerst alle Rechnungen im Gesamten Netzwerk angeben.
 
 ![[Pasted image 20230912184748.png]]
 
 Wir Stellen die Einzelnen Rechnungen auf:
-![[Pasted image 20230920180830.png]]   Input in das Netz mit dem zugeteilten Gewicht multipliziert
-![[Pasted image 20230920180912.png]]  Schwellwert Funktion (Sigmoid)
-![[Pasted image 20230920001258.png]]   Output der versteckten Schicht mit dem zugeteilten Gewicht  multipliziert
-![[Pasted image 20230920001519.png]]   Letzte Schwellwert Funktion (Sigmoid)
-![[Pasted image 20230920001633.png]]   Cost Funktion
+$$Z_1 = a_0*w_1$$
+Input in das Netz mit dem zugeteilten Gewicht multipliziert
+$$a_1=A(Z_1)$$
+Schwellwert Funktion (Sigmoid)
+$$Z_2=a_1*w_2$$
+Output der versteckten Schicht mit dem zugeteilten Gewicht  multipliziert
+$$a_2=A(Z_2)$$
+Letzte Schwellwert Funktion (Sigmoid)
+$$c=C(a_2)$$
+Cost Funktion
 
-Und nun zum Grundgedanken der Kettenregel zurück. Das Ziel ist es, die Änderungsrate der Cost Funktion (hier c) im Bezug auf Änderungen an den Gewichten der ersten versteckten Schicht zu ermitteln. Das heißt wie hängt *dc* von *dw* ab?
-
-![[Pasted image 20230920181830.png]]
-
-c ist abhängig von a<sub>2</sub>, welches wiederum abhängig ist von Z<sub>2</sub>, dieses von a<sub>2</sub>, dieses ist abhängig von a, dieses wieder von w<sub>1</sub>, also dem Ende unsere Untersuchung.
-
-![[Pasted image 20230920212443.png]]
-
-Es ist an dieser Stelle anzumerken, dass im Vergleich zur Cost in Abhängigkeit von w<sub>2</sub>, die Abhängigkeit von Z<sub>2</sub> nicht mehr w<sub>2</sub> ist, sondern a<sub>2</sub>. Das liegt daran, dass wir uns bereits um w<sub>2</sub> in der vorherigen Ableitung gekümmert haben.
-Hier wird ersichtlich, dass sich durch das hinzunehmen einer weiteren Schicht 2 Terme zu der Ableitung hinzugefügt wurden. das sind die Terme ![[Pasted image 20230920213957.png]] in Abhängigkeit zu ![[Pasted image 20230920214053.png]], als auch ![[Pasted image 20230920214208.png]] in Abhängigkeit von ![[Pasted image 20230920214238.png]]. 
+Und nun zum Grundgedanken der Kettenregel zurück. Das Ziel ist es, die Änderungsrate der Cost Funktion (hier $c$) im Bezug auf Änderungen an den Gewichten der ersten versteckten Schicht zu ermitteln. Das heißt wie hängt $dc$ von $dw$ ab?
+$$\frac{dc}{dw_1}$$
+$c$ ist abhängig von $a_2$, welches wiederum abhängig ist von $Z_2$, dieses von $a_2$, dieses ist abhängig von $a$, dieses wieder von $w_1$, also dem Ende unsere Untersuchung.
+$$\frac{ dc }{ dw_{ 1 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ da_{ 1 } }*
+\frac{ da_{ 1 } }{ dZ_{ 1 } }*
+\frac{ dZ_{ 1 } }{ dw_{ 1 } }$$
+Es ist an dieser Stelle anzumerken, dass im Vergleich zur Cost in Abhängigkeit von $w_2$, die Abhängigkeit von $Z_2$ nicht mehr $w_2$ ist, sondern $a_2$. Das liegt daran, dass wir uns bereits um $w_2$ in der vorherigen Ableitung gekümmert haben.
+Hier wird ersichtlich, dass sich durch das hinzunehmen einer weiteren Schicht 2 Terme zu der Ableitung hinzugefügt wurden. das sind die Terme $Z_2$ in Abhängigkeit zu $a_1$, als auch $a_1$ in Abhängigkeit von $Z_1$. 
 Und genau so wird das für jede weitere Schicht sein, denn Jede Schicht verarbeitet zwei Rechnungen, und zwar das Anwenden der Gewichte, und die Schwellwert Funktion.
 
 ## Backpropagation
 
 Kommen wir nun zum Abschluss der Learn Methode. Alle bisherigen Erkenntnisse Gipfeln im Backpropagation Algorithmus. Wie der Name vermuten lässt, handelt es sich um einen Algorithmus, der unser Netzwerk zurückverfolgt, das heißt er fängt hinten an, und Arbeitet sich nach vorne vor. 
 Wie wir im letzten Kapitel gesehen haben, ist die Ableitung der letzten Schicht im Bezug zu den letzten Gewichten im Netz die kleinste Formel. 
-
-![[Pasted image 20230920235100.png]]
-
-![[Pasted image 20230920212443.png]]
-
+$$\frac{ dc }{ dw_{ 2 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ dw_{ 2 } }$$
+$$\frac{ dc }{ dw_{ 1 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ da_{ 1 } }*
+\frac{ da_{ 1 } }{ dZ_{ 1 } }*
+\frac{ dZ_{ 1 } }{ dw_{ 1 } }$$
 Die ersten beiden Terme sind zudem gleich, und der letzte Term ist ebenfalls nahezu gleich. Lediglich die zwei Terme dazwischen werden mit jeder Schicht hinzugefügt. Wir werden also versuchen einen Algorithmus zu schreiben, welcher zunächst einmal nur die ersten beiden Terme für die Output Schicht errechnet, diese dann zurückgibt, sodass sie an die vorherige Schicht gegeben werden können. Danach muss das Ergebnis, welches wir von hier an NodeValues nennen, mit dem letzten Term verrechnet werden. Auch der letzte Term muss von jeder Schicht mit den jeweils eigenen Werten gerechnet werden, daher ist das auch der letzte Schritt. 
 
 Als erstes betrachten wir die Ableitung der Cost Funktion:
-![[Pasted image 20230921000346.png]]
+$$\frac{ dc }{ da_{ 2 } }$$
 So ungefähr verlief die Rechnung:
-Cost(Targets, Outputs) = (Targets - Outputs)² 
+$Cost(Targets, Outputs) = (Targets - Outputs)^2$
 
 Es gibt eine verallgemeinerte Formel, mit der man recht schnell Simple Ableitungen bilden kann:
-
-![[Pasted image 20230921004843.png]]
-
+$$\frac{dy}{dx}=nax^{n-1}$$
 also wäre demnach die Ableitung der Cost Funktion:
-
-![[Pasted image 20230921004959.png]]
-
+$$\frac{dc}{da_2}=2(Targets-Outputs)$$
 Diese Formel kann man in der Layer Klasse umsetzten:
 
 ```Java
@@ -446,13 +450,12 @@ private double CostAbleitung(double activation, double expectedOutput) {
 ```
 
 Jetzt wollen wir uns die Ableitung der Sigmoid Funktion ansehen, also das Ergebnis von
-![[Pasted image 20230921002631.png]]
+$$\frac{da_2}{dZ_2}$$
 die Ableitung so zu bilden, wie wir es zuvor gemacht haben, ist recht aufwendig, daher können wir uns einfach auf das Ergebnis anderer Mathematiker verlassen.
-Die Sigmoid Funktion`[2-S.84, 4]`:
-![[Pasted image 20230918125041.png]]
+Die Sigmoid Funktion`[2, 4]`:
+$$\sigma (x)=\frac{1}{(1+e^{-x})}$$
 Und ihre Ableitung:
-![[Pasted image 20230921001429.png]]
-
+$$\sigma '(x)=\sigma (x)(1-\sigma(x))$$
 Daraus lässt sich eine Einfach Methode bauen, die wir dann aufrufen können. Wir fügen die Methode ActivationDerivative(double weightedInput) in unserer Sigmoid Klasse hinzu.
 
 ```Java
@@ -473,38 +476,28 @@ Die Sigmoid Funktion und ihre Ableitung benötigen die Gewichteten Inputs als Ei
 
 Der letzte Term ist die der Input im Bezug zu den Gewichten.
 Dabei gilt 
-
-![[Pasted image 20230921230613.png]]
-
+$$Z_2 = a_1*w_2$$
 Also wird die Ableitung demnach so gebildet:
-
-![[Pasted image 20230921230922.png]]
-
-![[Pasted image 20230921231146.png]]
-
-![[Pasted image 20230921231221.png]]
-
-![[Pasted image 20230921231251.png]]
-
-Der Limes ist hier nicht einmal mehr nötig. Um es einmal in Worte zu fassen, bedeutet diese Ableitung einfach nur, dass die Änderungsrate im Bezug auf w<sub>2</sub> vollständig von den Inputs ![[Pasted image 20230921231554.png]] abhängig ist. Also wenn ![[Pasted image 20230921231606.png]] = 0 ist, dann haben die Gewichte auch keinen Einfluss mehr. Wenn ![[Pasted image 20230921231638.png]] = 1 ist, dann ist der einfluss von den Gewichten genau so groß, wie die Gewichte selbst sind. Wenn ![[Pasted image 20230921231721.png]] = 2 ist, dann haben die Gewichte einen Doppelten Einfluss und so weiter. 
+$$\frac{\Delta Z_2}{\Delta w_2}=\frac{a_1*(w_2+h)-a_1*w_2}{h}$$
+$$\frac{\Delta Z_2}{\Delta w_2}=\frac{a_1*w_2+a_1*h-a_1*w_2}{h}$$
+$$\frac{\Delta Z_2}{\Delta w_2}=\frac{a_1*h}{h}$$
+$$\frac{\Delta Z_2}{\Delta w_2}=a_1$$
+Der Limes ist hier nicht einmal mehr nötig. Um es einmal in Worte zu fassen, bedeutet diese Ableitung einfach nur, dass die Änderungsrate im Bezug auf $w_2$ vollständig von den Inputs $a_1$ abhängig ist. Also wenn $a_1$ = 0 ist, dann haben die Gewichte auch keinen Einfluss mehr. Wenn $a_1$ = 1 ist, dann ist der Einfluss von den Gewichten genau so groß, wie die Gewichte selbst sind. Wenn $a_1$ = 2 ist, dann haben die Gewichte einen Doppelten Einfluss und so weiter. 
 
 Wir suchen nach dieser Ableitung:
-
-![[Pasted image 20230920235100.png]]
-
+$$\frac{ dc }{ dw_{ 2 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ dw_{ 2 } }$$
 und haben jetzt alle Terme zusammen, die darin vorkommen. Der erste Term war 
-![[Pasted image 20230921004959.png]]
+$$\frac{dc}{da_2}=2(Targets-Outputs)$$
 Welchen wir in der Methode CostAbleitung festgehalten haben.
 Der Zweite Term war
-
-![[Pasted image 20230921001429.png]]
-
+$$\sigma '(x)=\sigma (x)(1-\sigma(x))$$
 Diesen haben wir in der Sigmoid Activation Klasse bereits in der activationAbleitung Methode festgehalten.
 Der Dritte Term war
-
-![[Pasted image 20230921231251.png]]
-
-wobei ![[Pasted image 20230921231638.png]] den unbearbeiteten Inputs dieser Schicht entspricht, und in der Querry bereits aufgefangen wurden und im 2 Dimensionalen Array "Inputs" abgespeichert wurden.
+$$\frac{\Delta Z_2}{\Delta w_2}=a_1$$
+wobei $a_1$ den unbearbeiteten Inputs dieser Schicht entspricht, und in der Querry bereits aufgefangen wurden und im 2 Dimensionalen Array "Inputs" abgespeichert wurden.
 
 ## Learn Algorithmus
 
@@ -527,9 +520,7 @@ ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Näch
 ### UpdateAllGradients
 
 Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil-Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu Ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
-
-![[Pasted image 20230921231251.png]]
-
+$$\frac{\Delta Z_2}{\Delta w_2}=a_1$$
 Mit anderen Worten, die NodeValues werden mit den unveränderten Inputs in die Outputschicht multipliziert.
 
 Wie werden dann alle Gewichte einer jeden versteckten Schicht berechnet? 
@@ -584,7 +575,8 @@ In der Aufrufenden Methode, UpdateAllGradients(), werden die NodeValues zwischen
 public void UpdateGradients(double[] nodeValues) {
     for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
         for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
-            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];                CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+	            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
+	            CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
         }
     }
 }
@@ -1334,6 +1326,747 @@ Im Vergleich zu den vorherigen Testreihen, wird die Genauigkeit von über 90% be
 
 Um die Ergebnisse ein wenig besser Einordnen zu können, betrachten wir einmal, wie ein Nicht funktionierendes Netzwerk aussehen würde. Wir nehmen an, dass das Netzwerk jedes Bild als eine 0 Klassifiziert. Dann wäre das Netzwerk in 10% der Fällen immer noch richtig. Das heißt wenn es tatsächlich dazu kommt, dass das Ergebnis des Netzwerkes immer 0 ist, dann läge die Genauigkeit bei 10%, und nicht bei 0%, wie man fälschlicherweise annehmen könnte. In dem Fall, dass das Netzwerk tatsächlich eine geringere Genauigkeit als ungefähr 10% erzielt, dann muss davon ausgegangen werden, dass das Netzwerk Gezielt Fehler macht. Unter Umständen Maximiert das Netzwerk den Fehler dann. Dadurch würde auf jeden Fall die Vermutung nahe liegen, dass das Netzwerk bereits Korrekt Klassifizieren kann, allerdings gezielt das Falsche Ergebnis ausgibt. In den meisten Fällen würde ein nicht funktionierendes Netzwerk allerdings rund um die 10% Genauigkeit erreichen, das heißt zwischen 8% und 12%. Wenn das Netzwerk nicht verstanden hat, was es tun soll, und einfach nur wild rät, wird es ebenfalls ungefähr bei 10% Genauigkeit landen, mit leichten Abweichungen. Wenn wir es also mit einem Netzwerk zu tun haben, das 20% Genauigkeit erreicht, dann können wir davon ausgehen, dass es bereits ein gewisses Verständnis darüber erlangt hat, wie die Bilder zu klassifizieren sind. 
 
+Wenden wir uns nun Möglichkeiten zu, das Netzwerk zu verbessern. Dazu sehen wir uns zuerst die Biases, und danach die Batches an.
+
+# Biases
+## Erklärung zum Nutzen
+
+Die Erklärung und die Bilder in diesem Abschnitt basieren auf einem Thread aus stackoverflow[5], sowie eigenen Erfahrungen.
+
+Biases geben uns die Möglichkeit, die Schwellwert Funktion zu verschieben. Kurzgefasst, das Netzwerk wird Felxibler. 
+Um etwas genauer zu werden, sehen wir uns einmal an, wie die Graphen aussehen im Bezug auf die Inputs $x$, nachdem sie mit den Gewichten $w$ verrechnet werden. Für $w$ nehmen wir als Beispiels Werte 0.5, 1, und 3.
+
+![[Pasted image 20231005144238.png]]
+
+Alle Graphen verlaufen durch den 0 Punkt. Dies sorgt allerdings auch dafür, dass das Netzwerk recht unflexibel ist. Nehmen wir an, dass es zwei Klassen gibt, die das Netzwerk unterscheiden können soll, und Klasse 1 befindet sich in $x$ < 1 sowie $y$ < 1, dann wäre es schlicht unmöglich, mit einem dieser Graphen eine einfache Klassifizierung vorzunehmen. Wenn wir allerdings einen Bias $b$ addieren, dann lässt sich so ein Graph entlang der $y$ Achse verschieben.
+
+![[Pasted image 20231005144628.png]]
+
+Mit diesem Graphen wäre unser Beispiel dann gelöst, alle Elemente der Klasse 1 liegen unterhalb des Graphen, während alle Elemente der Klasse 2 größer als 1 in beiden Achsen sind, und damit über dem Graphen liegen.
+Um die Berechnung im Neuron einmal darzustellen, hier eine Graphik:
+
+![[Pasted image 20231005133406.png]]
+
+Nachdem die Gewichte mit den Inputs multipliziert wurden, werden die Biases dazu addiert. Dieser Wert wird dann an die Schwellenfunktion übergeben. Hier ein beispiel mit der Sigmoid Funktion:
+
+![[Pasted image 20231005145933.png]]
+
+Der Bias von 2 und -2 verschiebt die Sigmoid Funktion nach Rechts und nach Links. Dadurch hat das Netzwerk eine Größere Kontrolle darüber, wie Stark ein Input sein muss, um ein Neuron/Knoten zu Aktivieren.
+
+## Mathematische Umsetzung
+
+Sehen wir uns als nächstes also an, was wir im Netzwerk ändern müssen. Bisher sah die Rechnung so aus:$$Z_2 = a_1 * w_2$$jetzt Addieren wir allerdings noch den Bias: $$Z_2 = a_1 * w_2 + b$$
+Zuvor haben wir $Z_2$ im Bezug auf $w_2$ betrachtet, um die Ableitung zu bilden. Nun müssen wir dies Eigentlich noch einmal machen, um festzustellen, ob wir an unseren bisherigen Formeln etwas ändern müssten.
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1 * (w_2+h) + b -(a_1 * w_2 + b) }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1*w_2+a_1*h + b -a_1 * w_2 - b }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1*w_2+a_1*h-a_1 * w_2 }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{a_1*h }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = a_1$$
+Die Konstante $c$ fällt einfach weg, und hat keinen Einfluss. Daher müssen wir am bestehenden Code nichts weiter hinzufügen. Aber wie genau berechnen wir die Änderungsrate für die Biases?
+
+Die Änderungsrate der Biases kann ebenfalls mit der Ableitung berechnet werden, also schreiben wir:
+$$\frac{ dc }{ db_{ 2 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ db_{ 2 } }$$
+Die ersten beiden Terme sind uns bereits bekannt, und im Code haben wir sie NodeValues genannt. Nur der letzte Term hat sich verändert, also müssen wir die Ableitung bilden.
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 + b+h -(a_1 * w_2 + b) }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 + b+h -a_1 * w_2 - b }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 +h -a_1 * w_2 }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ h  }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = 1$$
+Die Ableitung entspricht einfach 1. Das bedeutet, dass die Änderungsrate für die Biases in unserem Code so aussehen müsste:
+$$Änderungsrate_b = 1*NodeValues$$
+
+## Biases im Code
+
+Zunächst brauchen wir genau wie bei den Gewichten und der Änderungsrate für die Gewichte, eine Instanzvariable für die Biases in der Layer Klasse, und eine Instanzvariable für die Änderungsrate der Biases:
+
+```java
+double[] bias;
+// --> Steigung der Cost Funktion im Bezug auf die Biases b
+double[] CostSteigungB;
+```
+
+Die Biases werden zum Schluss verrechnet, und das auch nur einmal, und nicht mit jedem Gewicht. Daher brauchen wir nur ein einfaches Array, und dieses muss so groß sein, wie die Anzahl an Knoten in der Schicht. Genau wie die Gewichte, müssen die Biases ebenfalls mit Zufallszahlen initialisiert werden. Dies geschieht im Konstruktor:
+
+```java
+bias = NNMath.RandomDoubleArray(numOutputNodes);
+CostSteigungB = new double[numOutputNodes];
+```
+
+Dann kommen wir zu Methode "CalculateOutputs". Anstatt die Variable weightedInput am Anfang der äußeren Schleife mit 0 zu initialisieren, fangen wir mit den Biases an:
+
+```java
+public double[] CalculateOutputs(double[] inputs) {
+    this.inputs = inputs;
+    Activation activ = Activation.geActivation();
+    for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+        //double weightedInput = 0;
+        //Wird nun mit dem Bias initialisiert
+        double weightedInput = bias[nodeOut];
+        for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+            weightedInput += inputs[nodeIn] * weights[nodeOut][nodeIn];
+        }
+        weightedInputs[nodeOut] = weightedInput;
+        activations[nodeOut] = activ.ActivationFunction(weightedInput);
+    }
+    return activations;
+}
+```
+
+Jetzt muss die Methode "UpdateGradients" angepasst werden, damit die Änderungsraten nicht nur für die gewichte, sondern auch für die Biases gespeichert werden.
+
+```java
+public void UpdateGradients(double[] nodeValues) {
+    for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+        for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
+            CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+        }
+        //Hier werden die Änderungsraten für die Biases gespeichert
+        CostSteigungB[nodeOut] = 1 * nodeValues[nodeOut];
+    }
+}
+```
+
+Und zuletzt  müssen die Änderungsraten auch von den Biases abgezogen werden, und danach müssen die Änderungsraten zurückgesetzt werden. Die Änderungsrate muss ebenfalls mit der LearnRate multipliziert werden.
+
+```java
+public void ApplyGradient(double learnrate) {
+    for (int i = 0; i < numOutputNodes; i++) {
+        for (int j = 0; j < numInputNodes; j++) {
+            weights[i][j] -= CostSteigungW[j][i] * learnrate;
+        }
+        //Die Änderungsraten der Biases müssen von den Biases abgezogen werden
+        bias[i] -= CostSteigungB[i] * learnrate;
+    }
+}
+public void ClearGradient() {
+    this.CostSteigungW = new double[numInputNodes][numOutputNodes];
+    //Die Änderungsraten für die Biases müssen auch zurückgesetzt werden
+    this.CostSteigungB = new double[numOutputNodes];
+}
+```
+
+Das Netzwerk verfügt nun über Biases, und damit über eine größere Flexibilität. Als nächstes Testen wir das neue Netzwerk.
+
+## Testreihen mit Biases
+
+Zunächst einmal Testen wir die LearnRate. Unter Umständen kann sich etwas geändert haben.
+
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.009</td>
+		<td>76,22%</td>
+		<td>76,61%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.008</td>
+		<td>72,43%</td>
+		<td>73,05%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.007</td>
+		<td>76,30%</td>
+		<td>78,00%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.006</td>
+		<td>78,16%</td>
+		<td>77,91%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.005</td>
+		<td>79,07%</td>
+		<td>80,02%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.004</td>
+		<td>78,64%</td>
+		<td>79,38%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>81,03%</td>
+		<td>81,46%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.002</td>
+		<td>79,05%</td>
+		<td>79,90%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.001</td>
+		<td>72,60%</td>
+		<td>73,36%</td>
+	</tr>
+</table>
+
+#### Mit Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.009</td>
+		<td>75,22%</td>
+		<td>75,30%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.008</td>
+		<td>78,36%</td>
+		<td>78,83%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.007</td>
+		<td>79,92%</td>
+		<td>80,95%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.006</td>
+		<td>79,24%</td>
+		<td>79,48%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.005</td>
+		<td>78,86%</td>
+		<td>79,74%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.004</td>
+		<td>78,98%</td>
+		<td>79,62%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>78,23%</td>
+		<td>78,52%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.002</td>
+		<td>78,28%</td>
+		<td>79,13%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.001</td>
+		<td>72,84%</td>
+		<td>73,47%</td>
+	</tr>
+</table>
+
+Im Vergleich ist nicht direkt sichtbar, ob das Netzwerk mit Biases bessere Ergebnisse erzielt. Bei einer LernRate von 0.003 sehen wir keine Verbesserung, sondern sogar eine niedrigere Genauigkeit.
+Dennoch ist es Ratsam, Netzwerke mit Biases zu verwenden. Nehmen wir an, alle Pixel in einem Bild wären leer, dann würde bei einem Netzwerk ohne Biases in jedem Output nur 0 als Ergebnis möglich sein. Sollten wir das Netzwerk darauf trainieren wollen, auch unbeschriebene Bilder erkennen zu können, wäre das Ohne Biases schlicht nicht möglich. In unserem beispiel mit dem MNIST Datensatz ist der nutzen leider nicht direkt sichtbar, aber für andere Aufgaben kann es unumgänglich sein, Biases zu verwenden.
+Zur Vollständigkeit hier noch ein Vergleich mit Training von verschieden vielen Epochen. Dabei ist auch keine große Verbesserung festzustellen. Unterschiede von 1-2% können dem Zufall zugeschrieben werden.
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,86%</td>
+		<td>88,33%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>10</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,08%</td>
+		<td>89,49%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>15</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,75%</td>
+		<td>90,15%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>20</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>90,57%</td>
+		<td>90,70%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>25</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,47%</td>
+		<td>91,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>30</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,91%</td>
+		<td>91,93%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>35</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,40%</td>
+		<td>91,53%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>40</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,20%</td>
+		<td>91,32%</td>
+	</tr>
+</table>
+
+#### Mit Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,98%</td>
+		<td>87,63%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>10</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,09%</td>
+		<td>89,58%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>15</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,87%</td>
+		<td>90,16%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>20</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,04%</td>
+		<td>91,15%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>25</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,31%</td>
+		<td>91,85%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>30</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>92,21%</td>
+		<td>92,32%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>35</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,77%</td>
+		<td>91,98%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>40</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>92,26%</td>
+		<td>92,44%</td>
+	</tr>
+</table>
+
+Eine Letzte Möglichkeit, vielleicht doch einen Nutzen Nutzen sichtbar zu machen, liegt in der Verringerung der Knoten in der Versteckten Schicht. 
+These: Die erhöhte Flexibilität könnte das Netzwerk dahingehend effizienter machen, dass es weniger Knoten braucht, um vergleichbare Ergebnisse zu erzielen.
+
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 10, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>70,48%</td>
+		<td>70,41%</td>
+	</tr>
+	<tr>
+		<td>[784, 20, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>82,34%</td>
+		<td>81,93%</td>
+	</tr>
+	<tr>
+		<td>[784, 30, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>81,99%</td>
+		<td>82,77%</td>
+	</tr>
+	<tr>
+		<td>[784, 40, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>83,50%</td>
+		<td>84,34%</td>
+	</tr>
+	<tr>
+		<td>[784, 50, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,64%</td>
+		<td>86,54%</td>
+	</tr>
+	<tr>
+		<td>[784, 60, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,35%</td>
+		<td>87,03%</td>
+	</tr>
+	<tr>
+		<td>[784, 70, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,36%</td>
+		<td>86,00%</td>
+	</tr>
+	<tr>
+		<td>[784, 80, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,50%</td>
+		<td>87,87%</td>
+	</tr>
+	<tr>
+		<td>[784, 90, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,62%</td>
+		<td>88,29%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,14%</td>
+		<td>87,74%</td>
+	</tr>
+	<tr>
+		<td>[784, 150, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,40%</td>
+		<td>89,08%</td>
+	</tr>
+	<tr>
+		<td>[784, 200, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,50%</td>
+		<td>90,08%</td>
+	</tr>
+</table>
+
+#### With Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 10, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>71,86%</td>
+		<td>72,21%</td>
+	</tr>
+	<tr>
+		<td>[784, 20, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>80,29%</td>
+		<td>81,08%</td>
+	</tr>
+	<tr>
+		<td>[784, 30, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>82,55%</td>
+		<td>82,88%</td>
+	</tr>
+	<tr>
+		<td>[784, 40, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>84,54%</td>
+		<td>85,50%</td>
+	</tr>
+	<tr>
+		<td>[784, 50, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>84,18%</td>
+		<td>85,02%</td>
+	</tr>
+	<tr>
+		<td>[784, 60, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,59%</td>
+		<td>86,27%</td>
+	</tr>
+	<tr>
+		<td>[784, 70, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,42%</td>
+		<td>85,95%</td>
+	</tr>
+	<tr>
+		<td>[784, 80, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,12%</td>
+		<td>87,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 90, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,76%</td>
+		<td>87,39%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,41%</td>
+		<td>87,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 150, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,31%</td>
+		<td>88,86%</td>
+	</tr>
+	<tr>
+		<td>[784, 200, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,98%</td>
+		<td>89,62%</td>
+	</tr>
+</table>
+
+Leider kann die These mit diesem Datensatz nicht bestätigt werden. Ein Anderer Datensatz könnte die These bestätigen, oder die These ist vollständig falsch.
+
+# Batches
+
+Bisher 
+
 
 
 ## ToDo
@@ -1361,3 +2094,12 @@ Um die Ergebnisse ein wenig besser Einordnen zu können, betrachten wir einmal, 
 - [x] Donnerstag 10 Uhr
 
 
+
+
+
+# Quellen
+1. B. Lenze, Einführung in die Mathematik neuronaler Netze. Berlin: Logos Verlag; 2009.
+2. T. Rashid, Neuronale Netze selbst programmieren - Ein verständlicher Einstieg mit Python. Paderborn: O’Reilly Verlag; 2017.
+3. S. Lague, How to Create a Neural Network (and Train it to Identify Doodles). Hrsg. auf dem YouTube Kanal [Sebastian Lague](https://www.youtube.com/@SebastianLague). Ohne Jahr [zitiert am 16. September 2023]. Abrufbar unter: URL: https://www.youtube.com/watch?v=hfMk-kjRv4c.
+4. URL: https://ichi.pro/de/ableitung-der-sigmoid-funktion-91708302791054
+5. URL: https://stackoverflow.com/questions/2480650/what-is-the-role-of-the-bias-in-neural-networks

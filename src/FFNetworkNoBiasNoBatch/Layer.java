@@ -1,14 +1,11 @@
-package FFNetwork;
+package FFNetworkNoBiasNoBatch;
 
 public class Layer {
 
     int numInputNodes, numOutputNodes;
     double[][] weights;
-    double[] bias;
     // --> Steigung der Cost Funktion im Bezug auf das Gewicht W
     double[][] CostSteigungW;
-    // --> Steigung der Cost Funktion im Bezug auf die Biases b
-    double[] CostSteigungB;
 
     double[] inputs;
     double[] weightedInputs;
@@ -23,18 +20,13 @@ public class Layer {
         weightedInputs = new double[numOutputNodes];
         activations = new double[numOutputNodes];
         CostSteigungW = new double[numInputNodes][numOutputNodes];
-
-        bias = NNMath.RandomDoubleArray(numOutputNodes);
-        CostSteigungB = new double[numOutputNodes];
     }
 
     public double[] CalculateOutputs(double[] inputs) {
         this.inputs = inputs;
         Activation activ = Activation.geActivation();
         for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
-            // double weightedInput = 0;
-            // Wird nun mit dem Bias initialisiert
-            double weightedInput = bias[nodeOut];
+            double weightedInput = 0;
             for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
                 weightedInput += inputs[nodeIn] * weights[nodeOut][nodeIn];
             }
@@ -76,8 +68,6 @@ public class Layer {
                 double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
                 CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
             }
-            //Hier werden die Änderungsraten für die Biases gespeichert
-            CostSteigungB[nodeOut] = 1 * nodeValues[nodeOut];
         }
     }
 
@@ -86,14 +76,10 @@ public class Layer {
             for (int j = 0; j < numInputNodes; j++) {
                 weights[i][j] -= CostSteigungW[j][i] * learnrate;
             }
-            //Die Änderungsraten der Biases müssen von den Biases abgezogen werden
-            bias[i] -= CostSteigungB[i]*learnrate;
         }
     }
 
     public void ClearGradient() {
         this.CostSteigungW = new double[numInputNodes][numOutputNodes];
-        //Die Änderungsraten für die Biases müssen auch zurückgesetzt werden
-        this.CostSteigungB = new double[numOutputNodes];
     }
 }

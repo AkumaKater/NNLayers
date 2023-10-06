@@ -7,8 +7,9 @@ import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import FFNetwork.ConfigLoader;
-import FFNetwork.NeuralNetwork;
+//import FFNetworkNoBiasNoBatch.*;
+
+import FFNetwork.*;
 
 public class MNISTHTML {
     String html;
@@ -49,7 +50,7 @@ public class MNISTHTML {
         } else {
             String[] erg = { "HLayersSizes", "DataSize", "Epochen", "BatchSize", "Learnrate", "ACtrainingD",
                     "ACtestD" };
-                    tag("table").tr(erg);
+            tag("table").tr(erg);
         }
         String[] con = { Arrays.toString(conf.getLayers()), "" + conf.getSplitIndex(),
                 "" + conf.getTrainingCycles(),
@@ -155,7 +156,7 @@ public class MNISTHTML {
     public void writeHTML() {
         File file = new File(ConfigLoader.getConfig().getValue("Visualization"));
         try {
-             System.out.println(file.getAbsolutePath());
+            System.out.println(file.getAbsolutePath());
             FileWriter writer = new FileWriter(file);
             writer.write(getHtml());
             writer.close();
@@ -202,7 +203,7 @@ public class MNISTHTML {
 
     public void setHtml() {
         this.html = "<head>\n" + //
-                "\t<title>"+ConfigLoader.getConfig().getValue("PerformanceNotes")+"</title>\n" + //
+                "\t<title>" + ConfigLoader.getConfig().getValue("PerformanceNotes") + "</title>\n" + //
                 "\t<meta charset=\"UTF-8\">\n" + //
                 "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n" + //
                 "\t<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n" + //

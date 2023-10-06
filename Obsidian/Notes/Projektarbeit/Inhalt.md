@@ -11,7 +11,7 @@
 	2. [[Grundlagen#Abgrenzung/ welche Art von Netzwerk wird hier gebaut?|Abgrenzung/ welche Art von Netzwerk werde ich hier bauen]]
 	3. [[Grundlagen#Grundlegender Aufbau eines Netztes (Initialisieren/Querry/learn)]]
 	4. [[Grundlagen#Der MNIST Datensatz|Der MNIST Datensatz]]
-4. [[Mathematische Grundlagen]]
+4. [[Projektarbeit]]
 	1. Grundlage für die Querry (input x weight + bias -> Activation FUnktion)
 	2. Activation funktions
 	3. Grundlagen für Backpropagation
