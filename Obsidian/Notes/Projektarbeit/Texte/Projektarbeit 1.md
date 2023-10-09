@@ -729,598 +729,111 @@ Die LearnRate sollte mittlerweile bekannt sein. Dabei handelt es sich um eine Za
 Kommen wir nun zu den Testreihen. Sehen wir uns zunächst einmal an, wie verlässlich das Netzwerk Arbeitet. Dazu initialisieren wir das Netzwerk mit einer Reihe Test Einstellungen. Das Netzwerk soll eine versteckte Schicht haben, mit 100 Knoten. Wir Trainieren auf der vollen Größe des Datensatzes, das heißt 60.000 Bilder. Eine Epoche sollte für die ersten Testreihen ausreichend sein. Zur BatchSize kommen wir später, im Moment liegt sie bei eins. Das heißt, dass immer nur ein Bild betrachtet und gelernt wird. Die LearnRate stellen wir einfach mal auf 0.25 ein, diese Rate hat sich für einfache Feed Forward Netzwerke bewährt. Diese Einstellungen werden ausgegeben, und in den Letzten beiden Spalten werden jeweils die Genauigkeit des Netzwerkes auf den Trainings Daten und auf den Test Daten eingetragen. Um die Genauigkeit zu berechnen, wird einfach der Gesamte Datensatz einmal durch die Querry des Netzwerkes berechnet, und der Anteil an Korrekt Klassifizierten Bildern ist die Genauigkeit des Netzwerkes.
 Hier sind die ersten 6 Durchläufe:
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>13,11%</td>
-		<td>12,53%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>24,16%</td>
-		<td>24,16%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>18,74%</td>
-		<td>18,41%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>25,66%</td>
-		<td>25,80%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>24,06%</td>
-		<td>24,69%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.25</td>
-		<td>13,70%</td>
-		<td>13,27%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[780, 100, 10]|60000|1|1|0.25|13,11%|12,53%|
+|[780, 100, 10]|60000|1|1|0.25|24,16%|24,16%|
+|[780, 100, 10]|60000|1|1|0.25|18,74%|18,41%|
+|[780, 100, 10]|60000|1|1|0.25|25,66%|25,80%|
+|[780, 100, 10]|60000|1|1|0.25|24,06%|24,69%|
+|[780, 100, 10]|60000|1|1|0.25|13,70%|13,27%|
+
 
 Zunächst fällt auf, dass die Ergebnisse stark schwanken. Das lässt darauf schließen, dass die LearnRate zu hoch eingestellt ist. Die Nächste Testreihe sollte mit verschiedenen Raten gemacht werden.
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.01</td>
-		<td>74,44%</td>
-		<td>74,44%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.015</td>
-		<td>66,98%</td>
-		<td>67,23%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.02</td>
-		<td>66,03%</td>
-		<td>65,82%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.025</td>
-		<td>59,86%</td>
-		<td>60,67%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.03</td>
-		<td>51,43%</td>
-		<td>51,62%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.035</td>
-		<td>56,43%</td>
-		<td>56,73%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.04</td>
-		<td>51,18%</td>
-		<td>50,81%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.045</td>
-		<td>53,51%</td>
-		<td>53,72%</td>
-	</tr>
-	<tr>
-		<td>[780, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.05</td>
-		<td>47,86%</td>
-		<td>47,80%</td>
-	</tr>
-	</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[780, 100, 10]|60000|1|1|0.01|74,44%|74,44%|
+|[780, 100, 10]|60000|1|1|0.015|66,98%|67,23%|
+|[780, 100, 10]|60000|1|1|0.02|66,03%|65,82%|
+|[780, 100, 10]|60000|1|1|0.025|59,86%|60,67%|
+|[780, 100, 10]|60000|1|1|0.03|51,43%|51,62%|
+|[780, 100, 10]|60000|1|1|0.035|56,43%|56,73%|
+|[780, 100, 10]|60000|1|1|0.04|51,18%|50,81%|
+|[780, 100, 10]|60000|1|1|0.045|53,51%|53,72%|
+|[780, 100, 10]|60000|1|1|0.05|47,86%|47,80%|
+	
+	
 
 Wie unschwer zu erkennen ist, nimmt die Genauigkeit der Netzwerke ab, je höher die LearnRate ist. Wahrscheinlich muss die LearnRate weiter verringert werden.
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.009</td>
-			<td>77,33%</td>
-			<td>77,70%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.008</td>
-			<td>73,47%</td>
-			<td>74,08%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.007</td>
-			<td>74,50%</td>
-			<td>75,37%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.006</td>
-			<td>77,84%</td>
-			<td>78,80%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.005</td>
-			<td>80,05%</td>
-			<td>81,09%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.004</td>
-			<td>78,94%</td>
-			<td>79,47%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.003</td>
-			<td>79,45%</td>
-			<td>79,77%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.002</td>
-			<td>79,27%</td>
-			<td>79,61%</td>
-		</tr>
-		<tr>
-			<td>[780, 100, 10]</td>
-			<td>60000</td>
-			<td>1</td>
-			<td>1</td>
-			<td>0.001</td>
-			<td>74,58%</td>
-			<td>75,27%</td>
-		</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|		
+|--|---|--|--|--|--|--|
+|[780, 100, 10]|60000|1|1|0.009|77,33%|77,70%|
+|[780, 100, 10]|60000|1|1|0.008|73,47%|74,08%|
+|[780, 100, 10]|60000|1|1|0.007|74,50%|75,37%|
+|[780, 100, 10]|60000|1|1|0.006|77,84%|78,80%|
+|[780, 100, 10]|60000|1|1|0.005|80,05%|81,09%|
+|[780, 100, 10]|60000|1|1|0.004|78,94%|79,47%|
+|[780, 100, 10]|60000|1|1|0.003|79,45%|79,77%|
+|[780, 100, 10]|60000|1|1|0.002|79,27%|79,61%|
+|[780, 100, 10]|60000|1|1|0.001|74,58%|75,27%|
+	
 
 Diese Ergebnisse sehen schon viel besser aus. Es ist ersichtlich, dass sich bei einer LearnRate von 0.004 und kleiner keine Steigerung der Genauigkeit mehr feststellen lässt. Daher versuchen wir im nächsten Schritt die Epochen zu erhöhen. Durch das wiederholte lernen des Datensatzes sollten bessere Ergebnisse erzielt werden. Die LearnRate setzten wir hierbei auf 0.003, da wir in der letzten Testreihe Feststellen konnten, dass sich der die Optimale LearnRate zwischen 0.006 und 0.002 befinden muss, entscheiden wir uns für 0.003. Bei mehr Epochen können wir ruhig eine kleinere LearnRate wählen, da das Netzwerk genug Zeit haben müsste, um ein Tiefpunkt zu finden.
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,86%</td>
-		<td>88,33%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>10</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,08%</td>
-		<td>89,49%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>15</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,75%</td>
-		<td>90,15%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>20</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>90,57%</td>
-		<td>90,70%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,47%</td>
-		<td>91,72%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>30</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,91%</td>
-		<td>91,93%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>35</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,40%</td>
-		<td>91,53%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>40</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,20%</td>
-		<td>91,32%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 10]|60000|5|1|0.003|87,86%|88,33%|
+|[784, 100, 10]|60000|10|1|0.003|89,08%|89,49%|
+|[784, 100, 10]|60000|15|1|0.003|89,75%|90,15%|
+|[784, 100, 10]|60000|20|1|0.003|90,57%|90,70%|
+|[784, 100, 10]|60000|25|1|0.003|91,47%|91,72%|
+|[784, 100, 10]|60000|30|1|0.003|91,91%|91,93%|
+|[784, 100, 10]|60000|35|1|0.003|91,40%|91,53%|
+|[784, 100, 10]|60000|40|1|0.003|91,20%|91,32%|
+
 
 Bei dem ersten Versuch wurde der Gesamte Datensatz 5 mal gelernt. Im Vergleich zu den Vorherigen Tests lässt sich bereits eine Steigerung der Genauigkeit um fast 8% erkennen. Bei noch mehr Epochen lässt sich weiterhin erkennen, dass sich die Ergebnisse verbessern, allerdings konvergieren die Ergebnisse langsam gegen 92%. Außerdem dauert es mittlerweile auch sehr lange, die vielen Epochen zu trainieren. 
 
 Bisher haben wir alle Netzwerke mit einer Versteckten Schicht Trainiert, die genau 100 Knoten beherbergt. Die nächsten Versuchsreihen haben verschiedene Konfigurationen für die Versteckten Schichten. Wir sehen uns einige Variationen im Bezug auf Anzahl der Schichten sowie Anzahl der Knoten an, allesamt mit einer LearnRate von 0.003 und einer Epochen Zahl von 25, da wir mit dieser Konfiguration bereits einige Erfolge erzielt haben. 
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,12%</td>
-		<td>90,80%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,36%</td>
-		<td>91,20%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,85%</td>
-		<td>91,81%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,36%</td>
-		<td>93,40%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,08%</td>
-		<td>92,93%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,25%</td>
-		<td>93,07%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,41%</td>
-		<td>93,36%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,50%</td>
-		<td>93,30%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,59%</td>
-		<td>93,67%</td>
-	</tr>
-	<tr>
-		<td>[784, 500, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>94,70%</td>
-		<td>94,45%</td>
-	</tr>
-	<tr>
-		<td>[784, 500, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>94,47%</td>
-		<td>93,88%</td>
-	</tr>
-	<tr>
-		<td>[784, 500, 300, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>94,78%</td>
-		<td>94,50%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 100, 10]|60000|25|1|0.003|91,12%|90,80%|
+|[784, 100, 100, 10]|60000|25|1|0.003|91,36%|91,20%|
+|[784, 100, 100, 10]|60000|25|1|0.003|91,85%|91,81%|
+|[784, 300, 10]|60000|25|1|0.003|93,36%|93,40%|
+|[784, 300, 10]|60000|25|1|0.003|93,08%|92,93%|
+|[784, 300, 10]|60000|25|1|0.003|93,25%|93,07%|
+|[784, 300, 100, 10]|60000|25|1|0.003|93,41%|93,36%|
+|[784, 300, 100, 10]|60000|25|1|0.003|93,50%|93,30%|
+|[784, 300, 100, 10]|60000|25|1|0.003|93,59%|93,67%|
+|[784, 500, 300, 10]|60000|25|1|0.003|94,70%|94,45%|
+|[784, 500, 300, 10]|60000|25|1|0.003|94,47%|93,88%|
+|[784, 500, 300, 10]|60000|25|1|0.003|94,78%|94,50%|
+
 
 Wir können anhand der Ergebnisse feststellen, dass mehr Schichten und mehr Knoten auch bessere Ergebnisse liefern. Wenn wir kleinere Schichten und weniger Knoten wählen, dann bekommen wir auch schwächere Ergebnisse.
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>76,93%</td>
-		<td>77,66%</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>75,46%</td>
-		<td>75,74%</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>81,43%</td>
-		<td>81,95%</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>80,76%</td>
-		<td>81,64%</td>
-	</tr>
-	</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 10, 10, 10]|60000|25|1|0.003|76,93%|77,66%|
+|[784, 10, 10, 10]|60000|25|1|0.003|75,46%|75,74%|
+|[784, 10, 10]|60000|25|1|0.003|81,43%|81,95%|
+|[784, 10, 10]|60000|25|1|0.003|80,76%|81,64%|
+	
+	
 
 Allerdings sind die Unterschiede in diesem Beispiels nur sehr klein. Interessant zu sehen ist aber, dass weit weniger Epochen nötig sind, um ein Netzwerk zu Trainieren, welches über mehr Schichten und Knoten verfügt. Hier Trainieren wir mit 2 versteckten Schichten und jeweils 300 und 100 Knoten:
 
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>83,78%</td>
-		<td>84,79%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>90,44%</td>
-		<td>90,72%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>10</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,78%</td>
-		<td>92,01%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>15</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>92,48%</td>
-		<td>92,27%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>20</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,27%</td>
-		<td>92,86%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,37%</td>
-		<td>93,46%</td>
-	</tr>
-	<tr>
-		<td>[784, 300, 100, 10]</td>
-		<td>60000</td>
-		<td>30</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>93,99%</td>
-		<td>93,88%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 300, 100, 10]|60000|1|1|0.003|83,78%|84,79%|
+|[784, 300, 100, 10]|60000|5|1|0.003|90,44%|90,72%|
+|[784, 300, 100, 10]|60000|10|1|0.003|91,78%|92,01%|
+|[784, 300, 100, 10]|60000|15|1|0.003|92,48%|92,27%|
+|[784, 300, 100, 10]|60000|20|1|0.003|93,27%|92,86%|
+|[784, 300, 100, 10]|60000|25|1|0.003|93,37%|93,46%|
+|[784, 300, 100, 10]|60000|30|1|0.003|93,99%|93,88%|
+
 
 Im Vergleich zu den vorherigen Testreihen, wird die Genauigkeit von über 90% bereits nach 5 Epochen anstatt den 20 Epochen erreicht, die nötig waren, um das kleinere Netzwerk mit einer Versteckten Schicht und 100 Knoten zu trainieren.
 
@@ -1456,610 +969,104 @@ Das Netzwerk verfügt nun über Biases, und damit über eine größere Flexibili
 Zunächst einmal Testen wir die LearnRate. Unter Umständen kann sich etwas geändert haben.
 
 #### Ohne Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.009</td>
-		<td>76,22%</td>
-		<td>76,61%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.008</td>
-		<td>72,43%</td>
-		<td>73,05%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.007</td>
-		<td>76,30%</td>
-		<td>78,00%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.006</td>
-		<td>78,16%</td>
-		<td>77,91%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.005</td>
-		<td>79,07%</td>
-		<td>80,02%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.004</td>
-		<td>78,64%</td>
-		<td>79,38%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>81,03%</td>
-		<td>81,46%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.002</td>
-		<td>79,05%</td>
-		<td>79,90%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.001</td>
-		<td>72,60%</td>
-		<td>73,36%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 10]|60000|1|1|0.009|76,22%|76,61%|
+|[784, 100, 10]|60000|1|1|0.008|72,43%|73,05%|
+|[784, 100, 10]|60000|1|1|0.007|76,30%|78,00%|
+|[784, 100, 10]|60000|1|1|0.006|78,16%|77,91%|
+|[784, 100, 10]|60000|1|1|0.005|79,07%|80,02%|
+|[784, 100, 10]|60000|1|1|0.004|78,64%|79,38%|
+|[784, 100, 10]|60000|1|1|0.003|81,03%|81,46%|
+|[784, 100, 10]|60000|1|1|0.002|79,05%|79,90%|
+|[784, 100, 10]|60000|1|1|0.001|72,60%|73,36%|
+
 
 #### Mit Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.009</td>
-		<td>75,22%</td>
-		<td>75,30%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.008</td>
-		<td>78,36%</td>
-		<td>78,83%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.007</td>
-		<td>79,92%</td>
-		<td>80,95%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.006</td>
-		<td>79,24%</td>
-		<td>79,48%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.005</td>
-		<td>78,86%</td>
-		<td>79,74%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.004</td>
-		<td>78,98%</td>
-		<td>79,62%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>78,23%</td>
-		<td>78,52%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.002</td>
-		<td>78,28%</td>
-		<td>79,13%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>1</td>
-		<td>1</td>
-		<td>0.001</td>
-		<td>72,84%</td>
-		<td>73,47%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 10]|60000|1|1|0.009|75,22%|75,30%|
+|[784, 100, 10]|60000|1|1|0.008|78,36%|78,83%|
+|[784, 100, 10]|60000|1|1|0.007|79,92%|80,95%|
+|[784, 100, 10]|60000|1|1|0.006|79,24%|79,48%|
+|[784, 100, 10]|60000|1|1|0.005|78,86%|79,74%|
+|[784, 100, 10]|60000|1|1|0.004|78,98%|79,62%|
+|[784, 100, 10]|60000|1|1|0.003|78,23%|78,52%|
+|[784, 100, 10]|60000|1|1|0.002|78,28%|79,13%|
+|[784, 100, 10]|60000|1|1|0.001|72,84%|73,47%|
+
 
 Im Vergleich ist nicht direkt sichtbar, ob das Netzwerk mit Biases bessere Ergebnisse erzielt. Bei einer LernRate von 0.003 sehen wir keine Verbesserung, sondern sogar eine niedrigere Genauigkeit.
 Dennoch ist es Ratsam, Netzwerke mit Biases zu verwenden. Nehmen wir an, alle Pixel in einem Bild wären leer, dann würde bei einem Netzwerk ohne Biases in jedem Output nur 0 als Ergebnis möglich sein. Sollten wir das Netzwerk darauf trainieren wollen, auch unbeschriebene Bilder erkennen zu können, wäre das Ohne Biases schlicht nicht möglich. In unserem beispiel mit dem MNIST Datensatz ist der nutzen leider nicht direkt sichtbar, aber für andere Aufgaben kann es unumgänglich sein, Biases zu verwenden.
 Zur Vollständigkeit hier noch ein Vergleich mit Training von verschieden vielen Epochen. Dabei ist auch keine große Verbesserung festzustellen. Unterschiede von 1-2% können dem Zufall zugeschrieben werden.
 #### Ohne Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,86%</td>
-		<td>88,33%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>10</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,08%</td>
-		<td>89,49%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>15</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,75%</td>
-		<td>90,15%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>20</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>90,57%</td>
-		<td>90,70%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,47%</td>
-		<td>91,72%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>30</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,91%</td>
-		<td>91,93%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>35</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,40%</td>
-		<td>91,53%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>40</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,20%</td>
-		<td>91,32%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 10]|60000|5|1|0.003|87,86%|88,33%|
+|[784, 100, 10]|60000|10|1|0.003|89,08%|89,49%|
+|[784, 100, 10]|60000|15|1|0.003|89,75%|90,15%|
+|[784, 100, 10]|60000|20|1|0.003|90,57%|90,70%|
+|[784, 100, 10]|60000|25|1|0.003|91,47%|91,72%|
+|[784, 100, 10]|60000|30|1|0.003|91,91%|91,93%|
+|[784, 100, 10]|60000|35|1|0.003|91,40%|91,53%|
+|[784, 100, 10]|60000|40|1|0.003|91,20%|91,32%|
+
 
 #### Mit Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>86,98%</td>
-		<td>87,63%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>10</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,09%</td>
-		<td>89,58%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>15</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,87%</td>
-		<td>90,16%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>20</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,04%</td>
-		<td>91,15%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>25</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,31%</td>
-		<td>91,85%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>30</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>92,21%</td>
-		<td>92,32%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>35</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>91,77%</td>
-		<td>91,98%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>40</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>92,26%</td>
-		<td>92,44%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 100, 10]|60000|5|1|0.003|86,98%|87,63%|
+|[784, 100, 10]|60000|10|1|0.003|89,09%|89,58%|
+|[784, 100, 10]|60000|15|1|0.003|89,87%|90,16%|
+|[784, 100, 10]|60000|20|1|0.003|91,04%|91,15%|
+|[784, 100, 10]|60000|25|1|0.003|91,31%|91,85%|
+|[784, 100, 10]|60000|30|1|0.003|92,21%|92,32%|
+|[784, 100, 10]|60000|35|1|0.003|91,77%|91,98%|
+|[784, 100, 10]|60000|40|1|0.003|92,26%|92,44%|
+
 
 Eine Letzte Möglichkeit, vielleicht doch einen Nutzen Nutzen sichtbar zu machen, liegt in der Verringerung der Knoten in der Versteckten Schicht. 
 These: Die erhöhte Flexibilität könnte das Netzwerk dahingehend effizienter machen, dass es weniger Knoten braucht, um vergleichbare Ergebnisse zu erzielen.
 
 #### Ohne Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>70,48%</td>
-		<td>70,41%</td>
-	</tr>
-	<tr>
-		<td>[784, 20, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>82,34%</td>
-		<td>81,93%</td>
-	</tr>
-	<tr>
-		<td>[784, 30, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>81,99%</td>
-		<td>82,77%</td>
-	</tr>
-	<tr>
-		<td>[784, 40, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>83,50%</td>
-		<td>84,34%</td>
-	</tr>
-	<tr>
-		<td>[784, 50, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>85,64%</td>
-		<td>86,54%</td>
-	</tr>
-	<tr>
-		<td>[784, 60, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>86,35%</td>
-		<td>87,03%</td>
-	</tr>
-	<tr>
-		<td>[784, 70, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>85,36%</td>
-		<td>86,00%</td>
-	</tr>
-	<tr>
-		<td>[784, 80, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,50%</td>
-		<td>87,87%</td>
-	</tr>
-	<tr>
-		<td>[784, 90, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,62%</td>
-		<td>88,29%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,14%</td>
-		<td>87,74%</td>
-	</tr>
-	<tr>
-		<td>[784, 150, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>88,40%</td>
-		<td>89,08%</td>
-	</tr>
-	<tr>
-		<td>[784, 200, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>89,50%</td>
-		<td>90,08%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 10, 10]|60000|5|1|0.003|70,48%|70,41%|
+|[784, 20, 10]|60000|5|1|0.003|82,34%|81,93%|
+|[784, 30, 10]|60000|5|1|0.003|81,99%|82,77%|
+|[784, 40, 10]|60000|5|1|0.003|83,50%|84,34%|
+|[784, 50, 10]|60000|5|1|0.003|85,64%|86,54%|
+|[784, 60, 10]|60000|5|1|0.003|86,35%|87,03%|
+|[784, 70, 10]|60000|5|1|0.003|85,36%|86,00%|
+|[784, 80, 10]|60000|5|1|0.003|87,50%|87,87%|
+|[784, 90, 10]|60000|5|1|0.003|87,62%|88,29%|
+|[784, 100, 10]|60000|5|1|0.003|87,14%|87,74%|
+|[784, 150, 10]|60000|5|1|0.003|88,40%|89,08%|
+|[784, 200, 10]|60000|5|1|0.003|89,50%|90,08%|
+
 
 #### With Bias
-<table>
-	<tr>
-		<td>HLayersSizes</td>
-		<td>DataSize</td>
-		<td>Epochen</td>
-		<td>BatchSize</td>
-		<td>Learnrate</td>
-		<td>ACtrainingD</td>
-		<td>ACtestD</td>
-	</tr>
-	<tr>
-		<td>[784, 10, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>71,86%</td>
-		<td>72,21%</td>
-	</tr>
-	<tr>
-		<td>[784, 20, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>80,29%</td>
-		<td>81,08%</td>
-	</tr>
-	<tr>
-		<td>[784, 30, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>82,55%</td>
-		<td>82,88%</td>
-	</tr>
-	<tr>
-		<td>[784, 40, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>84,54%</td>
-		<td>85,50%</td>
-	</tr>
-	<tr>
-		<td>[784, 50, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>84,18%</td>
-		<td>85,02%</td>
-	</tr>
-	<tr>
-		<td>[784, 60, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>85,59%</td>
-		<td>86,27%</td>
-	</tr>
-	<tr>
-		<td>[784, 70, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>85,42%</td>
-		<td>85,95%</td>
-	</tr>
-	<tr>
-		<td>[784, 80, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,12%</td>
-		<td>87,72%</td>
-	</tr>
-	<tr>
-		<td>[784, 90, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>86,76%</td>
-		<td>87,39%</td>
-	</tr>
-	<tr>
-		<td>[784, 100, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>87,41%</td>
-		<td>87,72%</td>
-	</tr>
-	<tr>
-		<td>[784, 150, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>88,31%</td>
-		<td>88,86%</td>
-	</tr>
-	<tr>
-		<td>[784, 200, 10]</td>
-		<td>60000</td>
-		<td>5</td>
-		<td>1</td>
-		<td>0.003</td>
-		<td>88,98%</td>
-		<td>89,62%</td>
-	</tr>
-</table>
+
+|HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
+|--|---|--|--|--|--|--|
+|[784, 10, 10]|60000|5|1|0.003|71,86%|72,21%|
+|[784, 20, 10]|60000|5|1|0.003|80,29%|81,08%|
+|[784, 30, 10]|60000|5|1|0.003|82,55%|82,88%|
+|[784, 40, 10]|60000|5|1|0.003|84,54%|85,50%|
+|[784, 50, 10]|60000|5|1|0.003|84,18%|85,02%|
+|[784, 60, 10]|60000|5|1|0.003|85,59%|86,27%|
+|[784, 70, 10]|60000|5|1|0.003|85,42%|85,95%|
+|[784, 80, 10]|60000|5|1|0.003|87,12%|87,72%|
+|[784, 90, 10]|60000|5|1|0.003|86,76%|87,39%|
+|[784, 100, 10]|60000|5|1|0.003|87,41%|87,72%|
+|[784, 150, 10]|60000|5|1|0.003|88,31%|88,86%|
+|[784, 200, 10]|60000|5|1|0.003|88,98%|89,62%|
+
 
 Leider kann die These mit diesem Datensatz nicht bestätigt werden. Ein Anderer Datensatz könnte die These bestätigen, oder die These ist vollständig falsch.
 
@@ -2112,6 +1119,8 @@ public void learn(MnistMatrix[] batch) {
 - [x] Prüfungssystem Anmelden
 - [ ] Blocksatz
 - [x] Donnerstag 10 Uhr
+- [ ] bibTex
+- [ ] tabellern ein wenig Promoten
 
 
 

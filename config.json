@@ -1,7 +1,7 @@
-LayerSizes=784,200,10
+LayerSizes=784,100,10
 SplitIndex=60000
 TrainingCycles=5
-LearnRate=0.003
-BatchSize=1
-PerformanceNotes=FFN-Ausgabe/BiasTests/PN(LS#NoBias)V1.html
+LearnRate=0.01
+BatchSize=50
+PerformanceNotes=FFN-Ausgabe/BatchTest/PN(BatchTest-LR)V1.html
 Visualization=FFN-Ausgabe/Visualization.html

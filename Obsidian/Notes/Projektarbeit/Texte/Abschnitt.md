@@ -1,221 +1,734 @@
-## Learn Algorithmus
+# Biases
+## Erklärung zum Nutzen
 
-Wir fangen nun mit der Learn Methode an.
- ```java 
-// Training
-public void learn(MnistMatrix data) {
-	UpdateAllGradients(data);
-	ApplyAllGradients(this.learnRate);
-	ClearAllGradients();
-}
-```
+Die Erklärung und die Bilder in diesem Abschnitt basieren auf einem Thread aus stackoverflow[5], sowie eigenen Erfahrungen.
 
-UpdateAllGradients() wird die Methode sein, in der die Rechnungen aus dem letzten Kapital angewandt werden. Der Name kommt daher, dass die Ergebnisse der Rechnungen nicht sofort mit den Gewichten verrechnet werden, sondern zunächst als Steigung (Gradient) gespeichert wird. Dies liegt daran, dass später noch die Batches hinzukommen. Dabei handelt es sich um ein Konzept, bei dem der Durchschnitt mehrerer Berechnungen  als Änderung an den Gewichten verwendet wird. Für den Moment und zu Demonstrationszwecken gehen wir noch nicht im Code darauf ein. Es werden die Grundvoraussetzungen dennoch bereits jetzt geschaffen, um uns später Arbeit zu ersparen.
+Biases geben uns die Möglichkeit, die Schwellwert Funktion zu verschieben. Kurzgefasst, das Netzwerk wird Felxibler. 
+Um etwas genauer zu werden, sehen wir uns einmal an, wie die Graphen aussehen im Bezug auf die Inputs $x$, nachdem sie mit den Gewichten $w$ verrechnet werden. Für $w$ nehmen wir als Beispiels Werte 0.5, 1, und 3.
 
-ApplyAllGradients() wird dazu verwendet, um die Gradients mit den Gewichten zu verrechnen. 
-ClearAllGradients() setzt die Gradients einfach wieder auf Null, damit die Nächsten Rechnungen vorgenommen werden können.
+![[Pasted image 20231005144238.png]]
 
-### UpdateAllGradients
+Alle Graphen verlaufen durch den 0 Punkt. Dies sorgt allerdings auch dafür, dass das Netzwerk recht unflexibel ist. Nehmen wir an, dass es zwei Klassen gibt, die das Netzwerk unterscheiden können soll, und Klasse 1 befindet sich in $x$ < 1 sowie $y$ < 1, dann wäre es schlicht unmöglich, mit einem dieser Graphen eine einfache Klassifizierung vorzunehmen. Wenn wir allerdings einen Bias $b$ addieren, dann lässt sich so ein Graph entlang der $y$ Achse verschieben.
 
-Wie wir in den Rechnungen im letzten Kapitel gesehen haben, lässt sich die Ableitung für die verschiedenen Kosten Funktionen im Bezug auf die Gewichte der verschiedenen Schichten leicht erweitern. Die ersten Zwei Teil-Ableitungen, also die Ableitung der Cost Funktion und die Ableitung der Schwellwert Funktion der Output Schicht bleiben für jede Schicht gleich, sind so gesehen aber einzigartig in der Reihenfolge. Daher werden sie Initial berechnet in der Methode CalculateOutputLayerNodeValues(). Diese gibt dabei NodeValues zurück, die wir zwischenspeichern und dann übergeben können. Die NodeValues werden dann bereits für die Gewichte der Output Schicht zu Ende berechnet. Wie im letzten Kapitel gezeigt, fehlt nur noch die Multiplikation mit der Ableitung von Berechnung der Gewichte. 
+![[Pasted image 20231005144628.png]]
 
-![[Pasted image 20230921231251.png]]
+Mit diesem Graphen wäre unser Beispiel dann gelöst, alle Elemente der Klasse 1 liegen unterhalb des Graphen, während alle Elemente der Klasse 2 größer als 1 in beiden Achsen sind, und damit über dem Graphen liegen.
+Um die Berechnung im Neuron einmal darzustellen, hier eine Graphik[5]:
 
-Mit anderen Worten, die NodeValues werden mit den unveränderten Inputs in die Outputschicht multipliziert.
+![[Pasted image 20231005133406.png]]
 
-Wie werden dann alle Gewichte einer jeden versteckten Schicht berechnet? 
-Wie oben bereits beschrieben, werden für jede versteckte Schicht zwei Rechnungen zwischengeschoben, das sind jeweils die Ableitung für die Gewichtung in Bezug zu den Activations, sowie die Activations im Bezug zu den Gewichteten Inputs der vorherigen Schicht. Da die ersten Beiden Terme sich von der ersten Berechnung nicht unterscheiden, werden sie am besten wiederverwendet. Das heißt, sie sind ja bereits als NodeValues, also dem Ergebniss der CalculateOutputLayerNodeValues() Methode gespeichert. Daher übergeben wir die NodeValues der Methode CalculateOutputLayerNodeValues(), und übergeben sie der Methode CalculateHiddenLayerNodeValues(). Genau wie zuvor lassen wir uns die Ergebnisse als NodeValues übergeben, und speichern sie zwischen. Und genau wie zuvor, müssen sie noch mit der Ableitung der Gewichteten Inputs verrechnet werden, das heißt mit den ungewichteten Inputs der vorherigen Schicht.
-Dieser Schritt mit den CalculateHiddenLayerNodeValues() lässt sich in einer Schleife leicht auf alle Schichten Anwenden.
+Nachdem die Gewichte mit den Inputs multipliziert wurden, werden die Biases dazu addiert. Dieser Wert wird dann an die Schwellenfunktion übergeben. Hier ein beispiel mit der Sigmoid Funktion:
 
-Im Code sieht das dann so aus:
+![[Pasted image 20231005145933.png]]
+
+Der Bias von 2 und -2 verschiebt die Sigmoid Funktion nach Rechts und nach Links. Dadurch hat das Netzwerk eine Größere Kontrolle darüber, wie Stark ein Input sein muss, um ein Neuron/Knoten zu Aktivieren.
+
+## Mathematische Umsetzung
+
+Sehen wir uns als nächstes also an, was wir im Netzwerk ändern müssen. Bisher sah die Rechnung so aus:$$Z_2 = a_1 * w_2$$jetzt Addieren wir allerdings noch den Bias: $$Z_2 = a_1 * w_2 + b$$
+Zuvor haben wir $Z_2$ im Bezug auf $w_2$ betrachtet, um die Ableitung zu bilden. Nun müssen wir dies Eigentlich noch einmal machen, um festzustellen, ob wir an unseren bisherigen Formeln etwas ändern müssten.
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1 * (w_2+h) + b -(a_1 * w_2 + b) }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1*w_2+a_1*h + b -a_1 * w_2 - b }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{ a_1*w_2+a_1*h-a_1 * w_2 }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = \frac{a_1*h }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta w_2 } = a_1$$
+Die Konstante $c$ fällt einfach weg, und hat keinen Einfluss. Daher müssen wir am bestehenden Code nichts weiter hinzufügen. Aber wie genau berechnen wir die Änderungsrate für die Biases?
+
+Die Änderungsrate der Biases kann ebenfalls mit der Ableitung berechnet werden, also schreiben wir:
+$$\frac{ dc }{ db_{ 2 } }=
+\frac{ dc }{ da_{ 2 } }*
+\frac{ da_{ 2 } }{ dZ_{ 2 } }*
+\frac{ dZ_{ 2 } }{ db_{ 2 } }$$
+Die ersten beiden Terme sind uns bereits bekannt, und im Code haben wir sie NodeValues genannt. Nur der letzte Term hat sich verändert, also müssen wir die Ableitung bilden.
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 + b+h -(a_1 * w_2 + b) }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 + b+h -a_1 * w_2 - b }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ a_1 * w_2 +h -a_1 * w_2 }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = \frac{ h  }{ h }$$
+$$\frac{\Delta Z_2 }{\Delta b_2 } = 1$$
+Die Ableitung entspricht einfach 1. Das bedeutet, dass die Änderungsrate für die Biases in unserem Code so aussehen müsste:
+$$Änderungsrate_b = 1*NodeValues$$
+
+## Biases im Code
+
+Zunächst brauchen wir genau wie bei den Gewichten und der Änderungsrate für die Gewichte, eine Instanzvariable für die Biases in der Layer Klasse, und eine Instanzvariable für die Änderungsrate der Biases:
+
 ```java
-void UpdateAllGradients(MnistMatrix dataPoint) {
-    Querry(dataPoint.getInputs());
-
-    Layer outputLayer = layers[layers.length - 1];
-    double[] nodeValues = 
-    outputLayer.CalculateOutputLayerNodeValues(dataPoint.getTargets());
-    outputLayer.UpdateGradients(nodeValues);
-
-    for (int index = layers.length - 2; index >= 0; index--) {
-        Layer hiddenLayer = layers[index];
-        nodeValues = 
-	        hiddenLayer.CalculateHiddenLayerNodeValues(layers[index + 1], nodeValues);
-            hiddenLayer.UpdateGradients(nodeValues);
-    }
-}
+double[] bias;
+// --> Steigung der Cost Funktion im Bezug auf die Biases b
+double[] CostSteigungB;
 ```
 
-Und so sieht also der Backpropagation Algorithmus aus. Man fängt bei der letzten Schicht, der Output Schicht an, und passt die Gewichte an. Dann geht es weiter zur vorletzten Schicht und so weiter, bis zur Input Schicht. Die Gewichte werden sozusagen von Hinten nach vorne angepasst.
-Kommen wir nu zur Implementierung der CalculateOutputLayerNodeValues() und CalculateHiddenLayerNodeValues() Methoden.
+Die Biases werden zum Schluss verrechnet, und das auch nur einmal, und nicht mit jedem Gewicht. Daher brauchen wir nur ein einfaches Array, und dieses muss so groß sein, wie die Anzahl an Knoten in der Schicht. Genau wie die Gewichte, müssen die Biases ebenfalls mit Zufallszahlen initialisiert werden. Dies geschieht im Konstruktor:
 
-### CalculateOutputLayerNodeValues
-
-Sowohl die CalculateOutputLayerNodeValues() Methode, als auch die CalculateHiddenLayerNodeValues() Methode werden in der Layer Klasse implementiert.
-Die ersten NodeValues, die für die Output Schicht berechnet werden, entsprechen der Multiplikation aus der Ableitung der Cost Funktion und der Ableitung der Schwellwert Funktion der Output Schicht.
-Die NodeValues werden danach zurückgegeben.
 ```java
-public double[] CalculateOutputLayerNodeValues(double[] expectedOutputs) {
-    double[] nodeValues = new double[expectedOutputs.length];
-    for (int i = 0; i < nodeValues.length; i++) {
-        double costDerivative = CostAbleitung(activations[i], expectedOutputs[i]);
-        double activationAbleitung = 
-	 Activation.geActivation().ActivationAbleitung(weightedInputs[i]);
-        nodeValues[i] = activationAbleitung * costDerivative;
+bias = NNMath.RandomDoubleArray(numOutputNodes);
+CostSteigungB = new double[numOutputNodes];
+```
+
+Dann kommen wir zu Methode "CalculateOutputs". Anstatt die Variable weightedInput am Anfang der äußeren Schleife mit 0 zu initialisieren, fangen wir mit den Biases an:
+
+```java
+public double[] CalculateOutputs(double[] inputs) {
+    this.inputs = inputs;
+    Activation activ = Activation.geActivation();
+    for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
+        //double weightedInput = 0;
+        //Wird nun mit dem Bias initialisiert
+        double weightedInput = bias[nodeOut];
+        for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
+            weightedInput += inputs[nodeIn] * weights[nodeOut][nodeIn];
+        }
+        weightedInputs[nodeOut] = weightedInput;
+        activations[nodeOut] = activ.ActivationFunction(weightedInput);
     }
-    return nodeValues;
+    return activations;
 }
 ```
 
-In der Aufrufenden Methode, UpdateAllGradients(), werden die NodeValues zwischengespeichert, und danach direkt an die Methode UpdateGradients() der Output Schicht weitergegeben. Dort werden sie mit den Ungewichteten Inputs verrechnet, wodurch die erste Matrix entsteht, welche die Änderungen an den Gewichten enthält, die noch nicht mit den Gewichten verrechnet wurden.
+Jetzt muss die Methode "UpdateGradients" angepasst werden, damit die Änderungsraten nicht nur für die gewichte, sondern auch für die Biases gespeichert werden.
 
 ```java
 public void UpdateGradients(double[] nodeValues) {
     for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
         for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
-            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];                CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
+            double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
+            CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
         }
+        //Hier werden die Änderungsraten für die Biases gespeichert
+        CostSteigungB[nodeOut] = 1 * nodeValues[nodeOut];
     }
 }
 ```
 
-Das Array CostSteigungW muss außerdem ebenfalls in der Klasse Layer festgehalten werden. Hier werden die Anpassungen, die wir mithilfe der Kettenregel ausrechnen abgespeichert, bevor sie mit den Gewichten verrechnet werden.
-
-```java
-public class Layer {
-
-    int numInputNodes, numOutputNodes;
-    double[][] weights;
-    //--> Steigung der Cost Funktion im Bezug auf das Gewicht W
-    double[][] CostSteigungW;
-
-    double[] inputs;
-    double[] weightedInputs;
-    double[] activations;
-```
-### CalculateHiddenLayerNodeValues
-
-Nun sehen wir uns an, wie die Anpassungen an den Gewichten in den Versteckten Schichten berechnet werden.
-
-```java
-
-public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValues) {
-    double[] newNodeValues = new double[numOutputNodes];
-    Activation ac = Activation.geActivation();
-    for(int i=0; i < numOutputNodes; i++){
-        for(int j=0; j < nodeValues.length; j++){
-            newNodeValues[i] += nodeValues[j]*oldLayer.weights[j][i];
-        } 
-        newNodeValues[i] *= ac.ActivationAbleitung(weightedInputs[i]);
-    return newNodeValues;
-}
-```
-
-Die Gewichte der vorherigen Schicht und die NodeValues, die übergeben wurden werden mithilfe des Punkt Produkt verrechnet. Die Schicht, die zuvor berechnet wurde, muss in den Übergabe Parametern mitgegeben werden, und wird hier OldLayer genannt. Wenn wir gerade die Methode das erste mal aufrufen, dann wurde die Output Schicht bereits von der Methode CalculateOutputLayerNodeValues() berechnet und muss als OldLayer an diese Methode übergeben werden.
-Bei dem Punkt Produkt muss auf die Dimensionen der Gewichts-Matrix geachtet werden. In unserem Netzwerk wurde diese Matrix Transponiert aufgebaut, das heißt dass die Werte Senkrecht mit den Werten der vorherigen NodeValues verrechnet werden müssen.
-
-Auch diese Methode gibt wieder NodeValues zurück, welche in der aufrufenden Methode mit den ungewichteten Inputs dieser Schicht verrechnet werden müssen, und somit die Anpassungen berechnen, die an den Gewichten vorgenommen werden müssen. Falls es weitere versteckte Schichten gibt, werden die NodeValues weitergereicht, womit sich viele aufrufe und Rechnungen sparen lassen.
-
-### ApplyAllGradients
-
-In dieser Methode werden alle Anpassungen, die wir zuvor ausgerechnet haben, und die dem 2D Array CostSteigungW gespeichert wurden, mit den Gewichten verrechnet. Im NeuralNetwork Skript wird über alle Schichten iteriert:
-
-```java
-private void ApplyAllGradients(double learnrate) {
-    for (Layer layer : layers) {
-        layer.ApplyGradient(learnrate);
-    }
-}
-```
-
-Und in der Layer Klasse werden sie verrechnet:
+Und zuletzt  müssen die Änderungsraten auch von den Biases abgezogen werden, und danach müssen die Änderungsraten zurückgesetzt werden. Die Änderungsrate muss ebenfalls mit der LearnRate multipliziert werden.
 
 ```java
 public void ApplyGradient(double learnrate) {
-    for(int i=0; i<numOutputNodes;i++){
-        for(int j=0; j<numInputNodes;j++){
-            weights[i][j] -= CostSteigungW[j][i]*learnrate;
+    for (int i = 0; i < numOutputNodes; i++) {
+        for (int j = 0; j < numInputNodes; j++) {
+            weights[i][j] -= CostSteigungW[j][i] * learnrate;
         }
+        //Die Änderungsraten der Biases müssen von den Biases abgezogen werden
+        bias[i] -= CostSteigungB[i] * learnrate;
     }
 }
-```
-
-Wichtig zu beachten ist hier, dass die Steigung der Cost Funktion, die wir ausgerechnet haben, also die Anpassung an den Gewichten von den Gewichten *abgezogen* wird. Wenn die Steigung nämlich Positiv ist, dann läge der Tiefpunkt in entgegengesetzter Richtung, wenn sie negativ ist, liegt der Tiefpunkt voraus.
-
-![[Pasted image 20230917195146.png]]
-[Quelle](https://vzahorui.net/optimization/gradient-descent/)
-
-Um es an einem Beispiel zu verdeutlichen, die Steigung in Punkt A ist positiv. Daher müsste man die Steigung von den Gewichten abziehen, um näher an den Tiefpunkt zu gelangen. In Punkt F ist die Steigung negativ, und muss daher ebenfalls abgezogen werden, wodurch das Gewicht vergrößert wird.
-
-### ClearAllGradients
-
-Zum Schluss müssen die Steigungen die wir verrechnet haben wieder auf Null gesetzt werden, nachdem sie verrechnet wurden.
-Wir iterieren über alle Schichten:
-
-```java
-private void ClearAllGradients() {
-    for (Layer layer : layers) {
-        layer.ClearGradient();
-    }
-}
-```
-
-Und initialisieren neue Arrays in den Schichten:
-
-```java
 public void ClearGradient() {
     this.CostSteigungW = new double[numInputNodes][numOutputNodes];
+    //Die Änderungsraten für die Biases müssen auch zurückgesetzt werden
+    this.CostSteigungB = new double[numOutputNodes];
 }
 ```
 
-Das ist der Abschluss. Wir haben nun ein Funktionsfähiges Netzwerk erstellt. Es ist nun möglich, das Netzwerk mit Daten zu füttern, und Ergebnisse zu erwarten. Die Testreihen dazu werden in den Nächsten Kapiteln behandelt.
+Das Netzwerk verfügt nun über Biases, und damit über eine größere Flexibilität. Als nächstes Testen wir das neue Netzwerk.
 
-# Tool um das Netzwerk zu überprüfen
+## Testreihen mit Biases
 
-Es gibt einige Möglichkeiten, das Netzwerk zu testen, aber Sinnvoll sind ist es in diesem Fall, Einfache Mittel zu verwenden.
-Zunächst muss der Datensatz eingelesen und Nutzbar gemacht werden.
-Um den Datensatz einzulesen, wird in diesem Projekt der mnist-data-reader des Authors Türkdoğan Taşdelen von seinem Github Repository "[https://github.com/turkdogan/mnist-data-reader"](https://github.com/turkdogan/mnist-data-reader%22) verwendet. Darin sind zwei Klassen wichtig:  
-Der MnistDataReader liest die Dateien ein. Die Bilder und die Label sind getrennt gespeichert, und müssen für das Netzwerk zusammen gebracht werden. Daraus werden Objekte der zweiten Klasse erstellt, MnistMatrix. Diese Jedes Objekt der Klasse MnistMatrix enthält ein 2 Dimensionales Array, welches die Helligkeit eines Jeden Pixels des Bildes enthält, ein Wert zwischen 0 und 255. Außerdem kennt das Objekt das Label des Bildes.  
-Auf diese Weise kann der Datensatz eingelesen und Nutzbar gemacht werden.
-Das Projekt wurde für diese Projektarbeit angepasst und erweitert. Hinzugekommen ist eine Klasse MnistBuffer, welche eine bestimmte Menge an Bildern aus dem Datensatz einliest, und dann als Array zurückgibt. Dies ist hilfreich für die Spätere Umsetzung der Batches, welche später behandelt werden.
-Die Klasse MNISTPrinter gibt ein String zurück, welches eine ASCII Darstellung der Bilder ermöglicht. Je nach Helligkeit eines Pixels wird ein größeres oder kleineres Zeichen ausgegeben. Hier ein Beispiel:
+Zunächst einmal Testen wir die LearnRate. Unter Umständen kann sich etwas geändert haben.
 
-![[Pasted image 20231001133125.png]]
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.009</td>
+		<td>76,22%</td>
+		<td>76,61%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.008</td>
+		<td>72,43%</td>
+		<td>73,05%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.007</td>
+		<td>76,30%</td>
+		<td>78,00%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.006</td>
+		<td>78,16%</td>
+		<td>77,91%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.005</td>
+		<td>79,07%</td>
+		<td>80,02%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.004</td>
+		<td>78,64%</td>
+		<td>79,38%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>81,03%</td>
+		<td>81,46%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.002</td>
+		<td>79,05%</td>
+		<td>79,90%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.001</td>
+		<td>72,60%</td>
+		<td>73,36%</td>
+	</tr>
+</table>
 
-Oben Links in der Ecke steht außerdem bereits, welches Lable das Bild trägt. Teilweise sind die Zahlen auch für Menschen schlecht erkennbar, wie zum Beispiel diese 5:
+#### Mit Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.009</td>
+		<td>75,22%</td>
+		<td>75,30%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.008</td>
+		<td>78,36%</td>
+		<td>78,83%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.007</td>
+		<td>79,92%</td>
+		<td>80,95%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.006</td>
+		<td>79,24%</td>
+		<td>79,48%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.005</td>
+		<td>78,86%</td>
+		<td>79,74%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.004</td>
+		<td>78,98%</td>
+		<td>79,62%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>78,23%</td>
+		<td>78,52%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.002</td>
+		<td>78,28%</td>
+		<td>79,13%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0.001</td>
+		<td>72,84%</td>
+		<td>73,47%</td>
+	</tr>
+</table>
 
-![[Pasted image 20231001133317.png]]
+Im Vergleich ist nicht direkt sichtbar, ob das Netzwerk mit Biases bessere Ergebnisse erzielt. Bei einer LernRate von 0.003 sehen wir keine Verbesserung, sondern sogar eine niedrigere Genauigkeit.
+Dennoch ist es Ratsam, Netzwerke mit Biases zu verwenden. Nehmen wir an, alle Pixel in einem Bild wären leer, dann würde bei einem Netzwerk ohne Biases in jedem Output nur 0 als Ergebnis möglich sein. Sollten wir das Netzwerk darauf trainieren wollen, auch unbeschriebene Bilder erkennen zu können, wäre das Ohne Biases schlicht nicht möglich. In unserem beispiel mit dem MNIST Datensatz ist der nutzen leider nicht direkt sichtbar, aber für andere Aufgaben kann es unumgänglich sein, Biases zu verwenden.
+Zur Vollständigkeit hier noch ein Vergleich mit Training von verschieden vielen Epochen. Dabei ist auch keine große Verbesserung festzustellen. Unterschiede von 1-2% können dem Zufall zugeschrieben werden.
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,86%</td>
+		<td>88,33%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>10</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,08%</td>
+		<td>89,49%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>15</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,75%</td>
+		<td>90,15%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>20</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>90,57%</td>
+		<td>90,70%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>25</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,47%</td>
+		<td>91,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>30</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,91%</td>
+		<td>91,93%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>35</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,40%</td>
+		<td>91,53%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>40</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,20%</td>
+		<td>91,32%</td>
+	</tr>
+</table>
 
-Die Letzte Klasse ist die MNISTHTML Klasse. Diese wird dazu verwendet, um eine Ausgabe im HTML Format auszugeben. Dabei werden mehrere Beispiele aus dem Trainingsdatensatz und aus dem Testdatensatz dargestellt, zusammen mit den Outputs des Netzwerkes.
-Über der 3, die oben als Beispiel gezeigt wurde, wird dies Angezeigt:
+#### Mit Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,98%</td>
+		<td>87,63%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>10</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,09%</td>
+		<td>89,58%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>15</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,87%</td>
+		<td>90,16%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>20</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,04%</td>
+		<td>91,15%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>25</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,31%</td>
+		<td>91,85%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>30</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>92,21%</td>
+		<td>92,32%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>35</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>91,77%</td>
+		<td>91,98%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>40</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>92,26%</td>
+		<td>92,44%</td>
+	</tr>
+</table>
 
-![[Pasted image 20231001133707.png]]
+Eine Letzte Möglichkeit, vielleicht doch einen Nutzen Nutzen sichtbar zu machen, liegt in der Verringerung der Knoten in der Versteckten Schicht. 
+These: Die erhöhte Flexibilität könnte das Netzwerk dahingehend effizienter machen, dass es weniger Knoten braucht, um vergleichbare Ergebnisse zu erzielen.
 
-Das Netzwerk hat das Bild Korrekt als eine 3 Klassifizier, dies wird Grün dargestellt. Die Wahrscheinlichkeiten für jede mögliche Ausgabe werden in der Tabelle darunter dargestellt. Wir können eine Wahrscheinlichkeit von 5.52% für das Ergebnis "0" erkennen. Die Korrekte Ausgabe "3" wurde mit einer Wahrscheinlichkeit von 89,16% angegeben. Ein sehr gutes Ergebnis. An dieser Stelle soll darauf hingewiesen werden, dass die Prozentzahlen alles möglichen Ausgaben zusammengerechnet nicht 100% ergeben. Die Wahrscheinlichkeiten sind unabhängig voneinander. Sie zeigen lediglich an, wie wahrscheinlich eine Ausgabe ist, oder unwahrscheinlich, sprich, 5,52% Wahrscheinlichkeit das dieses Bild eine 0 darstellt, und eine 94,48% Wahrscheinlichkeit, dass es keine 0 ist.
-So sehen die Ergebnisse für die 5 aus:
+#### Ohne Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 10, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>70,48%</td>
+		<td>70,41%</td>
+	</tr>
+	<tr>
+		<td>[784, 20, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>82,34%</td>
+		<td>81,93%</td>
+	</tr>
+	<tr>
+		<td>[784, 30, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>81,99%</td>
+		<td>82,77%</td>
+	</tr>
+	<tr>
+		<td>[784, 40, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>83,50%</td>
+		<td>84,34%</td>
+	</tr>
+	<tr>
+		<td>[784, 50, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,64%</td>
+		<td>86,54%</td>
+	</tr>
+	<tr>
+		<td>[784, 60, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,35%</td>
+		<td>87,03%</td>
+	</tr>
+	<tr>
+		<td>[784, 70, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,36%</td>
+		<td>86,00%</td>
+	</tr>
+	<tr>
+		<td>[784, 80, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,50%</td>
+		<td>87,87%</td>
+	</tr>
+	<tr>
+		<td>[784, 90, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,62%</td>
+		<td>88,29%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,14%</td>
+		<td>87,74%</td>
+	</tr>
+	<tr>
+		<td>[784, 150, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,40%</td>
+		<td>89,08%</td>
+	</tr>
+	<tr>
+		<td>[784, 200, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>89,50%</td>
+		<td>90,08%</td>
+	</tr>
+</table>
 
-![[Pasted image 20231001134329.png]]
+#### With Bias
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 10, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>71,86%</td>
+		<td>72,21%</td>
+	</tr>
+	<tr>
+		<td>[784, 20, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>80,29%</td>
+		<td>81,08%</td>
+	</tr>
+	<tr>
+		<td>[784, 30, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>82,55%</td>
+		<td>82,88%</td>
+	</tr>
+	<tr>
+		<td>[784, 40, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>84,54%</td>
+		<td>85,50%</td>
+	</tr>
+	<tr>
+		<td>[784, 50, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>84,18%</td>
+		<td>85,02%</td>
+	</tr>
+	<tr>
+		<td>[784, 60, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,59%</td>
+		<td>86,27%</td>
+	</tr>
+	<tr>
+		<td>[784, 70, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>85,42%</td>
+		<td>85,95%</td>
+	</tr>
+	<tr>
+		<td>[784, 80, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,12%</td>
+		<td>87,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 90, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>86,76%</td>
+		<td>87,39%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,41%</td>
+		<td>87,72%</td>
+	</tr>
+	<tr>
+		<td>[784, 150, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,31%</td>
+		<td>88,86%</td>
+	</tr>
+	<tr>
+		<td>[784, 200, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>88,98%</td>
+		<td>89,62%</td>
+	</tr>
+</table>
 
-Hier wird Sichtbar, wie sich das Netzwerk irren kann. Das Netzwerk gibt eine 44% Wahrscheinlichkeit für die Ergebnisse "4" und "6" an. Die "5", die hier tatsächlich dargestellt wird, erhält nur eine 2,4% Wahrscheinlichkeit. Dieser Fehler ist allerdings leicht zu verzeihen, da auch Menschen häufig eine 6 erkennen. Es ist wichtig zu verstehen, dass bei diesen Datensätzen auch Menschen keine 100% Genauigkeit erreichen würden.
-
-Kommen wir nun zu generelleren Merkmalen des Netzwerkes. Die Betrachtung einzelner Bilder sagt uns noch nicht viel über die gesamte Leistung eines Netzwerkes aus. Das Netzwerk kann Configuriert werden. Einige Merkmale wurden schon genannt, allerdings werden wir uns alle Einstellungen einmal einzeln ansehen. In der Klasse ConfigLoader wird eine Datei "config.json" eingelesen, welche alle Einstellungen für unser Netzwerk enthält.
-
-### LayerSizes
-
-Die Anzahl der Layer und die Anzahl ihrer jeweiligen Nodes müssen als erstes Festgelegt werden. Das ziel ist es, ein Netzwerk zu finden, das Präzise genug ist, um gute Klassifikationen zu errechnen, aber auch nicht zu Groß zu sein, da der Aufwand beim Training des Netzes Exponentiell Steigt. Mit Jede weiteren Schicht kommt eine Gewichts Matrix dazu, und diese sind Quadratisch, und wachsen daher zusammen mit der Anzahl der Knoten in einer Schicht Exponentiell. 
-Die Erste Schicht ist die Input Schicht. Diese sollte nicht frei gewählt werden, sondern anhand des zu lernenden Datensatzes angepasst werden. Jedes Bild im MNIST Datensatz enthält 784 Pixel, das ist also die Größe unserer Input Schicht.
-Auch die Output Schicht sollte nicht frei gewählt werden, sondern der Anzahl der möglichen Label entsprechen. Der MNIST Datensatz hat 10 Zahlen, 0-9, also gibt es 10 mögliche Label, also muss die Output Schicht 10 Knoten enthalten.
-
-### SplitIndex
-
-In unserem Fall werden die Trainings Daten und die Test Daten gemeinsam eingelesen, und mit diesem Index kann festgelegt werden, wie viele Bilder des gesamten Datensatzes als Trainingsdatensatz benutzt werden sollen. Dies ist hilfreich um später die Effekte zu kleiner Datensätze zu demonstrieren, sowie leichter ein Over Fitting entstehen zu lassen. Dazu später mehr.
-
-### TrainingCycles/Epochen
-
-In unserem Netzwerk werden sie TrainingCycles genannt, in der Fachliteratur allerdings meist Epochen. Dabei handelt es sich um die Anzahl an Durchläufen, die das Netzwerk den Trainingsdatensatz lernt. Es kann durchaus nützlich sein, die Daten mehrmals zu durchlaufen, das heißt die Selben Daten wiederholt zu lernen. Dabei muss allerdings ebenfalls aufgepasst werden, da es zu einem Phänomen kommen kann, welches Over Fitting genannt wird. Dabei Handelt es sich um den Umstand, dass ein Ausreichend Großes Netzwerk einen Datensatz auch Auswendig lernen kann, anstatt generelle Rückschlüsse über die Natur der Daten zu ziehen. Dies ist häufig daran sichtbar, dass das Netzwerk eine ungewöhnlich Hohe Genauigkeit auf den Trainingsdaten aufweist, auf den Testdaten allerdings weit zurückfällt. Damit Demonstriert das Netzwerk, dass es die Trainingsdaten auswendig gelernt hat, und die Testdaten nicht viel schlechter versteht. 
-
-### LearnRate
-Die LearnRate sollte mittlerweile bekannt sein. Dabei handelt es sich um eine Zahl, mit der die Anpassungsrate verrechnet wird, um ein Over Shooting zu vermeiden. Wenn das Netzwerk zu Große Schritte in Richtung eines Fehlerminimums geht, kann es dazu kommen, dass es über den Tiefpunkt hinaushüpft, im schlimmsten falle sogar komplett aus dem Tal des Tiefpunkts hinausspringt.
-
-![[Pasted image 20230917181526.png]]
-[Quelle](https://medium.com/diogo-menezes-borges/what-is-gradient-descent-235a6c8d26b0)
+Leider kann die These mit diesem Datensatz nicht bestätigt werden. Ein Anderer Datensatz könnte die These bestätigen, oder die These ist vollständig falsch.

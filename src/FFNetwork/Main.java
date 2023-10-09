@@ -23,9 +23,8 @@ public class Main {
         NeuralNetwork nn = new NeuralNetwork(config.getLearnRate(), config.getLayers());
 
         for(int i=0; i<(splitIndex*TrainingCycles/BatchSize); i++){
-            MnistMatrix[] MnistMatrixdd = mBuffer.getBatch(BatchSize);
-            MnistMatrix mm = MnistMatrixdd[0];
-            nn.learn(mm);
+            MnistMatrix[] mnistMatrix = mBuffer.getBatch(BatchSize);
+            nn.learn(mnistMatrix);
             System.out.print('\r');
             System.out.print(df.format((double) i / (splitIndex*TrainingCycles/BatchSize-1) * 100) + "%");
         }

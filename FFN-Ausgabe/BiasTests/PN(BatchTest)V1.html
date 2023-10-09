@@ -1,0 +1,82 @@
+<head>
+	<title>FFN-Ausgabe/BiasTests/PN(BatchTest)V1.html</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		a {
+			margin: 5px;
+		}
+
+		body {
+			font-family: "Lato", sans-serif;
+			color: #85b1b0;
+			background-color: #231a10;
+		}
+
+		table,
+		tr,
+		td {
+			border: 1px solid;
+			border-collapse: collapse;
+			margin: 5px;
+			padding: 5px;
+		}
+
+		.Kasten {
+			border: 1px solid;
+			margin: 5px;
+			padding: 5px;
+			display: inline-block;
+
+		}
+
+		td {
+			text-align: center;
+		}
+
+		h1 {
+			color: #e5395a;
+		}
+	</style>
+</head>
+<table>
+	<tr>
+		<td>HLayersSizes</td>
+		<td>DataSize</td>
+		<td>Epochen</td>
+		<td>BatchSize</td>
+		<td>Learnrate</td>
+		<td>ACtrainingD</td>
+		<td>ACtestD</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>1</td>
+		<td>0.003</td>
+		<td>87,71%</td>
+		<td>88,15%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>50</td>
+		<td>0.003</td>
+		<td>47,73%</td>
+		<td>48,22%</td>
+	</tr>
+	<tr>
+		<td>[784, 100, 10]</td>
+		<td>60000</td>
+		<td>5</td>
+		<td>50</td>
+		<td>0.25</td>
+		<td>84,43%</td>
+		<td>85,70%</td>
+	</tr>
+</table>

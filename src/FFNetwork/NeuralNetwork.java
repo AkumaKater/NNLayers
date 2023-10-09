@@ -42,6 +42,17 @@ public class NeuralNetwork {
         ClearAllGradients();
     }
 
+    // Training über Batch
+    public void learn(MnistMatrix[] batch) {
+        for (MnistMatrix data : batch) {
+            UpdateAllGradients(data);
+        }
+        // Ganz WIctig! Der Durchschnitt wir errechnet durch
+        // LearnRate / BatchSize
+        ApplyAllGradients(this.learnRate / batch.length);
+        ClearAllGradients();
+    }
+
     void UpdateAllGradients(MnistMatrix dataPoint) {
         Querry(dataPoint.getInputs());
         Layer outputLayer = layers[layers.length - 1];

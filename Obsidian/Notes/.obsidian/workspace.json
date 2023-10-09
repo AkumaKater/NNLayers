@@ -25,7 +25,31 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Texte/Projektarbeit.md",
+                "file": "Projektarbeit/Texte/Projektarbeit 1.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1c689f02d6d821aa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN Ausgaben/Performance Notes.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "1fe7d6a1d8feb718",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "NN Ausgaben/Performance Notes.md",
                 "mode": "source",
                 "source": false
               }
@@ -92,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -142,8 +166,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 249.5,
-    "collapsed": true
+    "width": 249.5
   },
   "right": {
     "id": "62735ff7b5eacde0",
@@ -159,7 +182,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projektarbeit/Texte/Projektarbeit.md",
+                "file": "NN Ausgaben/Performance Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -176,7 +199,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projektarbeit/Texte/Projektarbeit.md",
+                "file": "NN Ausgaben/Performance Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -199,7 +222,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projektarbeit/Texte/Projektarbeit.md"
+                "file": "NN Ausgaben/Performance Notes.md"
               }
             }
           },
@@ -230,24 +253,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "89cd88be4f132a1c",
+  "active": "1c689f02d6d821aa",
   "lastOpenFiles": [
+    "Projektarbeit/Texte/Projektarbeit 1.md",
+    "Projektarbeit/Texte/Grundlagen.md",
+    "Projektarbeit/Texte/Projektarbeit.md",
+    "NN Ausgaben/Performance Notes.md",
+    "Projektarbeit/Texte/Abschnitt.md",
     "Pasted image 20231005145933.png",
     "Pasted image 20231005144628.png",
     "Pasted image 20231005144238.png",
     "Projektarbeit/Texte/Einleitung.md",
-    "Projektarbeit/Texte/Projektarbeit.md",
     "Projektarbeit/Texte/Quellen.md",
-    "Projektarbeit/Texte/Abschnitt.md",
     "Pasted image 20231005133406.png",
     "Pasted image 20231005133337.png",
-    "NN Ausgaben/Performance Notes.md",
     "Images/Pasted image 20231003221803.png",
     "Images/Pasted image 20231003155053.png",
     "Images/Pasted image 20231001134329.png",
     "Images/Pasted image 20231001133707.png",
     "Images/Pasted image 20231001133317.png",
-    "Images/Pasted image 20231001133125.png",
     "NN Ausgaben/EIn Html.md",
     "NN Ausgaben/Performance Notes Gemischt.md",
     "NN Ausgaben/Performance Notes Random Biases false.md",
@@ -260,7 +284,6 @@
     "Projektarbeit/Texte/Mathematische Grundlagen.pdf",
     "home/kater",
     "home",
-    "Projektarbeit/Texte/Grundlagen.md",
     "Projektarbeit/Texte/TestReihen und Anpassungen.md",
     "NN Ausgaben/Visualization with Batchsize 1.md",
     "NN Ausgaben/Visualization.md",
