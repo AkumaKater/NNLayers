@@ -16,10 +16,10 @@ public class JanNN {
         String path = "src/JanNN/NetworksPersitance/NetwerkMit!!!Epochen.json";
         String FileNameVisualization = "Visualization.md";
 
-        int splitIndex = 6000; // 60.000
-        int TrainingCycles = 1;
-        double learnRate = 0.25;
-        int BatchSize = 50;
+        int splitIndex = 60000; // 60.000
+        int TrainingCycles = 30;
+        double learnRate = 0.01;
+        int BatchSize = 1;
         NeuralNetwork nn = new NeuralNetwork(learnRate, 784, 80, 10);
         
         DecimalFormat df = new DecimalFormat("0.00");

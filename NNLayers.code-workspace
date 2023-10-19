@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"name": "NNLayers",
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorTheme": "Kimbie Dark",
+		"workbench.iconTheme": "vs-seti",
+		"workbench.preferredDarkColorTheme": "Kimbie Dark",
+		"workbench.preferredHighContrastColorTheme": "Kimbie Dark"
+	}
+}

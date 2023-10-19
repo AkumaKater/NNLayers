@@ -1,3 +1,60 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{float}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{RGB}{4,118,219}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{RGB}{0,27,51}
+\definecolor{textcolour}{RGB}{38, 149, 245}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\color{textcolour}\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=false,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+\lstset{style=mystyle}
+
+    \title{\textbf{Projektarbeit}}
+    \author{Jan Philipp Fortowski}
+    \date{02.10.2023}
+    
+    \addtolength{\topmargin}{-3cm}
+    \addtolength{\textheight}{3cm}
+\usepackage{graphicx}
+\begin{document}
+
+\maketitle
+\tableofcontents
+\thispagestyle{empty}
+
 \subsection{ Stichpunkte für den Aufbau}
 - Zielsetzung
 - Motivation
@@ -44,7 +101,8 @@ Das heißt also, dass die Funktion erstmal im "NeuralNetwork" die Inputs braucht
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230912175903.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figur
+\label{Was kommt hier rein?}
+\end{figure}
 Da es sich nur um eine Lose Inspiration handelt, ist es nicht notwendig, sich tiefer mit dem Gehirn auseinander zusetztes, allerdings war es tatsächlich die Inspiration für das neuronale Netzwerk. Das Gehirn besteht aus einer Vielzahl an Neuronen, Schätzungsweise aus $10^{10}$ bis $10^{11}$ Nervenzellen (Quelle Einführung in Neuronale Netzte Burkhard Lenze ToDo).
 Wichtig sind bei dem Neuron die folgenden Bestandteile:- Dendriten
 - der Zellkörper
@@ -55,7 +113,7 @@ Wichtig sind bei dem Neuron die folgenden Bestandteile:- Dendriten
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230912184748.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figurDer erste Knoten wird $a_0$ genannt, und entspricht schlichtweg dem Input. Dieser wird an die erste Schicht geleitet, an alle darin vorhandenen Knoten. Dort wird es erst gewichtet, das heißt mit dem Gewicht $w_1$ , welches der Kante zugewiesen ist multipliziert. Hier wird es jetzt Spannend. Nachdem alle Inputs in unseren Knoten miteinander verrechnet sind, muss das Ergebnis erst noch durch die Aktivierungsfunktion.\subsubsection{ Aktivierungsfunktion}Die am Häufigsten genutzte Aktivierungsfunktion ist die Sigmoid Funktion. Diese sieht so aus:
+\label{Was kommt hier rein?}\end{figure}Der erste Knoten wird $a_0$ genannt, und entspricht schlichtweg dem Input. Dieser wird an die erste Schicht geleitet, an alle darin vorhandenen Knoten. Dort wird es erst gewichtet, das heißt mit dem Gewicht $w_1$ , welches der Kante zugewiesen ist multipliziert. Hier wird es jetzt Spannend. Nachdem alle Inputs in unseren Knoten miteinander verrechnet sind, muss das Ergebnis erst noch durch die Aktivierungsfunktion.\subsubsection{ Aktivierungsfunktion}Die am Häufigsten genutzte Aktivierungsfunktion ist die Sigmoid Funktion. Diese sieht so aus:
 $$\sigma (x)=\frac{1}{(1+e^{-x})}$$
 \begin{figure}[H]
 \centering
@@ -177,29 +235,31 @@ Die vielen Dimensionen, und die Hoche Komplexität erlauben das nicht so einfach
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230915145401.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figur2pKHEzMrh3NbrTHsToGwzwHaEA\%26pid\%3DApi&f=1&ipt=0143a98e2b0b1bd0d6b6adb608301673298c518b31f1b0fe9e95d4b52b86e8cc&ipo=images)Hierbei sollte das größte Problem des Verfahrens auch schon klar werden: Das nächste Tal ist nicht unbedingt das Tiefste.
+\label{Was kommt hier rein?}\end{figure}
+Hierbei sollte das größte Problem des Verfahrens auch schon klar werden: Das nächste Tal ist nicht unbedingt das Tiefste.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230915223421.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figurWir initialisieren die Gewichte, also die variable zufällig. So gesehen ist der Startpunkt der imaginären Kugel damit am Anfang eines jeden Netzwerkes zufällig. Es kommt vor, dass sich die Kugel in der Nähe des Globalen Tiefpunktes befindet, es kommt aber oft genug vor, dass sie sich in einem Lokalen Minimum festsetzt. 
+\label{Was kommt hier rein?}\end{figure}Wir initialisieren die Gewichte, also die variable zufällig. So gesehen ist der Startpunkt der imaginären Kugel damit am Anfang eines jeden Netzwerkes zufällig. Es kommt vor, dass sich die Kugel in der Nähe des Globalen Tiefpunktes befindet, es kommt aber oft genug vor, dass sie sich in einem Lokalen Minimum festsetzt. 
 Das Größte Problem ist allerdings, ein Phänomen, welches Overshooting oder Überkorrektur genannt wird. Diese Überkorrektur entsteht, wenn die Korrektur zu Groß war, und über den Tiefpunkt hinaus geschossen wird.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230915222826.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figurcom\%2Fwp-content\%2Fuploads\%2F2021\%2F06\%2FOvershooting-in-gradient-descent.jpg&f=1&nofb=1&ipt=21de0bd972bbc02b6d5213be0ce982643c92092381025c518ba20b15f3105910&ipo=images)\subsection{ LearnRate}[3]Um dem Problem mit dem Overshooting zu beheben, bedient man sich der sogenannten LearnRate. Dabei handelt es sich einfach um einen Faktor, mit welchem die Änderungsrate Multipliziert wird. Der Sinn dahinter ist es, die Schritt Größe anzupassen, das heißt wie Stark die Gewichte in eine Richtung angepasst werden. Wenn die Rate zu Groß ist, dann haben wir das Overshooting, bei dem sich das Netzwerk immer wieder über den Tiefpunkt hinausschießt. Wenn die rate zu niedrig ist kann es sein, dass das Netzwerk einfach zu langsam lernt. Es muss also eine Goldene Mitte gefunden werden. Normalerweise benutz man in einem Feed Forward Netzwerk eine Feste Konstante, die meist bei 0,2 oder 0,3 liegt. Im Späteren Verlauf dieser Arbeit werden dazu Tests durchgeführt, um eine Optimale LearnRate zu finden.\begin{figure}[H]
+\label{Was kommt hier rein?}\end{figure}
+\subsection{ LearnRate}[3]Um dem Problem mit dem Overshooting zu beheben, bedient man sich der sogenannten LearnRate. Dabei handelt es sich einfach um einen Faktor, mit welchem die Änderungsrate Multipliziert wird. Der Sinn dahinter ist es, die Schritt Größe anzupassen, das heißt wie Stark die Gewichte in eine Richtung angepasst werden. Wenn die Rate zu Groß ist, dann haben wir das Overshooting, bei dem sich das Netzwerk immer wieder über den Tiefpunkt hinausschießt. Wenn die rate zu niedrig ist kann es sein, dass das Netzwerk einfach zu langsam lernt. Es muss also eine Goldene Mitte gefunden werden. Normalerweise benutz man in einem Feed Forward Netzwerk eine Feste Konstante, die meist bei 0,2 oder 0,3 liegt. Im Späteren Verlauf dieser Arbeit werden dazu Tests durchgeführt, um eine Optimale LearnRate zu finden.\begin{figure}[H]
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230917181526.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figur[1]Der Ansatz einer Learnrate wurde auch schon von Widrow und Hoff vorgeschlagen, ihr Ansatz galt den 2 Schichtigen Feed Forward Netzwerken. Die LernRate ($\lambda$) wird zunächst recht hoch angesetzt, im Bereich von $1 \le \lambda \le 10$. Dadurch soll das Netzwerk in groben Schritten der Konvergenz näherkommen. Anschließend wird die LernRate schrittweise verringert, bis sie im Bereich von $0.01 \le \lambda \le 0.1$ liegt. Dies ermöglicht eine genauere Annäherung an das Minimum.\section{ Kettenregel}Die Folgenden Kapitel zu den Ableitung, die für die Backpropagation (siehe spätere Kapitel) notwendig sind, sind Größtenteils unter zuhilfenahme von T. Rashids Buch "Neuronale Netze selbst programmieren"[2] und aus dem Video von Sebastian Lague namens "How to Create a Neural Network (and Train it to Identify Doodles)"[3] entstanden. 
+\label{Was kommt hier rein?}\end{figure}[1]Der Ansatz einer Learnrate wurde auch schon von Widrow und Hoff vorgeschlagen, ihr Ansatz galt den 2 Schichtigen Feed Forward Netzwerken. Die LernRate ($\lambda$) wird zunächst recht hoch angesetzt, im Bereich von $1 \le \lambda \le 10$. Dadurch soll das Netzwerk in groben Schritten der Konvergenz näherkommen. Anschließend wird die LernRate schrittweise verringert, bis sie im Bereich von $0.01 \le \lambda \le 0.1$ liegt. Dies ermöglicht eine genauere Annäherung an das Minimum.\section{ Kettenregel}Die Folgenden Kapitel zu den Ableitung, die für die Backpropagation (siehe spätere Kapitel) notwendig sind, sind Größtenteils unter zuhilfenahme von T. Rashids Buch "Neuronale Netze selbst programmieren"[2] und aus dem Video von Sebastian Lague namens "How to Create a Neural Network (and Train it to Identify Doodles)"[3] entstanden. 
 Bisher haben wurde die Cost Funktion und die LearnRate behandelt. Die Cost Funltion sagt uns, wie falsch das Netzwerk liegt, und die LearnRate reguliert die Schritt Größe, die beidem Gradient Descent Verfahren in Richtung der Fehler Minima angepasst werden. Allerdings Fehlt uns noch das Wissen um die Richtung. 
 Am leichtesten lässt sich dies in einer Zweidimensionalen Darstellung der Cost Funktion erklären.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230917195146.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figurAuf der $Y$ Achse ist der Fehler eingetragen, die $X$ Achse Repräsentiert unsere Gewichte. Wenn das Gewicht bei 8 liegt, und der Fehler des Netzwerks damit vom Punkt $A$ beschrieben wird. Das nächste Minimum liegt bei 6. Daher muss das Gewicht in dieser Richtung verschoben werden, also kleiner werden. 
+\label{Was kommt hier rein?}\end{figure}Auf der $Y$ Achse ist der Fehler eingetragen, die $X$ Achse Repräsentiert unsere Gewichte. Wenn das Gewicht bei 8 liegt, und der Fehler des Netzwerks damit vom Punkt $A$ beschrieben wird. Das nächste Minimum liegt bei 6. Daher muss das Gewicht in dieser Richtung verschoben werden, also kleiner werden. 
 Mathematisch kann das durch die Steigung im Punkt $A$ beschrieben werden. Als ersten Ansatz (Sowohl mathematisch, als auch im Code) könnte man zwei Punkte nehmen, die sehr nah beieinander liegen, und damit die Steigung ausrechnen. Diese 2 Punkte sind zum einen das Aktuelle Gewicht, und zum anderen ein Punkt, der minimal von dem Aktuellen Gewicht abweicht, also leicht verschoben wird.
 Diese kleine Änderung nennen wir Delta $w$ ($\Delta w$) für weight, also das Gewicht das angepasst wird, wobei Delta eine sehr kleine Änderung an $w$ repräsentiert.
 Um die Steigung zu berechnen würde man also die Änderung des Errors $\Delta e$, welche durch die Änderung an dem Gewicht $\Delta w$ entsteht, durch eben dieses $\Delta w$ teilen. $$\ddot{A}nderungsrate = \frac{\Delta e}{\Delta w}$$
@@ -398,7 +458,8 @@ public double[] CalculateHiddenLayerNodeValues(Layer oldLayer, double[] nodeValu
         newNodeValues[i] *= ac.ActivationAbleitung(weightedInputs[i]);
     return newNodeValues;
 }
-\end{lstlisting}Die Gewichte der vorherigen Schicht und die NodeValues, die übergeben wurden werden mithilfe des Punkt Produkt verrechnet. Die Schicht, die zuvor berechnet wurde, muss in den Übergabe Parametern mitgegeben werden, und wird hier OldLayer genannt. Wenn wir gerade die Methode das erste mal aufrufen, dann wurde die Output Schicht bereits von der Methode CalculateOutputLayerNodeValues() berechnet und muss als OldLayer an diese Methode übergeben werden.
+\end{lstlisting}
+Die Gewichte der vorherigen Schicht und die NodeValues, die übergeben wurden werden mithilfe des Punkt Produkt verrechnet. Die Schicht, die zuvor berechnet wurde, muss in den Übergabe Parametern mitgegeben werden, und wird hier OldLayer genannt. Wenn wir gerade die Methode das erste mal aufrufen, dann wurde die Output Schicht bereits von der Methode CalculateOutputLayerNodeValues() berechnet und muss als OldLayer an diese Methode übergeben werden.
 Bei dem Punkt Produkt muss auf die Dimensionen der Gewichts-Matrix geachtet werden. In unserem Netzwerk wurde diese Matrix Transponiert aufgebaut, das heißt dass die Werte Senkrecht mit den Werten der vorherigen NodeValues verrechnet werden müssen.Auch diese Methode gibt wieder NodeValues zurück, welche in der aufrufenden Methode mit den ungewichteten Inputs dieser Schicht verrechnet werden müssen, und somit die Anpassungen berechnen, die an den Gewichten vorgenommen werden müssen. Falls es weitere versteckte Schichten gibt, werden die NodeValues weitergereicht, womit sich viele aufrufe und Rechnungen sparen lassen.\subsubsection{ ApplyAllGradients}In dieser Methode werden alle Anpassungen, die wir zuvor ausgerechnet haben, und die dem 2D Array CostSteigungW gespeichert wurden, mit den Gewichten verrechnet. Im NeuralNetwork Skript wird über alle Schichten iteriert:\begin{lstlisting}[language=Java]
 private void ApplyAllGradients(double learnrate) {
     for (Layer layer : layers) {
@@ -417,7 +478,7 @@ public void ApplyGradient(double learnrate) {
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230917195146.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figurUm es an einem Beispiel zu verdeutlichen, die Steigung in Punkt A ist positiv. Daher müsste man die Steigung von den Gewichten abziehen, um näher an den Tiefpunkt zu gelangen. In Punkt F ist die Steigung negativ, und muss daher ebenfalls abgezogen werden, wodurch das Gewicht vergrößert wird.\subsubsection{ ClearAllGradients}Zum Schluss müssen die Steigungen die wir verrechnet haben wieder auf Null gesetzt werden, nachdem sie verrechnet wurden.
+\label{Was kommt hier rein?}\end{figure}Um es an einem Beispiel zu verdeutlichen, die Steigung in Punkt A ist positiv. Daher müsste man die Steigung von den Gewichten abziehen, um näher an den Tiefpunkt zu gelangen. In Punkt F ist die Steigung negativ, und muss daher ebenfalls abgezogen werden, wodurch das Gewicht vergrößert wird.\subsubsection{ ClearAllGradients}Zum Schluss müssen die Steigungen die wir verrechnet haben wieder auf Null gesetzt werden, nachdem sie verrechnet wurden.
 Wir iterieren über alle Schichten:\begin{lstlisting}[language=Java]
 private void ClearAllGradients() {
     for (Layer layer : layers) {
@@ -458,7 +519,7 @@ Auch die Output Schicht sollte nicht frei gewählt werden, sondern der Anzahl de
 \centering
 \includegraphics[scale=0.60]{/home/kater/Projekte/testlayer/NNLayers/Obsidian/Notes/Images/Pasted image 20230917181526.png}
 \caption{Die Identität}
-\label{Was kommt hier rein?}\end{figur
+\label{Was kommt hier rein?}\end{figure}
 \section{ Ergebnisse der Ersten Testreihen}
 Kommen wir nun zu den Testreihen. Sehen wir uns zunächst einmal an, wie verlässlich das Netzwerk Arbeitet. Dazu initialisieren wir das Netzwerk mit einer Reihe Test Einstellungen. Das Netzwerk soll eine versteckte Schicht haben, mit 100 Knoten. Wir Trainieren auf der vollen Größe des Datensatzes, das heißt 60.000 Bilder. Eine Epoche sollte für die ersten Testreihen ausreichend sein. Zur BatchSize kommen wir später, im Moment liegt sie bei eins. Das heißt, dass immer nur ein Bild betrachtet und gelernt wird. Die LearnRate stellen wir einfach mal auf 0.25 ein, diese Rate hat sich für einfache Feed Forward Netzwerke bewährt. Diese Einstellungen werden ausgegeben, und in den Letzten beiden Spalten werden jeweils die Genauigkeit des Netzwerkes auf den Trainings Daten und auf den Test Daten eingetragen. Um die Genauigkeit zu berechnen, wird einfach der Gesamte Datensatz einmal durch die Querry des Netzwerkes berechnet, und der Anteil an Korrekt Klassifizierten Bildern ist die Genauigkeit des Netzwerkes.
 Hier sind die ersten 6 Durchläufe:
@@ -482,7 +543,6 @@ Zunächst fällt auf, dass die Ergebnisse stark schwanken. Das lässt darauf sch
 |[780, 100, 10]|60000|1|1|0.04|51,18\%|50,81\%|
 |[780, 100, 10]|60000|1|1|0.045|53,51\%|53,72\%|
 |[780, 100, 10]|60000|1|1|0.05|47,86\%|47,80\%|
-	
 	Wie unschwer zu erkennen ist, nimmt die Genauigkeit der Netzwerke ab, je höher die LearnRate ist. Wahrscheinlich muss die LearnRate weiter verringert werden.
 |HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|		
 |--|---|--|--|--|--|--|
@@ -528,7 +588,6 @@ Wir können anhand der Ergebnisse feststellen, dass mehr Schichten und mehr Knot
 |[784, 10, 10, 10]|60000|25|1|0.003|75,46\%|75,74\%|
 |[784, 10, 10]|60000|25|1|0.003|81,43\%|81,95\%|
 |[784, 10, 10]|60000|25|1|0.003|80,76\%|81,64\%|
-	
 	Allerdings sind die Unterschiede in diesem Beispiels nur sehr klein. Interessant zu sehen ist aber, dass weit weniger Epochen nötig sind, um ein Netzwerk zu Trainieren, welches über mehr Schichten und Knoten verfügt. Hier Trainieren wir mit 2 versteckten Schichten und jeweils 300 und 100 Knoten:
 |HLayersSizes|DataSize|Epochen|BatchSize|Learnrate|ACtrainingD|ACtestD|
 |--|---|--|--|--|--|--|
@@ -600,14 +659,15 @@ public double[] CalculateOutputs(double[] inputs) {
     }
     return activations;
 }
-\end{lstlisting}Jetzt muss die Methode "UpdateGradients" angepasst werden, damit die Änderungsraten nicht nur für die gewichte, sondern auch für die Biases gespeichert werden.\begin{lstlisting}[language=Java]
+\end{lstlisting}Jetzt muss die Methode "UpdateGradients" angepasst werden, damit die Änderungsraten nicht nur für die gewichte, sondern auch für die Biases gespeichert werden.
+\begin{lstlisting}[language=Java]
 public void UpdateGradients(double[] nodeValues) {
     for (int nodeOut = 0; nodeOut < numOutputNodes; nodeOut++) {
         for (int nodeIn = 0; nodeIn < numInputNodes; nodeIn++) {
             double derivativeCostWrtWeight = inputs[nodeIn] * nodeValues[nodeOut];
             CostSteigungW[nodeIn][nodeOut] += derivativeCostWrtWeight;
         }
-        //Hier werden die Änderungsraten für die Biases gespeichert
+        //Hier werden die Anderungsraten für die Biases gespeichert
         CostSteigungB[nodeOut] = 1 * nodeValues[nodeOut];
     }
 }
@@ -742,3 +802,8 @@ public void learn(MnistMatrix[] batch) {
 3. S. Lague, How to Create a Neural Network (and Train it to Identify Doodles). Hrsg. auf dem YouTube Kanal [Sebastian Lague](https://www.youtube.com/@SebastianLague). Ohne Jahr [zitiert am 16. September 2023]. Abrufbar unter: URL: https://www.youtube.com/watch?v=hfMk-kjRv4c.
 4. URL: https://ichi.pro/de/ableitung-der-sigmoid-funktion-91708302791054
 5. URL: https://stackoverflow.com/questions/2480650/what-is-the-role-of-the-bias-in-neural-networks
+\cleardoublepage
+% \phantomsection
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\end{document}

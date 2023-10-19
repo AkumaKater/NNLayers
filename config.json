@@ -3,5 +3,5 @@ SplitIndex=60000
 TrainingCycles=5
 LearnRate=0.01
 BatchSize=50
-PerformanceNotes=FFN-Ausgabe/BatchTest/PN(BatchTest-LR)V1.html
+PerformanceNotes=FFN-Ausgabe/BiasTests/PN(BatchTest-LR)V1.html
 Visualization=FFN-Ausgabe/Visualization.html

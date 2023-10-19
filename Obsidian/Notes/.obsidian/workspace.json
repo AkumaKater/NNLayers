@@ -25,8 +25,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projektarbeit/Texte/Projektarbeit 1.md",
-                "mode": "source",
+                "file": "NN Ausgaben/Performance Notes.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -37,8 +37,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "NN Ausgaben/Performance Notes.md",
-                "mode": "source",
+                "file": "NN Ausgaben/Performance Notes Gemischt.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -116,7 +116,7 @@
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -166,7 +166,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 249.5
+    "width": 249.5,
+    "collapsed": true
   },
   "right": {
     "id": "62735ff7b5eacde0",
@@ -253,27 +254,31 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "1c689f02d6d821aa",
+  "active": "89cd88be4f132a1c",
   "lastOpenFiles": [
-    "Projektarbeit/Texte/Projektarbeit 1.md",
-    "Projektarbeit/Texte/Grundlagen.md",
-    "Projektarbeit/Texte/Projektarbeit.md",
+    "NN Ausgaben/Performance Notes Gemischt.md",
     "NN Ausgaben/Performance Notes.md",
+    "Projektarbeit/Texte/Projektarbeit.md",
+    "Projektarbeit/Texte/Mathematische Grundlagen.pdf",
+    "Projektarbeit/Texte/Projektarbeit 1.md",
+    "Projektarbeit/Texte/Einleitung.md",
+    "Projektarbeit/Texte/lat.TeX",
+    "Projektarbeit/Texte/lat.tex",
+    "Projektarbeit/Texte/lat.tx",
+    "Images/Pasted image 20231005145933.png",
+    "Images/Pasted image 20231005144628.png",
+    "Images/Pasted image 20231005144238.png",
+    "Images/Pasted image 20231005133406.png",
+    "Images/Pasted image 20231005133337.png",
+    "Projektarbeit/Texte/Grundlagen.md",
     "Projektarbeit/Texte/Abschnitt.md",
     "Pasted image 20231005145933.png",
     "Pasted image 20231005144628.png",
     "Pasted image 20231005144238.png",
-    "Projektarbeit/Texte/Einleitung.md",
     "Projektarbeit/Texte/Quellen.md",
     "Pasted image 20231005133406.png",
     "Pasted image 20231005133337.png",
-    "Images/Pasted image 20231003221803.png",
-    "Images/Pasted image 20231003155053.png",
-    "Images/Pasted image 20231001134329.png",
-    "Images/Pasted image 20231001133707.png",
-    "Images/Pasted image 20231001133317.png",
     "NN Ausgaben/EIn Html.md",
-    "NN Ausgaben/Performance Notes Gemischt.md",
     "NN Ausgaben/Performance Notes Random Biases false.md",
     "NN Ausgaben/Performance Notes with Bias.md",
     "NN Ausgaben/Performance Notes Without Biases.md",
@@ -281,7 +286,6 @@
     "NN Ausgaben/Performance Notes with Bias3.md",
     "NN Ausgaben/Visualization verkürzte Fehler Ableitung.md",
     "Projektarbeit/Texte/Mathematische Grundlagen_tmp.html",
-    "Projektarbeit/Texte/Mathematische Grundlagen.pdf",
     "home/kater",
     "home",
     "Projektarbeit/Texte/TestReihen und Anpassungen.md",
@@ -296,10 +300,6 @@
     "Pascal Hochzeit",
     "NN Ausgaben/Visualization.html",
     "Projektarbeit/Texte/Bilder.md",
-    "Projektarbeit/Texte/Bachelorarbeit.md",
-    "2023-09-12.md",
-    "Texte",
-    "Grundlagen/Abgrenzung",
-    "Grundlagen"
+    "Projektarbeit/Texte/Bachelorarbeit.md"
   ]
 }
