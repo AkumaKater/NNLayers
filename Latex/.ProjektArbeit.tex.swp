@@ -997,6 +997,15 @@ Es ist ersichtlich, dass die Batchsizes einen Positiven Einfluss haben. Allerdin
     \end{tabular}
 \end{table}
 
+
+\cleardoublepage
+% \phantomsection
+\section{Fazit und Ausblick}
+Das Netzwerk funktioniert und liefert gute Ergebnisse. Die Funktionsweise und die Programmierung wurden dargestellt und anschaulich gemacht.
+Mit so einem Netzwerk können einige Aufgaben bereits Automatisiert werden, vorrausgesetzt das ein Datensatz zur verfügung steht, um das netzwerk zu trainieren.
+Es gibt noch eine Menge 
+
+
 \cleardoublepage
 % \phantomsection
 \section{ Quellen}
